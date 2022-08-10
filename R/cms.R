@@ -1,6 +1,11 @@
-#Ok, so these functions below are to add weights to the data.
-# I want this to be an option to the user, with the default being no weights added. 
-
+#' add weights to the data.
+#'
+#' @param S 
+#'
+#' @return A matrix
+#' @export
+#'
+#' @examples
 cms<-function(S){
   n <- colMeans(S)
   S <- n^-1

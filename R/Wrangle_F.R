@@ -1,4 +1,9 @@
-# This function normalises each column in F to row sum
+#' This function normalises each column in F to row sum
+#'
+#' @return A matrix
+#' @export
+#'
+#' @examples
 Wrangle_F <- function(F){
   F_1<- F
   Fchl <- F_1[,ncol(F_1)]

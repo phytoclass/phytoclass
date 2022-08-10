@@ -1,3 +1,11 @@
+#' Weighting
+#'
+#' @param Fn 
+#'
+#' @return A list
+#' @export
+#'
+#' @examples
 Fac_F <- function(Fn){
   b <- crossprod(t(Weight_error(Fn)),t(Weight_error(S)))
   C_new2 <-t(nnls(crossprod(t(Weight_error(Fn))),b,cd_maxit = 100000,cd_tol =1e-6 ))

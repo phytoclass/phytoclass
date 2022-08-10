@@ -1,4 +1,14 @@
-# This function normalises each column in S to row sum
+
+#' This function normalises each column in S to row sum
+#' 
+#'
+#' @param S 
+#'
+#' @return A matrix
+#' @export
+#'
+#' @examples
+#' 
 Wrangle_S <- function(S){
   S <- S[,1:ncol(S)]
   #Normalise to unit row sum
