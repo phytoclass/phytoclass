@@ -1,6 +1,14 @@
-
-
-# Same as before, but without the 'N' input
+#' Same as before, but without the 'N' input
+#'
+#' @param Fn 
+#' @param Temp 
+#' @param chlv 
+#' @param s_c 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Random_neighbour2 <- function(Fn,Temp,chlv,s_c){
   s_c <- vectorise(s_c[,1:ncol(s_c)-1])
   SE <- Wrangling(Fn)[[3]] #### vectorise function outputs all non-zero elements as a vector (excluding chl column)

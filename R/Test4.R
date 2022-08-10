@@ -1,5 +1,9 @@
-
-# conduit between minimise_elements function and Fac_F_R
+#' conduit between minimise_elements function and Fac_F_R
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Test4 <- function(F){
   F.old <- Fac_F(F)
   F.news <- Fac_F_RR4(F.old,NSA)

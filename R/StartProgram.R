@@ -1,3 +1,11 @@
+#' Run the algorithm
+#'
+#' @param S 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 StartProgram <- function(S){
   Fmax <- ifelse(F>0,1,0)
   A <- simulated_annealing2(Fmax,niter = 450,0.009)[[1]]

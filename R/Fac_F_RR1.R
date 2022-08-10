@@ -1,5 +1,11 @@
-
-# Apply randomisation function to matrices and keep element that reduce error x4
+#' Apply randomisation function to matrices and keep element that reduce error x4
+#'
+#' @param vary 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Fac_F_RR1 <- function(F,vary){ # Inputs are #F and which elements to vary, should be all elements
   F.locs <- vector() 
   Fs <- F[[1]]

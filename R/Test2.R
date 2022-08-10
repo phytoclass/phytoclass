@@ -1,3 +1,9 @@
+#' conduit between minimise_elements function and Fac_F_R
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Test2 <- function(F){
   F.locs <- vector()
   F.old <- Fac_F(F)

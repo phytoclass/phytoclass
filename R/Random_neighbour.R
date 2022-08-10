@@ -1,6 +1,19 @@
-
-# Condisder a random neighbour to the inital value by randomising from normal distrubtion with scaling factors etc... 
-# This has the input N and is called in the simuated annealing output to randomise an element that is outside its min/max value
+#' Condisder a random neighbour to the inital value by randomising from normal
+#' distrubtion with scaling factors etc... 
+#' This has the input N and is called in the simuated annealing output to randomise an
+#' element that is outside its min/max value
+#' 
+#'
+#' @param Fn 
+#' @param Temp 
+#' @param chlv 
+#' @param s_c 
+#' @param N 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Random_neighbour <- function(Fn,Temp,chlv,s_c,N){
   k <- match(N,place)
   s_c <- s_c[N]

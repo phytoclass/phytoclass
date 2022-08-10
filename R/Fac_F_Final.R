@@ -1,4 +1,12 @@
-# This is the final fit, and multiplies the final value by Chl concentration so they're in units of Chl a biomass
+#' This is the final fit, and multiplies the final value by Chl concentration so 
+#' they're in units of Chl a biomass
+#'
+#' @param Fn 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Fac_F_Final <- function(Fn){
   F.sum <- Wrangle_F(Fn)[[2]]
   Fn <- Wrangle_F(Fn)[[1]]

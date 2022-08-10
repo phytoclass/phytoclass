@@ -1,5 +1,11 @@
-
-# This is a function thatn wrangles the data for the simulated annealing algorithm (maxs, mins etc...)
+#' wrangles the data for the simulated annealing algorithm (maxs, mins etc...)
+#'
+#' @param Fl 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Wrangling <- function(Fl){
   Fd <- Fl
   Fmin <- as.matrix(Fd)   #### Set up Fmin matrix

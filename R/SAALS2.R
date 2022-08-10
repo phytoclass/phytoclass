@@ -1,4 +1,11 @@
-
+#' to apply to SD algorithm after each iteration of simulated annealing.
+#'
+#' @param Ft 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 SAALS2 <- function(Ft){
   g <- Try_This2(Ft)
   err <- g[[2]]

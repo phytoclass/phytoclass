@@ -1,4 +1,13 @@
-# input = F matrix, number of iterations, and the step to use. 
+#' input = F matrix, number of iterations, and the step to use. 
+#'
+#' @param Fi 
+#' @param niter 
+#' @param step 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 simulated_annealing2 <- function(Fi,niter,step){
   
   SE <- vectorise(Fi)

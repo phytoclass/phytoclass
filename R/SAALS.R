@@ -1,6 +1,11 @@
-
-
-# to apply to SD algorithm after each iteration of simulated annealing. 
+#' to apply to SD algorithm after each iteration of simulated annealing.
+#'
+#' @param Ft 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 SAALS <- function(Ft){
   g <- Try_This(Ft)
   err <- g[[2]]

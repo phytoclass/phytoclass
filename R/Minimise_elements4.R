@@ -1,4 +1,9 @@
-
+#' A function that reduces every for every element that didn't reduce in index function
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Minimise_elements4 <- function(F){   # A function that reduces every for every element that didn't reduce in index function
   f <- Test4(F) # Calls index function
   F.new <- f[[1]] # F matrix

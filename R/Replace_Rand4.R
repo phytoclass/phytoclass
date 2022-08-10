@@ -1,3 +1,11 @@
+#' Apply randomization functions to matrices
+#'
+#' @param i 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Replace_Rand4 <- function(F,i){
   F.new <- as.matrix(replace(F[[1]],i,rand4(F[[1]][i]))) # randomise first element of matrix
   F.new <- Fac_F(F.new)

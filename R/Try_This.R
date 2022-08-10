@@ -1,4 +1,10 @@
-
+#' sets how many iterations the algorithm should continue for x4. 
+#' This is the 'steepest descent' algorithm
+#'
+#' @return
+#' @export
+#'
+#' @examples
 Try_This <- function(F){ 
   loop <- 1
   F.new <- Fac_F(F)
