@@ -6,12 +6,12 @@
 #' @export
 #'
 #' @examples
-Wrangling <- function(Fl){
+Wrangling <- function(Fl, min.val, max.val){
   Fd <- Fl
   Fmin <- as.matrix(Fd)   #### Set up Fmin matrix
-  Fmin[Fmin>0] <- min  # set all non-zero elements to the minimum values (imported from csv )
+  Fmin[Fmin>0] <- min.val  # set all non-zero elements to the minimum values (imported from csv )
   Fmax <- as.matrix(Fd)
-  Fmax[Fmax>0] <- max
+  Fmax[Fmax>0] <- max.val
   chlv <- Fd[,ncol(Fd)]  ##### The chlorophyll values once weighted to rowsums for initial F matrix
   Fmin <- Fmin * chlv #### multiply the minimum value by weighted chlorophyll to updated ratios
   Fmin[,ncol(Fmin)] <- chlv  #### Reassign correct initial chl values

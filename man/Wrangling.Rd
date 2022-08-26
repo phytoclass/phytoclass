@@ -4,10 +4,15 @@
 \alias{Wrangling}
 \title{wrangles the data for the simulated annealing algorithm (maxs, mins etc...)}
 \usage{
-Wrangling(Fl)
+Wrangling(Fl, min.val, max.val)
 }
 \arguments{
 \item{Fl}{}
+
+\item{min.val}{}
+
+\item{max.val}{}
+
 }
 \description{
 wrangles the data for the simulated annealing algorithm (maxs, mins etc...)

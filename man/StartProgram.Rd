@@ -4,10 +4,12 @@
 \alias{StartProgram}
 \title{Run the algorithm}
 \usage{
-StartProgram(S)
+StartProgram(S, min.val, max.val)
 }
 \arguments{
 \item{S}{}
+\item{min.val}{}
+\item{max.val}{}
 }
 \description{
 Run the algorithm
