@@ -4,7 +4,7 @@
 \alias{Random_neighbour2}
 \title{Same as before, but without the 'N' input}
 \usage{
-Random_neighbour2(Fn, Temp, chlv, s_c)
+Random_neighbour2(Fn, Temp, chlv, s_c, place)
 }
 \arguments{
 \item{Fn}{}

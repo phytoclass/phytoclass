@@ -4,7 +4,7 @@
 \alias{Fac_F}
 \title{Weighting}
 \usage{
-Fac_F(Fn)
+Fac_F(Fn, S)
 }
 \arguments{
 \item{Fn}{}

@@ -1,6 +1,8 @@
 #' wrangles the data for the simulated annealing algorithm (maxs, mins etc...)
 #'
-#' @param Fl 
+#' @param Fl   
+#' @param min.val 
+#' @param max.val  
 #'
 #' @return
 #' @export

@@ -5,6 +5,8 @@ Authors@R:
     person("Alexander", "Hayward", , "alexhayward1995@gmail.com", role = c("aut", "cre"))
 	person("Andy", "McKenzie", , "Andy.Mckenzie@niwa.co.nz", role = c("aut", "cre"))
 Description: Some fancy analyses to classify phytoplankton.
+Imports:
+    RcppML
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

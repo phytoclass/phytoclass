@@ -4,7 +4,7 @@
 \alias{Weight_error}
 \title{Add weights}
 \usage{
-Weight_error(S)
+Weight_error(S, cm)
 }
 \arguments{
 \item{S}{}

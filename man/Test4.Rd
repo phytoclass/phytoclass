@@ -4,7 +4,7 @@
 \alias{Test4}
 \title{conduit between minimise_elements function and Fac_F_R}
 \usage{
-Test4(F)
+Test4(F, NSA)
 }
 \description{
 conduit between minimise_elements function and Fac_F_R

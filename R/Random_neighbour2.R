@@ -9,7 +9,8 @@
 #' @export
 #'
 #' @examples
-Random_neighbour2 <- function(Fn,Temp,chlv,s_c){
+#' @importFrom stats runif
+Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place){
   s_c <- vectorise(s_c[,1:ncol(s_c)-1])
   SE <- Wrangling(Fn)[[3]] #### vectorise function outputs all non-zero elements as a vector (excluding chl column)
   minF <- Wrangling(Fn)[[1]]

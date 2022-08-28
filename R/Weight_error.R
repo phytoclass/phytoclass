@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-Weight_error <- function(S){
+Weight_error <- function(S, cm){
   S <- S%*%diag(cm)
   return(S)
 }

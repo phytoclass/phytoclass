@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-Random_neighbour <- function(Fn,Temp,chlv,s_c,N){
+Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place){
   k <- match(N,place)
   s_c <- s_c[N]
   SE <- Wrangling(Fn)[[3]] #### vectorise function outputs all non-zero elements as a vector (excluding chl column)

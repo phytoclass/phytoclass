@@ -2,13 +2,17 @@
 #'
 #' @param Fi 
 #' @param niter 
-#' @param step 
+#' @param step   
+#' @param min.val  
+#' @param max.val  
+#' @param nc  
+#' @param place  
 #'
 #' @return
 #' @export
 #'
 #' @examples
-simulated_annealing2 <- function(Fi,niter,step, min.val, max.val){
+simulated_annealing2 <- function(Fi, niter, step, min.val, max.val, nc, place){
   
   SE <- vectorise(Fi)
   nc <- Fac_F(Fi)
@@ -23,13 +27,13 @@ simulated_annealing2 <- function(Fi,niter,step, min.val, max.val){
     Temp <- (1 - step)^(k) ### Set temp to decline with each iteration
     #consider random neighbour
     chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-    new_neighbour <- Random_neighbour2(s_c,Temp,chlv,s_c)
+    new_neighbour <- Random_neighbour2(s_c, Temp, chlv, s_c, place)
     
     # considers 50 random neighbours and picks the one with the lowest error
     D <- list()
     for (i in 1:50){
       chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-      D[[length(D)+1]] <- Random_neighbour2(s_c,Temp,chlv,s_c)
+      D[[length(D)+1]] <- Random_neighbour2(s_c, Temp, chlv, s_c, place)
     }
     Dn <- list()
     for (i in D){
@@ -62,7 +66,7 @@ simulated_annealing2 <- function(Fi,niter,step, min.val, max.val){
       N <- place[d]
       for (i in 1:50){
         chlv <- Wrangling(s_n, min.val, max.val)[[4]]
-        D[[length(D)+1]] <- Random_neighbour(s_n,Temp,chlv,s_n,N)
+        D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place)
       }
       Dn <- list()
       for (i in D){
@@ -86,7 +90,7 @@ simulated_annealing2 <- function(Fi,niter,step, min.val, max.val){
     # Difference in error
     A = target(f_n)/target(f_c) 
     diff <- f_n - f_c
-    if (f_n < f_c || exp(-(f_n - f_c) / Temp) < runif(1, 0, 1)) {   # metropolis criterion we can switch off and on.
+    if (f_n < f_c || exp(-(f_n - f_c) / Temp) < stats::runif(1, 0, 1)) {   # metropolis criterion we can switch off and on.
       s_c <- s_n
       f_c <- f_n
     }

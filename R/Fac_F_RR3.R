@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-Fac_F_RR3 <- function(F,vary){
+Fac_F_RR3 <- function(F, vary, place){
   F.locs <- vector()
   F.new <- lapply(vary, function(i){
     Replace_Rand3(F,i)})

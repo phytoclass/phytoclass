@@ -4,7 +4,7 @@
 \alias{simulated_annealing2}
 \title{input = F matrix, number of iterations, and the step to use.}
 \usage{
-simulated_annealing2(Fi, niter, step, min.val, max.val)
+simulated_annealing2(Fi, niter, step, min.val, max.val, nc, place)
 }
 \arguments{
 \item{Fi}{}
@@ -17,6 +17,9 @@ simulated_annealing2(Fi, niter, step, min.val, max.val)
 
 \item{max.val}{}
 
+\item{nc}{}
+
+\item{place}{}
 }
 \description{
 input = F matrix, number of iterations, and the step to use.

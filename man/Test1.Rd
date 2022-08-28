@@ -4,7 +4,7 @@
 \alias{Test1}
 \title{conduit between minimise_elements function and Fac_F_R}
 \usage{
-Test1(F)
+Test1(F, place)
 }
 \description{
 conduit between minimise_elements function and Fac_F_R

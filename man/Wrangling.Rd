@@ -12,7 +12,6 @@ Wrangling(Fl, min.val, max.val)
 \item{min.val}{}
 
 \item{max.val}{}
-
 }
 \description{
 wrangles the data for the simulated annealing algorithm (maxs, mins etc...)

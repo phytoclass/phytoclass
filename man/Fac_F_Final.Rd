@@ -5,7 +5,7 @@
 \title{This is the final fit, and multiplies the final value by Chl concentration so
 they're in units of Chl a biomass}
 \usage{
-Fac_F_Final(Fn)
+Fac_F_Final(Fn, S, S_Chl)
 }
 \arguments{
 \item{Fn}{}

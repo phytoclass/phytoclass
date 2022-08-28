@@ -4,7 +4,7 @@
 \alias{Minimise_elements}
 \title{A function that reduces every for every element that didn't reduce in index function}
 \usage{
-Minimise_elements(F)
+Minimise_elements(F, place)
 }
 \description{
 A function that reduces every for every element that didn't reduce in index function
