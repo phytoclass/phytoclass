@@ -8,6 +8,8 @@ Weight_error(S, cm)
 }
 \arguments{
 \item{S}{}
+
+\item{cm}{}
 }
 \value{
 A matrix

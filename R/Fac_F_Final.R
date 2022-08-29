@@ -2,6 +2,8 @@
 #' they're in units of Chl a biomass
 #'
 #' @param Fn 
+#' @param S
+#' @param S_Chl
 #'
 #' @return
 #' @export

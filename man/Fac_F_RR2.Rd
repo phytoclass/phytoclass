@@ -4,10 +4,12 @@
 \alias{Fac_F_RR2}
 \title{Apply randomisation function to matrices and keep element that reduce error x4}
 \usage{
-Fac_F_RR2(F, vary, place)
+Fac_F_RR2(F, vary, place, S, cm)
 }
 \arguments{
 \item{vary}{}
+
+\item{cm}{}
 }
 \description{
 Apply randomisation function to matrices and keep element that reduce error x4

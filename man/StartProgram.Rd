@@ -8,6 +8,8 @@ StartProgram(S, min.val, max.val)
 }
 \arguments{
 \item{S}{}
+
+\item{max.val}{}
 }
 \description{
 Run the algorithm

@@ -4,10 +4,14 @@
 \alias{Fac_F}
 \title{Weighting}
 \usage{
-Fac_F(Fn, S)
+Fac_F(Fn, S, cm)
 }
 \arguments{
 \item{Fn}{}
+
+\item{S}{}
+
+\item{cm}{}
 }
 \value{
 A list

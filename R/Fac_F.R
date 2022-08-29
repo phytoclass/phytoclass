@@ -1,6 +1,8 @@
 #' Weighting
 #'
 #' @param Fn 
+#' @param S 
+#' @param cm
 #'
 #' @return A list
 #' @export

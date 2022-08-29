@@ -1,12 +1,15 @@
 #' Apply randomisation function to matrices and keep element that reduce error x4
 #'
+#' @param F
 #' @param vary 
+#' @param S
+#' @param cm
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Fac_F_RR1 <- function(F,vary){ # Inputs are #F and which elements to vary, should be all elements
+Fac_F_RR1 <- function(F, vary, S, cm){ # Inputs are #F and which elements to vary, should be all elements
   F.locs <- vector() 
   Fs <- F[[1]]
   F.new <- lapply(vary, function(i){ # randomises every element in 'vary' 
@@ -27,15 +30,15 @@ Fac_F_RR1 <- function(F,vary){ # Inputs are #F and which elements to vary, shoul
       else{F.news <- F.news[[1]]}      
       cont <- unlist(cont)
       F.new <- replace(F[[1]],cont,F.news)
-      F.new <- Fac_F(F.new)
+      F.new <- Fac_F(F.new, S, cm)
     }
     else{
-      F.new <- Fac_F(F[[1]])
+      F.new <- Fac_F(F[[1]], S, cm)
       cont <- vary
     }
   }
   else{
-    F.new <- Fac_F(F[[1]])
+    F.new <- Fac_F(F[[1]], S, cm)
     cont <- vary
   }
   res <- list(F.new,cont)

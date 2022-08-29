@@ -9,6 +9,8 @@ Fac_F_Final(Fn, S, S_Chl)
 }
 \arguments{
 \item{Fn}{}
+
+\item{S_Chl}{}
 }
 \description{
 This is the final fit, and multiplies the final value by Chl concentration so

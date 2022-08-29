@@ -1,6 +1,7 @@
 #' Add weights
 #'
 #' @param S 
+#' @param cm
 #'
 #' @return A matrix
 #' @export

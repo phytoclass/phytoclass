@@ -15,7 +15,7 @@
 simulated_annealing2 <- function(Fi, niter, step, min.val, max.val, cm, place){
   
   SE <- vectorise(Fi)
-  nc <- Fac_F(Fi)
+  nc <- Fac_F(Fi, S, cm)
   
   s_b <- s_c <- s_n <- nc[[1]]  # sets initial values 
   f_b <- f_c <- f_n <- nc[[2]]

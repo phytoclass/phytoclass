@@ -1,6 +1,8 @@
 #' Run the algorithm
 #'
 #' @param S 
+#' @param min.val
+#' @param max.val
 #'
 #' @return
 #' @export

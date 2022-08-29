@@ -1,12 +1,16 @@
 #' Apply randomisation function to matrices and keep element that reduce error x4
 #'
+#' @param F
 #' @param vary 
+#' @param place
+#' @param S
+#' @param cm
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Fac_F_RR3 <- function(F, vary, place){
+Fac_F_RR3 <- function(F, vary, place, S, cm){
   F.locs <- vector()
   F.new <- lapply(vary, function(i){
     Replace_Rand3(F,i)})
@@ -26,16 +30,16 @@ Fac_F_RR3 <- function(F, vary, place){
       else{F.news <- F.news[[1]]}
       cont <- unlist(cont)
       F.new <- replace(F[[1]],cont,F.news)
-      F.new <- Fac_F(F.new)
+      F.new <- Fac_F(F.new, S, cm)
     }
     else{
-      C <- Fac_F_RR2(F,place)
+      C <- Fac_F_RR2(F, vary, place, S, cm)
       F.new <- C[[1]] 
       cont <- C[[2]]
     }
   }
   else{
-    C <- Fac_F_RR1(F,place)
+    C <- Fac_F_RR1(F, place)
     F.new <- C[[1]] 
     cont <- C[[2]]
   }

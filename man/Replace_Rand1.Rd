@@ -4,7 +4,7 @@
 \alias{Replace_Rand1}
 \title{Apply randomization functions to matrices}
 \usage{
-Replace_Rand1(F, i)
+Replace_Rand1(F, i, S, cm)
 }
 \arguments{
 \item{i}{}
