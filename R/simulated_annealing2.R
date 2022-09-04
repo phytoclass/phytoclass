@@ -2,7 +2,8 @@
 #'
 #' @param Fi 
 #' @param niter 
-#' @param step   
+#' @param step  
+#' @param S 
 #' @param min.val  
 #' @param max.val 
 #' @param cm 
@@ -12,7 +13,7 @@
 #' @export
 #'
 #' @examples
-simulated_annealing2 <- function(Fi, niter, step, min.val, max.val, cm, place){
+simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place){
   
   SE <- vectorise(Fi)
   nc <- Fac_F(Fi, S, cm)
