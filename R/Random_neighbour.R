@@ -9,19 +9,22 @@
 #' @param chlv 
 #' @param s_c 
 #' @param N 
+#' @param place  
+#' @param min.val  
+#' @param max.val
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place){
+Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, min.val, max.val){
   k <- match(N,place)
   s_c <- s_c[N]
-  SE <- Wrangling(Fn)[[3]] #### vectorise function outputs all non-zero elements as a vector (excluding chl column)
+  SE <- Wrangling(Fn, min.val, max.val)[[3]] #### vectorise function outputs all non-zero elements as a vector (excluding chl column)
   SE <- SE[k]
-  minF <- Wrangling(Fn)[[1]]
+  minF <- Wrangling(Fn, min.val, max.val)[[1]]
   minF <- minF[k]
-  maxF <- Wrangling(Fn)[[2]]
+  maxF <- Wrangling(Fn, min.val, max.val)[[2]]
   maxF <- maxF[k]
   ki <- maxF-minF
   rand <- round(runif(n = length(s_c), -1, 1),4)
