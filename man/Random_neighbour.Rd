@@ -7,7 +7,7 @@ distrubtion with scaling factors etc...
 This has the input N and is called in the simuated annealing output to randomise an
 element that is outside its min/max value}
 \usage{
-Random_neighbour(Fn, Temp, chlv, s_c, N, place)
+Random_neighbour(Fn, Temp, chlv, s_c, N, place, min.val, max.val)
 }
 \arguments{
 \item{Fn}{}
@@ -19,6 +19,12 @@ Random_neighbour(Fn, Temp, chlv, s_c, N, place)
 \item{s_c}{}
 
 \item{N}{}
+
+\item{place}{}
+
+\item{min.val}{}
+
+\item{max.val}{}
 }
 \description{
 Condisder a random neighbour to the inital value by randomising from normal
