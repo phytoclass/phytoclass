@@ -80,8 +80,8 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
       s_n <- new_neighbour[[1]]
       f_n <- new_neighbour[[2]]
       
-      minF <- Wrangling(new_neighbour[[1]])[[1]]
-      maxF <- Wrangling(new_neighbour[[1]])[[2]]
+      minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
+      maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
       
       d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
       
