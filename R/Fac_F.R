@@ -18,7 +18,7 @@ Fac_F <- function(Fn, S, cm){
   Cn2 <- C_new2/Cn.s2 #Row sums to one
   Cn2 <- as.matrix(Cn2)
   colnames(Cn2) <- rownames(F)
-  error <- norm(Weight_error(S, cm) - (C_new2%*%Weight_error(Fn, )), 'F')
+  error <- norm(Weight_error(S, cm) - (C_new2%*%Weight_error(Fn, cm)), 'F')
   return(list(Fn, error, Cn2))
 }
 
