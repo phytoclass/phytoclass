@@ -4,7 +4,7 @@
 \alias{Random_neighbour2}
 \title{Same as before, but without the 'N' input}
 \usage{
-Random_neighbour2(Fn, Temp, chlv, s_c, place)
+Random_neighbour2(Fn, Temp, chlv, s_c, place, min.val, max.val)
 }
 \arguments{
 \item{Fn}{}
@@ -14,6 +14,10 @@ Random_neighbour2(Fn, Temp, chlv, s_c, place)
 \item{chlv}{}
 
 \item{s_c}{}
+
+\item{min.val}{}
+
+\item{max.val}{}
 }
 \description{
 Same as before, but without the 'N' input
