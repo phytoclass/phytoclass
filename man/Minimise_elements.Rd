@@ -6,6 +6,11 @@
 \usage{
 Minimise_elements(F, place)
 }
+\arguments{
+\item{F}{}
+
+\item{place}{}
+}
 \description{
 A function that reduces every for every element that didn't reduce in index function
 }

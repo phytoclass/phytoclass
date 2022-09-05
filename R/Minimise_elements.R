@@ -1,5 +1,8 @@
 #' A function that reduces every for every element that didn't reduce in index function
 #'
+#' @param F    
+#' @param place
+#'
 #' @return
 #' @export
 #'

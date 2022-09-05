@@ -6,8 +6,8 @@
 #' @export
 #'
 #' @examples
-SAALS2 <- function(Ft){
-  g <- Try_This2(Ft)
+SAALS2 <- function(Ft, S, cm){
+  g <- Try_This2(Ft, F, cm)
   err <- g[[2]]
   g <- g[[1]]
   gchl <- g[,ncol(g)]
