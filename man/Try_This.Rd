@@ -5,7 +5,14 @@
 \title{sets how many iterations the algorithm should continue for x4.
 This is the 'steepest descent' algorithm}
 \usage{
-Try_This(F)
+Try_This(F, S, cm)
+}
+\arguments{
+\item{F}{}
+
+\item{S}{}
+
+\item{cm}{}
 }
 \description{
 sets how many iterations the algorithm should continue for x4.

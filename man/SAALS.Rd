@@ -4,10 +4,14 @@
 \alias{SAALS}
 \title{to apply to SD algorithm after each iteration of simulated annealing.}
 \usage{
-SAALS(Ft)
+SAALS(Ft, S, cm)
 }
 \arguments{
 \item{Ft}{}
+
+\item{S}{}
+
+\item{Cm}{}
 }
 \description{
 to apply to SD algorithm after each iteration of simulated annealing.

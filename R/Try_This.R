@@ -1,13 +1,17 @@
 #' sets how many iterations the algorithm should continue for x4. 
-#' This is the 'steepest descent' algorithm
+#' This is the 'steepest descent' algorithm 
+#' 
+#' @param F  
+#' @param S   
+#' @param cm
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Try_This <- function(F){ 
+Try_This <- function(F, S, cm){ 
   loop <- 1
-  F.new <- Fac_F(F)
+  F.new <- Fac_F(F, S, cm)
   F.initial <- F.new
   for (i in 1:5){ #should always be small. It would be nice to allow the 
     F.new <- Minimise_elements(F.initial[[1]])
