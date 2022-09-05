@@ -17,7 +17,7 @@
 Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val){
   s_c <- vectorise(s_c[,1:ncol(s_c)-1])
   #### vectorise function outputs all non-zero elements as a vector (excluding chl column)  
-  SE <- Wrangling(Fn, min.val, max.val)[[3]] 
+  SE <-   Wrangling(Fn, min.val, max.val)[[3]] 
   minF <- Wrangling(Fn, min.val, max.val)[[1]]
   maxF <- Wrangling(Fn, min.val, max.val)[[2]]
   ki <- maxF-minF
@@ -50,6 +50,6 @@ Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.va
   Fn[Fn >0] <- SA
   Fn <- cbind(Fn,chlv)
   colnames(Fn) <- colnames(F)
-  F.n <- Fac_F(Fn)
+  F.n <- Fac_F(Fn, S, cm)
   return(F.n, S, cm)
 }
