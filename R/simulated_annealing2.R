@@ -28,13 +28,13 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
     Temp <- (1 - step)^(k) ### Set temp to decline with each iteration
     #consider random neighbour
     chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-    new_neighbour <- Random_neighbour2(s_c, Temp, chlv, s_c, place, S, min.val, max.val)
+    new_neighbour <- Random_neighbour2(s_c, Temp, chlv, s_c, place, S, cm, min.val, max.val)
     
     # considers 50 random neighbours and picks the one with the lowest error
     D <- list()
     for (i in 1:50){
       chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-      D[[length(D)+1]] <- Random_neighbour2(s_c, Temp, chlv, s_c, place, S, min.val, max.val)
+      D[[length(D)+1]] <- Random_neighbour2(s_c, Temp, chlv, s_c, place, S, cm, min.val, max.val)
     }
     Dn <- list()
     for (i in D){
@@ -67,7 +67,7 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
       N <- place[d]
       for (i in 1:50){
         chlv <- Wrangling(s_n, min.val, max.val)[[4]]
-        D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, min.val, max.val)
+        D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
       }
       Dn <- list()
       for (i in D){
