@@ -4,7 +4,8 @@
 #' @param Temp 
 #' @param chlv 
 #' @param s_c 
-#' @param S
+#' @param S  
+#' @param cm
 #' @param min.val 
 #' @param max.val
 #'
@@ -13,7 +14,7 @@
 #'
 #' @examples
 #' @importFrom stats runif
-Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, min.val, max.val){
+Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val){
   s_c <- vectorise(s_c[,1:ncol(s_c)-1])
   #### vectorise function outputs all non-zero elements as a vector (excluding chl column)  
   SE <- Wrangling(Fn, min.val, max.val)[[3]] 
