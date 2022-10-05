@@ -17,7 +17,7 @@ Minimise_elements <- function(F, place, S, cm){   # A function that reduces ever
   F.old <- f[[3]] # old F matrix
   F.initial <- F.new # Fac_F new matrix
   # Fac_F new matrix
-  g <-Fac_F_RR3(F.new, place, S, cm)
+  g <- Fac_F_RR3(F.new, vary = place, place, S, cm)
   if (g[[1]][[2]] < F.initial[[2]]){F.new <- g[[1]]}
   n <- g[[2]]
   res <- list(F.new,n)
