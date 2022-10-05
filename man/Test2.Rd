@@ -4,7 +4,12 @@
 \alias{Test2}
 \title{conduit between minimise_elements function and Fac_F_R}
 \usage{
-Test2(F, place)
+Test2(F, place, S, cm)
+}
+\arguments{
+\item{F}{}
+
+\item{cm}{}
 }
 \description{
 conduit between minimise_elements function and Fac_F_R
