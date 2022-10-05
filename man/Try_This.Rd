@@ -5,7 +5,11 @@
 \title{sets how many iterations the algorithm should continue for x4.
 This is the 'steepest descent' algorithm}
 \usage{
+<<<<<<< HEAD
 Try_This(F, place, S, cm)
+=======
+Try_This(F, S, cm)
+>>>>>>> 8b296bec24e5f67d0741dd1a00fd8fa602f57862
 }
 \arguments{
 \item{F}{}
