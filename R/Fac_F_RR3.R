@@ -13,7 +13,7 @@
 Fac_F_RR3 <- function(F, vary, place, S, cm){
   F.locs <- vector()
   F.new <- lapply(vary, function(i){
-    Replace_Rand3(F,i)})
+    Replace_Rand3(F, i, S, cm)})
   cont <- lapply(1:length(F.new), function(i){ c <- which(length(F.new[[i]]) == 4)})
   conts <- which(cont==1)
   if(!is.null(length(conts))){
