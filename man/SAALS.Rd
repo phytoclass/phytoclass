@@ -4,20 +4,11 @@
 \alias{SAALS}
 \title{to apply to SD algorithm after each iteration of simulated annealing.}
 \usage{
-<<<<<<< HEAD
 SAALS(Ft, place, S, cm)
-=======
-SAALS(Ft, S, cm)
->>>>>>> 8b296bec24e5f67d0741dd1a00fd8fa602f57862
 }
 \arguments{
 \item{Ft}{}
 
-<<<<<<< HEAD
-\item{place}{}
-
-=======
->>>>>>> 8b296bec24e5f67d0741dd1a00fd8fa602f57862
 \item{S}{}
 
 \item{Cm}{}
