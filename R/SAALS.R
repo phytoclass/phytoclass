@@ -1,7 +1,8 @@
 #' to apply to SD algorithm after each iteration of simulated annealing.
 #'
+
 #' @param Ft 
-#' @param place  
+#' @param place
 #' @param S  
 #' @param Cm
 #'
@@ -9,6 +10,8 @@
 #' @export
 #'
 #' @examples
+
+
 SAALS <- function(Ft, place, S, cm){
   g <- Try_This(Ft, place, S, cm)
   err <- g[[2]]
