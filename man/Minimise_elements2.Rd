@@ -10,6 +10,8 @@ Minimise_elements2(F, place, S, cm)
 \item{F}{}
 
 \item{place}{}
+
+\item{cm}{}
 }
 \description{
 A function that reduces every for every element that didn't reduce in index function
