@@ -1,7 +1,8 @@
 #' sets how many iterations the algorithm should continue for x4. 
 #' This is the 'steepest descent' algorithm 
 #' 
-#' @param F  
+#' @param F 
+#' @param place 
 #' @param S   
 #' @param cm
 #'
