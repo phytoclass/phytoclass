@@ -5,10 +5,12 @@
 \title{sets how many iterations the algorithm should continue for x4.
 This is the 'steepest descent' algorithm}
 \usage{
-Try_This2(F, S, cm)
+Try_This2(F, place, S, cm)
 }
 \arguments{
 \item{F}{}
+
+\item{place}{}
 
 \item{S}{}
 
