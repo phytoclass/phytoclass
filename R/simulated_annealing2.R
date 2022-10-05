@@ -51,7 +51,7 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
       new_neighbour <- SAALS(new_neighbour[[1]], min.value, max.value, place, S, cm)
       
     }
-    else{new_neighbour <- SAALS2(new_neighbour[[1]], place, S, cm)}
+    else{new_neighbour <- SAALS2(new_neighbour[[1]], min.value, max.value, place, S, cm)}
     
     
     minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]] # mins and maxs
