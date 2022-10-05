@@ -4,7 +4,7 @@
 \alias{SAALS}
 \title{to apply to SD algorithm after each iteration of simulated annealing.}
 \usage{
-SAALS(Ft, place, S, cm)
+SAALS(Ft, min.value, max.value, place, S, cm)
 }
 \arguments{
 \item{Ft}{}
