@@ -8,6 +8,8 @@ Replace_Rand1(F, i, S, cm)
 }
 \arguments{
 \item{i}{}
+
+\item{cm}{}
 }
 \description{
 Apply randomization functions to matrices

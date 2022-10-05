@@ -1,6 +1,9 @@
 #' Apply randomization functions to matrices
 #'
+#' @param F
 #' @param i 
+#' @param S
+#' @param cm
 #'
 #' @return
 #' @export
