@@ -58,7 +58,7 @@ Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.
   Fn[N] <- SA
   Fn <- cbind(Fn,chlv)
   colnames(Fn) <- colnames(F)
-  F.n <- Fac_F(, S, cm)
+  F.n <- Fac_F(Fn, S, cm)
   return(F.n)
 }
 
