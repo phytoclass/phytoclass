@@ -20,7 +20,7 @@ Fac_F_Final <- function(Fn, S, S_Chl){
   Cn2 <- C_new2/Cn.s2
   Cn2 <- as.matrix(Cn2)
   Cn2 <- Cn2 * S_Chl
-  colnames(Cn2) <- rownames(F)
+  colnames(Cn2) <- rownames(Fn[[1]])
   error <- norm(S-(C_new2%*%Fn),'F')
   return(list(Fn,error,Cn2))
 }
