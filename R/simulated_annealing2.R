@@ -32,7 +32,7 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
     
     # considers 50 random neighbours and picks the one with the lowest error
     D <- list()
-    for (i in 1:50){
+    for (i in 1:70){
       chlv <- Wrangling(s_c, min.val, max.val)[[4]]
       D[[length(D)+1]] <- Random_neighbour2(s_c, Temp, chlv, s_c, place, S, cm, min.val, max.val)
     }
@@ -47,11 +47,11 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
     
     # Applies the steepst descent algorithm to the new neighbour
     
-    if (Temp > .2) {
-      new_neighbour <- SAALS(new_neighbour[[1]], min.value, max.value, place, S, cm)
+    if (Temp > .3) {
+      new_neighbour <- SAALS(new_neighbour[[1]], place, S, cm)
       
     }
-    else{new_neighbour <- SAALS2(new_neighbour[[1]], min.value, max.value, place, S, cm)}
+    else{new_neighbour <- SAALS2(new_neighbour[[1]], place, S, cm)}
     
     
     minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]] # mins and maxs
@@ -65,7 +65,7 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
     d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
     while( length(d) > 0){
       N <- place[d]
-      for (i in 1:50){
+      for (i in 1:70){
         chlv <- Wrangling(s_n, min.val, max.val)[[4]]
         D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
       }
@@ -91,14 +91,14 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
     # Difference in error
     A = target(f_n)/target(f_c) 
     diff <- f_n - f_c
-    if (f_n < f_c || exp(-(f_n - f_c) / Temp) < stats::runif(1, 0, 1)) {   # metropolis criterion we can switch off and on.
+    if (f_n < f_c || exp(-(f_n - f_c)) < stats::runif(1, 0, 1)) {   # metropolis criterion we can switch off and on.
       s_c <- s_n
       f_c <- f_n
     }
-    print(f_c) # print if verbose
-    print(f_n)
-    print(f_b)
-    print(Temp)
+    print(paste("Current: ",round(f_c,4))) # print if verbose
+    print(paste("Neighbour: ",round(f_n,4))) # print if verbose
+    
+    print(paste("Temp: ",round(Temp,4)))
     # update best state
     if (f_n < f_b) {
       s_b <- s_n
