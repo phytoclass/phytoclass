@@ -4,6 +4,7 @@
 #' @param Temp 
 #' @param chlv 
 #' @param s_c 
+#' @param place
 #' @param S  
 #' @param cm
 #' @param min.val 
@@ -16,13 +17,12 @@
 #' @importFrom stats runif
 Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val){
   s_c <- vectorise(s_c[,1:ncol(s_c)-1])
-  #### vectorise function outputs all non-zero elements as a vector (excluding chl column)  
   SE <-   Wrangling(Fn, min.val, max.val)[[3]] 
   minF <- Wrangling(Fn, min.val, max.val)[[1]]
   maxF <- Wrangling(Fn, min.val, max.val)[[2]]
   ki <- maxF-minF
   rand <- round(runif(n = length(s_c), -1, 1),4)
-  SA <- (SE + (Temp*0.5) *ki*rand)
+  SA <- (SE + (Temp) *ki*rand)
   SA <- as.vector(unlist(SA))
   d <- which(SA < minF | SA > maxF)
   length(d)
@@ -35,11 +35,11 @@ Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.va
     mind <- minr[d]
     maxd <- maxr[d]
     kir <- maxd-mind
-    SA2 <- (SE[d] +(Temp*0.5)*kir*nr)
+    SA2 <- (SE[d] +(Temp)*kir*nr)
     SA[d] <- SA2 
     d <- which(SA < minF | SA > maxF)
     #print(loop)
-    if (loop > 2000){
+    if (loop > 30){
       nn <- (minF[d]+maxF[d])/2
       f <- round(runif(n=length(d),minF[d],maxF[d]),4)
       SA[d] <- f
