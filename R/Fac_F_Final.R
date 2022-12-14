@@ -34,7 +34,7 @@ Fac_F_Final <- function(Fn, S, S_Chl){
                          "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73","#001E73","#013E73")
   gr <- colnames(PLE)[[1]]
   n <- ggplot2::ggplot(PLE, aes(x=UQ(as.name(gr)), y=vals, fill=names)) +
-    geom_area()+
+    geom_area() +
     scale_color_manual(values=colorBlindGrey8)+
     scale_fill_manual(values=colorBlindGrey8)
   G <- S - (C_new2%*%Fn)
