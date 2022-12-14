@@ -9,7 +9,7 @@
 cms<-function(S){
   n <- colMeans(S)
   S <- n^-1
-  S <- ifelse(S>50,50,S)
+  S <- ifelse(S>40,40,S)
   S[length(S)] =1
   return(S)
 }
