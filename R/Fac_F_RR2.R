@@ -30,7 +30,7 @@ Fac_F_RR2 <- function(F, vary, place, S, cm){
       else{F.news <- F.news[[1]]} 
       cont <- unlist(cont)
       F.new <- replace(F[[1]],cont,F.news)
-      F.new <- Fac_F(F.new, S, cm)
+      F.new <- Fac_F(F.new,S,cm)
     }
     else{
       C <- Fac_F_RR1(F, place, S, cm)
