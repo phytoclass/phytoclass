@@ -35,12 +35,12 @@ Fac_F_Final <- function(Fn, S, S_Chl, cm){
                          "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73","#001E73","#013E73")
   gr <- colnames(PLE)[[1]]
   n <- ggplot2::ggplot(PLE, aes(x=UQ(as.name(gr)), y=vals, fill=names)) +
-    geom_area() +
-    scale_color_manual(values=colorBlindGrey8)+
-    scale_fill_manual(values=colorBlindGrey8)
+    ggplot2::geom_area() +
+    ggplot2::scale_color_manual(values=colorBlindGrey8)+
+    ggplot2::scale_fill_manual(values=colorBlindGrey8)
+  
   G <- S - (C_new2%*%Fn)
   gs <- colMeans(abs(G))/colSums(S)
-  
   
   return(list(Fn,error,Cn2,n,gs,G))
 }
