@@ -4,12 +4,13 @@
 #' @param Fn 
 #' @param S
 #' @param S_Chl
+#' @param cm
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Fac_F_Final <- function(Fn, S, S_Chl){
+Fac_F_Final <- function(Fn, S, S_Chl, cm){
   F.sum <- Wrangle_F(Fn)[[2]]
   Fn <- Wrangle_F(Fn)[[1]]
   Fn <- Fn * F.sum
