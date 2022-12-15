@@ -20,9 +20,7 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
   
   s_b <- s_c <- s_n <- nc[[1]]  # sets initial values 
   f_b <- f_c <- f_n <- nc[[2]]
-  
-  
-  
+
   for (k in 1:niter) #Set up loop (niter = number of iterations
   {   
     Temp <- (1 - step)^(k) ### Set temp to decline with each iteration
