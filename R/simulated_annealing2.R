@@ -47,11 +47,11 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
     
     if (Temp > .3) {
       new_neighbour <- SAALS(new_neighbour[[1]], min.val, max.val,
-                             place, S, cm)
+                             place, S, cm, num.loops = 10)
     }
     else {
-      new_neighbour <- SAALS2(new_neighbour[[1]], min.val, max.val, 
-                              place, S, cm)
+      new_neighbour <- SAALS(new_neighbour[[1]], min.val, max.val, 
+                              place, S, cm, num.looops = 2)
     }
     
     
