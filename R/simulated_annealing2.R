@@ -51,7 +51,7 @@ simulated_annealing2 <- function(Fi, niter, step, S, min.val, max.val, cm, place
     }
     else {
       new_neighbour <- SAALS(new_neighbour[[1]], min.val, max.val, 
-                              place, S, cm, num.looops = 2)
+                              place, S, cm, num.loops = 2)
     }
     
     
