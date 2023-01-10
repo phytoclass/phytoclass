@@ -12,7 +12,7 @@
 #'
 #' @examples
 SAALS2 <- function(Ft, min.value, max.value, place, S, cm){
-  g <- Try_This2(Ft, place, S, cm)
+  g <- Try_This(Ft, place, S, cm, num.loops = 2)
   err <- g[[2]]
   g <- g[[1]]
   gchl <- g[,ncol(g)]
