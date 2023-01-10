@@ -5,16 +5,17 @@
 #' @param place 
 #' @param S   
 #' @param cm
+#' @param num.loops
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Try_This <- function(F, place, S, cm){ 
+Try_This <- function(F, place, S, cm, num.loops){ 
   loop <- 1
   F.new <- Fac_F(F, S, cm)
   F.initial <- F.new
-  for (i in 1:10){ #should always be small. It would be nice to allow the 
+  for (i in 1:num.loops){ #should always be small. It would be nice to allow the 
     F.new <- Minimise_elements(F.initial[[1]], place, S, cm)
     loop = loop +1
     # print(loop)
