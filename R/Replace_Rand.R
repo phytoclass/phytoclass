@@ -4,14 +4,16 @@
 #' @param i 
 #' @param S
 #' @param cm
+#' @param min.scaler
+#' @param max.scaler
 #'
 #' @return
 #' @export
 #'
 #' @examples
-Replace_Rand1 <- function(F, i, S, cm){
+Replace_Rand <- function(F, i, S, cm, min.scaler, max.scaler){
   # randomise first element of matrix  
-  F.new <- as.matrix(replace(F[[1]], i, rand(F[[1]][i], min.scaler = 0.99, max.scaler = 1.01))) 
+  F.new <- as.matrix(replace(F[[1]], i, rand(F[[1]][i], min.scaler, max.scaler))) 
   F.new <- Fac_F(F.new, S, cm)
   # Which elements decrease the error? Store the location of the elements that decrease it   
   v <- which(F.new[[2]] < F[[2]])

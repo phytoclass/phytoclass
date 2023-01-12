@@ -13,10 +13,12 @@ Fac_F_RR1 <- function(F, vary, S, cm){ # Inputs are #F and which elements to var
   F.locs <- vector() 
   Fs <- F[[1]]
   F.new <- lapply(vary, function(i){ # randomises every element in 'vary' 
-    Replace_Rand1(F,i, S, cm)})
-  cont <- lapply(1:length(F.new), function(i){ c <- which(length(F.new[[i]]) == 4)}) # Shows which elements reduce error
+    Replace_Rand(F, i, S, cm, min.scaler = 0.99, max.scaler = 1.01)})
+  # Shows which elements reduce error  
+  cont <- lapply(1:length(F.new), function(i){ c <- which(length(F.new[[i]]) == 4)}) 
   conts <- which(cont==1)
-  if(!is.null(length(conts))){ # Procedure for if no elements reduce error
+  # Procedure for if no elements reduce error  
+  if(!is.null(length(conts))){ 
     cont <- as.list(vary[conts])
     conts <- as.list(conts)
     Locs <-cont
