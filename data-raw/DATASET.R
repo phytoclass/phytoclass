@@ -7,7 +7,7 @@ usethis::use_data(S, overwrite = TRUE)
 
 F <-read.csv("data-raw/Ratios_5.csv",header = TRUE,row.names = 'X') # Read pig:chl inital 
 F <- F[,-1]
-usethis::use_data(S, overwrite = TRUE)
+usethis::use_data(F, overwrite = TRUE)
 
 min_max <-read.csv("data-raw/Circumpolar_minmax.csv", header = TRUE) # Read pig:chl inital 
 usethis::use_data(min_max , overwrite = TRUE)
