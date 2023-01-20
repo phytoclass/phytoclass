@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-Try_This <- function(F, place, S, cm, num.loops){ 
+Steepest_Descent <- function(F, place, S, cm, num.loops){ 
   loop <- 1
   F.new <- Fac_F(F, S, cm)
   F.initial <- F.new
