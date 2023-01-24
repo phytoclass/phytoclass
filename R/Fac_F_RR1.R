@@ -1,9 +1,9 @@
 #' Apply randomisation function to matrices and keep element that reduce error x4
 #'
-#' @param F
-#' @param vary 
-#' @param S
-#' @param cm
+#' @param F XX
+#' @param vary XX
+#' @param S XX
+#' @param cm XX
 #'
 #' @return
 #' @export

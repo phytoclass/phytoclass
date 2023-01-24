@@ -7,9 +7,13 @@
 Fac_F_RR1(F, vary, S, cm)
 }
 \arguments{
-\item{vary}{}
+\item{F}{XX}
 
-\item{cm}{}
+\item{vary}{XX}
+
+\item{S}{XX}
+
+\item{cm}{XX}
 }
 \description{
 Apply randomisation function to matrices and keep element that reduce error x4
