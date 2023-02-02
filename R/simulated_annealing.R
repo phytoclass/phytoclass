@@ -1,13 +1,10 @@
 #' input = F matrix, number of iterations, and the step to use. 
 #'
-#' @param Fi 
+#' @param S
+#' @param F
+#' @param min_max
 #' @param niter 
 #' @param step  
-#' @param S 
-#' @param min.val  
-#' @param max.val 
-#' @param cm 
-#' @param place  
 #'
 #' @return
 #' @export
@@ -15,7 +12,7 @@
 #' @examples
 simulated_annealing <- function(S, F, min_max, niter, step){
   
-  L <- Homogenise_matrices(S,F)
+  L <- Homogenise_matrices(S, F)
   
   S <- as.matrix(L[[1]])
   S_Chl <- S[, ncol(S)]
