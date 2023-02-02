@@ -17,5 +17,5 @@ Wrangle_S <- function(S){
   #vectorise / matrices
   Sm <- as.matrix(S)
   Sn <- as.vector(Sm[1,])
-  return(list(Sm))
+  return(Sm)
 }
