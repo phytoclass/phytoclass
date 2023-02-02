@@ -13,7 +13,23 @@
 #' @export
 #'
 #' @examples
-simulated_annealing <- function(Fi, niter, step, S, min.val, max.val, cm, place){
+simulated_annealing <- function(S, F, min_max, niter, step){
+  
+  L <- Homogenise_matrices(S,F)
+  
+  S <- as.matrix(L[[1]])
+  S_Chl <- S[, ncol(S)]
+  S <- Wrangle_S(S)
+  cm <- cms(S)
+  
+  F <- as.matrix(L[[2]])
+  place <- which(F > 0)
+  
+  K <- minvalmaxval(min_max, F, place)
+  min.val <- K[[1]]
+  max.val <- K[[2]]
+  Fi <- ifelse(F>0,1,0)
+  
   
   SE <- vectorise(Fi)
   nc <- Fac_F(Fi, S, cm)
@@ -96,10 +112,11 @@ simulated_annealing <- function(Fi, niter, step, S, min.val, max.val, cm, place)
       s_c <- s_n
       f_c <- f_n
     }
-    print(paste("Current: ",round(f_c,4))) # print if verbose
-    print(paste("Neighbour: ",round(f_n,4))) # print if verbose
-    
+    print(paste("Current: ", round(f_c,4))) # print if verbose
+    print(paste("Neighbour: ", round(f_n,4))) # print if verbose
+
     print(paste("Temp: ",round(Temp,4)))
+    print()
     # update best state
     if (f_n < f_b) {
       s_b <- s_n
@@ -108,7 +125,9 @@ simulated_annealing <- function(Fi, niter, step, S, min.val, max.val, cm, place)
     
   }
   res <- list(s_b, f_b)
-  return(res[[1]])
+  A <- res[[1]]
+ 
+  Fac_F_Final(A, S, S_Chl, cm)
   
 }
 
