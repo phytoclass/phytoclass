@@ -16,8 +16,8 @@ simulated_annealing <- function(S, F, min_max, niter, step){
   
   S <- as.matrix(L[[1]])
   S_Chl <- S[, ncol(S)]
-  S <- Wrangle_S(S)
   cm <- cms(S)
+  S <- Wrangle_S(S)
   
   F <- as.matrix(L[[2]])
   place <- which(F > 0)
@@ -25,7 +25,7 @@ simulated_annealing <- function(S, F, min_max, niter, step){
   K <- minvalmaxval(min_max, F, place)
   min.val <- K[[1]]
   max.val <- K[[2]]
-  Fi <- ifelse(F>0,1,0)
+  Fi <- ifelse(F>0, 1, 0)
   
   
   SE <- vectorise(Fi)
