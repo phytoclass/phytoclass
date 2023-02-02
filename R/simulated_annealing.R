@@ -111,9 +111,9 @@ simulated_annealing <- function(S, F, min_max, niter, step){
     }
     print(paste("Current: ", round(f_c,4))) # print if verbose
     print(paste("Neighbour: ", round(f_n,4))) # print if verbose
-
     print(paste("Temp: ",round(Temp,4)))
-    print()
+    print(" ")
+    
     # update best state
     if (f_n < f_b) {
       s_b <- s_n
