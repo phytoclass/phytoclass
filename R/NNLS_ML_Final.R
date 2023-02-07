@@ -1,5 +1,10 @@
-#' This is the final fit, and multiplies the final value by Chl concentration so 
-#' they're in units of Chl a biomass
+#' Performs the non-negative matrix factorisation for given phytoplankton 
+#' pigments and pigment ratios, to attain an estimate of phytoplankton 
+#' class abundances.
+#' 
+#' Unlike NNLS_ML(), it also removes any weighting and normalisation, and 
+#' also multiplies relative abundances by chlorophyll values to determine
+#' the biomass of phytoplankton groups.
 #'
 #' @param Fn 
 #' @param S
@@ -9,8 +14,8 @@
 #' @return
 #' @export
 #'
-#' @examples
-Fac_F_Final <- function(Fn, S, S_Chl, cm){
+#' @examples  
+NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   F.sum <- Wrangle_F(Fn)[[2]]
   Fn <- Wrangle_F(Fn)[[1]]
   Fn <- Fn * F.sum
