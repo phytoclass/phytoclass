@@ -1,5 +1,4 @@
-#' This is the final fit, and multiplies the final value by Chl concentration so 
-#' they're in units of Chl a biomass
+#' removes any weighting and normalisation, it also multiplies relative abundances by chlorophyll values to determine the biomass of phytoplankton groups.
 #'
 #' @param Fn 
 #' @param S
@@ -10,7 +9,7 @@
 #' @export
 #'
 #' @examples
-Fac_F_Final <- function(Fn, S, S_Chl, cm){
+NNLS_MF <- function(Fn, S, S_Chl, cm){
   F.sum <- Wrangle_F(Fn)[[2]]
   Fn <- Wrangle_F(Fn)[[1]]
   Fn <- Fn * F.sum

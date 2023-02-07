@@ -11,6 +11,6 @@
 StartProgram <- function(S, min.val, max.val){
   Fmax <- ifelse(F>0,1,0)
   A <- simulated_annealing(Fmax, niter = 450,0.009, min.val, max.val)[[1]]
-  E <- Fac_F_Final(A)[[1]]
+  E <- NNLS_MF_Final(A)[[1]]
   return(E)
 }

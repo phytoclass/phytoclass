@@ -124,7 +124,7 @@ simulated_annealing <- function(S, F, min_max, niter, step){
   res <- list(s_b, f_b)
   A <- res[[1]]
  
-  Fac_F_Final(A, S, S_Chl, cm)
+  NNLS_MF_Final(A, S, S_Chl, cm)
   
 }
 
