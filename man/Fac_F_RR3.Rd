@@ -2,7 +2,8 @@
 % Please edit documentation in R/Fac_F_RR3.R
 \name{Fac_F_RR3}
 \alias{Fac_F_RR3}
-\title{Apply randomisation function to matrices and keep element that reduce error x4}
+\title{Part of the steepest descent algorithm and work to reduce error given
+the S and F matrices}
 \usage{
 Fac_F_RR3(F, vary, place, S, cm)
 }
@@ -12,5 +13,6 @@ Fac_F_RR3(F, vary, place, S, cm)
 \item{cm}{}
 }
 \description{
-Apply randomisation function to matrices and keep element that reduce error x4
+Part of the steepest descent algorithm and work to reduce error given
+the S and F matrices
 }

@@ -1,4 +1,5 @@
-#' Apply randomisation function to matrices and keep element that reduce error x4
+#' Part of the steepest descent algorithm and work to reduce error given 
+#' the S and F matrices. 
 #'
 #' @param F XX
 #' @param vary XX
@@ -9,7 +10,8 @@
 #' @export
 #'
 #' @examples
-Fac_F_RR1 <- function(F, vary, S, cm){ # Inputs are #F and which elements to vary, should be all elements
+# Inputs are F and which elements to vary, should be all elements
+Fac_F_RR1 <- function(F, vary, S, cm){ 
   F.locs <- vector() 
   Fs <- F[[1]]
   F.new <- lapply(vary, function(i){ # randomises every element in 'vary' 
