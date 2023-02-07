@@ -5,6 +5,7 @@
 #' Unlike NNLS_ML(), it also removes any weighting and normalisation, and 
 #' also multiplies relative abundances by chlorophyll values to determine
 #' the biomass of phytoplankton groups.
+#' removes any weighting and normalisation, it also multiplies relative abundances by chlorophyll values to determine the biomass of phytoplankton groups.
 #'
 #' @param Fn 
 #' @param S
