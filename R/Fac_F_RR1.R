@@ -32,15 +32,15 @@ Fac_F_RR1 <- function(F, vary, S, cm){ # Inputs are #F and which elements to var
       else{F.news <- F.news[[1]]}      
       cont <- unlist(cont)
       F.new <- replace(F[[1]],cont,F.news)
-      F.new <- Fac_F(F.new, S, cm)
+      F.new <- NNLS_MF(F.new, S, cm)
     }
     else{
-      F.new <- Fac_F(F[[1]], S, cm)
+      F.new <- NNLS_MF(F[[1]], S, cm)
       cont <- vary
     }
   }
   else{
-    F.new <- Fac_F(F[[1]], S, cm)
+    F.new <- NNLS_MF(F[[1]], S, cm)
     cont <- vary
   }
   res <- list(F.new,cont)

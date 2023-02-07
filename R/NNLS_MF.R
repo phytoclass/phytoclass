@@ -1,4 +1,6 @@
-#' Weighting
+#' Performs the non-negative matrix factorisation for given phytoplankton 
+#' pigments and pigment ratios, to attain an estimate of phytoplankton 
+#' class abundances.
 #'
 #' @param Fn 
 #' @param S 
@@ -9,7 +11,7 @@
 #'
 #' @examples
 #'
-Fac_F <- function(Fn, S, cm){
+NNLS_MF <- function(Fn, S, cm){
   b <- crossprod(t(Weight_error(Fn, cm)),t(Weight_error(S, cm)))
   C_new2 <-t(RcppML::nnls(crossprod(t(Weight_error(Fn, cm))),
                           b, 
