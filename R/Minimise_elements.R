@@ -1,4 +1,4 @@
-#' A function that reduces every for every element that didn't reduce in index function
+#' Part of the steepest descent algorithm
 #'
 #' @param F    
 #' @param place  

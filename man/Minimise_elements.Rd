@@ -2,7 +2,7 @@
 % Please edit documentation in R/Minimise_elements.R
 \name{Minimise_elements}
 \alias{Minimise_elements}
-\title{A function that reduces every for every element that didn't reduce in index function}
+\title{Part of the steepest descent algorithm}
 \usage{
 Minimise_elements(F, place, S, cm)
 }
@@ -16,5 +16,5 @@ Minimise_elements(F, place, S, cm)
 \item{cm}{}
 }
 \description{
-A function that reduces every for every element that didn't reduce in index function
+Part of the steepest descent algorithm
 }
