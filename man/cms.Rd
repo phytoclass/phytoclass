@@ -2,16 +2,18 @@
 % Please edit documentation in R/cms.R
 \name{cms}
 \alias{cms}
-\title{add weights to the data.}
+\title{Add weights to the data, bound at a maximum.}
 \usage{
-cms(S)
+cms(S, weight.upper.bound = 30)
 }
 \arguments{
 \item{S}{}
+
+\item{weight.upper.bound}{}
 }
 \value{
 A matrix
 }
 \description{
-add weights to the data.
+Add weights to the data, bound at a maximum.
 }

@@ -1,15 +1,16 @@
-#' add weights to the data.
+#' Add weights to the data, bound at a maximum.
 #'
 #' @param S 
+#' @param weight.upper.bound
 #'
 #' @return A matrix
 #' @export
 #'
 #' @examples
-cms<-function(S){
+cms<-function(S, weight.upper.bound = 30){
   n <- colMeans(S)
   S <- n^-1
-  S <- ifelse(S>40,40,S)
-  S[length(S)] =1
+  S <- ifelse(S > weight.upper.bound, weight.upper.bound, S)
+  S[length(S)] = 1
   return(S)
 }
