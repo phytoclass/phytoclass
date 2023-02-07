@@ -1,4 +1,6 @@
-#' Homogenise matrices
+#' Remove any column values that average 0. Further to this, also remove
+#' phytoplankton groups from the F matrix if their diagnostic pigment
+#' isn’t present. 
 #'
 #' @param S
 #' @param F
@@ -9,7 +11,7 @@
 #' @examples
 
 
-Homogenise_matrices <- function(S,F){
+Homogenise_matrices <- function(S, F){
   ba <- rownames(F)
   ba1<- which(ba =="Syn")
   if (unique(S$V31) =="Shelf" | unique(S$V31) =="SSIZ"){

@@ -12,7 +12,7 @@
 #' @examples
 simulated_annealing <- function(S, F, min_max, niter, step){
   
-  L <- Homogenise_matrices(S, F)
+  L <- Matrix_checks(S, F)
   
   S <- as.matrix(L[[1]])
   S_Chl <- S[, ncol(S)]
