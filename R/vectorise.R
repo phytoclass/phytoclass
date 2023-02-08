@@ -1,19 +1,18 @@
-#' This returns all elements that aren't 0 in the F matrix
+#' Turn each non-zero element of the F-matrix into a vector
 #'
-#' @param Fg 
+#' @param F 
 #'
 #' @return
 #' @export
 #'
 #' @examples
-vectorise <- function(Fg){
+vectorise <- function(F){
   g <- vector()
-  for (i in Fg){
+  for (i in F){
     if (i > -0){
       g[[length(g)+1]] <- i
       
     }
-    
   }
   return(g)
 }

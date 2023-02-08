@@ -2,13 +2,13 @@
 % Please edit documentation in R/vectorise.R
 \name{vectorise}
 \alias{vectorise}
-\title{This returns all elements that aren't 0 in the F matrix}
+\title{Turn each non-zero element of the F-matrix into a vector}
 \usage{
-vectorise(Fg)
+vectorise(F)
 }
 \arguments{
-\item{Fg}{}
+\item{F}{}
 }
 \description{
-This returns all elements that aren't 0 in the F matrix
+Turn each non-zero element of the F-matrix into a vector
 }
