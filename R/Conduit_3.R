@@ -1,5 +1,5 @@
-#' conduit between minimise_elements function and Fac_F_R
-#'
+#' Conduit between minimise_elements function and Fac_F_R 
+#' of steepest descent algorithm.
 #' @param F   
 #' @param place 
 #' @param S  

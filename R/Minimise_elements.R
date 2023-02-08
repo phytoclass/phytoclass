@@ -10,7 +10,7 @@
 #'
 #' @examples
 Minimise_elements <- function(F, place, S, cm){   # A function that reduces every for every element that didn't reduce in index function
-  f <- Test3(F, place, S, cm) # Calls index function
+  f <- Conduit_3(F, place, S, cm) # Calls index function
   F.new <- f[[1]] # F matrix
   n <- f[[2]] #elements that reduce error
   if (is.null(n)){n <- place}
