@@ -22,7 +22,7 @@ simulated_annealing <- function(S, F, min_max, niter, step){
   F <- as.matrix(L[[2]])
   place <- which(F > 0)
   
-  K <- minvalmaxval(min_max, F, place)
+  K <- Default_min_max((min_max, F, place)
   min.val <- K[[1]]
   max.val <- K[[2]]
   Fi <- ifelse(F>0, 1, 0)
