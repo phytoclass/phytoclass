@@ -2,7 +2,8 @@
 % Please edit documentation in R/SAALS.R
 \name{SAALS}
 \alias{SAALS}
-\title{to apply to SD algorithm after each iteration of simulated annealing.}
+\title{Perform the simulated annealing algorithm for given
+F and S matrices.}
 \usage{
 SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 }
@@ -14,5 +15,6 @@ SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 \item{num.loops}{}
 }
 \description{
-to apply to SD algorithm after each iteration of simulated annealing.
+Perform the simulated annealing algorithm for given
+F and S matrices.
 }

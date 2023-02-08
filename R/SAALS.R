@@ -1,4 +1,5 @@
-#' to apply to SD algorithm after each iteration of simulated annealing.
+#' Perform the simulated annealing algorithm for given 
+#' F and S matrices.
 #'
 
 #' @param Ft 
