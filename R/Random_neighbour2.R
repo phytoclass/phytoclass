@@ -1,4 +1,4 @@
-#' Same as before, but without the 'N' input
+#' Selects a random neighbour for the simulated annealing algorithm.
 #'
 #' @param Fn 
 #' @param Temp 

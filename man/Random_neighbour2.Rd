@@ -2,7 +2,7 @@
 % Please edit documentation in R/Random_neighbour2.R
 \name{Random_neighbour2}
 \alias{Random_neighbour2}
-\title{Same as before, but without the 'N' input}
+\title{Selects a random neighbour for the simulated annealing algorithm.}
 \usage{
 Random_neighbour2(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val)
 }
@@ -22,5 +22,5 @@ Random_neighbour2(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val)
 \item{max.val}{}
 }
 \description{
-Same as before, but without the 'N' input
+Selects a random neighbour for the simulated annealing algorithm.
 }

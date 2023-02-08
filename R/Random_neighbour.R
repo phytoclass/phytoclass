@@ -1,8 +1,5 @@
-#' Condisder a random neighbour to the inital value by randomising from normal
-#' distrubtion with scaling factors etc... 
-#' This has the input N and is called in the simuated annealing output to randomise an
-#' element that is outside its min/max value
-#' 
+#' Select a random neighbour when the previous random neighbour is beyond 
+#' the minimum or maximum value.
 #'
 #' @param Fn 
 #' @param Temp 
