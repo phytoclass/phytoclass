@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' 
-Wrangle_S <- function(S){
+Normalise_S <- function(S){
   S <- S[,1:ncol(S)]
   #Normalise to unit row sum
   S.sum <- rowSums(S)
