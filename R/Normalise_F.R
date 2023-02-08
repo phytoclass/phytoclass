@@ -4,7 +4,7 @@
 #' @export
 #'
 #' @examples
-Wrangle_F <- function(F){
+Normalise_F <- function(F){
   F_1<- F
   Fchl <- F_1[,ncol(F_1)]
   F_1 <- F_1 / Fchl
