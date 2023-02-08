@@ -2,8 +2,7 @@
 % Please edit documentation in R/Steepest_Descent.R
 \name{Steepest_Descent}
 \alias{Steepest_Descent}
-\title{sets how many iterations the algorithm should continue for x4.
-This is the 'steepest descent' algorithm}
+\title{Performs the steepest descent algorithm for a set number of iterations}
 \usage{
 Steepest_Descent(F, place, S, cm, num.loops)
 }
@@ -17,6 +16,5 @@ Steepest_Descent(F, place, S, cm, num.loops)
 \item{num.loops}{}
 }
 \description{
-sets how many iterations the algorithm should continue for x4.
-This is the 'steepest descent' algorithm
+Performs the steepest descent algorithm for a set number of iterations
 }

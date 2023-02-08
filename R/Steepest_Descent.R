@@ -1,5 +1,4 @@
-#' sets how many iterations the algorithm should continue for x4. 
-#' This is the 'steepest descent' algorithm 
+#' Performs the steepest descent algorithm for a set number of iterations
 #' 
 #' @param F 
 #' @param place 
