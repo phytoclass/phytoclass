@@ -1,4 +1,5 @@
-#' conduit between minimise_elements function and Fac_F_R
+#' Conduit between minimise_elements function and Fac_F_R 
+#' of steepest descent algorithm.
 #' @param F   
 #' @param place
 #' @param S
@@ -8,7 +9,7 @@
 #' @export
 #'
 #' @examples
-Test2 <- function(F, place, S, cm){
+Conduit_2 <- function(F, place, S, cm){
   F.locs <- vector()
   F.old <- NNLS_MF(F, S, cm)
   F.news <- Fac_F_RR2(F.old, vary = place, place, S, cm)
