@@ -2,7 +2,8 @@
 % Please edit documentation in R/Replace_Rand.R
 \name{Replace_Rand}
 \alias{Replace_Rand}
-\title{Apply randomization functions to matrices}
+\title{Select the new F matrix element with lowest error in the steepest
+descent algortithm.}
 \usage{
 Replace_Rand(F, i, S, cm, min.scaler, max.scaler)
 }
@@ -12,5 +13,6 @@ Replace_Rand(F, i, S, cm, min.scaler, max.scaler)
 \item{max.scaler}{}
 }
 \description{
-Apply randomization functions to matrices
+Select the new F matrix element with lowest error in the steepest
+descent algortithm.
 }

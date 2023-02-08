@@ -1,4 +1,5 @@
-#' Apply randomization functions to matrices
+#' Select the new F matrix element with lowest error in the steepest
+#' descent algortithm. 
 #'
 #' @param F
 #' @param i 
