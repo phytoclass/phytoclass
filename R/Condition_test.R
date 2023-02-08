@@ -23,10 +23,7 @@ Condition_test <- function(Fn, min.val, max.val){
     return(kappa(Fn %*% t(S)))
   }
   
-  sn <- vector(mode = "numeric", length = 10000)
-  for (i in 1:10000){
-    sn[i] <- condition_number(Fn, min.val, max.val)
-  }
+  sn <- replicate(n = 10000, condition_number(Fn, min.val, max.val))
   
   return(mean(sn))
   
