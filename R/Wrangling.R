@@ -1,4 +1,5 @@
-#' wrangles the data for the simulated annealing algorithm (maxs, mins etc...)
+#' Converts data-types and selects data for randomisation in 
+#' the simulated annealing algorithm
 #'
 #' @param Fl   
 #' @param min.val 

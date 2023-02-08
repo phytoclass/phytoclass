@@ -2,7 +2,8 @@
 % Please edit documentation in R/Wrangling.R
 \name{Wrangling}
 \alias{Wrangling}
-\title{wrangles the data for the simulated annealing algorithm (maxs, mins etc...)}
+\title{Converts data-types and selects data for randomisation in
+the simulated annealing algorithm}
 \usage{
 Wrangling(Fl, min.val, max.val)
 }
@@ -14,5 +15,6 @@ Wrangling(Fl, min.val, max.val)
 \item{max.val}{}
 }
 \description{
-wrangles the data for the simulated annealing algorithm (maxs, mins etc...)
+Converts data-types and selects data for randomisation in
+the simulated annealing algorithm
 }
