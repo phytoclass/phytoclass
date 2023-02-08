@@ -11,7 +11,7 @@
 #' @examples
 
 
-Homogenise_matrices <- function(S, F){
+Matrix_checks <- function(S, F){
   ba <- rownames(F)
   ba1<- which(ba =="Syn")
   if (unique(S$V31) =="Shelf" | unique(S$V31) =="SSIZ"){
