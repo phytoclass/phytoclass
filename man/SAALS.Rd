@@ -2,7 +2,7 @@
 % Please edit documentation in R/SAALS.R
 \name{SAALS}
 \alias{SAALS}
-\title{to apply to SD algorithm after each iteration of simulated annealing.}
+\title{Apply the steepest descent algorithm}
 \usage{
 SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 }
@@ -14,5 +14,5 @@ SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 \item{num.loops}{}
 }
 \description{
-to apply to SD algorithm after each iteration of simulated annealing.
+Apply the steepest descent algorithm
 }

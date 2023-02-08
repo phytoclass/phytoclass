@@ -1,6 +1,5 @@
-#' to apply to SD algorithm after each iteration of simulated annealing.
+#' Apply the steepest descent algorithm  
 #'
-
 #' @param Ft 
 #' @param min.value
 #' @param max.value
