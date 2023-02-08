@@ -1,4 +1,6 @@
-#' Calculate min and max value 
+#' Sets the default minimum and maximum values for phytoplankton groups 
+#' pigment ratios. To use this function, pigment and phytoplankton group
+#' names will need to fit the naming criteria of phytoclass. 
 #'  
 #' 
 #' @param min_max
@@ -11,7 +13,7 @@
 #' @examples
 
 
-minvalmaxval <- function(min_max, F, place){
+Default_min_max <- function(min_max, F, place){
   k <- list()
   for (i in place){
     k[[length(k)+1]] <- arrayInd(i, dim(F))
