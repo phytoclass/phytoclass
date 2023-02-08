@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-Test3 <- function(F, place, S, cm){
+Conduit_3 <- function(F, place, S, cm){
   F.old <- NNLS_MF(F, S, cm)
   F.news <- Fac_F_RR3(F.old, vary = place, place, S, cm)
   F.new <- F.news[[1]]
