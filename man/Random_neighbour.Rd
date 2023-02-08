@@ -2,10 +2,8 @@
 % Please edit documentation in R/Random_neighbour.R
 \name{Random_neighbour}
 \alias{Random_neighbour}
-\title{Condisder a random neighbour to the inital value by randomising from normal
-distrubtion with scaling factors etc...
-This has the input N and is called in the simuated annealing output to randomise an
-element that is outside its min/max value}
+\title{Select a random neighbour when the previous random neighbour is beyond
+the minimum or maximum value.}
 \usage{
 Random_neighbour(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val)
 }
@@ -31,8 +29,6 @@ Random_neighbour(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val)
 \item{max.val}{}
 }
 \description{
-Condisder a random neighbour to the inital value by randomising from normal
-distrubtion with scaling factors etc...
-This has the input N and is called in the simuated annealing output to randomise an
-element that is outside its min/max value
+Select a random neighbour when the previous random neighbour is beyond
+the minimum or maximum value.
 }
