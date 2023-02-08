@@ -3,7 +3,7 @@
 \name{Replace_Rand}
 \alias{Replace_Rand}
 \title{Select the new F matrix element with lowest error in the steepest
-descent algortithm.}
+descent algorithm.}
 \usage{
 Replace_Rand(F, i, S, cm, min.scaler, max.scaler)
 }
@@ -14,5 +14,5 @@ Replace_Rand(F, i, S, cm, min.scaler, max.scaler)
 }
 \description{
 Select the new F matrix element with lowest error in the steepest
-descent algortithm.
+descent algorithm.
 }

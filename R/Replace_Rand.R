@@ -1,5 +1,5 @@
 #' Select the new F matrix element with lowest error in the steepest
-#' descent algortithm. 
+#' descent algorithm. 
 #'
 #' @param F
 #' @param i 
