@@ -17,8 +17,8 @@
 #'
 #' @examples  
 NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
-  F.sum <- Wrangle_F(Fn)[[2]]
-  Fn <- Wrangle_F(Fn)[[1]]
+  F.sum <- Normalise_F(Fn)[[2]]
+  Fn <- Normalise_F(Fn)[[1]]
   Fn <- Fn * F.sum
   b <- crossprod(t(Weight_error(Fn, cm)),t(Weight_error(S, cm)))
   C_new2 <-t(RcppML::nnls(crossprod(t(Weight_error(Fn, cm))), b,cd_maxit = 1000,cd_tol =1e-8 ))

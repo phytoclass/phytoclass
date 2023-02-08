@@ -17,7 +17,7 @@ simulated_annealing <- function(S, F, min_max, niter, step){
   S <- as.matrix(L[[1]])
   S_Chl <- S[, ncol(S)]
   cm <- Bounded_weights(S)
-  S <- Wrangle_S(S)
+  S <- Normalise_S(S)
   
   F <- as.matrix(L[[2]])
   place <- which(F > 0)
