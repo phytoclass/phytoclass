@@ -12,14 +12,13 @@
 
 
 Matrix_checks <- function(S, F){
+  F <- subset(F, select = c(colnames(S)))
   ba <- rownames(F)
   ba1<- which(ba =="Syn")
-  if (unique(S$V31) =="Shelf" | unique(S$V31) =="SSIZ"){
-    F <- F[-ba1,]
-  }
-  S <- S[,1:ncol(S)-1]
+  if (ncol(S) > ncol(F)){
+    S <- subset(S, select = c(colnames(F)))}
   b <- colSums(S)
-  g <- mean(S$Tchla)
+  g <- mean(S[,ncol(S)])
   ba <- rownames(F)
   ba1<- which(ba =="Syn")
   
@@ -38,10 +37,10 @@ Matrix_checks <- function(S, F){
   }
   b <- nrow(S)
   g <- colSums(S != 0)
-  n <- colSums(S[,1:length(S)-1])
+  n <- colSums(S[,1:ncol(S)-1])
   l <- n/sum(n)
   fn <- g/b
-  p <- which(l < 0.01 & fn[length(fn)-1]<=.5)
+  p <- which(l < 0.01  & fn[1:length(fn) - 1] <= 0.5)
   if (length(p) >0) {
     F <- F[,-p]
     S <- S[,-p]
@@ -77,6 +76,13 @@ Matrix_checks <- function(S, F){
   c1 <- which(c =="Diatoms-A")
   d <- colnames(F)
   d1<- which(d =="Chl.c1")
+  if(length(d1) ==0 & length(c1) >0){
+    F <- F[-c1,]
+  }
+  c <- rownames(F)
+  c1 <- which(c =="Diatoms-B")
+  d <- colnames(F)
+  d1<- which(d =="Fuco")
   if(length(d1) ==0 & length(c1) >0){
     F <- F[-c1,]
   }
@@ -117,15 +123,13 @@ Matrix_checks <- function(S, F){
   if(length(d1) ==0 & length(c1) >0){
     F <- F[-c1,]
   }  
-  # c <- rownames(F)
-  # c1 <- which(c =="Diatoms-A")
-  # d <- colnames(F)
-  # d1<- which(d =="Chl.c1")
-  # if(length(d1) ==0 & length(c1) >0){
-  #   F <- F[-c1,]
-  # }
-  
-  
+  c <- rownames(F)
+  c1 <- which(c =="Diatoms-A")
+  d <- colnames(F)
+  d1<- which(d =="Fuco")
+  if(length(d1) ==0 & length(c1) >0){
+    F <- F[-c1,]
+  }
   
   d <- colnames(S)
   d1<- which(d =="X19but")
@@ -147,7 +151,5 @@ Matrix_checks <- function(S, F){
     F <- F[,-kn]
     S <- S[,-kn]
   }
-  
-  
   return(list(S,F))
 }
