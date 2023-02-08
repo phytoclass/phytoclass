@@ -1,4 +1,4 @@
-#' input = F matrix, number of iterations, and the step to use. 
+#' Perform simulated annealing algorithm for given F and S matrices
 #'
 #' @param S
 #' @param F

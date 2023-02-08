@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulated_annealing.R
 \name{simulated_annealing}
 \alias{simulated_annealing}
-\title{input = F matrix, number of iterations, and the step to use.}
+\title{Perform simulated annealing algorithm for given F and S matrices}
 \usage{
 simulated_annealing(S, F, min_max, niter, step)
 }
@@ -12,5 +12,5 @@ simulated_annealing(S, F, min_max, niter, step)
 \item{step}{}
 }
 \description{
-input = F matrix, number of iterations, and the step to use.
+Perform simulated annealing algorithm for given F and S matrices
 }

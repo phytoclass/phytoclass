@@ -1,4 +1,5 @@
-#' Apply the steepest descent algorithm  
+#' Apply the steepest descent algorithm 
+#'  
 #'
 #' @param Ft 
 #' @param min.value
