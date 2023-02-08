@@ -1,4 +1,4 @@
-#' Randomisation function
+#' Randomise individual elements in the F matrix.
 #'
 #' @param x 
 #' @param na.rm 
@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-rand <- function(x, min.scaler, max.scaler){
+Randomise_elements <- function(x, min.scaler, max.scaler){
   x <- ifelse(x<0.001, 0.001, x)
   round(runif(n=1, min = x*min.scaler, max = x*max.scaler), digits = 4)
 }
