@@ -2,7 +2,7 @@
 % Please edit documentation in R/Weight_error.R
 \name{Weight_error}
 \alias{Weight_error}
-\title{Add weights}
+\title{Apply weights to F/S matrices}
 \usage{
 Weight_error(S, cm)
 }
@@ -15,5 +15,5 @@ Weight_error(S, cm)
 A matrix
 }
 \description{
-Add weights
+Apply weights to F/S matrices
 }

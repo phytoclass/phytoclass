@@ -1,4 +1,4 @@
-#' Add weights
+#' Apply weights to F/S matrices
 #'
 #' @param S 
 #' @param cm
