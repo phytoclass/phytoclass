@@ -43,7 +43,9 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   n <- ggplot2::ggplot(PLE, ggplot2::aes(x=UQ(as.name(gr)), y=vals, fill=names)) +
     ggplot2::geom_area() +
     ggplot2::scale_color_manual(values=colorBlindGrey8)+
-    ggplot2::scale_fill_manual(values=colorBlindGrey8)
+    ggplot2::scale_fill_manual(values=colorBlindGrey8) +
+    ggplot2::xlab("Sample number") +
+    ggplot2::ylab("Chl a concentrations")
   
   G <- S - (C_new2%*%Fn)
   gs <- colMeans(abs(G))/colSums(S)
