@@ -3,7 +3,7 @@
 S <-read.csv("data-raw/Clusters_213.csv",header = TRUE,row.names = "X")
 S <- S[ , 14:length(S)-1]
 S <- S[, -c(18,11,2,1)]
-S <- S[, !("V31" %in% names(S))]
+S <- S[, !(names(S) %in% "V31")]
 usethis::use_data(S, overwrite = TRUE)
 
 F <-read.csv("data-raw/Ratios_5.csv",header = TRUE,row.names = 'X') # Read pig:chl inital 
