@@ -41,7 +41,7 @@ Cluster <- function(Data) {
     cutHeight = 70,
     minClusterSize = 12,
     method = "hybrid",
-    distM = as.matrix(dist(ndf, method = "manhattan")),
+    distM = as.matrix(stats::dist(ndf, method = "manhattan")),
     deepSplit = 4,
     pamStage = TRUE,
     pamRespectsDendro = TRUE,
@@ -56,7 +56,7 @@ Cluster <- function(Data) {
   L2 <- length(unique(ev.clust$Clust))
   L <- list()
   for (i in 1:L2) {
-    L[[length(L) + 1]] <- filter(ev.clust, Clust == i)
+    L[[length(L) + 1]] <- dplyr::filter(ev.clust, Clust == i)
   }
 
   L
