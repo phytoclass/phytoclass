@@ -29,21 +29,4 @@
 
 
 
-#' min and max data
-#'
-#'
-#' @format ## `min_max`
-#' A data frame with 68 rows and 4 columns:
-#' \describe{
-#'   \item{Class}{XX}
-#'   \item{Pig_Abbrev}{XX}
-#'   \item{min}{XX}
-#'   \item{max}{XX}#'   
-#'   ...
-#' }
-#' @source XX
-"min_max"
-
-
-
 
