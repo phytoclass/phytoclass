@@ -4,9 +4,11 @@
 \alias{simulated_annealing}
 \title{Perform simulated annealing algorithm for given F and S matrices}
 \usage{
-simulated_annealing(S, F, min_max, niter, step)
+simulated_annealing(S, F, user_defined_min_max = NA, niter, step)
 }
 \arguments{
+\item{user_defined_min_max}{data frame with some format as min_max built-in data}
+
 \item{niter}{}
 
 \item{step}{}
