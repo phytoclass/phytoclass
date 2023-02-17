@@ -30,8 +30,8 @@ simulated_annealing <- function(S, F, user_defined_min_max = NA, niter, step){
     min.val <- user_defined_min_max$min
     max.val <- user_defined_min_max$max
     if (length(min.val) != length(place)) {
-      message(past0("\nNumber of rows for user_defined_min_max = ", length(min.val)))
-      message(past0("Length of place = ", length(place)))
+      message(paste0("\nNumber of rows for user_defined_min_max = ", length(min.val)))
+      message(paste0("Length of place = ", length(place)))
       stop("\nThese do not match.")
     }
   }
