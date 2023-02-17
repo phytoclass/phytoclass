@@ -2,7 +2,7 @@
 #'
 #' @param S
 #' @param F
-#' @param min_max
+#' @param user_defined_min_max data frame with some format as min_max built-in data
 #' @param niter 
 #' @param step  
 #'
@@ -10,25 +10,35 @@
 #' @export
 #'
 #' @examples
-simulated_annealing <- function(S, F, min_max, niter, step){
+simulated_annealing <- function(S, F, user_defined_min_max = NA, niter, step){
   
   L <- Matrix_checks(S, F)
   
   S <- as.matrix(L[[1]])
-  S_Chl <- S[, ncol(S)]
+  S_Chl <- S[, ncol(S)]  # used at end of function
   cm <- Bounded_weights(S)
   S <- Normalise_S(S)
   
   F <- as.matrix(L[[2]])
   place <- which(F > 0)
   
-  K <- Default_min_max(min_max, F, place)
-  min.val <- K[[1]]
-  max.val <- K[[2]]
+  if (is.na(user_defined_min_max)) {
+    K <- Default_min_max(min_max, F, place)
+    min.val <- K[[1]]
+    max.val <- K[[2]]
+  } else {
+    min.val <- user_defined_min_max$min
+    max.val <- user_defined_min_max$max
+    if (length(min.val) != length(place)) {
+      message(past0("\nNumber of rows for user_defined_min_max = ", length(min.val)))
+      message(past0("Length of place = ", length(place)))
+      stop("\nThese do not match.")
+    }
+  }
+ 
   Fi <- ifelse(F>0, 1, 0)
   
-  
-  SE <- vectorise(Fi)
+    SE <- vectorise(Fi)
   nc <- NNLS_MF(Fi, S, cm)
   
   s_b <- s_c <- s_n <- nc[[1]]  # sets initial values 
