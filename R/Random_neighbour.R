@@ -44,9 +44,9 @@ Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.
     SA[d] <- SA2 
     d <- which(SA < minF | SA > maxF)
     #print(loop) # if loop is > 3000, just select it from a uniform distribution between the max and min
-    if (loop > 3000){
-      nn <- minF[d]+maxF[d]/2
-      f <- round(runif(n=length(d),nn*0.01,nn*1.5),4)
+    if (loop > 30){
+      nn <- (minF[d]+maxF[d])/2
+      f <- round(runif(n=length(d),minF[d],maxF[d]),4)
       SA[d] <- f
       d <- which(SA < minF | SA > maxF)
     }
@@ -55,7 +55,8 @@ Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.
   Fn[N] <- SA
   Fn <- cbind(Fn,chlv)
   colnames(Fn) <- colnames(F)
-  F.n <- NNLS_MF(Fn, S, cm)
+  F.n <- Fac_F(Fn, S, cm)
+  
   return(F.n)
 }
 
