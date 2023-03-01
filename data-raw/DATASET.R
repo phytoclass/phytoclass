@@ -1,13 +1,12 @@
 ## code to prepare `DATASET` dataset goes here
 
-S <-read.csv("data-raw/Clusters_213.csv",header = TRUE,row.names = "X")
-S <- S[ , 14:length(S)-1]
-S <- S[, -c(18,11,2,1)]
-S <- S[, !(names(S) %in% "V31")]
+# row names are in the first column
+S <- read.csv("data-raw/S_example.csv", header = TRUE, row.names = 1)
+# remove column at end containing "Shelf"
+S <- S[, -16]
 usethis::use_data(S, overwrite = TRUE)
 
-F <-read.csv("data-raw/Ratios_5.csv",header = TRUE,row.names = 'X') # Read pig:chl inital 
-F <- F[,-1]
+F <- read.csv("data-raw/F_example.csv", header = TRUE, row.names = 1)
 usethis::use_data(F, overwrite = TRUE)
 
 min_max <-read.csv("data-raw/Circumpolar_minmax.csv", header = TRUE) # Read pig:chl inital 
