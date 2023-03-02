@@ -35,6 +35,12 @@ simulated_annealing <- function(S, F, user_defined_min_max = NA, niter, step){
       stop("\nThese do not match.")
     }
   }
+  
+  condition.test <- Condition_test(S, F, min.val, max.val)
+  cat(paste0("\nCondition number = ", round(condition.test), "\n\n"))
+  if(condition.test > 10^5) {
+    stop("Condition number of S matrix greater than 100 000\n")
+  }
  
   Fi <- ifelse(F>0, 1, 0)
   

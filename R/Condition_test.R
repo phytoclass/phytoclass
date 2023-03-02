@@ -1,6 +1,7 @@
 #' Calculate the condition number ...
 #'
 #' @param Fn
+#' @param S
 #' @param min.val
 #' @param max.val
 #'
@@ -10,9 +11,9 @@
 #' @examples
 
 
-Condition_test <- function(Fn, min.val, max.val){
+Condition_test <- function(S, Fn, min.val, max.val){
   
-  condition_number <- function(Fd, min.val, max.val){
+  condition_number <- function(S, Fd, min.val, max.val){
     Fz <- vectorise(Fd)
     rand <- vector()
     for (i in 1:length(Fz)){
@@ -23,7 +24,7 @@ Condition_test <- function(Fn, min.val, max.val){
     return(kappa(Fn %*% t(S)))
   }
   
-  sn <- replicate(n = 10000, condition_number(Fn, min.val, max.val))
+  sn <- replicate(n = 10000, condition_number(S, Fn, min.val, max.val))
   
   return(mean(sn))
   
