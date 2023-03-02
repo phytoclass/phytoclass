@@ -11,11 +11,11 @@
 #'
 #' @examples
 simulated_annealing <- function(S,
-                                F, 
+                                F = Fm, 
                                 user_defined_min_max = NA,
                                 do_matrix_checks = TRUE,
-                                niter,
-                                step){
+                                niter = 500,
+                                step = 0.009){
   
   if(do_matrix_checks) {
     L <- Matrix_checks(S, F)
@@ -49,9 +49,9 @@ simulated_annealing <- function(S,
     stop("Condition number of S matrix greater than 100 000\n")
   }
  
-  Fi <- ifelse(F>0, 1, 0)
+  Fi <- ifelse(F > 0, 1, 0)
   
-    SE <- vectorise(Fi)
+  SE <- vectorise(Fi)
   nc <- NNLS_MF(Fi, S, cm)
   
   s_b <- s_c <- s_n <- nc[[1]]  # sets initial values 
