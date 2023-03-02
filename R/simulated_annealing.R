@@ -10,16 +10,23 @@
 #' @export
 #'
 #' @examples
-simulated_annealing <- function(S, F, user_defined_min_max = NA, niter, step){
+simulated_annealing <- function(S,
+                                F, 
+                                user_defined_min_max = NA,
+                                do_matrix_checks = TRUE,
+                                niter,
+                                step){
   
-  L <- Matrix_checks(S, F)
-  
-  S <- as.matrix(L[[1]])
+  if(do_matrix_checks) {
+    L <- Matrix_checks(S, F)
+    S <- as.matrix(L[[1]])  
+    F <- as.matrix(L[[2]])    
+  }
+ 
   S_Chl <- S[, ncol(S)]  # used at end of function
   cm <- Bounded_weights(S)
   S <- Normalise_S(S)
-  
-  F <- as.matrix(L[[2]])
+ 
   place <- which(F > 0)
   
   if (is.na(user_defined_min_max)) {
