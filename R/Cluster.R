@@ -51,6 +51,9 @@ Cluster <- function(Data) {
     respectSmallClusters = TRUE,
   )
 
+  # NULL assignment to stop NOTE during the package "Check"
+  #  -  no visible binding for global variable
+  Clust <- NULL
   ev.clust$Clust <- dynamicCut
 
   L2 <- length(unique(ev.clust$Clust))
