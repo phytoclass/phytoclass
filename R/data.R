@@ -1,8 +1,8 @@
-#' F data
+#' Fm data
 #'
 #'
-#' @format ## `F`
-#' A data frame with 10 rows and 15 columns:
+#' @format ## `Fm`
+#' A data frame with 9 rows and 15 columns:
 #' \describe{
 #'   \item{chl.c1}{XX}
 #'   \item{Per}{XX}
@@ -10,14 +10,14 @@
 #'   ...
 #' }
 #' @source XX
-"F"
+"Fm"
 
 
-#' S data
+#' Sm data
 #'
 #'
-#' @format ## `S`
-#' A data frame with 17 rows and 16 columns:
+#' @format ## `Sm`
+#' A data frame with 29 rows and 15 columns:
 #' \describe{
 #'   \item{chl.c1}{XX}
 #'   \item{Per}{XX}
@@ -25,7 +25,7 @@
 #'   ...
 #' }
 #' @source XX
-"S"
+"Sm"
 
 
 
