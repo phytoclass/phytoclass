@@ -11,12 +11,17 @@
 #'
 #' @examples
 simulated_annealing <- function(S,
-                                F = Fm, 
+                                F = NA, 
                                 user_defined_min_max = NA,
                                 do_matrix_checks = TRUE,
                                 niter = 500,
                                 step = 0.009){
   
+  # Use default F value
+  if(is.na(F)) {
+    F <- phytoclass::Fm
+  }
+
   if(do_matrix_checks) {
     L <- Matrix_checks(S, F)
     S <- as.matrix(L[[1]])  
@@ -30,7 +35,7 @@ simulated_annealing <- function(S,
   place <- which(F > 0)
   
   if (is.na(user_defined_min_max)) {
-    K <- Default_min_max(min_max, F, place)
+    K <- Default_min_max(phytoclass::min_max, F, place)
     min.val <- K[[1]]
     max.val <- K[[2]]
   } else {
