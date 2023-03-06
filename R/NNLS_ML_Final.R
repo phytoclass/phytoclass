@@ -36,11 +36,15 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   
   cn <- cn[1:ncol(k)-1]
   
-  PLE <- tidyr::pivot_longer(data = k,cols = cn,names_to = 'names',values_to = 'vals' )
+  # NULL assignment to stop NOTE during the package "Check"
+  #  -  no visible binding for global variable
+  vals <- NULL
+  PLE <- tidyr::pivot_longer(data = k, cols = cn, names_to = 'names', values_to = 'vals' )
   colorBlindGrey8   <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
                          "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73","#001E73","#013E73")
   gr <- colnames(PLE)[[1]]
-  n <- ggplot2::ggplot(PLE, ggplot2::aes(x=UQ(as.name(gr)), y=vals, fill=names)) +
+  
+  n <- ggplot2::ggplot(PLE, ggplot2::aes(x=rlang::UQ(as.name(gr)), y=vals, fill=names)) +
     ggplot2::geom_area() +
     ggplot2::scale_color_manual(values=colorBlindGrey8)+
     ggplot2::scale_fill_manual(values=colorBlindGrey8) +

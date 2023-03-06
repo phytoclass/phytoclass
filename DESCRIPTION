@@ -8,10 +8,12 @@ Description: Some fancy analyses to classify phytoplankton.
 Imports:
     bestNormalize,
     cluster,
+    dplyr,
     dynamicTreeCut,
     ggplot2,
     Metrics,
     RcppML,
+    rlang,
     tidyr
 License: MIT + file LICENSE
 Encoding: UTF-8
