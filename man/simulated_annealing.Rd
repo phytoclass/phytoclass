@@ -4,7 +4,14 @@
 \alias{simulated_annealing}
 \title{Perform simulated annealing algorithm for given F and S matrices}
 \usage{
-simulated_annealing(S, F, user_defined_min_max = NA, niter, step)
+simulated_annealing(
+  S,
+  F = NA,
+  user_defined_min_max = NA,
+  do_matrix_checks = TRUE,
+  niter = 500,
+  step = 0.009
+)
 }
 \arguments{
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
