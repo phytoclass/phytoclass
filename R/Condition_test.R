@@ -1,9 +1,9 @@
 #' Calculate the condition number ...
 #'
-#' @param Fn
-#' @param S
-#' @param min.val
-#' @param max.val
+#' @param S   
+#' @param Fn  
+#' @param min.val  
+#' @param max.val  
 #'
 #' @return
 #' @export
