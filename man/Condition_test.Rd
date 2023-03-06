@@ -4,9 +4,15 @@
 \alias{Condition_test}
 \title{Calculate the condition number ...}
 \usage{
-Condition_test(Fn, min.val, max.val)
+Condition_test(S, Fn, min.val, max.val)
 }
 \arguments{
+\item{S}{}
+
+\item{Fn}{}
+
+\item{min.val}{}
+
 \item{max.val}{}
 }
 \description{
