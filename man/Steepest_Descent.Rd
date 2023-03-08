@@ -13,6 +13,8 @@ Steepest_Descent(F, place, S, cm, num.loops)
 
 \item{S}{}
 
+\item{cm}{}
+
 \item{num.loops}{}
 }
 \description{

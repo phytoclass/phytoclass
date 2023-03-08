@@ -3,8 +3,8 @@
 #' @param F 
 #' @param place 
 #' @param S   
-#' @param cm
-#' @param num.loops
+#' @param cm   
+#' @param num.loops   
 #'
 #' @return
 #' @export

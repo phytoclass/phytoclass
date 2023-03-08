@@ -2,11 +2,11 @@
 #'  
 #'
 #' @param Ft 
-#' @param min.value
-#' @param max.value
-#' @param place
+#' @param min.value   
+#' @param max.value   
+#' @param place   
 #' @param S  
-#' @param cm
+#' @param cm   
 #' @param num.loops
 #'
 #' @return

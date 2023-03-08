@@ -9,7 +9,15 @@ SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 \arguments{
 \item{Ft}{}
 
+\item{min.value}{}
+
+\item{max.value}{}
+
+\item{place}{}
+
 \item{S}{}
+
+\item{cm}{}
 
 \item{num.loops}{}
 }

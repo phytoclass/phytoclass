@@ -9,6 +9,8 @@ StartProgram(S, min.val, max.val)
 \arguments{
 \item{S}{}
 
+\item{min.val}{}
+
 \item{max.val}{}
 }
 \description{

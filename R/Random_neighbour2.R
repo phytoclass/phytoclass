@@ -6,9 +6,9 @@
 #' @param s_c 
 #' @param place  
 #' @param S      
-#' @param cm
-#' @param min.val 
-#' @param max.val
+#' @param cm   
+#' @param min.val    
+#' @param max.val   
 #'
 #' @return
 #' @export
