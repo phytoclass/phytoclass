@@ -9,9 +9,9 @@ Randomise_elements(x, min.scaler, max.scaler)
 \arguments{
 \item{x}{}
 
-\item{max.scaler}{}
+\item{min.scaler}{}
 
-\item{na.rm}{}
+\item{max.scaler}{}
 }
 \value{
 numeric
