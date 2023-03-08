@@ -16,6 +16,8 @@ simulated_annealing(
 \arguments{
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
+\item{do_matrix_checks}{}
+
 \item{niter}{}
 
 \item{step}{}

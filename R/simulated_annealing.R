@@ -3,6 +3,7 @@
 #' @param S
 #' @param F
 #' @param user_defined_min_max data frame with some format as min_max built-in data
+#' @param do_matrix_checks    
 #' @param niter 
 #' @param step  
 #'
