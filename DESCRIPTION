@@ -12,7 +12,6 @@ Imports:
     ggplot2,
     Metrics,
     RcppML,
-    rlang,
     tidyr
 License: MIT + file LICENSE
 Encoding: UTF-8

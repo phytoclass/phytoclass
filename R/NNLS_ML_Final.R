@@ -44,7 +44,7 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
                          "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73","#001E73","#013E73")
   gr <- colnames(PLE)[[1]]
   
-  n <- ggplot2::ggplot(PLE, ggplot2::aes(x=rlang::UQ(as.name(gr)), y=vals, fill=names)) +
+  n <- ggplot2::ggplot(PLE, ggplot2::aes(x = .data[[gr]], y=vals, fill=names)) +
     ggplot2::geom_area() +
     ggplot2::scale_color_manual(values=colorBlindGrey8)+
     ggplot2::scale_fill_manual(values=colorBlindGrey8) +
