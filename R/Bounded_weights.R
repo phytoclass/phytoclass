@@ -1,7 +1,7 @@
 #' Add weights to the data, bound at a maximum.
 #'
-#' @param S 
-#' @param weight.upper.bound
+#' @param S   
+#' @param weight.upper.bound   
 #'
 #' @return A matrix
 #' @export

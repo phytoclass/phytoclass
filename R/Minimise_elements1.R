@@ -2,6 +2,8 @@
 #'
 #' @param F   
 #' @param place  
+#' @param S    
+#' @param cm      
 #'
 #' @return
 #' @export

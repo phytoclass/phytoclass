@@ -11,6 +11,10 @@ NNLS_MF_Final(Fn, S, S_Chl, cm)
 \arguments{
 \item{Fn}{}
 
+\item{S}{}
+
+\item{S_Chl}{}
+
 \item{cm}{}
 }
 \description{

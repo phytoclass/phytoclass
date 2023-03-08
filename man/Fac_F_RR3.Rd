@@ -8,7 +8,13 @@ the S and F matrices}
 Fac_F_RR3(F, vary, place, S, cm)
 }
 \arguments{
+\item{F}{}
+
 \item{vary}{}
+
+\item{place}{}
+
+\item{S}{}
 
 \item{cm}{}
 }

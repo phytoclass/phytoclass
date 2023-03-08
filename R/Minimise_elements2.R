@@ -2,7 +2,7 @@
 #'
 #' @param F   
 #' @param place  
-#' @param S
+#' @param S   
 #' @param cm
 #'
 #' @return

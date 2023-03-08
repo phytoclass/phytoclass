@@ -9,6 +9,8 @@ isn’t present.}
 Matrix_checks(S, F)
 }
 \arguments{
+\item{S}{}
+
 \item{F}{}
 }
 \description{

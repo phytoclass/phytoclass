@@ -6,6 +6,9 @@
 \usage{
 Normalise_F(F)
 }
+\arguments{
+\item{F}{}
+}
 \value{
 A matrix
 }

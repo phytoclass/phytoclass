@@ -10,6 +10,10 @@ Conduit_2(F, place, S, cm)
 \arguments{
 \item{F}{}
 
+\item{place}{}
+
+\item{S}{}
+
 \item{cm}{}
 }
 \description{

@@ -11,6 +11,8 @@ Minimise_elements2(F, place, S, cm)
 
 \item{place}{}
 
+\item{S}{}
+
 \item{cm}{}
 }
 \description{

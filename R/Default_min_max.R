@@ -3,9 +3,9 @@
 #' names will need to fit the naming criteria of phytoclass. 
 #'  
 #' 
-#' @param min_max
-#' @param F 
-#' @param place  
+#' @param min_max   
+#' @param F    
+#' @param place      
 #'
 #' @return
 #' @export

@@ -9,6 +9,8 @@ names will need to fit the naming criteria of phytoclass.}
 Default_min_max(min_max, F, place)
 }
 \arguments{
+\item{min_max}{}
+
 \item{F}{}
 
 \item{place}{}

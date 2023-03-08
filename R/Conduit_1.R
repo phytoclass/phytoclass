@@ -1,10 +1,10 @@
 #' Conduit between minimise_elements function and Fac_F_R 
 #' of steepest descent algorithm.
 #'
-#' @param F   
-#' @param place
-#' @param S
-#' @param cm
+#' @param F     
+#' @param place  
+#' @param S  
+#' @param cm  
 #' @return
 #' @export
 #'
