@@ -7,7 +7,6 @@ Authors@R:
 Description: Some fancy analyses to classify phytoplankton.
 Imports:
     bestNormalize,
-    cluster,
     dplyr,
     dynamicTreeCut,
     ggplot2,
