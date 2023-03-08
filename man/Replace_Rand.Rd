@@ -8,7 +8,15 @@ descent algorithm.}
 Replace_Rand(F, i, S, cm, min.scaler, max.scaler)
 }
 \arguments{
+\item{F}{}
+
 \item{i}{}
+
+\item{S}{}
+
+\item{cm}{}
+
+\item{min.scaler}{}
 
 \item{max.scaler}{}
 }

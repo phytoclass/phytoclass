@@ -15,6 +15,8 @@ Random_neighbour2(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val)
 
 \item{s_c}{}
 
+\item{place}{}
+
 \item{S}{}
 
 \item{min.val}{}

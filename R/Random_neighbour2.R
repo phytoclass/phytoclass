@@ -4,8 +4,8 @@
 #' @param Temp 
 #' @param chlv 
 #' @param s_c 
-#' @param place
-#' @param S  
+#' @param place  
+#' @param S      
 #' @param cm
 #' @param min.val 
 #' @param max.val
