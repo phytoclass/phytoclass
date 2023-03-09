@@ -7,7 +7,7 @@
 Cluster(Data)
 }
 \arguments{
-\item{Data}{}
+\item{Data}{XX}
 }
 \description{
 Cluster things

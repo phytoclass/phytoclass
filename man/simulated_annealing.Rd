@@ -14,6 +14,10 @@ simulated_annealing(
 )
 }
 \arguments{
+\item{S}{}
+
+\item{F}{}
+
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
 \item{do_matrix_checks}{}

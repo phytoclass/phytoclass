@@ -7,13 +7,13 @@
 Condition_test(S, Fn, min.val, max.val)
 }
 \arguments{
-\item{S}{}
+\item{S}{XX}
 
-\item{Fn}{}
+\item{Fn}{XX}
 
-\item{min.val}{}
+\item{min.val}{XX}
 
-\item{max.val}{}
+\item{max.val}{XX}
 }
 \description{
 Calculate the condition number ...

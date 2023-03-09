@@ -7,9 +7,9 @@
 Bounded_weights(S, weight.upper.bound = 30)
 }
 \arguments{
-\item{S}{}
+\item{S}{XX}
 
-\item{weight.upper.bound}{}
+\item{weight.upper.bound}{XX}
 }
 \value{
 A matrix

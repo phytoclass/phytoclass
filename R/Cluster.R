@@ -1,6 +1,6 @@
 #' Cluster things
 #'
-#' @param Data
+#' @param Data XX   
 #'
 #' @return
 #' @export
