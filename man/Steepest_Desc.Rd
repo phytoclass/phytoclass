@@ -7,9 +7,11 @@
 Steepest_Desc(F, S, num.loops)
 }
 \arguments{
-\item{S}{}
+\item{F}{xx}
 
-\item{num.loops}{}
+\item{S}{xx}
+
+\item{num.loops}{xx}
 }
 \description{
 Stand-alone version of steepest descent algorithm

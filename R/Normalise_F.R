@@ -1,5 +1,5 @@
 #' This function normalises each column in F to row sum
-#' @param F   
+#' @param F     xx
 #'
 #' @return A matrix
 #' @export

@@ -7,23 +7,23 @@
 Random_neighbour2(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val)
 }
 \arguments{
-\item{Fn}{}
+\item{Fn}{xx}
 
-\item{Temp}{}
+\item{Temp}{xx}
 
-\item{chlv}{}
+\item{chlv}{xx}
 
-\item{s_c}{}
+\item{s_c}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 
-\item{min.val}{}
+\item{min.val}{xx}
 
-\item{max.val}{}
+\item{max.val}{xx}
 }
 \description{
 Selects a random neighbour for the simulated annealing algorithm.

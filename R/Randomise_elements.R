@@ -1,8 +1,8 @@
 #' Randomise individual elements in the F matrix.
 #'
-#' @param x 
-#' @param min.scaler      
-#' @param max.scaler
+#' @param x   xx
+#' @param min.scaler     xx 
+#' @param max.scaler     xx
 #'
 #' @return numeric
 #' @export

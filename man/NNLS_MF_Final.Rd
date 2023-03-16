@@ -2,24 +2,26 @@
 % Please edit documentation in R/NNLS_MF_Final.R
 \name{NNLS_MF_Final}
 \alias{NNLS_MF_Final}
-\title{Performs the non-negative matrix factorisation for given phytoplankton
-pigments and pigment ratios, to attain an estimate of phytoplankton
-class abundances.}
+\title{Perform matrix factorisaiton for phytoplankton pigments and pigments ratios}
 \usage{
 NNLS_MF_Final(Fn, S, S_Chl, cm)
 }
 \arguments{
-\item{Fn}{}
+\item{Fn}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{S_Chl}{}
+\item{S_Chl}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 }
 \description{
+Performs the non-negative matrix factorisation for given phytoplankton
+pigments and pigment ratios, to attain an estimate of phytoplankton
+class abundances.
+}
+\details{
 Unlike NNLS_ML(), it also removes any weighting and normalisation, and
 also multiplies relative abundances by chlorophyll values to determine
 the biomass of phytoplankton groups.
-removes any weighting and normalisation, it also multiplies relative abundances by chlorophyll values to determine the biomass of phytoplankton groups.
 }

@@ -7,7 +7,7 @@
 Normalise_F(F)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 }
 \value{
 A matrix

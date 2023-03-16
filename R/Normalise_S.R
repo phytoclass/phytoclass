@@ -2,7 +2,7 @@
 #' This function normalises each column in S to row sum
 #' 
 #'
-#' @param S 
+#' @param S   xx
 #'
 #' @return A matrix
 #' @export

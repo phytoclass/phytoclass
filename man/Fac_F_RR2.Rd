@@ -8,15 +8,15 @@ the S and F matrices}
 Fac_F_RR2(F, vary, place, S, cm)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 
-\item{vary}{}
+\item{vary}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 }
 \description{
 Part of the steepest descent algorithm and work to reduce error given

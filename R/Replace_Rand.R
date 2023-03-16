@@ -1,12 +1,12 @@
 #' Select the new F matrix element with lowest error in the steepest
 #' descent algorithm. 
 #'
-#' @param F   
-#' @param i 
-#' @param S   
-#' @param cm   
-#' @param min.scaler   
-#' @param max.scaler
+#' @param F   xx
+#' @param i xx
+#' @param S   xx
+#' @param cm   xx
+#' @param min.scaler   xx
+#' @param max.scaler  xx
 #'
 #' @return
 #' @export

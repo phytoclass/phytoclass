@@ -1,8 +1,8 @@
 #' Stand-alone version of steepest descent algorithm
 #'
-#' @param F
-#' @param S 
-#' @param num.loops 
+#' @param F xx
+#' @param S xx
+#' @param num.loops xx
 #'
 #' @return
 #' @export

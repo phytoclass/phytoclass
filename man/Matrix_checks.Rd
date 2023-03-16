@@ -9,9 +9,9 @@ isn’t present.}
 Matrix_checks(S, F)
 }
 \arguments{
-\item{S}{}
+\item{S}{xx}
 
-\item{F}{}
+\item{F}{xx}
 }
 \description{
 Remove any column values that average 0. Further to this, also remove

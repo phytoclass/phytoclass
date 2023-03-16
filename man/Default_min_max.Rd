@@ -9,11 +9,11 @@ names will need to fit the naming criteria of phytoclass.}
 Default_min_max(min_max, F, place)
 }
 \arguments{
-\item{min_max}{}
+\item{min_max}{xx}
 
-\item{F}{}
+\item{F}{xx}
 
-\item{place}{}
+\item{place}{xx}
 }
 \description{
 Sets the default minimum and maximum values for phytoplankton groups

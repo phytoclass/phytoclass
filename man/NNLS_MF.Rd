@@ -9,11 +9,11 @@ class abundances.}
 NNLS_MF(Fn, S, cm)
 }
 \arguments{
-\item{Fn}{}
+\item{Fn}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 }
 \value{
 A list

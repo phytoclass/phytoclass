@@ -2,9 +2,9 @@
 #' pigments and pigment ratios, to attain an estimate of phytoplankton 
 #' class abundances.
 #'
-#' @param Fn 
-#' @param S 
-#' @param cm
+#' @param Fn   xx
+#' @param S    xx
+#' @param cm  xx
 #'
 #' @return A list
 #' @export

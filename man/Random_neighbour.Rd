@@ -8,25 +8,25 @@ the minimum or maximum value.}
 Random_neighbour(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val)
 }
 \arguments{
-\item{Fn}{}
+\item{Fn}{xx}
 
-\item{Temp}{}
+\item{Temp}{xx}
 
-\item{chlv}{}
+\item{chlv}{xx}
 
-\item{s_c}{}
+\item{s_c}{xx}
 
-\item{N}{}
+\item{N}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 
-\item{min.val}{}
+\item{min.val}{xx}
 
-\item{max.val}{}
+\item{max.val}{xx}
 }
 \description{
 Select a random neighbour when the previous random neighbour is beyond

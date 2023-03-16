@@ -1,16 +1,16 @@
 #' Select a random neighbour when the previous random neighbour is beyond 
 #' the minimum or maximum value.
 #'
-#' @param Fn 
-#' @param Temp 
-#' @param chlv 
-#' @param s_c 
-#' @param N 
-#' @param place 
-#' @param S  
-#' @param cm   
-#' @param min.val  
-#' @param max.val
+#' @param Fn  xx
+#' @param Temp xx
+#' @param chlv xx
+#' @param s_c xx
+#' @param N   xx
+#' @param place  xx
+#' @param S   xx
+#' @param cm   xx
+#' @param min.val  xx
+#' @param max.val  xx
 #'
 #' @return
 #' @export

@@ -1,3 +1,5 @@
+#' Perform matrix factorisaiton for phytoplankton pigments and pigments ratios
+#' 
 #' Performs the non-negative matrix factorisation for given phytoplankton 
 #' pigments and pigment ratios, to attain an estimate of phytoplankton 
 #' class abundances.
@@ -5,12 +7,11 @@
 #' Unlike NNLS_ML(), it also removes any weighting and normalisation, and 
 #' also multiplies relative abundances by chlorophyll values to determine
 #' the biomass of phytoplankton groups.
-#' removes any weighting and normalisation, it also multiplies relative abundances by chlorophyll values to determine the biomass of phytoplankton groups.
 #'
-#' @param Fn 
-#' @param S   
-#' @param S_Chl   
-#' @param cm
+#' @param Fn xx
+#' @param S   xx
+#' @param S_Chl   xx
+#' @param cm  xx
 #'
 #' @return
 #' @export

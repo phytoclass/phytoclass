@@ -7,13 +7,13 @@
 Minimise_elements(F, place, S, cm)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 }
 \description{
 Part of the steepest descent algorithm

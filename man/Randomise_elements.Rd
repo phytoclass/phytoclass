@@ -7,11 +7,11 @@
 Randomise_elements(x, min.scaler, max.scaler)
 }
 \arguments{
-\item{x}{}
+\item{x}{xx}
 
-\item{min.scaler}{}
+\item{min.scaler}{xx}
 
-\item{max.scaler}{}
+\item{max.scaler}{xx}
 }
 \value{
 numeric

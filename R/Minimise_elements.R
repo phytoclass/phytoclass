@@ -1,9 +1,9 @@
 #' Part of the steepest descent algorithm
 #'
-#' @param F    
-#' @param place  
-#' @param S   
-#' @param cm
+#' @param F    xx
+#' @param place  xx
+#' @param S   xx
+#' @param cm  xx
 #'
 #' @return
 #' @export

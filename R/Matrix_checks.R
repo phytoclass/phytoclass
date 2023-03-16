@@ -2,8 +2,8 @@
 #' phytoplankton groups from the F matrix if their diagnostic pigment
 #' isn’t present. 
 #'
-#' @param S   
-#' @param F
+#' @param S   xx
+#' @param F   xx
 #'
 #' @return
 #' @export

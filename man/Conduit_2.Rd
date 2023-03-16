@@ -8,13 +8,13 @@ of steepest descent algorithm.}
 Conduit_2(F, place, S, cm)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 }
 \description{
 Conduit between minimise_elements function and Fac_F_R

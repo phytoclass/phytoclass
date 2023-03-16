@@ -7,13 +7,13 @@
 Minimise_elements1(F, place, S, cm)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 }
 \description{
 A function that reduces every for every element that didn't reduce in index function

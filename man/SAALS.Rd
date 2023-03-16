@@ -7,19 +7,19 @@
 SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 }
 \arguments{
-\item{Ft}{}
+\item{Ft}{xx}
 
-\item{min.value}{}
+\item{min.value}{xx}
 
-\item{max.value}{}
+\item{max.value}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 
-\item{num.loops}{}
+\item{num.loops}{xx}
 }
 \description{
 Apply the steepest descent algorithm

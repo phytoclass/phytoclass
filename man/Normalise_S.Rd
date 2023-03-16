@@ -7,7 +7,7 @@
 Normalise_S(S)
 }
 \arguments{
-\item{S}{}
+\item{S}{xx}
 }
 \value{
 A matrix
