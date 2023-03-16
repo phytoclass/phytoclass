@@ -2,7 +2,7 @@ Package: phytoclass
 Title: Classify phytoplankton
 Version: 0.0.0.9000
 Authors@R: 
-    person("Alexander", "Hayward", , "alexhayward1995@gmail.com", role = c("aut", "cre"))
+    person("Alexander", "Hayward", , "alexhayward1995@gmail.com", role = c("aut", "cre", "cph"))
 	person("Andy", "McKenzie", , "Andy.Mckenzie@niwa.co.nz", role = c("aut", "cre"))
 Description: Some fancy analyses to classify phytoplankton.
 Imports:
