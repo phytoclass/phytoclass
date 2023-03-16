@@ -21,7 +21,9 @@
 #'
 #' @examples
 #' # Using the built-in matrices Sm and Fm
-#' simulated_annealing(Sm, Fm)
+#' set.seed(5326)
+#' sa.example <- simulated_annealing(Sm, Fm)
+#' sa.example$Figure
 simulated_annealing <- function(S,
                                 F = NULL, 
                                 user_defined_min_max = NULL,
