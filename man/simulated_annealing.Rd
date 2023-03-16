@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulated_annealing.R
 \name{simulated_annealing}
 \alias{simulated_annealing}
-\title{Perform simulated annealing algorithm for given F and S matrices}
+\title{Perform simulated annealing algorithm for S and F matrices}
 \usage{
 simulated_annealing(
   S,
@@ -26,6 +26,22 @@ simulated_annealing(
 
 \item{step}{xx}
 }
+\value{
+A list containing
+\enumerate{
+\item F matrix
+\item RMSE
+\item sMAPE
+\item condition number
+\item Class abudances
+\item MAE
+\item Error
+}
+}
 \description{
-Perform simulated annealing algorithm for given F and S matrices
+Perform simulated annealing algorithm for S and F matrices
+}
+\examples{
+# Using the built-in matrices Sm and Fm
+simulated_annealing(Sm, Fm)
 }

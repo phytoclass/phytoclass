@@ -1,4 +1,4 @@
-#' Perform simulated annealing algorithm for given F and S matrices
+#' Perform simulated annealing algorithm for S and F matrices
 #'
 #' @param S   xx
 #' @param F   xx
@@ -7,10 +7,21 @@
 #' @param niter xx
 #' @param step  xx
 #'
-#' @return
+#' @return A list containing 
+#' \enumerate{
+#'  \item F matrix
+#'  \item RMSE
+#'  \item sMAPE
+#'  \item condition number
+#'  \item Class abudances
+#'  \item MAE
+#'  \item Error
+#'  }
 #' @export
 #'
 #' @examples
+#' # Using the built-in matrices Sm and Fm
+#' simulated_annealing(Sm, Fm)
 simulated_annealing <- function(S,
                                 F = NULL, 
                                 user_defined_min_max = NULL,
