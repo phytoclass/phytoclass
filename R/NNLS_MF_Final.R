@@ -21,6 +21,7 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   Fn <- Normalise_F(Fn)[[1]]
   Fn <- Fn * F.sum
   b <- crossprod(t(Weight_error(Fn, cm)),t(Weight_error(S, cm)))
+  
   C_new2 <-t(RcppML::nnls(crossprod(t(Weight_error(Fn, cm))), b,cd_maxit = 1000,cd_tol =1e-8 ))
   C_new2 <- as.matrix(C_new2)
   Cn.s2 <- rowSums(C_new2)
@@ -28,13 +29,20 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   Cn2 <- as.matrix(Cn2)
   Cn2 <- Cn2 * S_Chl
   colnames(Cn2) <- rownames(Fn)
+  colnames(Fn) <- colnames(S)
+  
   error <- Metrics::rmse(S,(C_new2%*%Fn))
+  error2 <- Metrics::smape(S, (C_new2 %*% Fn))
+  
   k <- Cn2
   k <- as.data.frame(k)
   k[,ncol(k)+1] <- 1:nrow(k)
-  cn <- colnames(k)
   
+  cn <- colnames(k)
   cn <- cn[1:ncol(k)-1]
+  
+  # condition number
+  cd <- kappa(Fn %*% t(S))
   
   # NULL assignment to stop NOTE during the package "Check"
   #  -  no visible binding for global variable
@@ -54,5 +62,12 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   G <- S - (C_new2%*%Fn)
   gs <- colMeans(abs(G))/colSums(S)
   
-  return(list(Fn,error,Cn2,n,gs,G))
+  return(list("F matrix" = Fn, 
+              "RMSE"  = error,
+              "sMAPE" = error2,
+              "condition number" = cd,
+              "Class abundances" = Cn2,
+              "Figure" = n, 
+              "MAE" = gs, 
+              "Error" = G))  
 }
