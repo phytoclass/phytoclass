@@ -1,13 +1,13 @@
 #' Apply the steepest descent algorithm 
 #'  
 #'
-#' @param Ft 
-#' @param min.value   
-#' @param max.value   
-#' @param place   
-#' @param S  
-#' @param cm   
-#' @param num.loops
+#' @param Ft xx
+#' @param min.value   xx
+#' @param max.value   xx
+#' @param place   xx
+#' @param S  xx
+#' @param cm   xx
+#' @param num.loops xx
 #'
 #' @return
 #' @export
