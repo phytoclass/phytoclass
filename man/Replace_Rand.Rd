@@ -8,17 +8,17 @@ descent algorithm.}
 Replace_Rand(F, i, S, cm, min.scaler, max.scaler)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 
-\item{i}{}
+\item{i}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 
-\item{min.scaler}{}
+\item{min.scaler}{xx}
 
-\item{max.scaler}{}
+\item{max.scaler}{xx}
 }
 \description{
 Select the new F matrix element with lowest error in the steepest

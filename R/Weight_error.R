@@ -1,7 +1,7 @@
 #' Apply weights to F/S matrices
 #'
-#' @param S 
-#' @param cm
+#' @param S  xx
+#' @param cm  xx
 #'
 #' @return A matrix
 #' @export

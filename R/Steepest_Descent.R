@@ -1,10 +1,10 @@
 #' Performs the steepest descent algorithm for a set number of iterations
 #' 
-#' @param F 
-#' @param place 
-#' @param S   
-#' @param cm   
-#' @param num.loops   
+#' @param F xx
+#' @param place xx
+#' @param S   xx
+#' @param cm   xx
+#' @param num.loops   xx
 #'
 #' @return
 #' @export

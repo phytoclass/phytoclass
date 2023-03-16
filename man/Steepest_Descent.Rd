@@ -7,15 +7,15 @@
 Steepest_Descent(F, place, S, cm, num.loops)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 
-\item{place}{}
+\item{place}{xx}
 
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 
-\item{num.loops}{}
+\item{num.loops}{xx}
 }
 \description{
 Performs the steepest descent algorithm for a set number of iterations

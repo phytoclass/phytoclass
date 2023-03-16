@@ -7,9 +7,9 @@
 Weight_error(S, cm)
 }
 \arguments{
-\item{S}{}
+\item{S}{xx}
 
-\item{cm}{}
+\item{cm}{xx}
 }
 \value{
 A matrix

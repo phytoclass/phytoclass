@@ -1,9 +1,9 @@
 #' Converts data-types and selects data for randomisation in 
 #' the simulated annealing algorithm
 #'
-#' @param Fl   
-#' @param min.val 
-#' @param max.val  
+#' @param Fl   xx
+#' @param min.val xx
+#' @param max.val  xx
 #'
 #' @return
 #' @export

@@ -8,11 +8,11 @@ the simulated annealing algorithm}
 Wrangling(Fl, min.val, max.val)
 }
 \arguments{
-\item{Fl}{}
+\item{Fl}{xx}
 
-\item{min.val}{}
+\item{min.val}{xx}
 
-\item{max.val}{}
+\item{max.val}{xx}
 }
 \description{
 Converts data-types and selects data for randomisation in

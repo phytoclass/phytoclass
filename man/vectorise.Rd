@@ -7,7 +7,7 @@
 vectorise(F)
 }
 \arguments{
-\item{F}{}
+\item{F}{xx}
 }
 \description{
 Turn each non-zero element of the F-matrix into a vector

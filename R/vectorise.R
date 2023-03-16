@@ -1,6 +1,6 @@
 #' Turn each non-zero element of the F-matrix into a vector
 #'
-#' @param F 
+#' @param F  xx
 #'
 #' @return
 #' @export

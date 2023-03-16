@@ -7,7 +7,7 @@
 target(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{xx}
 }
 \description{
 Title

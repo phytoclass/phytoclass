@@ -1,11 +1,11 @@
 #' Perform simulated annealing algorithm for given F and S matrices
 #'
-#' @param S   
-#' @param F   
+#' @param S   xx
+#' @param F   xx
 #' @param user_defined_min_max data frame with some format as min_max built-in data
-#' @param do_matrix_checks    
-#' @param niter 
-#' @param step  
+#' @param do_matrix_checks     xx
+#' @param niter xx
+#' @param step  xx
 #'
 #' @return
 #' @export

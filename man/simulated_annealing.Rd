@@ -14,17 +14,17 @@ simulated_annealing(
 )
 }
 \arguments{
-\item{S}{}
+\item{S}{xx}
 
-\item{F}{}
+\item{F}{xx}
 
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
-\item{do_matrix_checks}{}
+\item{do_matrix_checks}{xx}
 
-\item{niter}{}
+\item{niter}{xx}
 
-\item{step}{}
+\item{step}{xx}
 }
 \description{
 Perform simulated annealing algorithm for given F and S matrices
