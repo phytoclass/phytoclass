@@ -43,8 +43,8 @@ simulated_annealing <- function(S,
   }
  
   S_Chl <- S[, ncol(S)]  # used at end of function
+  S <- Normalise_S(S)  
   cm <- Bounded_weights(S)
-  S <- Normalise_S(S)
  
   place <- which(F > 0)
   
