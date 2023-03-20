@@ -3,7 +3,7 @@ Title: Classify Phytoplankton
 Version: 0.0.0.9000
 Authors@R: c(person("Alexander", "Hayward", role = c("aut", "cre", "cph"), email = "Andy.McKenzie@niwa.co.nz"),
 	person("Andy", "McKenzie", role = c("aut")))
-Description: Some fancy analyses to classify phytoplankton.
+Description: Analyses to classify phytoplankton.
 Imports:
     bestNormalize,
     dplyr,
