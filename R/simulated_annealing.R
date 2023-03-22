@@ -10,11 +10,11 @@
 #' @return A list containing 
 #' \enumerate{
 #'  \item F matrix
-#'  \item RMSE
-#'  \item sMAPE
+#'  \item RMSE (Root Mean Square Error)
+#'  \item sMAPE (symmetrical Mean Absolute Percentage Error)
 #'  \item condition number
-#'  \item Class abudances
-#'  \item MAE
+#'  \item Class abundances
+#'  \item MAE (Mean Absolute Error)
 #'  \item Error
 #'  }
 #' @export
