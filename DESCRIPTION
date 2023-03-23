@@ -5,7 +5,7 @@ Authors@R: c(person("Alexander", "Hayward", role = c("aut", "cre", "cph"), email
 	person("Andy", "McKenzie", role = c("aut")))
 Description: A pigment-based chemotaxonomic method to determine the biomass of
     phytoplankton classes as decribed in: 
-    Hayward et al. (2023) <doi:10.1002/lom3.10541>
+    Hayward et al. (2023) <https://doi.org/10.1002/lom3.10541>
 Imports:
     bestNormalize,
     dplyr,
