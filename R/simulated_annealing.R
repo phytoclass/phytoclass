@@ -22,7 +22,7 @@
 #' @examples
 #' # Using the built-in matrices Sm and Fm
 #' set.seed(5326)
-#' sa.example <- simulated_annealing(Sm, Fm, niter = 50)
+#' sa.example <- simulated_annealing(Sm, Fm, niter = 20)
 #' sa.example$Figure
 simulated_annealing <- function(S,
                                 F = NULL, 
