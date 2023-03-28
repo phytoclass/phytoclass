@@ -44,6 +44,6 @@ Perform simulated annealing algorithm for S and F matrices
 \examples{
 # Using the built-in matrices Sm and Fm
 set.seed(5326)
-sa.example <- simulated_annealing(Sm, Fm, niter = 50)
+sa.example <- simulated_annealing(Sm, Fm, niter = 20)
 sa.example$Figure
 }
