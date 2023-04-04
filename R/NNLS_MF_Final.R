@@ -23,7 +23,7 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   Fn <- Fn * F.sum
   b <- crossprod(t(Weight_error(Fn, cm)),t(Weight_error(S, cm)))
   
-  C_new2 <-t(RcppML::nnls(crossprod(t(Weight_error(Fn, cm))), b,cd_maxit = 1000,cd_tol =1e-8 ))
+  C_new2 <-t(RcppML::nnls(crossprod(t(Weight_error(Fn, cm))), b,cd_maxit = 1000,cd_tol =1e-10 ))
   C_new2 <- as.matrix(C_new2)
   Cn.s2 <- rowSums(C_new2)
   Cn2 <- C_new2/Cn.s2
@@ -33,8 +33,7 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   colnames(Fn) <- colnames(S)
   
   error <- Metrics::rmse(S,(C_new2%*%Fn))
-  error2 <- Metrics::smape(S, (C_new2 %*% Fn))
-  
+
   k <- Cn2
   k <- as.data.frame(k)
   k[,ncol(k)+1] <- 1:nrow(k)
@@ -67,7 +66,6 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   
   return(list("F matrix" = Fn, 
               "RMSE"  = error,
-              "sMAPE" = error2,
               "condition number" = cd,
               "Class abundances" = Cn2,
               "Figure" = n, 
