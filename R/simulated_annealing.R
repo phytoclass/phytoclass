@@ -151,10 +151,11 @@ simulated_annealing <- function(S,
       s_c <- s_n
       f_c <- f_n
     }
-    print(paste("Current: ", round(f_c,4))) # print if verbose
-    print(paste("Neighbour: ", round(f_n,4))) # print if verbose
-    print(paste("Temp: ",round(Temp,4)))
-    print(" ")
+
+    print(paste("Current error: ", round(f_c, 4)))
+    print(paste("Neighbour's error: ", round(f_n, 4)))
+    print(paste("Temperature (%): ", round(Temp*100, 4)))
+    print(" ")    
     
     # update best state
     if (f_n < f_b) {
