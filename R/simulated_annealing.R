@@ -154,7 +154,7 @@ simulated_annealing <- function(S,
 
     print(paste("Current error: ", round(f_c, 4)))
     print(paste("Neighbour's error: ", round(f_n, 4)))
-    print(paste("Temperature (%): ", round(Temp*100, 4)))
+    print(paste("Temperature (%): ", round(Temp*100, 2)))
     print(" ")    
     
     # update best state
