@@ -6,6 +6,7 @@
 #' @param do_matrix_checks     xx
 #' @param niter xx
 #' @param step  xx
+#' @param weight.upper.bound xx
 #'
 #' @return A list containing 
 #' \enumerate{
@@ -29,7 +30,8 @@ simulated_annealing <- function(S,
                                 user_defined_min_max = NULL,
                                 do_matrix_checks = TRUE,
                                 niter = 500,
-                                step = 0.009){
+                                step = 0.009,
+                                weight.upper.bound = 30){
   
   # Use default F value
   if(is.null(F)) {
@@ -44,7 +46,7 @@ simulated_annealing <- function(S,
  
   S_Chl <- S[, ncol(S)]  # used at end of function
   S <- Normalise_S(S)  
-  cm <- Bounded_weights(S)
+  cm <- Bounded_weights(S, weight.upper.bound)
  
   place <- which(F > 0)
   

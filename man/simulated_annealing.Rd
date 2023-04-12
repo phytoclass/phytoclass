@@ -10,7 +10,8 @@ simulated_annealing(
   user_defined_min_max = NULL,
   do_matrix_checks = TRUE,
   niter = 500,
-  step = 0.009
+  step = 0.009,
+  weight.upper.bound = 30
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ simulated_annealing(
 \item{niter}{xx}
 
 \item{step}{xx}
+
+\item{weight.upper.bound}{xx}
 }
 \value{
 A list containing

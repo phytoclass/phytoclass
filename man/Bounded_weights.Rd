@@ -4,7 +4,7 @@
 \alias{Bounded_weights}
 \title{Add weights to the data, bound at a maximum.}
 \usage{
-Bounded_weights(S, weight.upper.bound = 30)
+Bounded_weights(S, weight.upper.bound)
 }
 \arguments{
 \item{S}{XX}

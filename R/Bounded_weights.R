@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-Bounded_weights <-function(S, weight.upper.bound = 30){
+Bounded_weights <-function(S, weight.upper.bound){
   n <- colMeans(S)
   S <- n^-1
   S <- ifelse(S > weight.upper.bound, weight.upper.bound, S)
