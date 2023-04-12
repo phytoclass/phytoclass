@@ -12,9 +12,9 @@
 #' \enumerate{
 #'  \item F matrix
 #'  \item RMSE (Root Mean Square Error)
-#'  \item sMAPE (symmetrical Mean Absolute Percentage Error)
 #'  \item condition number
 #'  \item Class abundances
+#'  \item Figure (plot of results)
 #'  \item MAE (Mean Absolute Error)
 #'  \item Error
 #'  }
