@@ -4,7 +4,7 @@
 \alias{Cluster}
 \title{Cluster things}
 \usage{
-Cluster(Data)
+Cluster(Data, min_cluster_size)
 }
 \arguments{
 \item{Data}{XX}
