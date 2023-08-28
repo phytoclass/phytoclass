@@ -32,8 +32,8 @@ Cluster <- function(Data, min_cluster_size) {
   colnames(ndf) <- colnames(S[, ncol(S) - 1])
 
 
-  mscluster <- dist(ndf, method = "manhattan")
-  mv.hclust <- hclust(mscluster, method = "ward.D2")
+  mscluster <- stats::dist(ndf, method = "manhattan")
+  mv.hclust <- stats::hclust(mscluster, method = "ward.D2")
 
   plot(mv.hclust)
 
