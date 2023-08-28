@@ -28,6 +28,5 @@ Wrangling <- function(Fl, min.val, max.val){
   SE <- vectorise(Fd[,1:ncol(Fd)-1]) #### vectorise function outputs all non-zero elements as a vector (excluding chl column)
   
   res <- list(Fmin, Fmax, SE,chlv)
-  return(res)
 }
 
