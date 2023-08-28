@@ -45,7 +45,7 @@ Cluster <- function(Data, min_cluster_size) {
     cutHeight = 70,
     minClusterSize = min_cluster_size,
     method = "hybrid",
-    distM = as.matrix(dist(ndf, method = "manhattan")), 
+    distM = as.matrix(stats::dist(ndf, method = "manhattan")), 
     deepSplit = 4,
     pamStage = TRUE, 
     pamRespectsDendro = TRUE,
