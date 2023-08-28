@@ -7,6 +7,7 @@
 #'
 #' @examples
 Cluster <- function(Data, min_cluster_size) {
+  
   standardise <- function(Data) {
     b <- Data
     b <- b[, 1:ncol(b) - 1]
@@ -16,7 +17,6 @@ Cluster <- function(Data, min_cluster_size) {
     v <- lapply(b, bestNormalize::boxcox)
     return(v)
   }
-
 
   v <- standardise(Data)
 
@@ -45,9 +45,12 @@ Cluster <- function(Data, min_cluster_size) {
     cutHeight = 70,
     minClusterSize = min_cluster_size,
     method = "hybrid",
-    distM = as.matrix(dist(ndf, method = "manhattan")), deepSplit = 4,
-    pamStage = TRUE, pamRespectsDendro = TRUE,
-    useMedoids = FALSE, maxDistToLabel = NULL,
+    distM = as.matrix(dist(ndf, method = "manhattan")), 
+    deepSplit = 4,
+    pamStage = TRUE, 
+    pamRespectsDendro = TRUE,
+    useMedoids = FALSE, 
+    maxDistToLabel = NULL,
     maxPamDist = 50,
     respectSmallClusters = TRUE
   )
@@ -70,7 +73,6 @@ Cluster <- function(Data, min_cluster_size) {
   for (i in 1:length(L)) {
     e[[length(e) + 1]] <- length(L[[i]][[1]])
   }
-
 
   return(list(L, plot(mv.hclust)))
 }
