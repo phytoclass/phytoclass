@@ -4,7 +4,7 @@
 \alias{Condition_test}
 \title{Calculate the condition number ...}
 \usage{
-Condition_test(S, Fn, min.val, max.val)
+Condition_test(S, Fn, min.val = NULL, max.val = NULL)
 }
 \arguments{
 \item{S}{XX}
