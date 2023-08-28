@@ -19,10 +19,6 @@ SAALS <- function(Ft, min.value, max.value, place, S, cm, num.loops){
   g <- Steepest_Descent(Ft, place, S, cm, num.loops)
   err <- g[[2]]
   g <- g[[1]]
-  gchl <- g[,ncol(g)]
-  gn <- g / gchl
-  n <- vectorise(gn)
-  d <- which(n < min.value | n > max.value)
   #if (length(d) >0){
   #  g <- Ft
   #}
