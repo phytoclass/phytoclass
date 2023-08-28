@@ -39,9 +39,9 @@ Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.va
     SA[d] <- SA2 
     d <- which(SA < minF | SA > maxF)
     #print(loop)
-    if (loop > 30){
+    if (loop > 50){
       nn <- (minF[d]+maxF[d])/2
-      f <- round(runif(n=length(d),minF[d],maxF[d]),4)
+      f <- round(runif(n=length(d),(minF[d]*1.20),(maxF[d]*0.80)),4)
       SA[d] <- f
       d <- which(SA < minF | SA > maxF)
     }
@@ -53,3 +53,4 @@ Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.va
   F.n <- NNLS_MF(Fn, S, cm)
   return(F.n)
 }
+
