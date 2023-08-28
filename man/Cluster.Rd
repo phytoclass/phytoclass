@@ -8,6 +8,8 @@ Cluster(Data, min_cluster_size)
 }
 \arguments{
 \item{Data}{XX}
+
+\item{min_cluster_size}{XX}
 }
 \description{
 Cluster things

@@ -1,6 +1,7 @@
 #' Cluster things
 #'
 #' @param Data XX
+#' @param min_cluster_size XX
 #'
 #' @return
 #' @export
