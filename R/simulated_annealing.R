@@ -35,9 +35,15 @@ simulated_annealing <- function(S,
   if (is.null(F)) {
     F <- phytoclass::Fm
   }
-  
+
+  if (is.data.frame(S)){
+  char_cols <- sapply(S, is.character)
+  S <- S[, !char_cols]}
+    
+
+
   if (do_matrix_checks) {
-    L <- Matrix_checks(S, F)
+    L <- Matrix_checks(as.matrix(S), as.matrix(F))
     S <- as.matrix(L[[1]])
     F <- as.matrix(L[[2]])
   }
@@ -63,7 +69,7 @@ simulated_annealing <- function(S,
     # }
   }
   
-  condition.test <- Condition_test(S, F, min.val, max.val)
+  condition.test <- Condition_test(S[,1:ncol(S)-1], F[,1:ncol(F)-1], min.val, max.val)
   cat(paste0("\nCondition number = ", round(condition.test), 
              "\n\n"))
   
@@ -82,6 +88,7 @@ simulated_annealing <- function(S,
     chlv <- Wrangling(s_c, min.val, max.val)[[4]]
     new_neighbour <- Random_neighbour2(s_c, Temp, chlv, s_c, 
                                        place, S, cm, min.val, max.val)
+    D <- list()
     if (k > niter-20){
       for (i in 1:300){
         chlv <- Wrangling(s_c, min.val, max.val)[[4]]
