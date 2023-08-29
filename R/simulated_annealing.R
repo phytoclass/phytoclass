@@ -1,7 +1,7 @@
 #' Perform simulated annealing algorithm for S and F matrices
 #'
-#' @param S   xx
-#' @param F   xx
+#' @param S   Sample matrix – a matrix of pigment samples
+#' @param F   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
 #' @param do_matrix_checks     xx
 #' @param niter xx
@@ -181,10 +181,12 @@ simulated_annealing <- function(S,
       s_c <- s_n
       f_c <- f_n
     }
-    print(paste("Current error: ", round(f_c, 4)))
-    print(paste("Neighbour's error: ", round(f_n, 4)))
-    print(paste("Temperature (%): ", round(Temp * 100, 2)))
-    print(" ")
+    
+    message(paste("Current error: ", round(f_c, 4)))
+    message(paste("Neighbour's error: ", round(f_n, 4)))
+    message(paste("Temperature (%): ", round(Temp * 100, 2)))
+    message(" ")
+    
     if (f_n < f_b) {
       s_b <- s_n
       f_b <- f_n
