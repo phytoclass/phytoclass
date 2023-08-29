@@ -1,11 +1,10 @@
 #' Add weights to the data, bound at a maximum.
 #' 
-#' @keywords internal
-#'
 #' @param S XX         
 #' @param weight.upper.bound  XX        
 #'
 #' @return A matrix
+#' @export
 #'
 #' @examples
 Bounded_weights <-function(S, weight.upper.bound){

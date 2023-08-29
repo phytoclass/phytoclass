@@ -17,4 +17,3 @@ A matrix
 \description{
 Add weights to the data, bound at a maximum.
 }
-\keyword{internal}
