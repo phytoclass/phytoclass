@@ -1,19 +1,17 @@
 #' Remove any column values that average 0. Further to this, also remove
 #' phytoplankton groups from the F matrix if their diagnostic pigment
-#' isn’t present.
-#' 
-#' @keywords internal 
+#' isn’t present. 
 #'
 #' @param S   xx
 #' @param F   xx
 #'
 #' @return
+#' @export
 #'
 #' @examples
 
 
 Matrix_checks <- function(S, F){
-  F <- subset(F, select = c(colnames(S)))
   ba <- rownames(F)
   ba1<- which(ba =="Syn")
   if (ncol(S) > ncol(F)){
@@ -26,7 +24,7 @@ Matrix_checks <- function(S, F){
   b <- nrow(S)
   c <- which(b ==0)
   g <- colSums(S != 0)
-  l <- which(g/b <=.2)
+  l <- which(g/b <=.01)
   if(length(l) > 0){
     S <- S[,-l]
     F <- F[,-l] 
@@ -42,10 +40,10 @@ Matrix_checks <- function(S, F){
   l <- n/sum(n)
   fn <- g/b
   p <- which(l < 0.01  & fn[1:length(fn) - 1] <= 0.5)
-  if (length(p) >0) {
-    F <- F[,-p]
-    S <- S[,-p]
-  }
+  #if (length(p) >0) {
+  #  F <- F[,-p]
+  #  S <- S[,-p]
+  #}
   d <- colnames(S)
   d1<- which(d =="Chl.b")
   b <- rownames(F)
@@ -152,5 +150,5 @@ Matrix_checks <- function(S, F){
     F <- F[,-kn]
     S <- S[,-kn]
   }
-  return(list(S,F))
+  return(list(as.matrix(S),as.matrix(F)))
 }
