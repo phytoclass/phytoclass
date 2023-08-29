@@ -6,7 +6,6 @@
 #' @param cm   xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Conduit_2 <- function(F, place, S, cm){

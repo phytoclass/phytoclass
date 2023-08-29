@@ -13,7 +13,6 @@
 #' @param max.val  xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val){

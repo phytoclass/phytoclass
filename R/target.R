@@ -3,7 +3,6 @@
 #' @param x   xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 target = function(x){

@@ -14,7 +14,6 @@
 #' @param cm  xx
 #'
 #' @return
-#' @export
 #'
 #' @examples  
 NNLS_MF_Final <- function(Fn, S, S_Chl, cm){

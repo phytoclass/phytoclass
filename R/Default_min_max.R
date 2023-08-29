@@ -8,7 +8,6 @@
 #' @param place       xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 

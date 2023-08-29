@@ -8,7 +8,6 @@
 #' @param cm xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Fac_F_RR3 <- function(F, vary, place, S, cm){

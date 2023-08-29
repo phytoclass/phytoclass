@@ -6,7 +6,6 @@
 #' @param max.val  xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Wrangling <- function(Fl, min.val, max.val){

@@ -10,7 +10,6 @@
 #' @param num.loops xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 

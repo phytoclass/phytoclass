@@ -6,7 +6,6 @@
 #' @param cm  xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Minimise_elements <- function(F, place, S, cm){   # A function that reduces every for every element that didn't reduce in index function

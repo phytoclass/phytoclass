@@ -2,7 +2,6 @@
 #' @param F     xx
 #'
 #' @return A matrix
-#' @export
 #'
 #' @examples
 Normalise_F <- function(F){

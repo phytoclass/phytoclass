@@ -6,7 +6,6 @@
 #' @param F   xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 

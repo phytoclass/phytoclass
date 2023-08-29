@@ -6,7 +6,6 @@
 #' @param cm     xx 
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Minimise_elements1 <- function(F, place, S, cm){  

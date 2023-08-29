@@ -3,7 +3,6 @@
 #' @param F  xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 vectorise <- function(F){

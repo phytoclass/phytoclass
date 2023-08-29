@@ -5,7 +5,6 @@
 #' @param max.scaler     xx
 #'
 #' @return numeric
-#' @export
 #'
 #' @examples
 Randomise_elements <- function(x, min.scaler, max.scaler){

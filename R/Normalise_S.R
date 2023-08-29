@@ -5,7 +5,6 @@
 #' @param S   xx
 #'
 #' @return A matrix
-#' @export
 #'
 #' @examples
 #' 

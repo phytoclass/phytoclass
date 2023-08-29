@@ -7,7 +7,6 @@
 #' @param num.loops   xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Steepest_Descent <- function(F, place, S, cm, num.loops){ 

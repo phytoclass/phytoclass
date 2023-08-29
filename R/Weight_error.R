@@ -4,7 +4,6 @@
 #' @param cm  xx
 #'
 #' @return A matrix
-#' @export
 #'
 #' @examples
 Weight_error <- function(S, cm){

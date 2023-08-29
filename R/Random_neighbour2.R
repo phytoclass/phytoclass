@@ -11,7 +11,6 @@
 #' @param max.val   xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 #' @importFrom stats runif

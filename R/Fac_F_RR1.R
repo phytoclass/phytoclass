@@ -7,7 +7,6 @@
 #' @param cm XX
 #'
 #' @return
-#' @export
 #'
 #' @examples
 # Inputs are F and which elements to vary, should be all elements

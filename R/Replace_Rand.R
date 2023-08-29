@@ -9,7 +9,6 @@
 #' @param max.scaler  xx
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Replace_Rand <- function(F, i, S, cm, min.scaler, max.scaler){
