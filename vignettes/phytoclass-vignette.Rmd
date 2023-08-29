@@ -3,8 +3,10 @@ title: "The phytoclass package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{The phytoclass package}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -62,10 +64,26 @@ Arguments:
 **weight.upper.bound** = the upper limit of the weights applied. The default value is 30. 
 
 
-When using the default values, the only argument required is the sample matrix. However, make sure that the pigment names match those in the built-in pigment to Chl matrix Fm”.
+When using the default values, the only argument required is the sample matrix. However, make sure that the pigment names match those in the built-in pigment to Chl matrix Fm.
+
+The example here uses the built-in sample matrix Sm. 
 
 ```{r message=FALSE}
 Results <- simulated_annealing(Sm)
+```
+
+```{r results}
+Results$`condition number`
+Results$RMSE
+Results$MAE
+Results$Error
+
+Results$`F matrix`
+Results$`Class abundances`
+```
+
+```{r figure-results, fig.width=8}
+Results$Figure
 ```
 
 
