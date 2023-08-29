@@ -15,9 +15,9 @@ simulated_annealing(
 )
 }
 \arguments{
-\item{S}{xx}
+\item{S}{Sample matrix – a matrix of pigment samples}
 
-\item{F}{xx}
+\item{F}{Pigment to Chl a matrix}
 
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
