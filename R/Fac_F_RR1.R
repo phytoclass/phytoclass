@@ -1,5 +1,7 @@
 #' Part of the steepest descent algorithm and work to reduce error given 
-#' the S and F matrices. 
+#' the S and F matrices.
+#' 
+#' @keywords internal 
 #'
 #' @param F XX
 #' @param vary XX

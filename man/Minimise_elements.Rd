@@ -18,3 +18,4 @@ Minimise_elements(F, place, S, cm)
 \description{
 Part of the steepest descent algorithm
 }
+\keyword{internal}

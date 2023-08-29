@@ -1,4 +1,7 @@
 #' This function normalises each column in F to row sum
+#' 
+#' @keywords internal
+#' 
 #' @param F     xx
 #'
 #' @return A matrix

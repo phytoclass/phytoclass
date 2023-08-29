@@ -22,3 +22,4 @@ Fac_F_RR2(F, vary, place, S, cm)
 Part of the steepest descent algorithm and work to reduce error given
 the S and F matrices
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ Sets the default minimum and maximum values for phytoplankton groups
 pigment ratios. To use this function, pigment and phytoplankton group
 names will need to fit the naming criteria of phytoclass.
 }
+\keyword{internal}

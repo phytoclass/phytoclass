@@ -1,5 +1,7 @@
 #' Select a random neighbour when the previous random neighbour is beyond 
 #' the minimum or maximum value.
+#' 
+#' @keywords internal
 #'
 #' @param Fn  xx
 #' @param Temp xx

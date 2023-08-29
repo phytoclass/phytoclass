@@ -18,3 +18,4 @@ Minimise_elements1(F, place, S, cm)
 \description{
 A function that reduces every for every element that didn't reduce in index function
 }
+\keyword{internal}

@@ -1,4 +1,6 @@
 #' Randomise individual elements in the F matrix.
+#' 
+#' @keywords internal
 #'
 #' @param x   xx
 #' @param min.scaler     xx 

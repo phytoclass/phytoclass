@@ -18,3 +18,4 @@ Wrangling(Fl, min.val, max.val)
 Converts data-types and selects data for randomisation in
 the simulated annealing algorithm
 }
+\keyword{internal}

@@ -17,3 +17,4 @@ A matrix
 \description{
 Apply weights to F/S matrices
 }
+\keyword{internal}

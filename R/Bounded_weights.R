@@ -1,4 +1,6 @@
 #' Add weights to the data, bound at a maximum.
+#' 
+#' @keywords internal
 #'
 #' @param S XX         
 #' @param weight.upper.bound  XX        

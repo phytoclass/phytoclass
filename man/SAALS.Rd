@@ -24,3 +24,4 @@ SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 \description{
 Apply the steepest descent algorithm
 }
+\keyword{internal}

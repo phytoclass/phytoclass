@@ -12,3 +12,4 @@ vectorise(F)
 \description{
 Turn each non-zero element of the F-matrix into a vector
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ A matrix
 \description{
 This function normalises each column in S to row sum
 }
+\keyword{internal}

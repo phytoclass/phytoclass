@@ -32,3 +32,4 @@ Random_neighbour(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val)
 Select a random neighbour when the previous random neighbour is beyond
 the minimum or maximum value.
 }
+\keyword{internal}

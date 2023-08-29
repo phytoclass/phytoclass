@@ -1,5 +1,7 @@
 #' Converts data-types and selects data for randomisation in 
 #' the simulated annealing algorithm
+#' 
+#' @keywords internal
 #'
 #' @param Fl   xx
 #' @param min.val xx

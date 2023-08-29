@@ -1,4 +1,6 @@
 #' Selects a random neighbour for the simulated annealing algorithm.
+#' 
+#' @keywords internal
 #'
 #' @param Fn   xx
 #' @param Temp xx

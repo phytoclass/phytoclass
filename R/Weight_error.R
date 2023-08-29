@@ -1,4 +1,6 @@
 #' Apply weights to F/S matrices
+#' 
+#' @keywords internal
 #'
 #' @param S  xx
 #' @param cm  xx

@@ -1,4 +1,6 @@
 #' Part of the steepest descent algorithm
+#' 
+#' @keywords internal
 #'
 #' @param F    xx
 #' @param place  xx

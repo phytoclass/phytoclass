@@ -28,3 +28,4 @@ Random_neighbour2(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val)
 \description{
 Selects a random neighbour for the simulated annealing algorithm.
 }
+\keyword{internal}

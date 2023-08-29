@@ -1,4 +1,6 @@
 #' Turn each non-zero element of the F-matrix into a vector
+#' 
+#' @keywords internal
 #'
 #' @param F  xx
 #'

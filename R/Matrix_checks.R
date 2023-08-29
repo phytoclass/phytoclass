@@ -1,6 +1,8 @@
 #' Remove any column values that average 0. Further to this, also remove
 #' phytoplankton groups from the F matrix if their diagnostic pigment
-#' isn’t present. 
+#' isn’t present.
+#' 
+#' @keywords internal 
 #'
 #' @param S   xx
 #' @param F   xx

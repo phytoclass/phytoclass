@@ -1,4 +1,6 @@
 #' Title
+#' 
+#' @keywords internal
 #'
 #' @param x   xx
 #'

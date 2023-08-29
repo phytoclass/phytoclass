@@ -18,3 +18,4 @@ Remove any column values that average 0. Further to this, also remove
 phytoplankton groups from the F matrix if their diagnostic pigment
 isn’t present.
 }
+\keyword{internal}

@@ -1,5 +1,6 @@
 #' Apply the steepest descent algorithm 
 #'  
+#' @keywords internal  
 #'
 #' @param Ft xx
 #' @param min.value   xx

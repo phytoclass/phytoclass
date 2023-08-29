@@ -1,5 +1,7 @@
 #' Performs the steepest descent algorithm for a set number of iterations
 #' 
+#' @keywords internal
+#' 
 #' @param F xx
 #' @param place xx
 #' @param S   xx

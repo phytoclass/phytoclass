@@ -20,3 +20,4 @@ Steepest_Descent(F, place, S, cm, num.loops)
 \description{
 Performs the steepest descent algorithm for a set number of iterations
 }
+\keyword{internal}

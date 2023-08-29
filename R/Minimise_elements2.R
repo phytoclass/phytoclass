@@ -1,4 +1,6 @@
 #' A function that reduces every for every element that didn't reduce in index function
+#' 
+#' @keywords internal
 #'
 #' @param F   xx
 #' @param place  xx

@@ -2,6 +2,7 @@
 #' pigment ratios. To use this function, pigment and phytoplankton group
 #' names will need to fit the naming criteria of phytoclass. 
 #'  
+#' @keywords internal
 #' 
 #' @param min_max   xx
 #' @param F    xx

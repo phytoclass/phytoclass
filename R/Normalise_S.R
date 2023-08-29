@@ -2,6 +2,8 @@
 #' This function normalises each column in S to row sum
 #' 
 #'
+#' @keywords internal
+#'
 #' @param S   xx
 #'
 #' @return A matrix

@@ -20,3 +20,4 @@ Conduit_3(F, place, S, cm)
 Conduit between minimise_elements function and Fac_F_R
 of steepest descent algorithm.
 }
+\keyword{internal}
