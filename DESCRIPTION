@@ -22,3 +22,7 @@ RoxygenNote: 7.2.3
 Depends: 
     R (>= 4.2)
 LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
