@@ -6,7 +6,7 @@
 pigments and pigment ratios, to attain an estimate of phytoplankton
 class abundances.}
 \usage{
-NNLS_MF(Fn, S, cm)
+NNLS_MF(Fn, S, cm = NULL)
 }
 \arguments{
 \item{Fn}{xx}
