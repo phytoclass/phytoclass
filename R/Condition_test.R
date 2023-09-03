@@ -1,4 +1,6 @@
 #' Calculate the condition number ...
+#' 
+#' @keywords internal
 #'
 #' @param S XX     
 #' @param Fn  XX   
@@ -6,7 +8,6 @@
 #' @param max.val XX       
 #'
 #' @return
-#' @export
 #'
 #' @examples
 

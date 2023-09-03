@@ -18,3 +18,4 @@ Condition_test(S, Fn, min.val = NULL, max.val = NULL)
 \description{
 Calculate the condition number ...
 }
+\keyword{internal}
