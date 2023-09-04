@@ -7,10 +7,17 @@
 Cluster(Data, min_cluster_size)
 }
 \arguments{
-\item{Data}{XX}
+\item{Data}{S (sample) matrix}
 
-\item{min_cluster_size}{XX}
+\item{min_cluster_size}{the minimum size required for a cluster}
+}
+\value{
+A list of length two. The first element is a list of clusters, and
+the second the cluster analysis object (dendogram) that can be plotted.
 }
 \description{
 Cluster things
+}
+\examples{
+Cluster.result <- Cluster(Sm, 14)
 }
