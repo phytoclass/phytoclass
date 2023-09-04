@@ -1,6 +1,7 @@
 ---
 title: "The phytoclass package"
 output: rmarkdown::html_vignette
+bibliography: references.bib
 vignette: >
   %\VignetteIndexEntry{The phytoclass package}
   %\VignetteEncoding{UTF-8}
@@ -22,23 +23,31 @@ library(phytoclass)
 
 # Introduction
 
-The *phytoclass* package uses non-negative matrix factorization and simulated annealing to determine the biomass of different phytoplankton groups from pigment concentrations. The methodology is discussed in Hayward et al. (2023) and is similar to the CHEMTAX method of Mackey et al. (1996). 
+The *phytoclass* package uses non-negative matrix factorization and simulated annealing to determine the biomass of different phytoplankton groups from pigment concentrations. The methodology is discussed in [@Hayward2023] and is similar to the CHEMTAX method of [@Mackey1996].
 
+For ease of use, most functions have default options. However the user also has the option to set their own parameters within the program, and instructions on how to do this are listed for each function. 
 
-For ease of use, most functions have default options. However the user also has the option to set their own parameters within the program, and instructions on how to do this are listed for each function. It is important to highlight that naming conventions for phytoplankton groups and their pigments should be adhered to when using the default samples. For example, the user should ensure that pigment names in their sample matrix (S) match the same pigment names in the pigment – Chl a ratio matrix (F).
+It is important to highlight that naming conventions for phytoplankton groups and their pigments should be adhered to when using the default samples. For example, the user should ensure that pigment names in their sample matrix (S) match the same pigment names in the pigment – Chl a ratio matrix (F).
 
 At present the use of DV Chl a with Prochlorococcus is not supported, however this will be released in the future.
 
-The functions covered here are:
+The main functions of the package are **Cluster()** and **simulated_annealing()**. 
 
-1.	simulated_annealing
-2.	Cluster
-3.	Condition_test
-4.	Steepest_Desc
-5.	NNLS_MF
+Other helper functions covered in this document are:
 
-# simulated_annealing
+1.  Matrix_checks
+2.  Bounded_weights
+3.  Steepest_Desc
+4.  NNLS_MF
 
+
+# Main functions: Cluster(), simulated_annealing()
+
+## Cluster()
+
+
+
+## simulated_annealing()
 
 This is the main function for the *phytoclass* package. 
 
@@ -69,7 +78,7 @@ When using the default values, the only argument required is the sample matrix. 
 The example here uses the built-in sample matrix Sm. 
 
 ```{r message=FALSE}
-Results <- simulated_annealing(Sm)
+Results <- simulated_annealing(Sm, niter = 20)
 ```
 
 ```{r results}
@@ -85,5 +94,19 @@ Results$`Class abundances`
 ```{r figure-results, fig.width=8}
 Results$Figure
 ```
+
+# Helper functions
+
+## Matrix_checks()
+
+
+## Steep_Desc()
+
+
+## Bounded_weights()
+
+
+## NNLS_MF()
+
 
 
