@@ -1,12 +1,14 @@
 #' Cluster things
 #'
-#' @param Data XX
-#' @param min_cluster_size XX
+#' @param Data S (sample) matrix
+#' @param min_cluster_size the minimum size required for a cluster
 #'
-#' @return
+#' @return A list of length two. The first element is a list of clusters, and
+#' the second the cluster analysis object (dendogram) that can be plotted.
 #' @export
 #'
 #' @examples
+#' Cluster.result <- Cluster(Sm, 14)
 Cluster <- function(Data, min_cluster_size) {
   
   standardise <- function(Data) {
@@ -75,5 +77,5 @@ Cluster <- function(Data, min_cluster_size) {
     e[[length(e) + 1]] <- length(L[[i]][[1]])
   }
 
-  return(list(L, plot(mv.hclust)))
+  return(list(cluster.list = L, cluster.plot = mv.hclust))
 }
