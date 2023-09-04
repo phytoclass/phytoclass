@@ -12,12 +12,15 @@ Cluster(Data, min_cluster_size)
 \item{min_cluster_size}{the minimum size required for a cluster}
 }
 \value{
-A list of length two. The first element is a list of clusters, and
-the second the cluster analysis object (dendogram) that can be plotted.
+A named list of length two. The first element "cluster.list"
+is a list of clusters, and the second element "cluster.plot" the
+cluster analysis object (dendogram) that can be plotted.
 }
 \description{
 Cluster things
 }
 \examples{
 Cluster.result <- Cluster(Sm, 14)
+Cluster.result$cluster.list
+plot(Cluster.result$cluster.plot)
 }
