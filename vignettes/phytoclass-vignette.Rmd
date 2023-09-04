@@ -21,6 +21,28 @@ knitr::opts_chunk$set(
 library(phytoclass)
 ```
 
+# To do for vignette
+
+Reference style 
+
+Get the right font for the "a" in Chl a
+
+Include helper function in vignette and expand on their help:
+
+
+Matrix_checks()
+
+
+Steep_Desc()
+
+
+Bounded_weights()
+
+
+NNLS_MF()
+
+
+
 # Introduction
 
 The *phytoclass* package uses non-negative matrix factorization and simulated annealing to determine the biomass of different phytoplankton groups from pigment concentrations. The methodology is discussed in [@Hayward2023] and is similar to the CHEMTAX method of [@Mackey1996].
@@ -51,10 +73,14 @@ The “clustering” function divides all pigment concentrations by the total Ch
 
 The function returns a list of the clusters and the cluster dendrogram. 
 
-An example, using the built-in data set Sm:
+An example, using the built-in sample data set Sm:
 
 ```{r}
 Cluster.result <- Cluster(Sm, 14)
+
+```
+
+```{r fig.width=7}
 # list of clusters
 Cluster.result$cluster.list
 # plot of clusters
@@ -75,9 +101,9 @@ Arguments:
 
 **S** = Sample matrix – a matrix of pigment samples. Ensure that Chl a is the final column
 
-**F** = Pigment to Chl a matrix. If left blank default values will be used. Ensure that pigment columns are in the same order as S and column naming conventions match. 
+**F** = Pigment to Chl a matrix. If left blank default values will be used. Ensure that pigment columns are in the same order as **S** and column naming conventions match. 
 
-**user_defined_min_max** = If blank default values are used. To create different min_max values, follow the same structure as the phytoclass::min_max file. See example below. 
+**user_defined_min_max** = If blank default values are used. To create different min_max values, follow the same structure as the phytoclass::min_max file. See the example below. 
 
 **do_matrix_checks** = this should only be set to true when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.
 
@@ -89,6 +115,8 @@ Arguments:
 
 
 When using the default values, the only argument required is the sample matrix. However, make sure that the pigment names match those in the built-in pigment to Chl matrix Fm.
+
+### Example without clustering
 
 The example here uses the built-in sample matrix Sm. 
 
@@ -106,9 +134,112 @@ Results$`F matrix`
 Results$`Class abundances`
 ```
 
-```{r figure-results, fig.width=8}
+```{r figure-results, fig.width=7}
 Results$Figure
 ```
+
+### Example with clustering
+
+```{r message=FALSE}
+Clust1 <- Cluster(Sm,14)$cluster.list[[1]]
+# Remove the cluster column/label
+Clust1$Clust <- NULL
+
+Results <- simulated_annealing(Clust1, niter = 20)
+```
+
+
+```{r results-clustering}
+Results$`condition number`
+Results$RMSE
+Results$MAE
+Results$Error
+
+Results$`F matrix`
+Results$`Class abundances`
+```
+
+```{r figure-results-clustering, fig.width=7}
+Results$Figure
+```
+
+
+### Example using non-default values
+
+```{r}
+#Create Fm (F matrix). Alternatively, a .csv file can be uploaded.
+Fu <- data.frame(
+  Per = c(0, 0, 0, 0, 1, 0, 0, 0),
+  X19but = c(0, 0, 0, 0, 0, 1, 1, 0),
+  Fuco = c(0, 0, 0, 1, 0, 1, 1, 0),
+  Pra = c(1, 0, 0, 0, 0, 0, 0, 0),
+  X19hex = c(0, 0, 0, 0, 0, 1, 0, 0),
+  Allo = c(0, 0, 1, 0, 0, 0, 0, 0),
+  Zea = c(1, 1, 0, 0, 0, 0, 0, 1),
+  Chl.b = c(1, 1, 0, 0, 0, 0, 0, 0),
+  Tchla = c(1, 1, 1, 1, 1, 1, 1, 1)
+)
+
+rownames(Fu) <- c(
+  "Prasinophytes", "Chlorophytes", "Cryptophytes"
+  , "Diatoms-B", "Dinoflagellates-A",
+  "Haptophytes", "Pelagophytes", "Syn"
+)
+Min_max <- data.frame(
+  Class = c(
+    "Syn", "Chlorophytes", "Chlorophytes", "Prasinophytes", "Prasinophytes",
+    "Prasinophytes", "Cryptophytes", "Diatoms-B", "Diatoms-B", "Pelagophytes",
+    "Pelagophytes", "Pelagophytes", "Dinoflagellates-A", "Haptophytes",
+    "Haptophytes", "Haptophytes", "Haptophytes", "Diatoms-B", "Cryptophytes",
+    "Prasinophytes", "Chlorophytes", "Syn", "Dinoflagellates-A", "Pelagophytes"
+  ),
+  Pig_Abbrev = c(
+    "Zea", "Zea", "Chl.b", "Pra", "Zea", "Chl.b", "Allo", "Chl.c3",
+    "Fuco", "Chl.c3", "X19but", "Fuco", "Per", "X19but", "X19hex",
+    "Fuco", "Tchla", "Tchla", "Tchla", "Tchla", "Tchla", "Tchla", "Tchla",
+    "Tchla"
+  ),
+  min = as.numeric(c(
+    0.0800, 0.0063, 0.1666, 0.0642, 0.0151, 0.4993, 0.2118, 0.0189,
+    0.3315, 0.1471, 0.2457, 0.3092, 0.3421, 0.0819, 0.2107, 0.0090,
+    1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000
+  )),
+  max = as.numeric(c(
+    1.2123, 0.0722, 0.9254, 0.4369, 0.1396, 0.9072, 0.5479, 0.1840,
+    0.9332, 0.2967, 1.0339, 1.2366, 0.8650, 0.2872, 1.3766, 0.4689,
+    1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000
+  ))
+)
+```
+
+```{r message=FALSE}
+Results <- phytoclass::simulated_annealing(
+  S = Sm, 
+  F = Fu,
+  user_defined_min_max = Min_max,
+  do_matrix_checks = TRUE,
+  niter = 20,
+  step = 0.01,
+  weight.upper.bound = 30
+)
+```
+
+
+```{r results-not-default}
+Results$`condition number`
+Results$RMSE
+Results$MAE
+Results$Error
+
+Results$`F matrix`
+Results$`Class abundances`
+```
+
+```{r figure-results-not-default, fig.width=7}
+Results$Figure
+```
+
+
 
 # Helper functions
 
