@@ -25,22 +25,7 @@ library(phytoclass)
 
 Reference style 
 
-Get the right font for the "a" in Chl a
-
-Include helper function in vignette and expand on their help:
-
-
-Matrix_checks()
-
-
-Steep_Desc()
-
-
-Bounded_weights()
-
-
-NNLS_MF()
-
+Get the right font for the "a" in Chl a ?
 
 
 # Introduction
@@ -141,7 +126,7 @@ Results$Figure
 ### Example with clustering
 
 ```{r message=FALSE}
-Clust1 <- Cluster(Sm,14)$cluster.list[[1]]
+Clust1 <- Cluster(Sm, min_cluster_size = 14)$cluster.list[[1]]
 # Remove the cluster column/label
 Clust1$Clust <- NULL
 
@@ -213,7 +198,7 @@ Min_max <- data.frame(
 )
 ```
 
-```{r message=FALSE}
+```{r message=FALSE, eval=FALSE}
 Results <- simulated_annealing(
   S = Sm, 
   F = Fu,
@@ -246,14 +231,72 @@ Results$Figure
 
 ## Matrix_checks()
 
+This function will perform checks on the **F** and **S** matrices. If the columns sum is 0 or very small it will be eliminated from both the S and F matrix. To use this function, naming for both pigments and phytoplankton  classes must follow the same conventions as the default values. The output of this function will be new **S** and **F** matrices.
+
+Arguments:
+
+S = S matrix
+F = F matrix
+
+```{r}
+MC <- Matrix_checks(Sm,Fm)  
+Snew <- MC$Snew
+Fnew <- MC$Fnew  
+```
+
 
 ## Steep_Desc()
+
+This algorithm will perform the steepest descent algorithm without being bound by any limits. The results may show unrealistic pig:Chl a ratios for certain groups, although the error can often be very low. 
+
+Arguments:
+
+F = F matrix
+S = S matrix
+num.loops = the number of loops/iterations to perform
+
+```{r message=FALSE}
+MC <- Matrix_checks(Sm, Fm)  
+Snew <- MC$Snew
+Fnew <- MC$Fnew
+SDRes <- Steepest_Desc(Fnew, Snew, num.loops = 20)
+```
 
 
 ## Bounded_weights()
 
+This function determines the weights to use for the S matrix, for which the default upper bound is 30 in the simulated_annealing() function call. 
+
+Arguments:
+
+S = sample matrix
+weight.upper.bound = maximum weights upper bound
+
+```{r}
+Bounded_weights(Sm, weight.upper.bound = 30)
+```
+
 
 ## NNLS_MF()
 
+This performs non-negative least least squares matrix factorization between the **S** and **F** matrices. Ensure that Chl a is the final column and that the columns in **S** and **F** are in the same order. If the weights are left blank then no weights will be used.
+
+Arguments:
+
+F = F matrix
+S = sample matrix
+cm = weights for each column
+
+```{r}
+MC <- Matrix_checks(Sm, Fm)  
+Snew <- MC$Snew
+Fnew <- MC$Fnew
+cm <- Bounded_weights(Snew, weight.upper.bound = 30)
+
+Results <- NNLS_MF(Fnew, Snew, cm)
+Results$`F matrix`
+Results$RMSE
+Results$`C matrix`
+```
 
 
