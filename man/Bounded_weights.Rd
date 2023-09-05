@@ -4,16 +4,20 @@
 \alias{Bounded_weights}
 \title{Add weights to the data, bound at a maximum.}
 \usage{
-Bounded_weights(S, weight.upper.bound)
+Bounded_weights(S, weight.upper.bound = 30)
 }
 \arguments{
-\item{S}{XX}
+\item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{weight.upper.bound}{XX}
+\item{weight.upper.bound}{Upper bound for weights (default is 30)}
 }
 \value{
-A matrix
+A vector with upper bounds for weights
 }
 \description{
 Add weights to the data, bound at a maximum.
+}
+\examples{
+Bounded_weights(Sm, weight.upper.bound = 30)
+
 }
