@@ -185,6 +185,7 @@ rownames(Fu) <- c(
   , "Diatoms-B", "Dinoflagellates-A",
   "Haptophytes", "Pelagophytes", "Syn"
 )
+
 Min_max <- data.frame(
   Class = c(
     "Syn", "Chlorophytes", "Chlorophytes", "Prasinophytes", "Prasinophytes",
@@ -213,7 +214,7 @@ Min_max <- data.frame(
 ```
 
 ```{r message=FALSE}
-Results <- phytoclass::simulated_annealing(
+Results <- simulated_annealing(
   S = Sm, 
   F = Fu,
   user_defined_min_max = Min_max,
