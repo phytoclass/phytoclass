@@ -2,13 +2,17 @@
 #' phytoplankton groups from the F matrix if their diagnostic pigment
 #' isn’t present. 
 #'
-#' @param S   xx
-#' @param F   xx
+#' @param S   Sample data matrix – a matrix of pigment samples
+#' @param F   Pigment to Chl a matrix
 #'
-#' @return
+#' @return Named list with new S and F matrices
 #' @export
 #'
 #' @examples
+#' MC <- Matrix_checks(Sm,Fm)  
+#' Snew <- MC$Snew
+# 'Fnew <- MC$Fnew 
+#' 
 
 
 Matrix_checks <- function(S, F){
@@ -150,5 +154,5 @@ Matrix_checks <- function(S, F){
     F <- F[,-kn]
     S <- S[,-kn]
   }
-  return(list(as.matrix(S),as.matrix(F)))
+  return(list(Snew = as.matrix(S), Fnew = as.matrix(F)))
 }

@@ -9,12 +9,20 @@ isn’t present.}
 Matrix_checks(S, F)
 }
 \arguments{
-\item{S}{xx}
+\item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{F}{xx}
+\item{F}{Pigment to Chl a matrix}
+}
+\value{
+Named list with new S and F matrices
 }
 \description{
 Remove any column values that average 0. Further to this, also remove
 phytoplankton groups from the F matrix if their diagnostic pigment
 isn’t present.
+}
+\examples{
+MC <- Matrix_checks(Sm,Fm)  
+Snew <- MC$Snew
+
 }
