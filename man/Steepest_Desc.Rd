@@ -7,12 +7,22 @@
 Steepest_Desc(F, S, num.loops)
 }
 \arguments{
-\item{F}{xx}
+\item{F}{Pigment to Chl a matrix}
 
-\item{S}{xx}
+\item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{num.loops}{xx}
+\item{num.loops}{Number of loops/iterations to perform (no default)}
+}
+\value{
+XX
 }
 \description{
 Stand-alone version of steepest descent algorithm
+}
+\examples{
+MC <- Matrix_checks(Sm,Fm)
+Snew <- MC$Snew
+Fnew <- MC$Fnew
+SDRes <- Steepest_Desc(Fnew,Snew, num.loops = 20)
+
 }
