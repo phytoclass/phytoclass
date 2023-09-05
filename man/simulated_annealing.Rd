@@ -9,7 +9,7 @@ simulated_annealing(
   F = NULL,
   user_defined_min_max = NULL,
   do_matrix_checks = TRUE,
-  niter = 500,
+  niter = 300,
   step = 0.009,
   weight.upper.bound = 30
 )
@@ -21,13 +21,13 @@ simulated_annealing(
 
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
-\item{do_matrix_checks}{xx}
+\item{do_matrix_checks}{This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.}
 
-\item{niter}{xx}
+\item{niter}{Number of iterations (default is 300)}
 
-\item{step}{xx}
+\item{step}{Step ratio used (default is 0.009)}
 
-\item{weight.upper.bound}{xx}
+\item{weight.upper.bound}{Upper limit of the weights applied (default value is 30).}
 }
 \value{
 A list containing
