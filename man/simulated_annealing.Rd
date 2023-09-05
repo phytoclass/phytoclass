@@ -9,7 +9,7 @@ simulated_annealing(
   F = NULL,
   user_defined_min_max = NULL,
   do_matrix_checks = TRUE,
-  niter = 300,
+  niter = 500,
   step = 0.009,
   weight.upper.bound = 30
 )
@@ -23,7 +23,7 @@ simulated_annealing(
 
 \item{do_matrix_checks}{This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.}
 
-\item{niter}{Number of iterations (default is 300)}
+\item{niter}{Number of iterations (default is 500)}
 
 \item{step}{Step ratio used (default is 0.009)}
 

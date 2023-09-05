@@ -4,7 +4,7 @@
 #' @param F   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
 #' @param do_matrix_checks     This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.
-#' @param niter Number of iterations (default is 300)
+#' @param niter Number of iterations (default is 500)
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
 #'
@@ -29,7 +29,7 @@ simulated_annealing <- function(S,
                                 F = NULL, 
                                 user_defined_min_max = NULL,
                                 do_matrix_checks = TRUE,
-                                niter = 300,
+                                niter = 500,
                                 step = 0.009,
                                 weight.upper.bound = 30){
   if (is.null(F)) {
