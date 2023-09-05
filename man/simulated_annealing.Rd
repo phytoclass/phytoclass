@@ -15,7 +15,7 @@ simulated_annealing(
 )
 }
 \arguments{
-\item{S}{Sample matrix – a matrix of pigment samples}
+\item{S}{Sample data matrix – a matrix of pigment samples}
 
 \item{F}{Pigment to Chl a matrix}
 

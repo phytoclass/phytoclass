@@ -1,6 +1,6 @@
 #' Perform simulated annealing algorithm for S and F matrices
 #'
-#' @param S   Sample matrix – a matrix of pigment samples
+#' @param S   Sample data matrix – a matrix of pigment samples
 #' @param F   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
 #' @param do_matrix_checks     This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.
