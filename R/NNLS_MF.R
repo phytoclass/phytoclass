@@ -2,14 +2,24 @@
 #' pigments and pigment ratios, to attain an estimate of phytoplankton 
 #' class abundances.
 #'
-#' @param Fn   xx
-#' @param S    xx
-#' @param cm  xx
+#' @param F   Pigment to Chl a matrix
+#' @param S   Sample data matrix – a matrix of pigment samples
+#' @param cm  Weights for each column
 #'
-#' @return A list
+#' @return A list containing 
+#' \enumerate{
+#'  \item F matrix
+#'  \item RMSE (Root Mean Square Error)
+#'  \item C matrix for class abundances
+#'  }
 #' @export
 #'
 #' @examples
+#' MC <- Matrix_checks(Sm,Fm)
+#' Snew <- MC$Snew
+#' Fnew <- MC$Fnew
+#' cm <- Bounded_weights(Snew, weight.upper.bound = 30)
+#' NNLS_MF(Fnew, Snew, cm)
 #'
 NNLS_MF <- function(Fn, S, cm=NULL){
     if (is.null(cm)) {

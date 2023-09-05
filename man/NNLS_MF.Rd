@@ -9,17 +9,30 @@ class abundances.}
 NNLS_MF(Fn, S, cm = NULL)
 }
 \arguments{
-\item{Fn}{xx}
+\item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{S}{xx}
+\item{cm}{Weights for each column}
 
-\item{cm}{xx}
+\item{F}{Pigment to Chl a matrix}
 }
 \value{
-A list
+A list containing
+\enumerate{
+\item F matrix
+\item RMSE (Root Mean Square Error)
+\item C matrix for class abundances
+}
 }
 \description{
 Performs the non-negative matrix factorisation for given phytoplankton
 pigments and pigment ratios, to attain an estimate of phytoplankton
 class abundances.
+}
+\examples{
+MC <- Matrix_checks(Sm,Fm)
+Snew <- MC$Snew
+Fnew <- MC$Fnew
+cm <- Bounded_weights(Snew, weight.upper.bound = 30)
+NNLS_MF(Fnew, Snew, cm)
+
 }
