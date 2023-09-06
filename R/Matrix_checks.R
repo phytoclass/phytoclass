@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' MC <- Matrix_checks(Sm,Fm)  
+#' MC <- Matrix_checks(Sm, Fm)  
 #' Snew <- MC$Snew
 # 'Fnew <- MC$Fnew 
 #' 
