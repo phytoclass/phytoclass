@@ -23,7 +23,9 @@ library(phytoclass)
 
 # To do for vignette
 
-Reference style 
+Help for examples data
+
+Non-default simulated_annealing() working okay
 
 Get the right font for the "a" in Chl a ?
 
@@ -36,7 +38,7 @@ For ease of use, most functions have default options. However the user also has 
 
 It is important to highlight that naming conventions for phytoplankton groups and their pigments should be adhered to when using the default samples. For example, the user should ensure that pigment names in their sample matrix (S) match the same pigment names in the pigment – Chl a ratio matrix (F).
 
-At present the use of DV Chl a with Prochlorococcus is not supported, however this will be released in the future.
+At present the use of DV Chl a with Prochlorococcus is not supported, however it will be in a future release.
 
 The main functions of the package are **Cluster()** and **simulated_annealing()**. 
 
@@ -54,7 +56,7 @@ Other helper functions covered in this document are:
 
 Prior to analysis using simulated annealing, pigment samples require clustering.
 
-The “clustering” function divides all pigment concentrations by the total Chl a concentration. Following this the data undergoes BoxCox transformation, and the data is hierarchically clustered using the Ward method based on the Manhattan distances between pigment samples. The DynamicTreeCut method of [@Langfelder2008], is then used to prune the dendogram into reasonable clusters of specified size(s). 
+The “clustering” function divides all pigment concentrations by the total Chl a concentration. Following this the data undergoes BoxCox transformation, and the data is hierarchically clustered using the Ward method based on the Manhattan distances between pigment samples. The DynamicTreeCut method of [@Langfelder2008] is then used to prune the dendogram into reasonable clusters of specified size(s). 
 
 The function returns a list of the clusters and the cluster dendrogram. 
 
@@ -62,7 +64,6 @@ An example, using the built-in sample data set Sm:
 
 ```{r}
 Cluster.result <- Cluster(Sm, 14)
-
 ```
 
 ```{r fig.width=7}
@@ -106,7 +107,7 @@ When using the default values, the only argument required is the sample matrix. 
 The example here uses the built-in sample matrix Sm. 
 
 ```{r message=FALSE}
-Results <- simulated_annealing(Sm, niter = 20)
+Results <- simulated_annealing(Sm, niter = 10)
 ```
 
 ```{r results}
@@ -130,7 +131,7 @@ Clust1 <- Cluster(Sm, min_cluster_size = 14)$cluster.list[[1]]
 # Remove the cluster column/label
 Clust1$Clust <- NULL
 
-Results <- simulated_annealing(Clust1, niter = 20)
+Results <- simulated_annealing(Clust1, niter = 10)
 ```
 
 
@@ -204,14 +205,14 @@ Results <- simulated_annealing(
   F = Fu,
   user_defined_min_max = Min_max,
   do_matrix_checks = TRUE,
-  niter = 20,
+  niter = 10,
   step = 0.01,
   weight.upper.bound = 30
 )
 ```
 
 
-```{r results-not-default}
+```{r results-not-default, eval=FALSE}
 Results$`condition number`
 Results$RMSE
 Results$MAE
@@ -221,7 +222,7 @@ Results$`F matrix`
 Results$`Class abundances`
 ```
 
-```{r figure-results-not-default, fig.width=7}
+```{r figure-results-not-default, fig.width=7, eval=FALSE}
 Results$Figure
 ```
 
@@ -236,10 +237,11 @@ This function will perform checks on the **F** and **S** matrices. If the column
 Arguments:
 
 S = S matrix
+
 F = F matrix
 
 ```{r}
-MC <- Matrix_checks(Sm,Fm)  
+MC <- Matrix_checks(Sm, Fm)  
 Snew <- MC$Snew
 Fnew <- MC$Fnew  
 ```
@@ -252,14 +254,16 @@ This algorithm will perform the steepest descent algorithm without being bound b
 Arguments:
 
 F = F matrix
+
 S = S matrix
+
 num.loops = the number of loops/iterations to perform
 
 ```{r message=FALSE}
 MC <- Matrix_checks(Sm, Fm)  
 Snew <- MC$Snew
 Fnew <- MC$Fnew
-SDRes <- Steepest_Desc(Fnew, Snew, num.loops = 20)
+SDRes <- Steepest_Desc(Fnew, Snew, num.loops = 10)
 ```
 
 
@@ -270,6 +274,7 @@ This function determines the weights to use for the S matrix, for which the defa
 Arguments:
 
 S = sample matrix
+
 weight.upper.bound = maximum weights upper bound
 
 ```{r}
@@ -284,7 +289,9 @@ This performs non-negative least least squares matrix factorization between the 
 Arguments:
 
 F = F matrix
+
 S = sample matrix
+
 cm = weights for each column
 
 ```{r}
@@ -299,4 +306,4 @@ Results$RMSE
 Results$`C matrix`
 ```
 
-
+# References
