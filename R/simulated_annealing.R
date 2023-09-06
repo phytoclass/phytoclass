@@ -59,6 +59,7 @@ simulated_annealing <- function(S,
     max.val <- K[[2]]
   }
   else {
+    K <- Default_min_max(user_defined_min_max,F[, 1:ncol(F) - 1], place)    
     min.val <- user_defined_min_max$min
     max.val <- user_defined_min_max$max
     # if (length(min.val) != length(place)) {
