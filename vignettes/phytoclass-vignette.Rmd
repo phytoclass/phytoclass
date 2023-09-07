@@ -42,6 +42,8 @@ Other helper functions covered in this document are:
 4.  NNLS_MF
 
 
+
+
 # Main functions: Cluster(), simulated_annealing()
 
 ## Cluster()
@@ -72,8 +74,7 @@ This is the main function for the *phytoclass* package.
 
 It takes in the inputs (listed below) and returns the updated pigment to Chl a ratios, the Chl a biomass of each phytoplankton group, error associated with each group, and a graph displaying the Chl a concentration for each group.  
 
-It is important that samples are clustered appropriately before using the function
-
+It is important that samples are clustered appropriately before using the function.
 
 Arguments:
 
@@ -93,6 +94,8 @@ Arguments:
 
 
 When using the default values, the only argument required is the sample matrix. However, make sure that the pigment names match those in the built-in pigment to Chl matrix Fm.
+
+For the examples that follow the argument *niter* equals ten for speed of processing, but should be set higher to obtain convergence. 
 
 ### Example without clustering
 
