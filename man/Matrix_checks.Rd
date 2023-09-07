@@ -22,7 +22,7 @@ phytoplankton groups from the F matrix if their diagnostic pigment
 isn’t present.
 }
 \examples{
-MC <- Matrix_checks(Sm,Fm)  
+MC <- Matrix_checks(Sm, Fm)  
 Snew <- MC$Snew
 
 }
