@@ -79,11 +79,11 @@ When using the default values, the only argument required is the sample matrix. 
 For the examples that follow the argument *niter* equals ten for speed of processing, but should be set higher to obtain convergence. 
 
 
-### Cluster()
+### Cluster function
 
 Prior to analysis using simulated annealing, pigment samples require clustering.
 
-The “clustering” function divides all pigment concentrations by the total Chl a concentration. Following this the data undergoes BoxCox transformation, and the data is hierarchically clustered using the Ward method based on the Manhattan distances between pigment samples. The DynamicTreeCut method of [@Langfelder2008] is then used to prune the dendogram into reasonable clusters of specified size(s). 
+The *Cluster* function divides all pigment concentrations by the total Chl a concentration. Following this the data undergoes BoxCox transformation, and the data is hierarchically clustered using the Ward method based on the Manhattan distances between pigment samples. The DynamicTreeCut method of [@Langfelder2008] is then used to prune the dendogram into reasonable clusters of specified size(s). 
 
 The function returns a list of the clusters and the cluster dendrogram. 
 
@@ -228,7 +228,8 @@ Results$Figure
 
 
 # Helper functions {.tabset}
-## Matrix_checks()
+
+## Matrix_checks 
 
 This function will perform checks on the **F** and **S** matrices. If the columns sum is 0 or very small it will be eliminated from both the S and F matrix. To use this function, naming for both pigments and phytoplankton  classes must follow the same conventions as the default values. The output of this function will be new **S** and **F** matrices.
 
@@ -245,7 +246,7 @@ Fnew <- MC$Fnew
 ```
 
 
-## Steep_Desc()
+## Steep_Desc 
 
 This algorithm will perform the steepest descent algorithm without being bound by any limits. The results may show unrealistic pig:Chl *a* ratios for certain groups, although the error can often be very low. 
 
@@ -265,7 +266,7 @@ SDRes <- Steepest_Desc(Fnew, Snew, num.loops = 10)
 ```
 
 
-## Bounded_weights()
+## Bounded_weights 
 
 This function determines the weights to use for the S matrix, for which the default upper bound is 30 in the simulated_annealing() function call. 
 
@@ -280,7 +281,7 @@ Bounded_weights(Sm, weight.upper.bound = 30)
 ```
 
 
-## NNLS_MF()
+## NNLS_MF 
 
 This performs non-negative least least squares matrix factorization between the **S** and **F** matrices. Ensure that Chl *a* is the final column and that the columns in **S** and **F** are in the same order. If the weights are left blank then no weights will be used.
 
