@@ -21,14 +21,6 @@ knitr::opts_chunk$set(
 library(phytoclass)
 ```
 
-# To do for vignette
-
-Help for examples data
-
-Non-default simulated_annealing() working okay
-
-Get the right font for the "a" in Chl a ?
-
 
 # Introduction
 
@@ -199,7 +191,7 @@ Min_max <- data.frame(
 )
 ```
 
-```{r message=FALSE, eval=FALSE}
+```{r message=FALSE}
 Results <- simulated_annealing(
   S = Sm, 
   F = Fu,
@@ -249,7 +241,7 @@ Fnew <- MC$Fnew
 
 ## Steep_Desc()
 
-This algorithm will perform the steepest descent algorithm without being bound by any limits. The results may show unrealistic pig:Chl a ratios for certain groups, although the error can often be very low. 
+This algorithm will perform the steepest descent algorithm without being bound by any limits. The results may show unrealistic pig:Chl *a* ratios for certain groups, although the error can often be very low. 
 
 Arguments:
 
@@ -284,7 +276,7 @@ Bounded_weights(Sm, weight.upper.bound = 30)
 
 ## NNLS_MF()
 
-This performs non-negative least least squares matrix factorization between the **S** and **F** matrices. Ensure that Chl a is the final column and that the columns in **S** and **F** are in the same order. If the weights are left blank then no weights will be used.
+This performs non-negative least least squares matrix factorization between the **S** and **F** matrices. Ensure that Chl *a* is the final column and that the columns in **S** and **F** are in the same order. If the weights are left blank then no weights will be used.
 
 Arguments:
 
