@@ -59,9 +59,10 @@ simulated_annealing <- function(S,
     max.val <- K[[2]]
   }
   else {
-    K <- Default_min_max(user_defined_min_max,F[, 1:ncol(F) - 1], place)    
-    min.val <- user_defined_min_max$min
-    max.val <- user_defined_min_max$max
+    K <- Default_min_max(user_defined_min_max,F[, 1:ncol(F) - 
+                                                1], place)
+  min.val <- K[[1]]
+  max.val <- K[[2]]
     # if (length(min.val) != length(place)) {
     #   message(paste0("\nNumber of rows for user_defined_min_max = ", 
     #                  length(min.val)))
@@ -182,12 +183,10 @@ simulated_annealing <- function(S,
       s_c <- s_n
       f_c <- f_n
     }
-    
-    message(paste("Current error: ", round(f_c, 4)))
-    message(paste("Neighbour's error: ", round(f_n, 4)))
-    message(paste("Temperature (%): ", round(Temp * 100, 2)))
-    message(" ")
-    
+    print(paste("Current error: ", round(f_c, 4)))
+    print(paste("Neighbour's error: ", round(f_n, 4)))
+    print(paste("Temperature (%): ", round(Temp * 100, 2)))
+    print(" ")
     if (f_n < f_b) {
       s_b <- s_n
       f_b <- f_n
