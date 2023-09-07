@@ -1,6 +1,8 @@
 ---
 title: "The phytoclass package"
-output: rmarkdown::html_vignette
+output:
+   rmarkdown::html_vignette:
+     tabset: true
 bibliography: references.bib
 vignette: >
   %\VignetteIndexEntry{The phytoclass package}
@@ -37,7 +39,7 @@ It is important to highlight that naming conventions for phytoplankton groups an
 
 At present the use of DV Chl a with Prochlorococcus is not supported, however it will be in a future release.
 
-The main functions of the package are **Cluster()** and **simulated_annealing()**. 
+The main function of the package is **simulated_annealing()** and the associated helper function **Cluster()**  
 
 Other helper functions covered in this document are:
 
@@ -47,33 +49,7 @@ Other helper functions covered in this document are:
 4.  NNLS_MF
 
 
-
-
-# Main functions: Cluster(), simulated_annealing()
-
-## Cluster()
-
-Prior to analysis using simulated annealing, pigment samples require clustering.
-
-The “clustering” function divides all pigment concentrations by the total Chl a concentration. Following this the data undergoes BoxCox transformation, and the data is hierarchically clustered using the Ward method based on the Manhattan distances between pigment samples. The DynamicTreeCut method of [@Langfelder2008] is then used to prune the dendogram into reasonable clusters of specified size(s). 
-
-The function returns a list of the clusters and the cluster dendrogram. 
-
-An example, using the built-in sample data set Sm:
-
-```{r}
-Cluster.result <- Cluster(Sm, 14)
-```
-
-```{r fig.width=7}
-# list of clusters
-Cluster.result$cluster.list
-# plot of clusters
-plot(Cluster.result$cluster.plot)
-```
-
-
-## simulated_annealing()
+## Main function: simulated_annealing() {.tabset}
 
 This is the main function for the *phytoclass* package. 
 
@@ -101,6 +77,29 @@ Arguments:
 When using the default values, the only argument required is the sample matrix. However, make sure that the pigment names match those in the built-in pigment to Chl matrix Fm.
 
 For the examples that follow the argument *niter* equals ten for speed of processing, but should be set higher to obtain convergence. 
+
+
+### Cluster()
+
+Prior to analysis using simulated annealing, pigment samples require clustering.
+
+The “clustering” function divides all pigment concentrations by the total Chl a concentration. Following this the data undergoes BoxCox transformation, and the data is hierarchically clustered using the Ward method based on the Manhattan distances between pigment samples. The DynamicTreeCut method of [@Langfelder2008] is then used to prune the dendogram into reasonable clusters of specified size(s). 
+
+The function returns a list of the clusters and the cluster dendrogram. 
+
+An example, using the built-in sample data set Sm:
+
+```{r}
+Cluster.result <- Cluster(Sm, 14)
+```
+
+```{r fig.width=7}
+# list of clusters
+Cluster.result$cluster.list
+# plot of clusters
+plot(Cluster.result$cluster.plot)
+```
+
 
 ### Example without clustering
 
@@ -228,8 +227,7 @@ Results$Figure
 
 
 
-# Helper functions
-
+# Helper functions {.tabset}
 ## Matrix_checks()
 
 This function will perform checks on the **F** and **S** matrices. If the columns sum is 0 or very small it will be eliminated from both the S and F matrix. To use this function, naming for both pigments and phytoplankton  classes must follow the same conventions as the default values. The output of this function will be new **S** and **F** matrices.
