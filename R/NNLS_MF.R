@@ -2,7 +2,7 @@
 #' pigments and pigment ratios, to attain an estimate of phytoplankton 
 #' class abundances.
 #'
-#' @param F   Pigment to Chl a matrix
+#' @param Fn   Pigment to Chl a matrix
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param cm  Weights for each column
 #'

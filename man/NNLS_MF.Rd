@@ -9,11 +9,11 @@ class abundances.}
 NNLS_MF(Fn, S, cm = NULL)
 }
 \arguments{
+\item{Fn}{Pigment to Chl a matrix}
+
 \item{S}{Sample data matrix – a matrix of pigment samples}
 
 \item{cm}{Weights for each column}
-
-\item{F}{Pigment to Chl a matrix}
 }
 \value{
 A list containing

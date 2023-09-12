@@ -287,7 +287,7 @@ This performs non-negative least least squares matrix factorization between the 
 
 Arguments:
 
-F = F matrix
+Fn = F matrix
 
 S = sample matrix
 
