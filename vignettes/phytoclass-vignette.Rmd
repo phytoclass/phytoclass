@@ -31,7 +31,7 @@ library(phytoclass)
 
 # Introduction
 
-The *phytoclass* package uses non-negative matrix factorization and simulated annealing to determine the biomass of different phytoplankton groups from pigment concentrations. The methodology is discussed in [@Hayward2023] and is similar to the CHEMTAX method of [@Mackey1996].
+The *phytoclass* package uses non-negative matrix factorization and simulated annealing to determine the biomass of different phytoplankton groups from pigment concentrations. The methodology is discussed in [@Hayward2023] and is similar to the CHEMTAX method of @Mackey1996.
 
 For ease of use, most functions have default options. However the user also has the option to set their own parameters within the program, and instructions on how to do this are listed for each function. 
 
@@ -39,7 +39,7 @@ It is important to highlight that naming conventions for phytoplankton groups an
 
 At present the use of DV Chl a with Prochlorococcus is not supported, however it will be in a future release.
 
-The main function of the package is **simulated_annealing()** and the associated helper function **Cluster()**  
+The main function of the package is **simulated_annealing()** with an associated helper function **Cluster()**  
 
 Other helper functions covered in this document are:
 
@@ -55,7 +55,7 @@ This is the main function for the *phytoclass* package.
 
 It takes in the inputs (listed below) and returns the updated pigment to Chl a ratios, the Chl a biomass of each phytoplankton group, error associated with each group, and a graph displaying the Chl a concentration for each group.  
 
-It is important that samples are clustered appropriately before using the function.
+It is important that samples are clustered appropriately before using the function (see the Cluster function).
 
 Arguments:
 
@@ -67,16 +67,16 @@ Arguments:
 
 **do_matrix_checks** = this should only be set to true when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.
 
-**niter** = number of iterations – default is 500.
+**niter** = number of iterations. Default value is 500.
 
-**step** = step ratio used. Default is 0.009. 
+**step** = step ratio used. Default value is 0.009. 
 
-**weight.upper.bound** = the upper limit of the weights applied. The default value is 30. 
+**weight.upper.bound** = the upper limit of the weights applied. Default value is 30. 
 
 
 When using the default values, the only argument required is the sample matrix. However, make sure that the pigment names match those in the built-in pigment to Chl matrix Fm.
 
-For the examples that follow the argument *niter* equals ten for speed of processing, but should be set higher to obtain convergence. 
+For the examples that follow the argument *niter* equals ten for processing speed, but should be set higher to obtain convergence. 
 
 
 ### Cluster function
