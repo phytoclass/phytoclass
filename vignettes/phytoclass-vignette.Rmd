@@ -207,7 +207,7 @@ Results <- simulated_annealing(
  
  
 
-```{r results-not-default, eval=FALSE}
+```{r results-not-default}
 Results$`condition number`
 Results$RMSE
 Results$MAE
@@ -217,7 +217,7 @@ Results$`F matrix`
 Results$`Class abundances`
 ```
 
-```{r figure-results-not-default, fig.width=7, eval=FALSE}
+```{r figure-results-not-default, fig.width=7}
 Results$Figure
 ```
 
