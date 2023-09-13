@@ -3,9 +3,8 @@ Title: Classify Phytoplankton
 Version: 0.0.0.9000
 Authors@R: c(person("Alexander", "Hayward", role = c("aut", "cre", "cph"), email = "phytoclass@outlook.com"),
 	person("Andy", "McKenzie", role = c("aut")))
-Description: A pigment-based chemotaxonomic method to determine the biomass of
-    phytoplankton classes as decribed in: 
-    Hayward et al. (2023) <https://doi.org/10.1002/lom3.10541>
+Description: A pigment-based chemotaxonomic method to determine the biomass
+    of phytoplanton classes. 
 Imports:
     bestNormalize,
     dplyr,
