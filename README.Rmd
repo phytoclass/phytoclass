@@ -1,0 +1,43 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# phytoclass
+
+The *phytoclass* package uses non-negative matrix factorization and simulated annealing to determine the biomass of different phytoplankton groups from pigment concentrations. 
+
+## Installation
+
+You can install the development version of phytoclass from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("AndyMcKenzieFromNZ/phytoclass")
+```
+
+## Example
+
+For the built-in samples matrix Sm of pigment samples:
+
+```{r example}
+library(phytoclass)
+Results <- simulated_annealing(Sm, niter = 5)
+
+Results$RMSE
+Results$MAE
+Results$Error
+Results$`F matrix`
+Results$`Class abudances`
+Results$Figure
+```
