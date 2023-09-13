@@ -21,7 +21,7 @@ simulated_annealing(
 
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
-\item{do_matrix_checks}{This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.}
+\item{do_matrix_checks}{This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups}
 
 \item{niter}{Number of iterations (default is 500)}
 

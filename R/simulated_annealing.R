@@ -3,7 +3,7 @@
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param F   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
-#' @param do_matrix_checks     This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.
+#' @param do_matrix_checks     This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups
 #' @param niter Number of iterations (default is 500)
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 

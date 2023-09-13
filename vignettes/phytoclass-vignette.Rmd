@@ -65,7 +65,7 @@ Arguments:
 
 **user_defined_min_max** = If blank default values are used. To create different min_max values, follow the same structure as the phytoclass::min_max file. See the example below. 
 
-**do_matrix_checks** = this should only be set to true when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if not using the default values.
+**do_matrix_checks** = this should only be set to true when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups.
 
 **niter** = number of iterations. Default value is 500.
 
