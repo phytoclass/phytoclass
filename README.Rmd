@@ -19,7 +19,13 @@ The *phytoclass* package uses non-negative matrix factorization and simulated an
 
 ## Installation
 
-You can install the development version of phytoclass from [GitHub](https://github.com/) with:
+It can be installed from CRAN with:
+
+```r
+install.packages("phytoclass")
+```
+
+Or the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
