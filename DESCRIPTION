@@ -10,7 +10,6 @@ Imports:
     dplyr,
     dynamicTreeCut,
     ggplot2,
-    klippy,
     Metrics,
     RcppML,
     stats,
