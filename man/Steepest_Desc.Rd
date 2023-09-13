@@ -14,7 +14,15 @@ Steepest_Desc(F, S, num.loops)
 \item{num.loops}{Number of loops/iterations to perform (no default)}
 }
 \value{
-XX
+A list containing
+\enumerate{
+\item The F matrix (pigment: Chl \emph{a}) ratios
+\item RMSE (Root Mean Square Error)
+\item Condition number
+\item class abundances
+\item Figure (plot of results)
+\item MAE (Mean Absolute Error)
+}
 }
 \description{
 Stand-alone version of steepest descent algorithm

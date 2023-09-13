@@ -8,9 +8,9 @@
 #'
 #' @return A list containing 
 #' \enumerate{
-#'  \item F matrix
-#'  \item RMSE (Root Mean Square Error)
-#'  \item C matrix for class abundances
+#'  \item The F matrix (pigment: Chl *a*) ratios
+#'  \item The root mean square error (RMSE)
+#'  \item The C matrix (class abundances for each group)
 #'  }
 #' @export
 #'

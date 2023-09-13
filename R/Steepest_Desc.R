@@ -4,7 +4,15 @@
 #' @param F   Pigment to Chl a matrix
 #' @param num.loops Number of loops/iterations to perform (no default)
 #'
-#' @return XX
+#' @return A list containing 
+#' \enumerate{
+#'  \item The F matrix (pigment: Chl *a*) ratios
+#'  \item RMSE (Root Mean Square Error)
+#'  \item Condition number
+#'  \item class abundances
+#'  \item Figure (plot of results)
+#'  \item MAE (Mean Absolute Error)
+#'  }
 #' @export
 #'
 #' @examples
