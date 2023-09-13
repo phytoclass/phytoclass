@@ -204,7 +204,8 @@ Results <- simulated_annealing(
   weight.upper.bound = 30
 )
 ```
-
+ 
+ 
 
 ```{r results-not-default, eval=FALSE}
 Results$`condition number`
