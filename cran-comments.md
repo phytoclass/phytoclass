@@ -5,14 +5,10 @@
 
 R CMD check succeeded
 
+"chemotaxonomic" in the DESCRIPTION file is correctly spelt. The spelling of
+this was the only note in the Windows build check. 
 
- Examples with CPU (user + system) or elapsed time > 5s
-                     user system elapsed
- simulated_annealing  7.3   0.19    7.51
- 
- There are three examples for simulated_annealing(), all of which
- have the number of iterations set to 10 so that they don't take
- too long to run.
+https://win-builder.r-project.org/CYHZCI2Q7ez0/00check.log
 
 
 * This is a new release.
@@ -26,9 +22,5 @@ There are no reverse dependencies
 Checked with a github action and passed all five checks: 
 
 macos-latest, ubuntu (x3), windows-latest
-
-
-
-## revdepcheck results
 
 
