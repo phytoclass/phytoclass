@@ -71,7 +71,7 @@ Arguments:
 
 When using the default values, the only argument required is the sample matrix. However, make sure that the pigment names match those in the built-in pigment to Chl matrix Fm.
 
-For the examples that follow the argument *niter* equals three for processing speed, but should be set much higher to obtain convergence. 
+For the examples that follow the argument *niter* equals one for processing speed, but should be set much higher to obtain convergence. 
 
 
 ### Cluster function
@@ -101,7 +101,7 @@ plot(Cluster.result$cluster.plot)
 The example here uses the built-in sample matrix Sm. 
 
 ```{r message=FALSE}
-Results <- simulated_annealing(Sm, niter = 2)
+Results <- simulated_annealing(Sm, niter = 1)
 ```
 
 ```{r results}
@@ -125,7 +125,7 @@ Clust1 <- Cluster(Sm, min_cluster_size = 14)$cluster.list[[1]]
 # Remove the cluster column/label
 Clust1$Clust <- NULL
 
-Results <- simulated_annealing(Clust1, niter = 2)
+Results <- simulated_annealing(Clust1, niter = 1)
 ```
 
 
@@ -199,7 +199,7 @@ Results <- simulated_annealing(
   F = Fu,
   user_defined_min_max = Min_max,
   do_matrix_checks = TRUE,
-  niter = 2,
+  niter = 1,
   step = 0.01,
   weight.upper.bound = 30
 )
