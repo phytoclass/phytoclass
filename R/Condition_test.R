@@ -31,6 +31,6 @@ Condition_test <- function(S, Fn, min.val=NULL, max.val=NULL){
     Fn[Fn > 0] <- rand
     return(kappa(Fn %*% t(S)))
   }
-  sn <- replicate(n = 10000, condition_number(S, Fn, min.val, max.val))
+  sn <- replicate(n = 1000, condition_number(S, Fn, min.val, max.val))
   return(mean(sn))
 }
