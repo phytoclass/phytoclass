@@ -101,6 +101,7 @@ plot(Cluster.result$cluster.plot)
 The example here uses the built-in sample matrix Sm. 
 
 ```{r message=FALSE}
+set.seed("7683")
 Results <- simulated_annealing(Sm, niter = 1)
 ```
 
@@ -125,6 +126,7 @@ Clust1 <- Cluster(Sm, min_cluster_size = 14)$cluster.list[[1]]
 # Remove the cluster column/label
 Clust1$Clust <- NULL
 
+set.seed("7683")
 Results <- simulated_annealing(Clust1, niter = 1)
 ```
 
@@ -194,6 +196,7 @@ Min_max <- data.frame(
 ```
 
 ```{r message=FALSE}
+set.seed("7683")
 Results <- simulated_annealing(
   S = Sm, 
   F = Fu,
