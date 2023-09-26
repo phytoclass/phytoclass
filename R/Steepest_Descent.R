@@ -2,7 +2,7 @@
 #' 
 #' @keywords internal
 #' 
-#' @param F xx
+#' @param Fmat xx
 #' @param place xx
 #' @param S   xx
 #' @param cm   xx
@@ -11,9 +11,9 @@
 #' @return
 #'
 #' @examples
-Steepest_Descent <- function(F, place, S, cm, num.loops){ 
+Steepest_Descent <- function(Fmat, place, S, cm, num.loops){ 
   loop <- 1
-  F.new <- NNLS_MF(F, S, cm)
+  F.new <- NNLS_MF(Fmat, S, cm)
   F.initial <- F.new
   for (i in 1:num.loops){ #should always be small. It would be nice to allow the 
     F.new <- Minimise_elements(F.initial[[1]], place, S, cm)

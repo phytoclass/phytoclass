@@ -1,7 +1,7 @@
 #' Stand-alone version of steepest descent algorithm
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
-#' @param F   Pigment to Chl a matrix
+#' @param Fmat   Pigment to Chl a matrix
 #' @param num.loops Number of loops/iterations to perform (no default)
 #'
 #' @return A list containing 
@@ -21,14 +21,14 @@
 #' Fnew <- MC$Fnew
 #' SDRes <- Steepest_Desc(Fnew,Snew, num.loops = 20)
 #' 
-Steepest_Desc <-  function (F, S, num.loops) 
+Steepest_Desc <-  function (Fmat, S, num.loops) 
 {
   S_Chl <- S[, ncol(S)]
   cm <- Bounded_weights(S,30)
-  place <- which(F[,1:ncol(F)-1] > 0)
+  place <- which(Fmat[,1:ncol(Fmat)-1] > 0)
   
   loop <- 1
-  F.new <- NNLS_MF(F, S, cm)
+  F.new <- NNLS_MF(Fmat, S, cm)
   F.initial <- F.new
   for (i in 1:num.loops) {
     F.new <- Minimise_elements(F.initial[[1]], place, S, 

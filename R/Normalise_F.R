@@ -2,13 +2,13 @@
 #' 
 #' @keywords internal
 #' 
-#' @param F     xx
+#' @param Fmat     xx
 #'
 #' @return A matrix
 #'
 #' @examples
-Normalise_F <- function(F){
-  F_1<- F
+Normalise_F <- function(Fmat){
+  F_1<- Fmat
   Fchl <- F_1[,ncol(F_1)]
   F_1 <- F_1 / Fchl
   F.sum <- rowSums(F_1)

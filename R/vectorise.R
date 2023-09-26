@@ -2,14 +2,14 @@
 #' 
 #' @keywords internal
 #'
-#' @param F  xx
+#' @param Fmat  xx
 #'
 #' @return
 #'
 #' @examples
-vectorise <- function(F){
+vectorise <- function(Fmat){
   g <- vector()
-  for (i in F){
+  for (i in Fmat){
     if (i > -0){
       g[[length(g)+1]] <- i
       
