@@ -38,6 +38,8 @@ For the built-in samples matrix Sm of pigment samples:
 
 ```{r example}
 library(phytoclass)
+set.seed("84545")
+
 Results <- simulated_annealing(Sm, niter = 5)
 
 Results$RMSE
