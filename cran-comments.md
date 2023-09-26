@@ -1,3 +1,12 @@
+## Resubmission
+
+In this version I have:
+
+* Expanded the DESCRIPTION Description field, and included doi references
+
+* In the functions changed F as a matrix name to Fmat
+
+
 ## R CMD check results
 
 
@@ -5,13 +14,23 @@
 
 R CMD check succeeded
 
-"chemotaxonomic" in the DESCRIPTION file is correctly spelt. The spelling of
-this was the only note in the Windows build check. 
+## Windows Build
 
-https://win-builder.r-project.org/CYHZCI2Q7ez0/00check.log
+Some possibly misspelled words are flagged. These have been checked and 
+are correct. 
+
+https://win-builder.r-project.org/9cPQd1Ev0eo7/00check.log
 
 
-* This is a new release.
+## Linux and Windows Build
+
+Passes R-hub build
+
+https://builder.r-hub.io/status/phytoclass_1.0.0.tar.gz-917127cc9ec74a058351ca4bd7c64eed
+
+
+
+
 
 ## revdepcheck results
 
