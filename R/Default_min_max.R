@@ -5,7 +5,7 @@
 #' @keywords internal
 #' 
 #' @param min_max   xx
-#' @param F    xx
+#' @param Fmat    xx
 #' @param place       xx
 #'
 #' @return
@@ -13,17 +13,17 @@
 #' @examples
 
 
-Default_min_max <- function(min_max, F, place){
+Default_min_max <- function(min_max, Fmat, place){
   k <- list()
   for (i in place){
-    k[[length(k)+1]] <- arrayInd(i, dim(F))
+    k[[length(k)+1]] <- arrayInd(i, dim(Fmat))
   }
   
   RName <- vector()
   CName <- vector()
   for (i in 1:length(k)){
-    RName[[length(RName)+1]] <- rownames(F)[k[[i]][,1]]
-    CName[[length(CName)+1]] <- colnames(F)[k[[i]][,2]]
+    RName[[length(RName)+1]] <- rownames(Fmat)[k[[i]][,1]]
+    CName[[length(CName)+1]] <- colnames(Fmat)[k[[i]][,2]]
   }
   
   vecs <- vector()
