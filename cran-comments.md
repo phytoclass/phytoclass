@@ -14,6 +14,7 @@ In this version I have:
 
 R CMD check succeeded
 
+
 ## Windows Build
 
 Some possibly misspelled words are flagged. These have been checked and 
@@ -30,16 +31,10 @@ https://builder.r-hub.io/status/phytoclass_1.0.0.tar.gz-917127cc9ec74a058351ca4b
 
 
 
-
-
 ## revdepcheck results
 
 There are no reverse dependencies
 
-## package built
 
-Checked with a github action and passed all five checks: 
-
-macos-latest, ubuntu (x3), windows-latest
 
 
