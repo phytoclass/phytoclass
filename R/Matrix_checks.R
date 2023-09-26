@@ -3,9 +3,9 @@
 #' isn’t present. 
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
-#' @param F   Pigment to Chl a matrix
+#' @param Fmat   Pigment to Chl a matrix
 #'
-#' @return Named list with new S and F matrices
+#' @return Named list with new S and Fmat matrices
 #' @export
 #'
 #' @examples
@@ -15,14 +15,14 @@
 #' 
 
 
-Matrix_checks <- function(S, F){
-  ba <- rownames(F)
+Matrix_checks <- function(S, Fmat){
+  ba <- rownames(Fmat)
   ba1<- which(ba =="Syn")
-  if (ncol(S) > ncol(F)){
-    S <- subset(S, select = c(colnames(F)))}
+  if (ncol(S) > ncol(Fmat)){
+    S <- subset(S, select = c(colnames(Fmat)))}
   b <- colSums(S)
   g <- mean(S[,ncol(S)])
-  ba <- rownames(F)
+  ba <- rownames(Fmat)
   ba1<- which(ba =="Syn")
   
   b <- nrow(S)
@@ -31,12 +31,12 @@ Matrix_checks <- function(S, F){
   l <- which(g/b <=.01)
   if(length(l) > 0){
     S <- S[,-l]
-    F <- F[,-l] 
+    Fmat <- Fmat[,-l] 
   }
-  k <- rowSums(F)
+  k <- rowSums(Fmat)
   kn <- which(k == 1)
   if (length(kn) >0) {
-    F <- F[-kn,]
+    Fmat <- Fmat[-kn,]
   }
   b <- nrow(S)
   g <- colSums(S != 0)
@@ -50,109 +50,109 @@ Matrix_checks <- function(S, F){
   #}
   d <- colnames(S)
   d1<- which(d =="Chl.b")
-  b <- rownames(F)
+  b <- rownames(Fmat)
   b1<- which(b =="Chlorophytes")
   
   if(length(d1) ==0 & length(b1) >0){
-    F <- F[-b1,]
+    Fmat <- Fmat[-b1,]
   }
   c1 <- which(b =="Prasinophytes")
   
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Prasinophytes")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Pra")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Dinoflagellates-A")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Per")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Diatoms-A")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Chl.c1")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Diatoms-B")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Fuco")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Dinoflagellates-A")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Per")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Syn")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Zea")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
   
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Cryptophytes")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Allo")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
   
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Haptophytes-H")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="X19hex")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Haptophytes-L")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="X19hex")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }  
-  c <- rownames(F)
+  c <- rownames(Fmat)
   c1 <- which(c =="Diatoms-A")
-  d <- colnames(F)
+  d <- colnames(Fmat)
   d1<- which(d =="Fuco")
   if(length(d1) ==0 & length(c1) >0){
-    F <- F[-c1,]
+    Fmat <- Fmat[-c1,]
   }
   
   d <- colnames(S)
   d1<- which(d =="X19but")
-  b <- rownames(F)
+  b <- rownames(Fmat)
   b1<- which(b =="Pelagophytes")
   if(length(d1) ==0 & length(b1) >0){
-    F <- F[-b1,]
+    Fmat <- Fmat[-b1,]
   }
   d <- colnames(S)
   d1<- which(d =="Chl.b")
-  b <- rownames(F)
+  b <- rownames(Fmat)
   b1<- which(b =="Prasinophytes")
   if(length(d1) == 0  & length(b1) >0){
-    F <- F[-b1,]
+    Fmat <- Fmat[-b1,]
   }
-  k <- colSums(F)
+  k <- colSums(Fmat)
   kn <- which(k == 0)
   if (length(kn) >0) {
-    F <- F[,-kn]
+    Fmat <- Fmat[,-kn]
     S <- S[,-kn]
   }
-  return(list(Snew = as.matrix(S), Fnew = as.matrix(F)))
+  return(list(Snew = as.matrix(S), Fnew = as.matrix(Fmat)))
 }
