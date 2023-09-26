@@ -3,7 +3,7 @@
 #' 
 #' @keywords internal
 #' 
-#' @param F    xx 
+#' @param Fmat    xx 
 #' @param place   xx
 #' @param S   xx
 #' @param cm   xx
@@ -11,9 +11,9 @@
 #' @return
 #'
 #' @examples
-Conduit_2 <- function(F, place, S, cm){
+Conduit_2 <- function(Fmat, place, S, cm){
   F.locs <- vector()
-  F.old <- NNLS_MF(F, S, cm)
+  F.old <- NNLS_MF(Fmat, S, cm)
   F.news <- Fac_F_RR2(F.old, vary = place, place, S, cm)
   F.new <- F.news[[1]]
   n <- F.news[[2]]
