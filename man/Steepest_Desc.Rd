@@ -4,10 +4,10 @@
 \alias{Steepest_Desc}
 \title{Stand-alone version of steepest descent algorithm}
 \usage{
-Steepest_Desc(F, S, num.loops)
+Steepest_Desc(Fmat, S, num.loops)
 }
 \arguments{
-\item{F}{Pigment to Chl a matrix}
+\item{Fmat}{Pigment to Chl a matrix}
 
 \item{S}{Sample data matrix – a matrix of pigment samples}
 

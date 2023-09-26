@@ -5,10 +5,10 @@
 \title{Select the new F matrix element with lowest error in the steepest
 descent algorithm.}
 \usage{
-Replace_Rand(F, i, S, cm, min.scaler, max.scaler)
+Replace_Rand(Fmat, i, S, cm, min.scaler, max.scaler)
 }
 \arguments{
-\item{F}{xx}
+\item{Fmat}{xx}
 
 \item{i}{xx}
 

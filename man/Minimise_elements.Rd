@@ -4,10 +4,10 @@
 \alias{Minimise_elements}
 \title{Part of the steepest descent algorithm}
 \usage{
-Minimise_elements(F, place, S, cm)
+Minimise_elements(Fmat, place, S, cm)
 }
 \arguments{
-\item{F}{xx}
+\item{Fmat}{xx}
 
 \item{place}{xx}
 

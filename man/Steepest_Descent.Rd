@@ -4,10 +4,10 @@
 \alias{Steepest_Descent}
 \title{Performs the steepest descent algorithm for a set number of iterations}
 \usage{
-Steepest_Descent(F, place, S, cm, num.loops)
+Steepest_Descent(Fmat, place, S, cm, num.loops)
 }
 \arguments{
-\item{F}{xx}
+\item{Fmat}{xx}
 
 \item{place}{xx}
 

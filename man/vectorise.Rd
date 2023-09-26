@@ -4,10 +4,10 @@
 \alias{vectorise}
 \title{Turn each non-zero element of the F-matrix into a vector}
 \usage{
-vectorise(F)
+vectorise(Fmat)
 }
 \arguments{
-\item{F}{xx}
+\item{Fmat}{xx}
 }
 \description{
 Turn each non-zero element of the F-matrix into a vector

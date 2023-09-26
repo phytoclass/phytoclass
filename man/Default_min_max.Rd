@@ -6,12 +6,12 @@
 pigment ratios. To use this function, pigment and phytoplankton group
 names will need to fit the naming criteria of phytoclass.}
 \usage{
-Default_min_max(min_max, F, place)
+Default_min_max(min_max, Fmat, place)
 }
 \arguments{
 \item{min_max}{xx}
 
-\item{F}{xx}
+\item{Fmat}{xx}
 
 \item{place}{xx}
 }

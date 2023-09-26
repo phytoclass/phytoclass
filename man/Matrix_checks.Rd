@@ -6,15 +6,15 @@
 phytoplankton groups from the F matrix if their diagnostic pigment
 isn’t present.}
 \usage{
-Matrix_checks(S, F)
+Matrix_checks(S, Fmat)
 }
 \arguments{
 \item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{F}{Pigment to Chl a matrix}
+\item{Fmat}{Pigment to Chl a matrix}
 }
 \value{
-Named list with new S and F matrices
+Named list with new S and Fmat matrices
 }
 \description{
 Remove any column values that average 0. Further to this, also remove

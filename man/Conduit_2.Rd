@@ -5,10 +5,10 @@
 \title{Conduit between minimise_elements function and Fac_F_R
 of steepest descent algorithm.}
 \usage{
-Conduit_2(F, place, S, cm)
+Conduit_2(Fmat, place, S, cm)
 }
 \arguments{
-\item{F}{xx}
+\item{Fmat}{xx}
 
 \item{place}{xx}
 

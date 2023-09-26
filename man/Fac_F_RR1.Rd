@@ -5,10 +5,10 @@
 \title{Part of the steepest descent algorithm and work to reduce error given
 the S and F matrices.}
 \usage{
-Fac_F_RR1(F, vary, S, cm)
+Fac_F_RR1(Fmat, vary, S, cm)
 }
 \arguments{
-\item{F}{XX}
+\item{Fmat}{XX}
 
 \item{vary}{XX}
 

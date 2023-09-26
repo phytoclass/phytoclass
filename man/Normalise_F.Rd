@@ -4,10 +4,10 @@
 \alias{Normalise_F}
 \title{This function normalises each column in F to row sum}
 \usage{
-Normalise_F(F)
+Normalise_F(Fmat)
 }
 \arguments{
-\item{F}{xx}
+\item{Fmat}{xx}
 }
 \value{
 A matrix

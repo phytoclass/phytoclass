@@ -4,10 +4,10 @@
 \alias{Minimise_elements2}
 \title{A function that reduces every for every element that didn't reduce in index function}
 \usage{
-Minimise_elements2(F, place, S, cm)
+Minimise_elements2(Fmat, place, S, cm)
 }
 \arguments{
-\item{F}{xx}
+\item{Fmat}{xx}
 
 \item{place}{xx}
 

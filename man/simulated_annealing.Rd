@@ -6,7 +6,7 @@
 \usage{
 simulated_annealing(
   S,
-  F = NULL,
+  Fmat = NULL,
   user_defined_min_max = NULL,
   do_matrix_checks = TRUE,
   niter = 500,
@@ -17,7 +17,7 @@ simulated_annealing(
 \arguments{
 \item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{F}{Pigment to Chl a matrix}
+\item{Fmat}{Pigment to Chl a matrix}
 
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
@@ -32,7 +32,7 @@ simulated_annealing(
 \value{
 A list containing
 \enumerate{
-\item F matrix
+\item Fmat matrix
 \item RMSE (Root Mean Square Error)
 \item condition number
 \item Class abundances
