@@ -2,7 +2,7 @@
 #' 
 #' @keywords internal
 #'
-#' @param F    xx
+#' @param Fmat    xx
 #' @param place  xx
 #' @param S   xx
 #' @param cm  xx
@@ -10,8 +10,8 @@
 #' @return
 #'
 #' @examples
-Minimise_elements <- function(F, place, S, cm){   # A function that reduces every for every element that didn't reduce in index function
-  f <- Conduit_3(F, place, S, cm) # Calls index function
+Minimise_elements <- function(Fmat, place, S, cm){   # A function that reduces every for every element that didn't reduce in index function
+  f <- Conduit_3(Fmat, place, S, cm) # Calls index function
   F.new <- f[[1]] # F matrix
   n <- f[[2]] #elements that reduce error
   if (is.null(n)){n <- place}
