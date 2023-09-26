@@ -1,7 +1,7 @@
 #' Perform simulated annealing algorithm for S and F matrices
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
-#' @param F   Pigment to Chl a matrix
+#' @param Fmat   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
 #' @param do_matrix_checks     This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups
 #' @param niter Number of iterations (default is 500)
@@ -10,7 +10,7 @@
 #'
 #' @return A list containing 
 #' \enumerate{
-#'  \item F matrix
+#'  \item Fmat matrix
 #'  \item RMSE (Root Mean Square Error)
 #'  \item condition number
 #'  \item Class abundances
@@ -26,14 +26,14 @@
 #' sa.example <- simulated_annealing(Sm, Fm, niter = 5)
 #' sa.example$Figure
 simulated_annealing <- function(S,
-                                F = NULL, 
+                                Fmat = NULL, 
                                 user_defined_min_max = NULL,
                                 do_matrix_checks = TRUE,
                                 niter = 500,
                                 step = 0.009,
                                 weight.upper.bound = 30){
-  if (is.null(F)) {
-    F <- phytoclass::Fm
+  if (is.null(Fmat)) {
+    Fmat <- phytoclass::Fm
   }
 
   if (is.data.frame(S)){
@@ -41,23 +41,23 @@ simulated_annealing <- function(S,
   S <- S[, !char_cols]}
 
   if (do_matrix_checks) {
-    L <- Matrix_checks(as.matrix(S), as.matrix(F))
+    L <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
     S <- as.matrix(L[[1]])
-    F <- as.matrix(L[[2]])
+    Fmat <- as.matrix(L[[2]])
   }
   
   S_Chl <- S[, ncol(S)]
   S <- Normalise_S(S)
   cm <- Bounded_weights(S, weight.upper.bound)
-  place <- which(F[,1:ncol(F)-1] > 0)
+  place <- which(Fmat[,1:ncol(Fmat)-1] > 0)
   
   if (is.null(user_defined_min_max)) {
-    K <- Default_min_max(phytoclass::min_max, F[,1:ncol(F)-1], place)
+    K <- Default_min_max(phytoclass::min_max, Fmat[,1:ncol(Fmat)-1], place)
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
   else {
-    K <- Default_min_max(user_defined_min_max,F[, 1:ncol(F) - 1], place)
+    K <- Default_min_max(user_defined_min_max,Fmat[, 1:ncol(Fmat) - 1], place)
   min.val <- K[[1]]
   max.val <- K[[2]]
     # if (length(min.val) != length(place)) {
@@ -68,7 +68,7 @@ simulated_annealing <- function(S,
     # }
   }
   
-  condition.test <- Condition_test(S[,1:ncol(S)-1], F[,1:ncol(F)-1], min.val, max.val)
+  condition.test <- Condition_test(S[,1:ncol(S)-1], Fmat[,1:ncol(Fmat)-1], min.val, max.val)
   cat(paste0("\nCondition number = ", round(condition.test), 
              "\n\n"))
   
@@ -76,7 +76,7 @@ simulated_annealing <- function(S,
     stop("Condition number of S matrix greater than 100 000\n")
   }
   
-  Fi <- ifelse(F > 0, 1, 0)
+  Fi <- ifelse(Fmat > 0, 1, 0)
   SE <- vectorise(Fi)
   nc <- NNLS_MF(Fi, S, cm)
   s_b <- s_c <- s_n <- nc[[1]]
