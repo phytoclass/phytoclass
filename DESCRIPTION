@@ -1,5 +1,5 @@
 Package: phytoclass
-Title: Classify Phytoplankton
+Title: Estimate Phytoplankton Chlorophyll A Biomass
 Version: 1.0.0
 Authors@R: c(person("Alexander", "Hayward", role = c("aut", "cre", "cph"), email = "phytoclass@outlook.com"),
 	person("Andy", "McKenzie", role = c("aut")))
