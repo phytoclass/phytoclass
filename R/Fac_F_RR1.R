@@ -3,7 +3,7 @@
 #' 
 #' @keywords internal 
 #'
-#' @param F XX
+#' @param Fmat XX
 #' @param vary XX
 #' @param S XX
 #' @param cm XX
@@ -12,11 +12,11 @@
 #'
 #' @examples
 # Inputs are F and which elements to vary, should be all elements
-Fac_F_RR1 <- function(F, vary, S, cm){ 
+Fac_F_RR1 <- function(Fmat, vary, S, cm){ 
   F.locs <- vector() 
-  Fs <- F[[1]]
+  Fs <- Fmat[[1]]
   F.new <- lapply(vary, function(i){ # randomises every element in 'vary' 
-    Replace_Rand(F, i, S, cm, min.scaler = 0.99, max.scaler = 1.01)})
+    Replace_Rand(Fmat, i, S, cm, min.scaler = 0.99, max.scaler = 1.01)})
   # Shows which elements reduce error  
   cont <- lapply(1:length(F.new), function(i){ c <- which(length(F.new[[i]]) == 4)}) 
   conts <- which(cont==1)
@@ -34,16 +34,16 @@ Fac_F_RR1 <- function(F, vary, S, cm){
       if (length(F.news) >1 ){F.news <- diag(F.news)}
       else{F.news <- F.news[[1]]}      
       cont <- unlist(cont)
-      F.new <- replace(F[[1]],cont,F.news)
+      F.new <- replace(Fmat[[1]],cont,F.news)
       F.new <- NNLS_MF(F.new, S, cm)
     }
     else{
-      F.new <- NNLS_MF(F[[1]], S, cm)
+      F.new <- NNLS_MF(Fmat[[1]], S, cm)
       cont <- vary
     }
   }
   else{
-    F.new <- NNLS_MF(F[[1]], S, cm)
+    F.new <- NNLS_MF(Fmat[[1]], S, cm)
     cont <- vary
   }
   res <- list(F.new,cont)
