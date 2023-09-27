@@ -2,6 +2,8 @@
 
 In this version I have:
 
+* Changed the DESCRIPTION title
+
 * Expanded the DESCRIPTION Description field, and included doi references
 
 * In the functions changed F as a matrix name to Fmat
