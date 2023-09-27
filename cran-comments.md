@@ -25,11 +25,11 @@ are correct.
 https://win-builder.r-project.org/9cPQd1Ev0eo7/00check.log
 
 
-## Linux and Windows Build
+## Github action build
 
-Passes R-hub build
+Checked with github action, and passed all five checks:
 
-https://builder.r-hub.io/status/phytoclass_1.0.0.tar.gz-917127cc9ec74a058351ca4bd7c64eed
+macos-latest, ubuntu (x3), windows-latest
 
 
 
