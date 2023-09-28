@@ -71,8 +71,12 @@ simulated_annealing <- function(S,
   }
   
   condition.test <- Condition_test(S[,1:ncol(S)-1], Fmat[,1:ncol(Fmat)-1], min.val, max.val)
-  cat(paste0("\nCondition number = ", round(condition.test), 
-             "\n\n"))
+  if (verbose) {
+   message(paste0(
+     "\nCondition number = ", round(condition.test),
+     "\n\n"
+   ))
+ }
   
   if (condition.test > 10^5) {
     stop("Condition number of S matrix greater than 100 000\n")
