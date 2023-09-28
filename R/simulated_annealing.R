@@ -7,6 +7,7 @@
 #' @param niter Number of iterations (default is 500)
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
+#' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
 #'
 #' @return A list containing 
 #' \enumerate{
@@ -31,7 +32,8 @@ simulated_annealing <- function(S,
                                 do_matrix_checks = TRUE,
                                 niter = 500,
                                 step = 0.009,
-                                weight.upper.bound = 30){
+                                weight.upper.bound = 30, 
+                                verbose = TRUE){
   if (is.null(Fmat)) {
     Fmat <- phytoclass::Fm
   }
@@ -180,10 +182,14 @@ simulated_annealing <- function(S,
       s_c <- s_n
       f_c <- f_n
     }
-    message(paste("Current error: ", round(f_c, 4)))
-    message(paste("Neighbour's error: ", round(f_n, 4)))
-    message(paste("Temperature (%): ", round(Temp * 100, 2)))
-    print(" ")
+    
+    if (verbose) {
+      message(paste("Current error: ", round(f_c, 4)))
+      message(paste("Neighbour's error: ", round(f_n, 4)))
+      message(paste("Temperature (%): ", round(Temp * 100, 2)))
+      message(" ")
+    }
+    
     if (f_n < f_b) {
       s_b <- s_n
       f_b <- f_n
