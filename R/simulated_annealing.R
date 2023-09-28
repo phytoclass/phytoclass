@@ -202,5 +202,7 @@ simulated_annealing <- function(S,
   
   res <- list(s_b, f_b)
   A <- res[[1]]
-  NNLS_MF_Final(A, S, S_Chl, cm)
+  
+  final.results <- NNLS_MF_Final(A, S, S_Chl, cm)
+  return(final.results)
 }
