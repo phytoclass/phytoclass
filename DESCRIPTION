@@ -8,7 +8,7 @@ Description: Determine the chlorophyll a (Chl a) biomass of different
     non-negative matrix factorisation and simulated annealing to minimise error
     between the observed and estimated values of pigment concentrations
     (Hayward et al. (2023) <doi:10.1002/lom3.10541>).
-    The approach is similar to the widely used CHEMTAX program
+    The approach is similar to the widely used 'CHEMTAX' program
     (Mackey et al. 1996) <doi:10.3354/meps144265>, but is more straightforward,
     accurate, and not reliant on initial guesses for the pigment to Chl a
     ratios for each phytoplankton group.
