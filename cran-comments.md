@@ -1,4 +1,14 @@
-## Resubmission
+## Resubmission (second time)
+
+In this version I have:
+
+* Changed CHEMTAX to 'CHEMTAX' in the DESCRIPTION description field
+
+* Added in a verbose argument for the main simulated_annealing() function, with
+  a default TRUE argument to output at each simulation iteration the error and 
+  temperature. 
+
+## Resubmission (first time)
 
 In this version I have:
 
