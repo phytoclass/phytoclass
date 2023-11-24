@@ -24,7 +24,7 @@
 #' @examples
 #' # Using the built-in matrices Sp and Fp
 #' set.seed(5326)
-#' sa.example <- simulated_annealing(Sp, Fp, niter = 5)
+#' sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 5)
 #' sa.example$Figure
 simulated_annealing_Prochloro <- function (S, 
                                            Fmat = NULL,
