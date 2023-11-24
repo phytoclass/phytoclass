@@ -14,8 +14,13 @@
 # 'Fnew <- MC$Fnew 
 #' 
 
-
 Matrix_checks <- function(S, Fmat){
+  # Only keep columns of Fmat that are in S
+  S.colnames <- colnames(S)
+  Fmat.colnames <- colnames(Fmat)
+  keep.these.columns <- (Fmat.colnames %in% S.colnames)
+  Fmat[, keep.these.columns]
+  #
   ba <- rownames(Fmat)
   ba1<- which(ba =="Syn")
   if (ncol(S) > ncol(Fmat)){
