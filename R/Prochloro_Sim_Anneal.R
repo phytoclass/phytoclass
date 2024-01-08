@@ -38,20 +38,24 @@ simulated_annealing_Prochloro <- function (S,
   if (is.null(Fmat)) {
     Fmat <- Fp
   }
+  
   if (is.data.frame(S)) {
     char_cols <- sapply(S, is.character)
     S <- S[, !char_cols]
   }
+  
   if (do_matrix_checks) {
     L <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
     S <- as.matrix(L[[1]])
     Fmat <- as.matrix(L[[2]])
   }
+  
   S_Chl <- S[, ncol(S)]
   S_dvChl <- S[, ncol(S)-1]
   S <- phytoclass:::Normalise_S(S)
   cm <- phytoclass:::Bounded_weights(S, weight.upper.bound)
   place <- which(Fmat[, 1:ncol(Fmat) - 1] > 0)
+  
   if (is.null(user_defined_min_max)) {
     K <- phytoclass:::Default_min_max(phytoclass::min_max, Fmat[, 1:ncol(Fmat) - 
                                                      1], place)
@@ -64,20 +68,24 @@ simulated_annealing_Prochloro <- function (S,
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
+  
   condition.test <- phytoclass:::Condition_test(S[, 1:ncol(S) - 1], Fmat[, 
                                                             1:ncol(Fmat) - 1], min.val, max.val)
   if (verbose) {
     message(paste0("\nCondition number = ", round(condition.test), 
                    "\n\n"))
   }
+  
   if (condition.test > 10^5) {
     stop("Condition number of S matrix greater than 100 000\n")
   }
+  
   Fi <- ifelse(Fmat > 0, 1, 0)
   SE <- phytoclass:::vectorise(Fi)
   nc <- NNLS_MF(Fi, S, cm)
   s_b <- s_c <- s_n <- nc[[1]]
   f_b <- f_c <- f_n <- nc[[2]]
+  
   for (k in 1:niter) {
     Temp <- (1 - step)^(k)
     chlv <- Prochloro_Wrangling(s_c, min.val, max.val)[[4]]
