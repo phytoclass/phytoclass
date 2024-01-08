@@ -1,4 +1,4 @@
-#' Perform matrix factorisaiton for phytoplankton pigments and pigments ratios
+#' Perform matrix factorisation for phytoplankton pigments and pigments ratios
 #' 
 #' Performs the non-negative matrix factorisation for given phytoplankton 
 #' pigments and pigment ratios, to attain an estimate of phytoplankton 
