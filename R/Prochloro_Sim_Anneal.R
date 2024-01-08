@@ -90,7 +90,8 @@ simulated_annealing_Prochloro <- function (S,
         chlv <- Prochloro_Wrangling(s_c, min.val, max.val)[[4]]
         chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
         D[[length(D) + 1]] <- Prochloro_Random_Neighbour_2(s_c, 
-                                                Temp, chlv,chlvp, s_c, place, S, cm, min.val, max.val)
+                                                Temp, chlv,chlvp, s_c, 
+                                                place, S, cm, min.val, max.val)
       }
     }
     else {
@@ -98,7 +99,8 @@ simulated_annealing_Prochloro <- function (S,
         chlv <- Prochloro_Wrangling(s_c, min.val, max.val)[[4]]
         chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
         D[[length(D) + 1]] <- Prochloro_Random_Neighbour_2(s_c, 
-                                                Temp, chlv,chlvp, s_c, place, S, cm, min.val, max.val)
+                                                Temp, chlv,chlvp, s_c, 
+                                                place, S, cm, min.val, max.val)
       }
     }
     Dn <- list()
@@ -129,7 +131,8 @@ simulated_annealing_Prochloro <- function (S,
           chlv <- Prochloro_Wrangling(s_n, min.val, max.val)[[4]]
           chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
           D[[length(D) + 1]] <- Prochloro_Random_Neighbour(s_n, 
-                                                 Temp, chlv,chlvp, s_n, N, place, S, cm, min.val, 
+                                                 Temp, chlv,chlvp, s_n,
+                                                 N, place, S, cm, min.val, 
                                                  max.val)
         }
         Dn <- list()
