@@ -1,4 +1,4 @@
-#' Title
+#' Selects a random neighbour for the simulated annealing algorithm.
 #' 
 #' @keywords internal
 #'
