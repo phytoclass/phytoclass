@@ -2,21 +2,21 @@
 #' 
 #' @keywords internal
 #'
-#' @param Fn 
-#' @param Temp 
-#' @param chlv 
-#' @param chlvp 
-#' @param s_c 
-#' @param place 
-#' @param S 
-#' @param cm 
-#' @param min.val 
-#' @param max.val 
+#' @param Fn xx
+#' @param Temp xx
+#' @param chlv xx
+#' @param chlvp xx
+#' @param s_c xx
+#' @param place  xx
+#' @param S  xx
+#' @param cm  xx
+#' @param min.val  xx
+#' @param max.val  xx
 #'
 #' @return
-#' @export
-#'
+#' 
 #' @examples
+#' @importFrom stats runif
 Prochloro_Random_Neighbour_2 <- function (Fn, Temp, chlv, chlvp, s_c, place, S, cm, min.val, max.val) 
 {
   s_c <- phytoclass:::vectorise(s_c[, 1:ncol(s_c) - 1])
