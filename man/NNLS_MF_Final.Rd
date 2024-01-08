@@ -2,7 +2,7 @@
 % Please edit documentation in R/NNLS_MF_Final.R
 \name{NNLS_MF_Final}
 \alias{NNLS_MF_Final}
-\title{Perform matrix factorisaiton for phytoplankton pigments and pigments ratios}
+\title{Perform matrix factorisation for phytoplankton pigments and pigments ratios}
 \usage{
 NNLS_MF_Final(Fn, S, S_Chl, cm)
 }
