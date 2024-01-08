@@ -13,7 +13,6 @@
 #' @param max.val 
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Prochloro_Random_Neighbour <- function (Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val) 
