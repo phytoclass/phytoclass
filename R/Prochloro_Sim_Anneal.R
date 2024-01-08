@@ -57,8 +57,7 @@ simulated_annealing_Prochloro <- function (S,
   place <- which(Fmat[, 1:ncol(Fmat) - 1] > 0)
   
   if (is.null(user_defined_min_max)) {
-    K <- phytoclass:::Default_min_max(phytoclass::min_max, Fmat[, 1:ncol(Fmat) - 
-                                                     1], place)
+    K <- phytoclass:::Default_min_max(phytoclass::min_max, Fmat[, 1:ncol(Fmat) - 1], place)
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
