@@ -89,8 +89,9 @@ simulated_annealing_Prochloro <- function (S,
     Temp <- (1 - step)^(k)
     chlv <- Prochloro_Wrangling(s_c, min.val, max.val)[[4]]
     chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
-    new_neighbour <- Prochloro_Random_Neighbour_2(s_c, Temp, chlv, chlvp, s_c, 
-                                       place, S, cm, min.val, max.val)
+    new_neighbour <- Prochloro_Random_Neighbour_2(s_c, 
+                                                  Temp, chlv, chlvp, s_c, 
+                                                  place, S, cm, min.val, max.val)
     D <- list()
     if (k > niter - 20) {
       for (i in 1:300) {
@@ -106,7 +107,7 @@ simulated_annealing_Prochloro <- function (S,
         chlv <- Prochloro_Wrangling(s_c, min.val, max.val)[[4]]
         chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
         D[[length(D) + 1]] <- Prochloro_Random_Neighbour_2(s_c, 
-                                                Temp, chlv,chlvp, s_c, 
+                                                Temp, chlv, chlvp, s_c, 
                                                 place, S, cm, min.val, max.val)
       }
     }
