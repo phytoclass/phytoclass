@@ -8,7 +8,6 @@ Prochloro_Random_Neighbour(
   Fn,
   Temp,
   chlv,
-  chlvp,
   s_c,
   N,
   place,
@@ -25,8 +24,6 @@ Prochloro_Random_Neighbour(
 
 \item{chlv}{}
 
-\item{chlvp}{}
-
 \item{s_c}{}
 
 \item{N}{}
@@ -40,6 +37,8 @@ Prochloro_Random_Neighbour(
 \item{min.val}{}
 
 \item{max.val}{}
+
+\item{chlvp}{}
 }
 \description{
 Title

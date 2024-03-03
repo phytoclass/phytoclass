@@ -18,7 +18,7 @@
 #' @export
 #'
 #' @examples
-Prochloro_Random_Neighbour <- function (Fn, Temp, chlv,chlvp, s_c, N, place, S, cm, min.val, max.val) 
+Prochloro_Random_Neighbour <- function (Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val) 
 {
   k <- match(N, place)
   s_c <- s_c[N]
