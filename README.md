@@ -177,3 +177,4 @@ Results$Figure
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
+A line I wrote on my local computer  
