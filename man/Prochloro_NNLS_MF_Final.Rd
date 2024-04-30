@@ -4,7 +4,7 @@
 \alias{Prochloro_NNLS_MF_Final}
 \title{Title}
 \usage{
-Prochloro_NNLS_MF_Final(Fn, S, S_Chl, cm)
+Prochloro_NNLS_MF_Final(Fn, S, S_Chl, cm, S_dvChl)
 }
 \arguments{
 \item{Fn}{}

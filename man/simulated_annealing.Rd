@@ -45,9 +45,7 @@ A list containing
 }
 }
 \description{
-Perform simulated annealing algorithm for S and F matrices. This is the main function of the phytoclass package, and is the only function required to determine the chlorophyll a concentrations for different phytoplankton classes. 
-Classes can be added or removed from the defaults by changing the rows of the Fm matrix. For example: Fm <- subset(Fm, rownames(Fm) != "Syn")
-To create your own matrices, please refer to the phytoclass vignette.
+Perform simulated annealing algorithm for S and F matrices
 }
 \examples{
 # Using the built-in matrices Sm and Fm
