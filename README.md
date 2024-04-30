@@ -7,6 +7,12 @@ The *phytoclass* package uses non-negative matrix factorization and
 simulated annealing to determine the biomass of different phytoplankton
 groups from pigment concentrations.
 
+The main function is 'Simulated annealing'. This can be used in conjuction with the cluster function, which clusters larger datasets. To understand how to use your own matrices instead of the default dataset, please see the example in the vignette. 
+
+There is a separate function when Divynl chlorophyll a and Prochlorococcus are used. 
+
+The 'Steepest Descent'function is similar to that of CHEMTAX, and is unconstrained by minimum and maximum values, unlike the simualted annealing function. I would use this with more caution. 
+
 ## Installation
 
 It can be installed from CRAN with:
