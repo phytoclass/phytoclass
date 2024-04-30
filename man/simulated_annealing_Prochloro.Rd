@@ -2,7 +2,7 @@
 % Please edit documentation in R/Prochloro_Sim_Anneal.R
 \name{simulated_annealing_Prochloro}
 \alias{simulated_annealing_Prochloro}
-\title{Perform simulated annealing algorithm for S and F matrices} with prochlorococcus
+\title{Perform XX simulated annealing algorithm for S and F matrices}
 \usage{
 simulated_annealing_Prochloro(
   S,
