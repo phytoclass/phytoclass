@@ -150,6 +150,7 @@ Results$Figure
 
 ```{r}
 #Create Fm (F matrix). Alternatively, a .csv file can be uploaded.
+#Create Fm (F matrix). Alternatively, a .csv file can be uploaded.
 Fu <- data.frame(
   Per = c(0, 0, 0, 0, 1, 0, 0, 0),
   X19but = c(0, 0, 0, 0, 0, 1, 1, 0),
@@ -158,27 +159,27 @@ Fu <- data.frame(
   X19hex = c(0, 0, 0, 0, 0, 1, 0, 0),
   Allo = c(0, 0, 1, 0, 0, 0, 0, 0),
   Zea = c(1, 1, 0, 0, 0, 0, 0, 1),
-  Chl.b = c(1, 1, 0, 0, 0, 0, 0, 0),
+  Chl_b = c(1, 1, 0, 0, 0, 0, 0, 0),
   Tchla = c(1, 1, 1, 1, 1, 1, 1, 1)
 )
 
 rownames(Fu) <- c(
   "Prasinophytes", "Chlorophytes", "Cryptophytes"
-  , "Diatoms-B", "Dinoflagellates-A",
+  , "Diatoms-2", "Dinoflagellates-1",
   "Haptophytes", "Pelagophytes", "Syn"
 )
 
 Min_max <- data.frame(
   Class = c(
     "Syn", "Chlorophytes", "Chlorophytes", "Prasinophytes", "Prasinophytes",
-    "Prasinophytes", "Cryptophytes", "Diatoms-B", "Diatoms-B", "Pelagophytes",
-    "Pelagophytes", "Pelagophytes", "Dinoflagellates-A", "Haptophytes",
-    "Haptophytes", "Haptophytes", "Haptophytes", "Diatoms-B", "Cryptophytes",
-    "Prasinophytes", "Chlorophytes", "Syn", "Dinoflagellates-A", "Pelagophytes"
+    "Prasinophytes", "Cryptophytes", "Diatoms-2", "Diatoms-2", "Pelagophytes",
+    "Pelagophytes", "Pelagophytes", "Dinoflagellates-1", "Haptophytes",
+    "Haptophytes", "Haptophytes", "Haptophytes", "Diatoms-2", "Cryptophytes",
+    "Prasinophytes", "Chlorophytes", "Syn", "Dinoflagellates-1", "Pelagophytes"
   ),
   Pig_Abbrev = c(
-    "Zea", "Zea", "Chl.b", "Pra", "Zea", "Chl.b", "Allo", "Chl.c3",
-    "Fuco", "Chl.c3", "X19but", "Fuco", "Per", "X19but", "X19hex",
+    "Zea", "Zea", "Chl_b", "Pra", "Zea", "Chl_b", "Allo", "Chl_c3",
+    "Fuco", "Chl_c3", "X19but", "Fuco", "Per", "X19but", "X19hex",
     "Fuco", "Tchla", "Tchla", "Tchla", "Tchla", "Tchla", "Tchla", "Tchla",
     "Tchla"
   ),
@@ -192,6 +193,19 @@ Min_max <- data.frame(
     0.9332, 0.2967, 1.0339, 1.2366, 0.8650, 0.2872, 1.3766, 0.4689,
     1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000
   ))
+)
+```
+
+```{r message=FALSE}
+set.seed("7683")
+Results <- simulated_annealing(
+  S = Sm, 
+  F = Fu,
+  user_defined_min_max = Min_max,
+  do_matrix_checks = TRUE,
+  niter = 1,
+  step = 0.01,
+  weight.upper.bound = 30
 )
 ```
 
