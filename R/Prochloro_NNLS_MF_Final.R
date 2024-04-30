@@ -54,7 +54,7 @@ Prochloro_NNLS_MF_Final <- function (Fn, S, S_Chl, cm, S_dvChl)
     ggplot2::xlab("Sample number") + ggplot2::ylab("Chl a concentrations") + 
     ggplot2::theme_bw()
   G <- S - (C_new2 %*% Fn)
-  gs <- colMeans(abs(G))/colSums(S)
+  gs <- colMeans(abs(G - S))
   return(list(`F matrix` = Fn, RMSE = error, `condition number` = cd, 
               `Class abundances` = Cn2, Figure = n, MAE = gs, Error = G))
 }

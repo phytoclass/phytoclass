@@ -63,7 +63,7 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
     ggplot2::theme_bw()
   
   G <- S - (C_new2%*%Fn)
-  gs <- colMeans(abs(G))/colSums(S)
+  colMeans(abs((C_new2%*%Fn) - S))
   
   return(list("F matrix" = Fn, 
               "RMSE"  = error,
