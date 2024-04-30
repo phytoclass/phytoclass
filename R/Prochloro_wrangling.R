@@ -17,6 +17,7 @@ Prochloro_Wrangling <- function (Fl, min.val, max.val)
   Fmin <- Fmin[, 1:ncol(Fmin) - 1]
   Fmin[Fmin > 0] <- min.val
   Fmax <- as.matrix(Fd)
+  
   Fmax <- Fmax[, 1:ncol(Fmax) - 1]
   Fmax[Fmax > 0] <- max.val
   chlv <- Fd[, ncol(Fd)]

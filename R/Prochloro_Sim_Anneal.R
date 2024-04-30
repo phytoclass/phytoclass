@@ -209,7 +209,7 @@ simulated_annealing_Prochloro <- function (S,
   }
   res <- list(s_b, f_b)
   A <- res[[1]]
-  final.results <- Prochloro_NNLS_MF_Final(A, S, S_Chl, cm)
+  final.results <- Prochloro_NNLS_MF_Final(A, S, S_Chl, cm, S_dvChl)
   return(final.results)
 }
 
