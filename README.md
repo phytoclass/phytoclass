@@ -4,7 +4,7 @@
 # phytoclass
 
 The *phytoclass* package uses non-negative matrix factorization and
-simulated annealing to determine the biomass of different phytoplankton
+simulated annealing to determine the chl a concentrations of different phytoplankton
 groups from pigment concentrations.
 
 The main function is 'Simulated annealing'. This can be used in conjuction with the cluster function, which clusters larger datasets. To understand how to use your own matrices instead of the default dataset, please see the example in the vignette. 
