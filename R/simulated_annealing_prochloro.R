@@ -36,7 +36,7 @@ simulated_annealing_Prochloro <- function (S,
                                            verbose = TRUE) 
 {
   if (is.null(Fmat)) {
-    Fmat <- Fp
+    Fmat <- phytoclass::Fp
   }
   
   if (is.data.frame(S)) {

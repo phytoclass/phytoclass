@@ -45,7 +45,7 @@ A list containing
 }
 }
 \description{
-Perform simulated annealing algorithm for S and F matrices. This is the main funciton of phytoclass. See the vingette for how to set up data.
+Perform simulated annealing algorithm for S and F matrices
 }
 \examples{
 # Using the built-in matrices Sm and Fm
