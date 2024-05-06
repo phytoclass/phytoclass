@@ -9,7 +9,7 @@
 
 A data frame with 29 rows and 15 columns:
 \describe{
-\item{chl.c1}{XX}
+\item{chl_c1}{XX}
 \item{Per}{XX}
 \item{X19but}{XX}
 ...
