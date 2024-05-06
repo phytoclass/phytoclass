@@ -25,7 +25,7 @@ A list containing
 }
 }
 \description{
-Stand-alone version of steepest descent algorithm
+Stand-alone version of steepest descent algorithm. This is similar to the CHEMTAX steepest descent algorithm. It is not required to use this function, and as results are not bound by minimum and maximum, results may be unrealistic. 
 }
 \examples{
 MC <- Matrix_checks(Sm,Fm)
