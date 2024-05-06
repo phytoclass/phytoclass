@@ -1,4 +1,4 @@
-#' Perform XX simulated annealing algorithm for S and F matrices
+#' Perform simulated annealing algorithm for S and F matrices
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix
@@ -19,7 +19,7 @@
 #'  \item MAE (Mean Absolute Error)
 #'  \item Error
 #'  }
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' # Using the built-in matrices Sp and Fp

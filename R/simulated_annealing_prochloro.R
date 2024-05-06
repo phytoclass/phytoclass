@@ -1,4 +1,4 @@
-#' Perform XX simulated annealing algorithm for S and F matrices
+#' Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus. Divinyl chlorophyll must be the final column of both S and F matrices, with chlorophyll a the 2nd to last column. See how the example Sp and Fp matrices are organised.
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix
@@ -22,9 +22,9 @@
 #' @export
 #'
 #' @examples
-#' # Using the built-in matrices Sp and Fp
+#' # Using the built-in matrices Sp and Fp. For more detailed set up and to define your own values please refer to vignette.
 #' set.seed(5326)
-#' sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 5)
+#' sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
 #' sa.example$Figure
 simulated_annealing_Prochloro <- function (S, 
                                            Fmat = NULL,

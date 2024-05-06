@@ -1,4 +1,4 @@
-#' Title
+#' Final step for MF with prochlorococcus
 #' @keywords internal
 #'
 #' @param Fn 
