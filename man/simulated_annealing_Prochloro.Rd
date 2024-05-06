@@ -77,7 +77,7 @@ Perform simulated annealing algorithm for samples with divinyl chlorophyll and p
 set.seed(5326)
 sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 5)
 sa.example$Figure
-# Using the built-in matrices Sp and Fp. For more detailed set up and to define your own values please refer to vignette.
+# Using the built-in matrices Sp and Fp.
 set.seed(5326)
 sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
 sa.example$Figure
