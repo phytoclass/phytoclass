@@ -14,7 +14,7 @@ Steepest_Desc(Fmat, S, num.loops)
 \item{num.loops}{Number of loops/iterations to perform (no default)}
 }
 \value{
-A list containing
+A list containing:
 \enumerate{
 \item The F matrix (pigment: Chl \emph{a}) ratios
 \item RMSE (Root Mean Square Error)
