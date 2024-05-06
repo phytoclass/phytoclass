@@ -2,7 +2,7 @@
 % Please edit documentation in R/Prochloro_Sim_Anneal.R
 \name{simulated_annealing_Prochloro}
 \alias{simulated_annealing_Prochloro}
-\title{Perform XX simulated annealing algorithm for S and F matrices}
+\title{Perform simulated annealing algorithm for S and F matrices}
 \usage{
 simulated_annealing_Prochloro(
   S,
@@ -45,7 +45,7 @@ A list containing
 }
 }
 \description{
-Perform XX simulated annealing algorithm for S and F matrices
+Perform simulated annealing algorithm for S and F matrices, please ensure divinyl chlorophyll is 2nd to last column.
 }
 \examples{
 # Using the built-in matrices Sp and Fp

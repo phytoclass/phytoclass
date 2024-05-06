@@ -4,14 +4,14 @@
 # phytoclass
 
 The *phytoclass* package uses non-negative matrix factorization and
-simulated annealing to determine the chlorophyll of different phytoplankton
-groups from pigment concentrations. Soon we will be releasing this software on a web based interface.
+simulated annealing to determine the biomass of different phytoplankton
+groups from pigment concentrations.
 
-The main function is 'Simulated annealing'. This can be used in conjuction with the cluster function, used to clusters larger datasets. To understand how to use your own matrices instead of the default dataset, please see the examples in the vignette. 
+The main function is 'Simulated annealing'. This can be used in conjuction with the cluster function, which clusters larger datasets. To understand how to use your own matrices instead of the default dataset, please see the example in the vignette. 
 
 When setting up your matrices, it is important to ensure that pigments are in the same order in the Sm and Fm matrices. Chlorophyll a must be the final column.
 
-There is a separate function when Divynl chlorophyll a and Prochlorococcus are used. Here Divynl chlorophyll a must be the final column.
+There is a separate function when Divinyl chlorophyll a and Prochlorococcus are used. Here Divynl chlorophyll a must be the 2nd to last column (see 'Fp).
 
 The 'Steepest Descent'function is similar to that of CHEMTAX, and is unconstrained by minimum and maximum values, unlike the simualted annealing function. I would use this with more caution. 
 
