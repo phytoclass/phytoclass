@@ -2,7 +2,7 @@
 % Please edit documentation in R/Prochloro_wrangling.R
 \name{Prochloro_Wrangling}
 \alias{Prochloro_Wrangling}
-\title{Title}
+\title{Prochloro Wrangling}
 \usage{
 Prochloro_Wrangling(Fl, min.val, max.val)
 }
@@ -14,6 +14,6 @@ Prochloro_Wrangling(Fl, min.val, max.val)
 \item{max.val}{}
 }
 \description{
-Title
+Prochloro Wrangling
 }
 \keyword{internal}

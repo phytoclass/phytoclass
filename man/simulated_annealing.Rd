@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulated_annealing.R
 \name{simulated_annealing}
 \alias{simulated_annealing}
-\title{Perform simulated annealing algorithm for S and F matrices}
+\title{This is the main phytoclass algorithm. It performs simulated annealing algorithm for S and F matrices. See the examples (Fm, Sm) for how to set up matrices, and the vignette for more detailed instructions. Different pigments and phytoplankton groups may be used.}
 \usage{
 simulated_annealing(
   S,
@@ -45,7 +45,7 @@ A list containing
 }
 }
 \description{
-Perform simulated annealing algorithm for S and F matrices
+This is the main phytoclass algorithm. It performs simulated annealing algorithm for S and F matrices. See the examples (Fm, Sm) for how to set up matrices, and the vignette for more detailed instructions. Different pigments and phytoplankton groups may be used.
 }
 \examples{
 # Using the built-in matrices Sm and Fm

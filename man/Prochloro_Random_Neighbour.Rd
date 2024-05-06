@@ -2,7 +2,7 @@
 % Please edit documentation in R/Prochloro_Random_Neighbour.R
 \name{Prochloro_Random_Neighbour}
 \alias{Prochloro_Random_Neighbour}
-\title{Title}
+\title{Prochloro random neighbour}
 \usage{
 Prochloro_Random_Neighbour(
   Fn,
@@ -41,6 +41,6 @@ Prochloro_Random_Neighbour(
 \item{chlvp}{}
 }
 \description{
-Title
+Prochloro random neighbour
 }
 \keyword{internal}

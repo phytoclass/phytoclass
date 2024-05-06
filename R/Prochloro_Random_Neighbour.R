@@ -1,4 +1,4 @@
-#' Title
+#' Prochloro random neighbour
 #' 
 #' @keywords internal
 #'

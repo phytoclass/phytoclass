@@ -2,7 +2,7 @@
 % Please edit documentation in R/Prochloro_Normalise_F.R
 \name{Prochloro_Normalise_F}
 \alias{Prochloro_Normalise_F}
-\title{Title}
+\title{Normalise F for prochloro}
 \usage{
 Prochloro_Normalise_F(Fmat)
 }
@@ -10,6 +10,6 @@ Prochloro_Normalise_F(Fmat)
 \item{Fmat}{}
 }
 \description{
-Title
+Normalise F for prochloro
 }
 \keyword{internal}

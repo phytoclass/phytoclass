@@ -3,7 +3,7 @@
 %   R/simulated_annealing_prochloro.R
 \name{simulated_annealing_Prochloro}
 \alias{simulated_annealing_Prochloro}
-\title{Perform XX simulated annealing algorithm for S and F matrices}
+\title{Perform simulated annealing algorithm for S and F matrices}
 \usage{
 simulated_annealing_Prochloro(
   S,
@@ -68,17 +68,18 @@ A list containing
 }
 }
 \description{
-Perform XX simulated annealing algorithm for S and F matrices
+Perform simulated annealing algorithm for S and F matrices
 
-Perform XX simulated annealing algorithm for S and F matrices
+Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus. Divinyl chlorophyll must be the final column of both S and F matrices, with chlorophyll a the 2nd to last column. See how the example Sp and Fp matrices are organised.
 }
 \examples{
 # Using the built-in matrices Sp and Fp
 set.seed(5326)
 sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 5)
 sa.example$Figure
-# Using the built-in matrices Sp and Fp
+# Using the built-in matrices Sp and Fp. For more detailed set up and to define your own values please refer to vignette.
 set.seed(5326)
-sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 5)
+sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
 sa.example$Figure
 }
+\keyword{internal}

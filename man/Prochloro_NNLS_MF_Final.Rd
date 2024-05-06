@@ -2,7 +2,7 @@
 % Please edit documentation in R/Prochloro_NNLS_MF_Final.R
 \name{Prochloro_NNLS_MF_Final}
 \alias{Prochloro_NNLS_MF_Final}
-\title{Title}
+\title{Final step for MF with prochlorococcus}
 \usage{
 Prochloro_NNLS_MF_Final(Fn, S, S_Chl, cm, S_dvChl)
 }
@@ -16,6 +16,6 @@ Prochloro_NNLS_MF_Final(Fn, S, S_Chl, cm, S_dvChl)
 \item{cm}{}
 }
 \description{
-Title
+Final step for MF with prochlorococcus
 }
 \keyword{internal}
