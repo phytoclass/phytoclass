@@ -14,7 +14,7 @@ Steepest_Desc(Fmat, S, num.loops)
 \item{num.loops}{Number of loops/iterations to perform (no default)}
 }
 \value{
-A list containing:
+A list containing
 \enumerate{
 \item The F matrix (pigment: Chl \emph{a}) ratios
 \item RMSE (Root Mean Square Error)
@@ -25,7 +25,7 @@ A list containing:
 }
 }
 \description{
-Stand-alone version of steepest descent algorithm. This is similar to the CHEMTAX steepest descent algorithm. It is not required to use this function, and as results are not bound by minimum and maximum, results may be unrealistic. 
+Stand-alone version of steepest descent algorithm
 }
 \examples{
 MC <- Matrix_checks(Sm,Fm)
