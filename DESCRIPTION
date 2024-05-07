@@ -11,7 +11,7 @@ Description: Determine the chlorophyll a (Chl a) concentrations of different
     The approach is similar to the widely used 'CHEMTAX' program
     (Mackey et al. 1996) <doi:10.3354/meps144265>, but is more straightforward,
     accurate, and not reliant on initial guesses for the pigment to Chl a
-    ratios for each phytoplankton group.
+    ratios for phytoplankton groups.
 Imports:
     bestNormalize,
     dplyr,
