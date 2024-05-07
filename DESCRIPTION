@@ -26,11 +26,12 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Depends: 
-    R (>= 4.2)
+    R (>= 3.8)
 LazyData: true
 Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/AndyMcKenzieFromNZ/phytoclass
-BugReports: https://github.com/AndyMcKenzieFromNZ/phytoclass/issues
+URL: https://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@github.com/AndyMcKenzieFromNZ/phytoclass
+BugReports: https://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@github.com/AndyMcKenzieFromNZ/phytoclass/issues
+
