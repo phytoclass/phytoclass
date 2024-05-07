@@ -5,7 +5,6 @@
 #' @param Fn 
 #' @param Temp 
 #' @param chlv 
-#' @param chlvp 
 #' @param s_c 
 #' @param N 
 #' @param place 
