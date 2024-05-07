@@ -32,6 +32,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://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@github.com/AndyMcKenzieFromNZ/phytoclass
-BugReports: https://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@github.com/AndyMcKenzieFromNZ/phytoclass/issues
-
+URL: https://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@github.com/AndyMcKenzieFromNZ/phytoclass, https://github.com/AndyMcKenzieFromNZ/phytoclass
+BugReports: https://github.com/AndyMcKenzieFromNZ/phytoclass/issues
