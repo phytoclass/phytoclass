@@ -7,7 +7,6 @@
 #' @param cm 
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Prochloro_NNLS_MF_Final <- function (Fn, S, S_Chl, cm, S_dvChl) 

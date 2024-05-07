@@ -5,7 +5,6 @@
 #' @param Fmat 
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Prochloro_Normalise_F <- function (Fmat) 

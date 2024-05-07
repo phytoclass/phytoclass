@@ -7,7 +7,6 @@
 #' @param max.val 
 #'
 #' @return
-#' @export
 #'
 #' @examples
 Prochloro_Wrangling <- function (Fl, min.val, max.val) 
