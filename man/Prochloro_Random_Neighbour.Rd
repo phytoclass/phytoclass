@@ -37,8 +37,6 @@ Prochloro_Random_Neighbour(
 \item{min.val}{}
 
 \item{max.val}{}
-
-\item{chlvp}{}
 }
 \description{
 Prochloro random neighbour
