@@ -144,7 +144,7 @@ simulated_annealing_Prochloro <- function (S,
           D[[length(D) + 1]] <- Prochloro_Random_Neighbour(s_n, 
                                                  Temp, chlv, s_n,
                                                  N, place, S, cm, min.val, 
-                                                 max.val)
+                                                 max.val,chlvp)
         }
         Dn <- list()
         for (i in D) {
@@ -169,7 +169,7 @@ simulated_annealing_Prochloro <- function (S,
           chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
           D[[length(D) + 1]] <- Prochloro_Random_Neighbour(s_n, 
                                                  Temp, chlv, s_n, N, place, S, cm, min.val, 
-                                                 max.val)
+                                                 max.val,chlvp)
         }
         Dn <- list()
         for (i in D) {
