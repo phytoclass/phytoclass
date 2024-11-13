@@ -92,7 +92,7 @@ simulated_annealing_Prochloro <- function (S,
     new_neighbour <- Prochloro_Random_Neighbour_2(s_c, 
                                                   Temp, chlv, s_c, 
                                                   place, S, cm, 
-                                                  min.val, max.val)
+                                                  min.val, max.val,chlvp)
     D <- list()
     if (k > niter - 20) {
       for (i in 1:300) {
@@ -101,7 +101,7 @@ simulated_annealing_Prochloro <- function (S,
         D[[length(D) + 1]] <- Prochloro_Random_Neighbour_2(s_c, 
                                                 Temp, chlv, 
                                                 s_c, place, S, cm, 
-                                                min.val, max.val)
+                                                min.val, max.val,chlvp)
       }
     }
     else {
@@ -111,7 +111,7 @@ simulated_annealing_Prochloro <- function (S,
         D[[length(D) + 1]] <- Prochloro_Random_Neighbour_2(s_c, 
                                                 Temp, chlv,s_c, 
                                                 place, S, cm,
-                                                min.val, max.val)
+                                                min.val, max.val,chlvp)
       }
     }
     Dn <- list()
@@ -144,7 +144,7 @@ simulated_annealing_Prochloro <- function (S,
           D[[length(D) + 1]] <- Prochloro_Random_Neighbour(s_n, 
                                                  Temp, chlv, s_n,
                                                  N, place, S, cm, min.val, 
-                                                 max.val,chlvp)
+                                                 max.val)
         }
         Dn <- list()
         for (i in D) {
@@ -169,7 +169,7 @@ simulated_annealing_Prochloro <- function (S,
           chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
           D[[length(D) + 1]] <- Prochloro_Random_Neighbour(s_n, 
                                                  Temp, chlv, s_n, N, place, S, cm, min.val, 
-                                                 max.val,chlvp)
+                                                 max.val)
         }
         Dn <- list()
         for (i in D) {
