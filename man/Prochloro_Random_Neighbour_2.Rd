@@ -13,7 +13,8 @@ Prochloro_Random_Neighbour_2(
   S,
   cm,
   min.val,
-  max.val
+  max.val,
+  chlvp,
 )
 }
 \arguments{
@@ -34,6 +35,9 @@ Prochloro_Random_Neighbour_2(
 \item{min.val}{xx}
 
 \item{max.val}{xx}
+
+\item{chlvp}{xx}
+
 }
 \description{
 Selects a random neighbour for the simulated annealing algorithm.

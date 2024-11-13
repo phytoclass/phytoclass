@@ -20,7 +20,15 @@ Prochloro_Random_Neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min
   {
   k <- match(N, place)
   s_c <- s_c[N]
+  s_c <- phytoclass:::vectorise(s_c[, 1:ncol(s_c) - 1])
+  s_c <- s_c[1:length(s_c)-1]
+  s_c <- s_c[k]
+  if (is.na(s_c)) {
+    return(NNLS_MF(Fn, S, cm))
+  }
+  else{
   SE <- Prochloro_Wrangling(Fn, min.val, max.val)[[3]]
+  SE <- SE[1:length(SE)-1]
   SE <- SE[k]
   minF <- Prochloro_Wrangling(Fn, min.val, max.val)[[1]]
   minF <- minF[k]
@@ -65,4 +73,5 @@ Prochloro_Random_Neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min
   colnames(Fn) <- colnames(S)
   F.n <- NNLS_MF(Fn, S, cm)
   return(F.n)
+  }
 }
