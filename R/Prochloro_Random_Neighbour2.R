@@ -19,9 +19,13 @@
 Prochloro_Random_Neighbour_2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val) 
   {
   s_c <- phytoclass:::vectorise(s_c[, 1:ncol(s_c) - 1])
+  s_c <- s_c[1:length(s_c)-1]
   SE <- Prochloro_Wrangling(Fn, min.val, max.val)[[3]]
+  SE <- SE[1:length(SE)-1]
   minF <- Prochloro_Wrangling(Fn, min.val, max.val)[[1]]
+  minF <- minF[1:length(minF)-1]
   maxF <- Prochloro_Wrangling(Fn, min.val, max.val)[[2]]
+  maxF <- maxF[1:length(maxF)-1]
   ki <- maxF - minF
   rand <- round(runif(n = length(s_c), -1, 1), 4)
   SA <- (SE + (Temp) * ki * rand)
@@ -45,19 +49,18 @@ Prochloro_Random_Neighbour_2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.
     
     # Exit condition after max loops with a safe fallback
     if (loop > max_loops) {
-      # Set midpoint between minF and maxF as fallback for remaining `SA[d]`
-      SA[d] <- (minF[d] + maxF[d]) / 2
-      d <- which(SA < minF | SA > maxF) # Recheck bounds after setting fallback
-      
-      # Break loop if all elements are within bounds
-      if (length(d) == 0) { 
-        break
-      }
+      nn <- (minF[d]+maxF[d])/2
+      f <- round(runif(n=length(d),(minF[d]*1.20),(maxF[d]*0.80)),4)
+      SA[d] <- f
+      d <- which(SA < minF | SA > maxF)
     }
   }
   
+  
+  Fn <- Fn[, 1:ncol(Fn) - 1]
   Fn <- Fn[, 1:ncol(Fn) - 1]
   Fn[Fn > 0] <- SA
+  Fn <- cbind(Fn, chlvp)
   Fn <- cbind(Fn, chlv)
   colnames(Fn) <- colnames(S)
   F.n <- NNLS_MF(Fn, S, cm)

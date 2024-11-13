@@ -52,13 +52,10 @@ Prochloro_Random_Neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min
     
     # Check for excessive looping and exit if needed
     if (loop > max_loops) {
-      # Fallback to midpoint between minF and maxF
-      SA[d] <- (minF[d] + maxF[d]) / 2
-      d <- which(SA < minF | SA > maxF) # Re-evaluate after adjustment
-      
-      if (length(d) == 0) { 
-        break # Exit the loop if all values are within bounds
-      }
+      nn <- (minF[d]+maxF[d])/2
+      f <- round(runif(n=length(d),(minF[d]*1.2),(maxF[d]*0.80)),4)
+      SA[d] <- f
+      d <- which(SA < minF | SA > maxF)
     }
   }
   
