@@ -17,18 +17,10 @@
 #'
 #' @examples
 Prochloro_Random_Neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val) 
-  {
+{
   k <- match(N, place)
   s_c <- s_c[N]
-  s_c <- phytoclass:::vectorise(s_c[, 1:ncol(s_c) - 1])
-  s_c <- s_c[1:length(s_c)-1]
-  s_c <- s_c[k]
-  if (is.na(s_c)) {
-    return(NNLS_MF(Fn, S, cm))
-  }
-  else{
   SE <- Prochloro_Wrangling(Fn, min.val, max.val)[[3]]
-  SE <- SE[1:length(SE)-1]
   SE <- SE[k]
   minF <- Prochloro_Wrangling(Fn, min.val, max.val)[[1]]
   minF <- minF[k]
@@ -44,8 +36,7 @@ Prochloro_Random_Neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min
   }
   d <- which(SA < minF | SA > maxF)
   loop <- 1
-  max_loops <- 100 # Set a higher loop count if necessary
-  
+  max_loops <- 100
   while (length(d) > 0) {
     loop <- loop + 1
     nr <- round(runif(length(d), -1, 1), 4)
@@ -57,21 +48,18 @@ Prochloro_Random_Neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min
     SA2 <- (SE[d] + (Temp) * kir * nr)
     SA[d] <- SA2
     d <- which(SA < minF | SA > maxF)
-    
-    # Check for excessive looping and exit if needed
     if (loop > max_loops) {
-      nn <- (minF[d]+maxF[d])/2
-      f <- round(runif(n=length(d),(minF[d]*1.2),(maxF[d]*0.80)),4)
+      nn <- (minF[d] + maxF[d])/2
+      f <- round(runif(n = length(d), (minF[d] * 1.2), 
+                       (maxF[d] * 0.8)), 4)
       SA[d] <- f
       d <- which(SA < minF | SA > maxF)
     }
   }
-  
   Fn <- Fn[, 1:ncol(Fn) - 1]
   Fn[N] <- SA
   Fn <- cbind(Fn, chlv)
   colnames(Fn) <- colnames(S)
   F.n <- NNLS_MF(Fn, S, cm)
   return(F.n)
-  }
 }
