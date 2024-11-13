@@ -1,3 +1,5 @@
+# phytoclass 2.0.0
+
 # phytoclass 1.2.0
 
 # phytoclass 1.1.0
