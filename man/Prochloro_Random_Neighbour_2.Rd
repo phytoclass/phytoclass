@@ -14,7 +14,7 @@ Prochloro_Random_Neighbour_2(
   cm,
   min.val,
   max.val,
-  chlvp,
+  chlvp
 )
 }
 \arguments{
