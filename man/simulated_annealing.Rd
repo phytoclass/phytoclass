@@ -54,6 +54,7 @@ sa.example <- simulated_annealing(Sm, Fm, niter = 5)
 sa.example$Figure
 
 #Using non-default data:
+# Set up a new F matrix
 Fu <- data.frame(
   Per = c(0, 0, 0, 0, 1, 0, 0, 0),
   X19but = c(0, 0, 0, 0, 0, 1, 1, 0),
@@ -72,6 +73,7 @@ rownames(Fu) <- c(
   "Haptophytes", "Pelagophytes", "Syn"
 )
 
+#Set up a new Min_max file
 Min_max <- data.frame(
   Class = c(
     "Syn", "Chlorophytes", "Chlorophytes", "Prasinophytes", "Prasinophytes",
@@ -97,7 +99,7 @@ Min_max <- data.frame(
     1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000
   ))
 )
-
+#Run the new file with your own set up (make sure all names between your data (S), F-marix, and min_max are correct)
 Results <- simulated_annealing(
   S = Sm, 
   F = Fu,
@@ -105,7 +107,7 @@ Results <- simulated_annealing(
   do_matrix_checks = TRUE, #You may want to change this to faults if your naming conventions are different.
   niter = 1,
   step = 0.01,
-  weight.upper.bound = 30
+  weight.upper.bound = 30)
 
 
 }
