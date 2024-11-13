@@ -54,7 +54,7 @@ Prochloro_NNLS_MF_Final <- function (Fn, S, S_Chl, cm, S_dvChl)
     ggplot2::theme_bw()
   G <- S - (C_new2 %*% Fn)
   Cn2 <- as.data.frame(Cn2)
-  colnames(Cn2) <- colnames(G)
+  row.names(Cn2) <- row.names(G)
   gs <- colMeans(abs((C_new2%*%Fn) - S))
   return(list(`F matrix` = Fn, RMSE = error, `condition number` = cd, 
               `Class abundances` = Cn2, Figure = n, MAE = gs, Error = G))
