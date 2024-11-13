@@ -79,7 +79,7 @@ simulated_annealing <- function(S,
  }
   
   if (condition.test > 10^5) {
-    stop("Condition number of S matrix greater than 100 000\n")
+    print("Abort process: condition number of S matrix greater than 100 000\n")
   }
   
   Fi <- ifelse(Fmat > 0, 1, 0)

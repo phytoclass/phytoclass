@@ -83,7 +83,7 @@ Matrix_checks <- function(S, Fmat){
   c <- rownames(Fmat)
   c1 <- which(c =="Diatoms-1")
   d <- colnames(Fmat)
-  d1<- which(d =="Chl.c1")
+  d1<- which(d =="Chl_c1")
   if(length(d1) ==0 & length(c1) >0){
     Fmat <- Fmat[-c1,]
   }
@@ -147,7 +147,7 @@ Matrix_checks <- function(S, Fmat){
     Fmat <- Fmat[-b1,]
   }
   d <- colnames(S)
-  d1<- which(d =="Chl.b")
+  d1<- which(d =="Chl_b")
   b <- rownames(Fmat)
   b1<- which(b =="Prasinophytes")
   if(length(d1) == 0  & length(b1) >0){
