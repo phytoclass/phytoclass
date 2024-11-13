@@ -16,8 +16,8 @@
 #' @return
 #'
 #' @examples
-Prochloro_Random_Neighbour <- function (Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val) 
-{
+Prochloro_Random_Neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val) 
+  {
   k <- match(N, place)
   s_c <- s_c[N]
   SE <- Prochloro_Wrangling(Fn, min.val, max.val)[[3]]
@@ -31,14 +31,15 @@ Prochloro_Random_Neighbour <- function (Fn, Temp, chlv, s_c, N, place, S, cm, mi
   SA <- (SE + (Temp) * ki * rand)
   SA <- as.vector(unlist(SA))
   h <- which(maxF == 1)
-  if(length(h)>0){
+  if (length(h) > 0) {
     SA[h] <- 1
   }
   d <- which(SA < minF | SA > maxF)
-  length(d)
   loop <- 1
+  max_loops <- 100 # Set a higher loop count if necessary
+  
   while (length(d) > 0) {
-    loop = loop + 1
+    loop <- loop + 1
     nr <- round(runif(length(d), -1, 1), 4)
     minr <- as.vector(unlist(minF))
     maxr <- as.vector(unlist(maxF))
@@ -48,14 +49,19 @@ Prochloro_Random_Neighbour <- function (Fn, Temp, chlv, s_c, N, place, S, cm, mi
     SA2 <- (SE[d] + (Temp) * kir * nr)
     SA[d] <- SA2
     d <- which(SA < minF | SA > maxF)
-    if (loop > 50) {
-      nn <- (minF[d] + maxF[d])/2
-      f <- round(runif(n = length(d), (minF[d] * 1.2), 
-                       (maxF[d] * 0.8)), 4)
-      SA[d] <- f
-      d <- which(SA < minF | SA > maxF)
+    
+    # Check for excessive looping and exit if needed
+    if (loop > max_loops) {
+      # Fallback to midpoint between minF and maxF
+      SA[d] <- (minF[d] + maxF[d]) / 2
+      d <- which(SA < minF | SA > maxF) # Re-evaluate after adjustment
+      
+      if (length(d) == 0) { 
+        break # Exit the loop if all values are within bounds
+      }
     }
   }
+  
   Fn <- Fn[, 1:ncol(Fn) - 1]
   Fn[N] <- SA
   Fn <- cbind(Fn, chlv)
