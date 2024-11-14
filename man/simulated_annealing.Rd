@@ -99,12 +99,14 @@ Min_max <- data.frame(
     1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000
   ))
 )
-#Run the new file with your own set up (make sure all names between your data (S), F-marix, and min_max are correct)
+#Run the new file with your own set up (make sure all names between your data (S),
+#F-marix, and min_max are correct)
 Results <- simulated_annealing(
   S = Sm, 
   F = Fu,
   user_defined_min_max = Min_max,
-  do_matrix_checks = TRUE, #You may want to change this to faults if your naming conventions are different.
+  do_matrix_checks = TRUE, 
+  #You may want to change this to faults if your naming conventions are different.
   niter = 1,
   step = 0.01,
   weight.upper.bound = 30)
