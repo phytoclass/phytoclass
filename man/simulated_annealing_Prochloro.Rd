@@ -81,5 +81,7 @@ sa.example$Figure
 set.seed(5326)
 sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
 sa.example$Figure
+
+# To use with non-defauæy values, see the 'simulated_annealing' example-
 }
 \keyword{internal}

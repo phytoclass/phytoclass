@@ -28,9 +28,9 @@ Prochloro_Wrangling <- function (Fl, min.val, max.val)
   Fmax[1:nrow(Fmax)-1,1:ncol(Fmax)-1] <- Fmax[1:nrow(Fmax)-1,1:ncol(Fmax)-1] * chlv[1:length(chlv)-1]
   Fmax[nrow(Fmax),1:ncol(Fmax)] <- Fmax[nrow(Fmax),1:ncol(Fmax)] * chlvp[length(chlvp)]
   Fmax <- cbind(Fmax[,1:ncol(Fmax)-1],chlep, chlv)
-  Fmin <- phytoclass:::vectorise(Fmin[, 1:ncol(Fmin) - 1])
-  Fmax <- phytoclass:::vectorise(Fmax[, 1:ncol(Fmax) - 1])
-  SE <- phytoclass:::vectorise(Fd[, 1:ncol(Fd) - 1])
+  Fmin <- vectorise(Fmin[, 1:ncol(Fmin) - 1])
+  Fmax <- vectorise(Fmax[, 1:ncol(Fmax) - 1])
+  SE <- vectorise(Fd[, 1:ncol(Fd) - 1])
   res <- list(Fmin, Fmax, SE, chlv,chlvp)
 }
 
