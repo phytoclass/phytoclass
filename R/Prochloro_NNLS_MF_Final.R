@@ -14,9 +14,9 @@ Prochloro_NNLS_MF_Final <- function (Fn, S, S_Chl, cm, S_dvChl)
   F.sum <- Prochloro_Normalise_F(Fn)[[2]]
   Fn <- Prochloro_Normalise_F(Fn)[[1]]
   Fn <- Fn * F.sum
-  b <- crossprod(t(phytoclass:::Weight_error(Fn, cm)), t(phytoclass:::Weight_error(S, 
+  b <- crossprod(t(Weight_error(Fn, cm)), t(Weight_error(S, 
                                                          cm)))
-  C_new2 <- t(RcppML::nnls(crossprod(t(phytoclass:::Weight_error(Fn, cm))), 
+  C_new2 <- t(RcppML::nnls(crossprod(t(Weight_error(Fn, cm))), 
                            b, cd_maxit = 1000, cd_tol = 1e-10))
   C_new2 <- as.matrix(C_new2)
   Cn.s2 <- rowSums(C_new2)
@@ -25,8 +25,8 @@ Prochloro_NNLS_MF_Final <- function (Fn, S, S_Chl, cm, S_dvChl)
   Cn2 <- Cn2 * S_Chl
   colnames(Cn2) <- rownames(Fn)
   colnames(Fn) <- colnames(S)
-  Pb <- crossprod(t(phytoclass:::Weight_error(Fn[nrow(Fn),1:ncol(Fn)-1], cm[1:length(cm)-1])), t(phytoclass:::Weight_error(S[,1:ncol(S)-1],                                                                                                                       cm[1:length(cm)-1])))
-  PC_new2 <- t(RcppML::nnls(crossprod(t(phytoclass:::Weight_error(Fn[nrow(Fn),1:ncol(Fn)-1], cm[1:length(cm)-1]))), 
+  Pb <- crossprod(t(Weight_error(Fn[nrow(Fn),1:ncol(Fn)-1], cm[1:length(cm)-1])), t(Weight_error(S[,1:ncol(S)-1],                                                                                                                       cm[1:length(cm)-1])))
+  PC_new2 <- t(RcppML::nnls(crossprod(t(Weight_error(Fn[nrow(Fn),1:ncol(Fn)-1], cm[1:length(cm)-1]))), 
                             Pb, cd_maxit = 1000, cd_tol = 1e-10))
   PCn.s2 <- rowSums(PC_new2)
   PCn2 <- PC_new2/PCn.s2
