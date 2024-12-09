@@ -1,5 +1,5 @@
 ---
-title: "The phytoclass package"
+title: "Example Usage : TEMPO"
 output:
    rmarkdown::html_vignette:
      tabset: true
