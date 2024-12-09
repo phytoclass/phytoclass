@@ -1,0 +1,35 @@
+---
+title: "The phytoclass package"
+output:
+   rmarkdown::html_vignette:
+     tabset: true
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{The phytoclass package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup}
+library(phytoclass)
+```
+
+```{R}
+# sample matrix
+S_matrix <- read.csv("vignettes/TEMPO-example-S-matrix.csv")
+
+# pigment-taxa occurrence matrix (specific to an oceanographic region)
+F_matrix <- read.csv("vignettes/TEMPO-example-F-matrix.csv")
+
+# min-max matrix for bounding pigment-taxa fits (taxa specific)
+min_max_matrix <- phytoclass::min_max
+
+phytoclass::simulated_annealing(
+  S_matrix,
+  Fmat = F_matrix,
+  # user_defined_min_max = min_max_matrix
+)
+```
