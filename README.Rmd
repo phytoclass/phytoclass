@@ -65,3 +65,9 @@ Documentation is built into a website using pkgdown and GitHub actions.
 To build locally run `pkgdown::build_site()` and `pkgdown::preview_site()`.
 Changes made to the `main` branch will trigger an automatic GitHub action to update the docs.
 This process can take a few minutes from commit time to website update.
+
+# Automated Testing
+The included `./vignettes/` serve as tests for the project.
+If the `pkgdown` build fails then something has gone wrong.
+
+**Always test before pushing** by running `pkgdown::build_site()`.
