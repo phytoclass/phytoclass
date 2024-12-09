@@ -1,0 +1,59 @@
+---
+title: "Example : Minimal"
+output:
+   rmarkdown::html_vignette:
+     tabset: true
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{The phytoclass package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+This vignette outlines the simplest possible usage of phytoclass's simulated annealing.
+
+# Preparing the S Matrix
+To run phytoclass you must prepare a sample matrix (aka the `S matrix`).
+For this we recommend creating a comma-separated-value (`.csv`) file.
+Several example files are included in the [`./vignettes/` directory of the phytoclass source code](https://github.com/phytoclass/phytoclass/tree/main/vignettes). 
+`.csv` files can be created in any plain text editor.
+Below is an example S-matrix `.csv` file content:
+
+```
+Per,X19hex,Fuco,Neox,Pra,Viol,X19but,Allo,Zea,Lut,ChlcMGDG18,ChlcMGDG14,Chl_b,Tchla
+0.0097,0.23846,0.38051,0,0,0,0.01415,0.01356,0.00243,0,0,0,0,1.19233
+0.00797,0.23691,0.29481,0,0,0,0.01235,0.01176,0,0,0,0,0.00716,0.93391
+0.00898,0.2175,0.28145,0,0,0,0.01344,0.01124,0,0,0,0,0.00969,0.8194
+0.0098,0.05819,0.11961,0,0,0,0.00791,0.00763,0,0,0,0,0.00828,0.37931
+0.00635,0.02745,0.05233,0,0,0,0.00639,0.00644,0,0,0,0,0.00765,0.18592
+```
+
+This example includes only 5 samples (rows), with the pigment concentration of each sample included on each row.
+The first row includes the names for each pigment.
+These **pigment abbreviations must match exactly** to the pigments in the F-matrix. For this example we are using the default `phytoclass:Fm` F matrix, and the column names in the example above should be used.
+
+> NOTE: Instead of using a plain text editor, `.csv` files can also be created using a spreadsheet editor (MS Excel, Google Docs, LibreOffice Calc, etc.) by using "save as" or "export" to `.csv`.
+
+# Simulated Annealing
+To run the simulated annealing call the function with your S matrix passed as the only argument.
+```{R}
+# load the sample matrix from a file
+S_matrix <- read.csv("vignettes/TEMPO-example-S-matrix.csv")
+
+# run simulated annealing 
+results <- phytoclass::simulated_annealing(S_matrix)
+```
+
+# Viewing Results
+Results of the simulated annealing run are in the `results` object returned by the function.
+
+```{R}
+Results$`condition number`
+Results$RMSE
+Results$MAE
+Results$Error
+Results$`Class abundances`
+Results$Figure
+```
