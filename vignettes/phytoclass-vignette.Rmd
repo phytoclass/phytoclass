@@ -319,3 +319,23 @@ Results$`C matrix`
 ```
 
 # References
+
+
+
+```{R}
+samples <- phytoclass::Sm
+# samples <- read.csv()
+
+F_matrix <- phytoclass::Fm
+# F_matrix <- read.csv("custom_F_matrix.csv")
+
+min_max_matrix <- phytoclass::min_max
+write.csv(min_max_matrix, file="eg_minMax.csv")
+
+phytoclass::simulated_annealing(
+  samples,
+  Fmat = F_matrix,
+  user_defined_min_max = min_max_matrix
+)
+
+```
