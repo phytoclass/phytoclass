@@ -29,3 +29,4 @@ vignettes/*.pdf
 .Renviron
 phytoclass.Rproj
 inst/doc
+docs
