@@ -21,7 +21,7 @@ The main function is 'Simulated annealing'. This can be used in conjuction with 
 
 When setting up your matrices, it is important to ensure that pigments are in the same order in the Sm and Fm matrices. Chlorophyll a must be the final column.
 
-There is a separate function when Divinyl chlorophyll a and Prochlorococcus are used. Here Divynl chlorophyll a must be the 2nd to last column (see 'Fp').
+There is a separate function when Divinyl chlorophyll a and Prochlorococcus are used. Here Divinyl chlorophyll a must be the 2nd to last column (see 'Fp').
 
 The 'Steepest Descent'function is similar to that of CHEMTAX, and is unconstrained by minimum and maximum values, unlike the simualted annealing function. I would use this with more caution.
 
