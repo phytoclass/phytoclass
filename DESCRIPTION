@@ -32,7 +32,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    quarto
+    quarto,
+    here
 VignetteBuilder: knitr
 URL: https://github.com/phytoclass/phytoclass/
 BugReports: https://github.com/phytoclass/phytoclass/issues/

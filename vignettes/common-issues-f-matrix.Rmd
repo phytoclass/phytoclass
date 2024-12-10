@@ -33,6 +33,9 @@ https://github.com/phytoclass/phytoclass/issues/11
 
 https://github.com/phytoclass/phytoclass/issues/12
 
+This error can happen when the sample names are included in the S matrix.
+Current version of phytoclass does not support sample names.
+
 # 'x' must be numeric
 > Error in rowSums(Fmat) : 'x' must be numeric
 
