@@ -31,7 +31,8 @@ LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    quarto
 VignetteBuilder: knitr
 URL: https://github.com/phytoclass/phytoclass/
 BugReports: https://github.com/phytoclass/phytoclass/issues/
