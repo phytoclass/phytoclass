@@ -1,7 +1,7 @@
-,Chl_c3,Chl_c1,Chl_c2,Per,X19but,Fuco,Neox,Pra,Viol,X19hex,Allo,Zea,Gyro1,crocox,Chl_b
-Chlorophytes,0,0,0,0,0,0,1,0,1,0,0,1,0,0,1
-Prasinophytes,0,0,0,0,0,0,1,1,1,0,0,1,0,0,1
-Cryptophytes,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
-Diatoms-B,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0
-Dinoflagellates-A,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
-Haptophytes,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0
+,Per,Fuco,Neox,X19hex,Allo,Zea,Chl_b
+Chlorophytes,0,0,1,0,0,1,1
+Prasinophytes,0,0,1,0,0,1,1
+Cryptophytes,0,0,0,0,1,0,0
+Diatoms-B,0,1,0,0,0,0,0
+Dinoflagellates-A,1,0,0,0,0,0,0
+Haptophytes,0,1,0,1,0,0,0

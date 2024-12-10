@@ -39,7 +39,6 @@ if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
   F_matrix <- F_matrix[, -1] 
 }
 ```
-
 ```{R}
 # min-max matrix for bounding pigment-taxa fits (taxa specific)
 min_max_matrix <- phytoclass::min_max
@@ -83,7 +82,7 @@ if (! length(common_headers) > 0){
 ```{R}
 phytoclass::simulated_annealing(
   S_matrix,
-  Fmat = F_matrix
-  # user_defined_min_max = min_max_matrix
+  Fmat = F_matrix,
+  user_defined_min_max = min_max_matrix
 )
 ```
