@@ -15,16 +15,18 @@ editor_options:
 
 ```{r setup}
 library(phytoclass)
+
+library(here)
 ```
 
 ```{R}
 # sample matrix
-S_matrix <- read.csv("vignettes/custom-example-S.csv")
+S_matrix <- read.csv(here("vignettes/custom-example-S.csv"))
 ```
 
 ```{R}
 # pigment-taxa occurrence matrix (specific to an oceanographic region)
-F_matrix <- read.csv("vignettes/custom-example-F.csv")
+F_matrix <- read.csv(here("vignettes/custom-example-F.csv"))
 ```
 
 
@@ -42,7 +44,7 @@ if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
 ```
 
 ```{R}
-min_max_matrix <- read.csv("vignettes/custom-example-min_max.csv")
+min_max_matrix <- read.csv(here("vignettes/custom-example-min_max.csv"))
 ```
 
 ```{R}

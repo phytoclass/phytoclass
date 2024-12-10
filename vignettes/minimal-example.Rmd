@@ -39,8 +39,9 @@ These **pigment abbreviations must match exactly** to the pigments in the F-matr
 # Simulated Annealing
 To run the simulated annealing call the function with your S matrix passed as the only argument.
 ```{R}
+#| eval: false
 # load the sample matrix from a file
-S_matrix <- read.csv("vignettes/TEMPO-example-S-matrix.csv")
+S_matrix <- read.csv("vignettes/custom-example-S.csv")
 
 # run simulated annealing 
 results <- phytoclass::simulated_annealing(S_matrix)
@@ -50,10 +51,11 @@ results <- phytoclass::simulated_annealing(S_matrix)
 Results of the simulated annealing run are in the `results` object returned by the function.
 
 ```{R}
-Results$`condition number`
-Results$RMSE
-Results$MAE
-Results$Error
-Results$`Class abundances`
-Results$Figure
+#| eval: false
+results$`condition number`
+results$RMSE
+results$MAE
+results$Error
+results$`Class abundances`
+results$Figure
 ```
