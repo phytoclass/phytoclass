@@ -1,0 +1,69 @@
+---
+title: "Example Usage : custom F & MinMax Matrices"
+output:
+   rmarkdown::html_vignette:
+     tabset: true
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{The phytoclass package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r setup}
+library(phytoclass)
+
+library(here)
+```
+
+```{R}
+# sample matrix
+S_matrix <- read.csv(here("vignettes/custom-example-S.csv"))
+```
+
+```{R}
+# pigment-taxa occurrence matrix (specific to an oceanographic region)
+F_matrix <- read.csv(here("vignettes/custom-example-F.csv"))
+```
+
+
+```{R}
+#| code-summary: clean up the F matrix
+# === remove numeric rownames introduced by read.csv
+if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
+  print("dropping unneeded numeric index")
+  # Set the first column as row names
+  rownames(F_matrix) <- F_matrix[[1]]
+  
+  # Remove the first column
+  F_matrix <- F_matrix[, -1] 
+}
+```
+
+```{R}
+min_max_matrix <- read.csv(here("vignettes/custom-example-min_max.csv"))
+```
+
+```{R}
+#| code-summary: clean up the min_max matrix
+# === remove numeric rownames introduced by read.csv
+if (all(grepl("^[0-9]+$", rownames(min_max_matrix)))) {
+  print("dropping unneeded numeric index")
+  # Set the first column as row names
+  rownames(min_max_matrix) <- min_max_matrix[[1]]
+  
+  # Remove the first column
+  min_max_matrix <- min_max_matrix[, -1] 
+}
+```
+
+```{R}
+phytoclass::simulated_annealing(
+  S_matrix,
+  Fmat = F_matrix,
+  user_defined_min_max = min_max_matrix
+)
+```

@@ -1,0 +1,71 @@
+---
+title: "Example : Minimal"
+output:
+   rmarkdown::html_vignette:
+     tabset: true
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{The phytoclass package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+This vignette outlines the simplest possible usage of phytoclass's simulated annealing.
+
+# Preparing the S Matrix
+To run phytoclass you must prepare a sample matrix (aka the `S matrix`).
+For this we recommend creating a comma-separated-value (`.csv`) file.
+Several example files are included in the [`./vignettes/` directory of the phytoclass source code](https://github.com/phytoclass/phytoclass/tree/main/vignettes). 
+`.csv` files can be created in any plain text editor.
+Below is an example S-matrix `.csv` file content:
+
+```
+"","Per","X19but","Fuco","Neox","Pra","Viol","X19hex","Allo","Zea","Lut","ChlcMGDG18","ChlcMGDG14","Chl_b","Tchla"
+"1",0,0.03024,0.06225,0.00557,0.01407,0.00759,0.08224,0.00188,0.00201,0,0,0,0.08661,0.45851
+"2",0,0.01084,0.02864,0.00111,0.00351,0.00144,0.01497,0.00144,0.00191,0,0,0,0.01473,0.14571
+"3",0,0.0156,0.2172,0.0064,0.0092,0,0.0174,0.0058,0.0036,0,0,0,0.057,0.6127
+"4",0,0.0177,0.2347,0.007,0.0115,0,0.0189,0.0054,0.0038,0,0,0,0.0619,0.6207
+"5",0,0.0252,0.2952,0.0099,0.013,0,0.0211,0.0014,0.0076,0,0,0,0.0578,0.5302
+"6",0.0102,0.0222,0.2275,0.0076,0.0107,0,0.019,0,0.003,0,0,0,0.0453,0.4057
+"7",0,0.0151,0.1417,0.004,0.008,0.0026,0.0255,8e-04,0.001,0,0,0,0.0312,0.2117
+"8",0,0.0452,0.4484,0.0037,0.0065,0,0.1317,0.0044,0.0023,0,0,0,0.0093,0.6885
+"9",0,0.0518,0.6228,0.0049,0.0075,0.004,0.1321,0.0597,0.0035,0,0,0,0.0121,1.0849
+"10",0,0.022,0.109,0.004,0.008,0.003,0.042,0.003,0.003,0,0,0,0.032,0.206
+"11",0,0.049062693,0.526641835,0.017334346,0.034463572,0,0.120442872,0.029990012,0.039966194,0,0,0,0.153250497,1.039660729
+"12",0,0.020526621,0.271493439,0.017692288,0.019947584,0,0.030115477,0,0.030828916,0,0,0,0.09243326,0.481204323
+"13",0,0.022161768,0.165425707,0.012242414,0.019562855,0,0.027210489,0,0.017661542,0,0,0,0.087205952,0.340907892
+"14",0,0.014385454,0.255559406,0.020671983,0.047363662,0.011507712,0.021676506,0.009032764,0.018938989,0,0,0,0.142134419,0.489290176
+```
+
+This example includes only 14 samples (rows), with the pigment concentration of each sample included on each row.
+14 is the minumum number of rows required to apply simulated annealing.
+The first row includes the names for each pigment.
+These **pigment abbreviations must match exactly** to the pigments in the F-matrix. For this example we are using the default `phytoclass:Fm` F matrix, and the column names in the example above should be used.
+
+> NOTE: Instead of using a plain text editor, `.csv` files can also be created using a spreadsheet editor (MS Excel, Google Docs, LibreOffice Calc, etc.) by using "save as" or "export" to `.csv`.
+
+# Simulated Annealing
+To run the simulated annealing call the function with your S matrix passed as the only argument.
+```{R}
+#| eval: false
+# load the sample matrix from a file
+S_matrix <- read.csv("vignettes/custom-example-S.csv")
+
+# run simulated annealing 
+results <- phytoclass::simulated_annealing(S_matrix)
+```
+
+# Viewing Results
+Results of the simulated annealing run are in the `results` object returned by the function.
+
+```{R}
+#| eval: false
+results$`condition number`
+results$RMSE
+results$MAE
+results$Error
+results$`Class abundances`
+results$Figure
+```

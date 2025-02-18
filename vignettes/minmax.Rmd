@@ -1,0 +1,26 @@
+---
+title: "Table of Default F MinMax Values"
+output:
+   rmarkdown::html_vignette:
+     tabset: true
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{The phytoclass package}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+Below is the default table used to define the minimum and maximum values 
+for the pigment-to-chlorophyll-a ratios of each pigment-taxa pair.
+These values are used to constrain the gradient decent algorithm. 
+
+```{R}
+print(phytoclass::min_max)
+```
+
+These values are derived from the following paper among other sources:
+
+> Mackey, M. D., Mackey, D. J., Higgins, H. W., & Wright, S. W. (1996). 
+> CHEMTAX—a program for estimating class abundances from chemical markers: 
+> application to HPLC measurements of phytoplankton. 
+> Marine Ecology Progress Series, 144(1/3), 265–283. http://www.jstor.org/stable/24857270
