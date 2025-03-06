@@ -12,6 +12,17 @@ conjuction with the cluster function, which clusters larger datasets. To
 understand how to use your own matrices instead of the default dataset,
 please see the example in the vignette.
 
+-------------------------------------------------------------
+
+### Why Phytoclass?
+* phytoclass is entirely open-source, whereas other methods rely on external software
+* ability to run phytoclass from R allows scripting for improved reproducibility
+* scripting also enables batch processing for running many samples
+* phytoclass features improved gradient-descent algorithms for solving the least-squares problem
+  
+-------------------------------------------------------------
+
+### Additional Features
 When setting up your matrices, it is important to ensure that pigments
 are in the same order in the Sm and Fm matrices. Chlorophyll a must be
 the final column.
