@@ -61,9 +61,25 @@
 </h1></div>
 <p>The phytoclass package uses non-negative matrix factorization and simulated annealing to determine the chl a concentrations of different phytoplankton groups from pigment concentrations.</p>
 <p>The main function is ‘Simulated annealing’. This can be used in conjuction with the cluster function, which clusters larger datasets. To understand how to use your own matrices instead of the default dataset, please see the example in the vignette.</p>
+<hr>
+<div class="section level3">
+<h3 id="why-phytoclass">Why Phytoclass?<a class="anchor" aria-label="anchor" href="#why-phytoclass"></a>
+</h3>
+<ul>
+<li>phytoclass is entirely open-source, whereas other methods rely on external software</li>
+<li>ability to run phytoclass from R allows scripting for improved reproducibility</li>
+<li>scripting also enables batch processing for running many samples</li>
+<li>phytoclass features improved gradient-descent algorithms for solving the least-squares problem</li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="additional-features">Additional Features<a class="anchor" aria-label="anchor" href="#additional-features"></a>
+</h3>
 <p>When setting up your matrices, it is important to ensure that pigments are in the same order in the Sm and Fm matrices. Chlorophyll a must be the final column.</p>
 <p>There is a separate function when Divinyl chlorophyll a and Prochlorococcus are used. Here Divynl chlorophyll a must be the 2nd to last column (see ‘Fp’).</p>
 <p>The ’Steepest Descent’function is similar to that of CHEMTAX, and is unconstrained by minimum and maximum values, unlike the simualted annealing function. I would use this with more caution.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
