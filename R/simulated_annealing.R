@@ -33,7 +33,7 @@ simulated_annealing <- function(S,
                                 niter = 500,
                                 step = 0.009,
                                 weight.upper.bound = 30, 
-                                verbose = TRUE){
+                                verbose = FALSE){
   if (is.null(Fmat)) {
     Fmat <- phytoclass::Fm
   }
