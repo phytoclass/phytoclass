@@ -1,0 +1,40 @@
+---
+---
+
+Data source: Karen Westwood 2025-03.
+Reported via [Tylar's email](https://mail.google.com/mail/u/0/?pli=1#inbox/FMfcgzQZTVkbdzgfZwHCWXRWSbhZvTdF).
+
+>> "Works fine using the default F matrix, but fails with custom F matrix."
+
+```{r setup}
+library(phytoclass)
+library(here)
+```
+
+```{R}
+# sample matrix
+S_matrix <- read.csv(here("tests/integration/ME2-S.csv"))
+```
+
+```{R}
+# pigment-taxa occurrence matrix (specific to an oceanographic region)
+F_matrix <- read.csv(here("tests/integration/ME2-F.csv"))
+```
+
+```{R}
+phytoclass::simulated_annealing(
+  S_matrix,
+  Fmat = F_matrix,
+  user_defined_min_max = min_max_matrix
+)
+```
+
+"Error in rowSums(Fmat) : 'x' must be numeric."
+
+This indicates that the object Fmat (or one of its columns, if it’s a data frame) contains non‐numeric data.
+
+> traceback()
+3: rowSums(Fmat)
+2: Matrix_checks(as.matrix(S), as.matrix(Fmat))
+1: phytoclass::simulated_annealing(S_matrix, Fmat = F_matrix, user_defined_min_max = min_max_matrix)
+
