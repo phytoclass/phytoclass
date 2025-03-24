@@ -7,7 +7,7 @@
 #' @param niter Number of iterations (default is 500)
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
-#' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
+#' @param verbose Logical value. Output error and temperature at each iteration. Default value of FALSE
 #'
 #' @return A list containing 
 #' \enumerate{
