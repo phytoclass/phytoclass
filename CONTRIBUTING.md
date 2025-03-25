@@ -16,4 +16,7 @@ Pull requests are welcomed, please open an issue on github to get started.
 * `./tests/testthat/` is where unit tests will be placed, but none exist yet.
 
 ## Pushing a Release
-TODO
+* rebuild docs: `devtools::document()`
+* increment version: ? TODO
+* push github release: ? TODO
+* push to CRAN: ? TODO
