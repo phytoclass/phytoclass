@@ -37,7 +37,6 @@ Prochloro_Random_Neighbour_2(
 \item{max.val}{xx}
 
 \item{chlvp}{xx}
-
 }
 \description{
 Selects a random neighbour for the simulated annealing algorithm.

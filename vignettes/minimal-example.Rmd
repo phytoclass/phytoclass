@@ -5,7 +5,7 @@ output:
      tabset: true
 bibliography: references.bib
 vignette: >
-  %\VignetteIndexEntry{The phytoclass package}
+  %\VignetteIndexEntry{Minimal Example}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

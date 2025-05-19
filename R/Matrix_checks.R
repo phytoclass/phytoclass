@@ -38,7 +38,15 @@ Matrix_checks <- function(S, Fmat){
     S <- S[,-l]
     Fmat <- Fmat[,-l] 
   }
-  k <- rowSums(Fmat)
+  k <- tryCatch({
+    rowSums(Fmat)
+  }, error = function(e) {
+    if (grepl("'x' must be numeric", e$message)) {
+      stop("Error in rowSums(Fmat) : 'x' must be numeric. \n\n The F-Matrix contains non-numeric data.")
+    } else {
+      stop(e)
+    }
+  })
   kn <- which(k == 1)
   if (length(kn) >0) {
     Fmat <- Fmat[-kn,]
