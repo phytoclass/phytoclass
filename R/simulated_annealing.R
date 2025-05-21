@@ -37,10 +37,18 @@ simulated_annealing <- function(S,
   if (is.null(Fmat)) {
     Fmat <- phytoclass::Fm
   }
-
+  
+  if (!is.matrix(Fmat)){
+    Fmat <- as.matrix(Fmat)
+  }
+    
   if (is.data.frame(S)){
   char_cols <- sapply(S, is.character)
   S <- S[, !char_cols]}
+  
+  if (!is.matrix(S)){
+    S <- as.matrix(S)
+  }
 
   if (do_matrix_checks) {
     L <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
