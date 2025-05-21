@@ -27,7 +27,8 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   C_new2 <-t(RcppML::nnls(crossprod(t(Weight_error(Fn, cm))), b,cd_maxit = 1000,cd_tol =1e-10 ))
   C_new2 <- as.matrix(C_new2)
   Cn.s2 <- rowSums(C_new2)
-  Cn2 <- C_new2/Cn.s2
+  Cn.s2_safe <- ifelse(Cn.s2 == 0, 1, Cn.s2)
+  Cn2 <- C_new2 / Cn.s2_safe
   Cn2 <- as.matrix(Cn2)
   Cn2 <- Cn2 * S_Chl
   colnames(Cn2) <- rownames(Fn)
