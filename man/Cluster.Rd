@@ -4,12 +4,12 @@
 \alias{Cluster}
 \title{Cluster things}
 \usage{
-Cluster(Data, min_cluster_size)
+Cluster(Data, minSamplesPerCluster)
 }
 \arguments{
 \item{Data}{S (sample) matrix}
 
-\item{min_cluster_size}{the minimum size required for a cluster}
+\item{minSamplesPerCluster}{the minimum number of samples required for a cluster}
 }
 \value{
 A named list of length two. The first element "cluster.list"
