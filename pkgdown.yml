@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.2
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   common-issues-f-matrix: common-issues-f-matrix.html
@@ -7,4 +7,4 @@ articles:
   minimal-example: minimal-example.html
   minmax: minmax.html
   phytoclass-vignette: phytoclass-vignette.html
-last_built: 2025-05-21T17:36Z
+last_built: 2025-05-29T12:44Z

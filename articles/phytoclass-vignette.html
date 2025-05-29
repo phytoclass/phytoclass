@@ -420,7 +420,7 @@ dendrogram.</p>
 <h4 id="example-with-clustering">Example with clustering<a class="anchor" aria-label="anchor" href="#example-with-clustering"></a>
 </h4>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Clust1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Cluster.html">Cluster</a></span><span class="op">(</span><span class="va">Sm</span>, min_cluster_size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span><span class="op">$</span><span class="va">cluster.list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="va">Clust1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Cluster.html">Cluster</a></span><span class="op">(</span><span class="va">Sm</span>, minSamplesPerCluster <span class="op">=</span> <span class="fl">14</span><span class="op">)</span><span class="op">$</span><span class="va">cluster.list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt;  ..done.</span></span>
 <span><span class="co"># Remove the cluster column/label</span></span>
 <span><span class="va">Clust1</span><span class="op">$</span><span class="va">Clust</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
@@ -3220,7 +3220,7 @@ Markers: Application to HPLC Measurements of Phytoplankton.”</span>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
