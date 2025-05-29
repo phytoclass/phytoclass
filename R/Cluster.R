@@ -14,6 +14,22 @@
 #' plot(Cluster.result$cluster.plot)
 Cluster <- function(Data, minSamplesPerCluster) {
   
+  number_of_Samples <- nrow(Data)
+  number_of_Features <- ncol(Data) - 1 
+  
+  # Stop if minSamplesPerCluster is less than the number of features
+  if (minSamplesPerCluster < number_of_Features) {
+    stop(sprintf("minSamplesPerCluster (%d) cannot be less than number of features/pigments (%d).", 
+                 minSamplesPerCluster, number_of_Features))
+  }
+  
+  # Stop if minSamplesPerCluster exceeds half the total number of samples
+  maxAllowed <- floor(number_of_Samples / 2)
+  if (minSamplesPerCluster > maxAllowed) {
+    stop(sprintf("minSamplesPerCluster (%d) cannot be greater than half of total samples (%d).", 
+                 minSamplesPerCluster, maxAllowed))
+  }
+  
   standardise <- function(Data) {
     b <- Data
     b <- b[, 1:ncol(b) - 1]
