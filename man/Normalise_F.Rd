@@ -7,10 +7,12 @@
 Normalise_F(Fmat)
 }
 \arguments{
-\item{Fmat}{xx}
+\item{Fmat}{A matrix or data.frame with the last column containing non-zeros}
 }
 \value{
-A matrix
+A list consisting of two components:
+- a matrix of pigment ratios normalized to row sums
+- a vector of row sums
 }
 \description{
 This function normalises each column in F to row sum
