@@ -17,16 +17,3 @@ Normalise_S <- function(S){
   S <- S / rowSums(S)
   return(S)
 }
-
-
-# Normalise_S2 <- function(S){
-#   S <- S[,1:ncol(S)]
-#   #Normalise to unit row sum
-#   S.sum <- rowSums(S)
-#   S <- S/S.sum
-#   #vectorise / matrices
-#   Sm <- as.matrix(S)
-#   Sn <- as.vector(Sm[1,])
-#   return(Sm)
-# }
-
