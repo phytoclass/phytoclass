@@ -9,10 +9,10 @@
 #' @examples
 #' Bounded_weights(Sm, weight.upper.bound = 30)
 #' 
-Bounded_weights <-function(S, weight.upper.bound = 30){
+Bounded_weights <- function(S, weight.upper.bound = 30) {
   n <- colMeans(S)
   S <- n^-1
-  S <- ifelse(S > weight.upper.bound, weight.upper.bound, S)
-  S[length(S)] = 1
+  S[S > weight.upper.bound] <- weight.upper.bound
+  S[length(S)] <- 1
   return(S)
 }
