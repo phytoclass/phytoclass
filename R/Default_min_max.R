@@ -4,9 +4,8 @@
 #'  
 #' @keywords internal
 #' 
-#' @param min_max   xx
-#' @param Fmat    xx
-#' @param place       xx
+#' @param min_max A data.frame with 3 4 columns for class, pigment, min and max.
+#' @param Fmat    F matrix
 #'
 #' @return
 #'
@@ -39,7 +38,9 @@ Default_min_max <- function(min_max, Fmat) {
     stop(
       call. = FALSE,
       c(
-        "Your F matrix includes a missing taxa-pigment pair in the `min_max` matrix.\n",
+        "`Default_min_max()` - Your F matrix includes a missing taxa-pigment ", 
+        "pair in the `min_max` matrix.\n",
+        "Missing pairs:\n",
         sprintf(
           "%-20.20s : %7.7s\n",
           RName[mis_idx],
