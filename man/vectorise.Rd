@@ -2,12 +2,15 @@
 % Please edit documentation in R/vectorise.R
 \name{vectorise}
 \alias{vectorise}
-\title{Turn each non-zero element of the F-matrix into a vector}
+\title{Vectorise a matrix and keep non-zero elements}
 \usage{
 vectorise(Fmat)
 }
 \arguments{
-\item{Fmat}{xx}
+\item{Fmat}{A matrix to vectorise}
+}
+\value{
+A vector of non-zero pigment elements
 }
 \description{
 Turn each non-zero element of the F-matrix into a vector

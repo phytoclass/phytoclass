@@ -2,17 +2,24 @@
 % Please edit documentation in R/Wrangling.R
 \name{Wrangling}
 \alias{Wrangling}
-\title{Converts data-types and selects data for randomisation in
-the simulated annealing algorithm}
+\title{Wrangle data to vectors}
 \usage{
 Wrangling(Fl, min.val, max.val)
 }
 \arguments{
-\item{Fl}{xx}
+\item{Fl}{A matrix of initial F (i.e. pigment ratio matrix)}
 
-\item{min.val}{xx}
+\item{min.val}{A vector of the minimum values for each non-zero pigment ratios}
 
-\item{max.val}{xx}
+\item{max.val}{A vector of the maximum values for each non-zero pigment ratios}
+}
+\value{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A list containing following components:
+- A vector Fmin with the minimum pigment ratio values
+- A vector Fmax with the maximum pigment ratio values
+- A vector SE with the current pigment ratio values
+- A vector chlv with the pigment ratio values for the last column in Fl
+}\if{html}{\out{</div>}}
 }
 \description{
 Converts data-types and selects data for randomisation in

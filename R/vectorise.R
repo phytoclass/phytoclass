@@ -1,19 +1,14 @@
+#' Vectorise a matrix and keep non-zero elements
+#' 
 #' Turn each non-zero element of the F-matrix into a vector
 #' 
 #' @keywords internal
 #'
-#' @param Fmat  xx
+#' @param Fmat  A matrix to vectorise
 #'
-#' @return
+#' @return A vector of non-zero pigment elements
 #'
 #' @examples
-vectorise <- function(Fmat){
-  g <- vector()
-  for (i in Fmat){
-    if (i > -0){
-      g[[length(g)+1]] <- i
-      
-    }
-  }
-  return(g)
+vectorise <- function(Fmat) {
+  return(Fmat[Fmat > 0])
 }

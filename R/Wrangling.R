@@ -1,33 +1,41 @@
+#' Wrangle data to vectors
+#' 
 #' Converts data-types and selects data for randomisation in 
 #' the simulated annealing algorithm
 #' 
 #' @keywords internal
 #'
-#' @param Fl   xx
-#' @param min.val xx
-#' @param max.val  xx
+#' @param Fl      A matrix of the initial F matrix (i.e. pigment ratio matrix)
+#' @param min.val A vector of the minimum values for each non-zero pigment ratios 
+#' @param max.val A vector of the maximum values for each non-zero pigment ratios
 #'
 #' @return
-#'
+#'     A list containing following components:
+#'     - A vector Fmin with the minimum pigment ratio values
+#'     - A vector Fmax with the maximum pigment ratio values
+#'     - A vector SE with the current pigment ratio values
+#'     - A vector chlv with the pigment ratio values for the last column in Fl
 #' @examples
-Wrangling <- function(Fl, min.val, max.val){
-  Fd <- Fl
-  Fmin <- as.matrix(Fd)   #### Set up Fmin matrix
-  Fmin <- Fmin[,1:ncol(Fmin)-1]
-  Fmin[Fmin>0] <- min.val  # set all non-zero elements to the minimum values (imported from csv )
-  Fmax <- as.matrix(Fd)
-  Fmax <- Fmax[,1:ncol(Fmax)-1]
-  Fmax[Fmax>0] <- max.val
-  chlv <- Fd[,ncol(Fd)]  ##### The chlorophyll values once weighted to rowsums for initial F matrix
-  Fmin <- Fmin * chlv #### multiply the minimum value by weighted chlorophyll to updated ratios
-  Fmin <- cbind(Fmin,chlv)  #### Reassign correct initial chl values
-  Fmax <- Fmax * chlv  #### same for max values
-  Fmax <- cbind(Fmax,chlv)
+Wrangling <- function(Fl, min.val, max.val) {
   
-  Fmin <- vectorise(Fmin[,1:ncol(Fmin)-1]) #### vectorise function outputs all non-zero elements as a vector (excluding chl column)
-  Fmax <- vectorise(Fmax[,1:ncol(Fmax)-1]) #### vectorise function outputs all non-zero elements as a vector (excluding chl column)
-  SE <- vectorise(Fd[,1:ncol(Fd)-1]) #### vectorise function outputs all non-zero elements as a vector (excluding chl column)
+  # set up initial F, Fmin, Fmax, matrix by removing Tchla column
+  Fd <- Fmin <- Fmax <- as.matrix(Fl)[, -ncol(Fl)]
   
-  res <- list(Fmin, Fmax, SE,chlv)
+  # set all non-zero elements of F matrix to the minimum and maximum values
+  Fmin[Fmin > 0] <- min.val
+  Fmax[Fmax > 0] <- max.val
+  
+  # extract chlorophyll-a values once weighted to rowsums for initial F matrix
+  chlv <- Fl[, ncol(Fl)]
+  
+  # multiply the minimum value by weighted chlorophyll to updated ratios
+  Fmin <- Fmin * chlv
+  Fmax <- Fmax * chlv
+  
+  # vectorise function outputs all non-zero elements as a vector (excluding chl column)
+  Fmin <- vectorise(Fmin)
+  Fmax <- vectorise(Fmax)
+  SE   <- vectorise(Fd)
+  
+  return(list(Fmin, Fmax, SE, chlv))
 }
-
