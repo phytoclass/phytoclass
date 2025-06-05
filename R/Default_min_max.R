@@ -26,9 +26,18 @@ Default_min_max <- function(min_max, Fmat, place){
     CName[[length(CName)+1]] <- colnames(Fmat)[k[[i]][,2]]
   }
   
+  
+  # Find indices in min_max matching each taxa-pigment pair;
+  # throw error if any pair is missing in min_max
   vecs <- vector()
   for (i in 1:length(k)){
-    vecs[[length(vecs)+1]]<-which(RName[[i]] == min_max[,1] & CName[[i]] == min_max[,2])
+    idx <- which(RName[[i]] == min_max[,1] & CName[[i]] == min_max[,2])
+    if (length(idx) == 0) {
+      stop(paste0("Your F matrix includes an unexpected taxa-pigment pair for ", 
+                  RName[[i]], " - ", CName[[i]], 
+                  ". This pair is not in the min_max matrix."))
+    }
+    vecs[[length(vecs)+1]] <- idx
   }
   
   min <- min_max[vecs,3]
