@@ -2,12 +2,12 @@
 % Please edit documentation in R/Normalise_S.R
 \name{Normalise_S}
 \alias{Normalise_S}
-\title{This function normalises each column in S to row sum}
+\title{Normalise matrix to row sum}
 \usage{
 Normalise_S(S)
 }
 \arguments{
-\item{S}{xx}
+\item{S}{A matrix or data.frame}
 }
 \value{
 A matrix
