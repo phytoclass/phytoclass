@@ -1,0 +1,57 @@
+---
+title: "Using a Custom S Matrix"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(phytoclass)
+```
+
+This guide demonstrates how to use your own custom sample matrix (S matrix) with the simulated_annealing() function in the phytoclass package.
+
+#Step 1: Prepare Your Custom S Matrix
+Ensure your CSV file:
+    1. Has pigment columns followed by Tchla (total chlorophyll a) as the last column.
+    2. Has row names for each sample (optional but helps with tracking).
+    
+```{R}
+# Load your custom S matrix
+
+S_custom <- read.csv("custom-example-S.csv", row.names = 1)
+
+# Preview
+head(S_custom)
+```
+
+#Step 2: Run Simulated Annealing
+If you're using the default F matrix and min_max matrix:
+
+```{R}
+set.seed(42) 
+
+results <- simulated_annealing(
+  S = S_custom,
+  do_matrix_checks = TRUE,
+  niter = 10  # Use a higher value for real analysis
+)
+
+```
+
+#Step 3: View Results
+
+```{R}
+# Numerical outputs
+results$`condition number`
+results$RMSE
+results$MAE
+
+# Group-wise chlorophyll concentrations
+head(results$`Class abundances`)
+```
+
+```{R}
+# Plot of Chl-a contributions by group
+results$Figure
+
+```
