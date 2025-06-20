@@ -1,5 +1,6 @@
 #' This is the main phytoclass algorithm. It performs simulated annealing algorithm for S and F matrices. See the examples (Fm, Sm) for how to set up matrices, and the vignette for more detailed instructions. Different pigments and phytoplankton groups may be used.
-#'
+#' @importFrom progress progress_bar
+
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
@@ -20,6 +21,7 @@
 #'  \item Error
 #'  }
 #' @export
+#'
 #'
 #' @examples
 #' # Using the built-in matrices Sm and Fm
@@ -96,7 +98,16 @@ simulated_annealing <- function(S,
   s_b <- s_c <- s_n <- nc[[1]]
   f_b <- f_c <- f_n <- nc[[2]]
   
+  # Initialize progress bar if verbose is FALSE
+  if (!verbose) {
+    pb <- progress::progress_bar$new(
+      format = "  Simulated Annealing [:bar] :percent ETA: :eta",
+      total = niter, clear = FALSE, width = 60
+    )
+  }
+  
   for (k in 1:niter) {
+    if (!verbose) pb$tick()
     Temp <- (1 - step)^(k)
     chlv <- Wrangling(s_c, min.val, max.val)[[4]]
     new_neighbour <- Random_neighbour2(s_c, Temp, chlv, s_c, 
