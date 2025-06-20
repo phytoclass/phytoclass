@@ -1,0 +1,56 @@
+---
+title: "Custom-F"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(phytoclass)
+```
+
+This example shows how to run simulated_annealing() with your custom F matrix (Pigment to Chl-a ratios), while still using a default or custom S matrix.
+
+#Step 1: Load or Define Your Custom F Matrix
+You can load it from a .csv file or create it manually. Make sure:
+  1. Row names are phytoplankton groups
+  2. Column names are pigments
+  3. The last column should be Tchla (a row of all 1s)
+  
+```{R}
+# Load your custom S matrix
+F_custom <- read.csv("custom-example-F.csv", row.names = 1)
+
+# Preview
+head(F_custom)
+```
+
+#Step 2: Use Built-in S Matrix or Load Your Own
+
+```{R}
+S_matrix <- phytoclass::Sm  # Or use your own CSV with row.names = 1
+```
+
+#Step 3: Run Simulated Annealing with Custom F
+```{R}
+set.seed(42)
+
+results <- simulated_annealing(
+  S = S_matrix,
+  Fmat = F_custom,
+  do_matrix_checks = TRUE,
+  niter = 10
+)
+
+```
+
+#Step 4: View Results
+```{R}
+results$`condition number`
+results$RMSE
+head(results$`Class abundances`)
+```
+
+```{R}
+results$Figure
+
+```
