@@ -65,12 +65,46 @@
 </ul></div>
 <div class="section level2">
 <h2 id="pushing-a-release">Pushing a Release<a class="anchor" aria-label="anchor" href="#pushing-a-release"></a></h2>
-<ul><li>rebuild docs: <code>devtools::document()</code>
-</li>
-<li>increment version: ? TODO</li>
-<li>push github release: ? TODO</li>
-<li>push to CRAN: ? TODO</li>
-</ul></div>
+<pre><code><span><span class="co"># 1. Open your package project in RStudio (clone from GitHub if needed)</span></span>
+<span></span>
+<span><span class="co"># 2. Make code changes in R/ and update documentation comments</span></span>
+<span></span>
+<span><span class="co"># 3. Regenerate documentation</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4. Bump version (choose "patch", "minor", or "major")</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_version</span><span class="op">(</span><span class="st">"patch"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 5. Update NEWS.md with a summary of changes</span></span>
+<span></span>
+<span><span class="co"># 6. Load functions for testing</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">load_all</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 7. (Optional) Set up test infrastructure if missing</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_testthat</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 8. Create test files for existing functions</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_test</span><span class="op">(</span><span class="st">"my_function"</span><span class="op">)</span>  <span class="co"># Replace with actual function name</span></span>
+<span></span>
+<span><span class="co"># 9. Write tests using testthat::test_that()</span></span>
+<span><span class="co"># e.g., test_that("my_function works", { expect_equal(my_function(2, 2), 4) })</span></span>
+<span></span>
+<span><span class="co"># 10. Run all tests</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">test</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 11. Check package with CRAN-level checks</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 12. (Optional) Check on remote platforms</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check_rhub</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check_win_devel</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 13. Build package for CRAN submission</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">build</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 14. Submit to CRAN</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">submit_cran</span><span class="op">(</span><span class="op">)</span> </span></code></pre>
+</div>
 
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
