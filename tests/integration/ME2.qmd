@@ -59,6 +59,10 @@ rownames(taxa_abundance) <- sample_names
 knitr::kable(taxa_abundance, caption = "Taxa estimation with sample names")
 
 ```
+```{r figure-output, fig.width=7, fig.height=5}
+# Plot the results figure
+result$Figure
+```
 
 "Error in rowSums(Fmat) : 'x' must be numeric."
 
