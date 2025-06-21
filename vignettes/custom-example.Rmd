@@ -21,7 +21,7 @@ library(here)
 
 ```{R}
 # sample matrix
-S_matrix <- read.csv(here("vignettes/custom-example-S.csv"))
+S_matrix <- read.csv(here("vignettes/custom-example-S.csv"), row.names = 1)
 ```
 
 ```{R}
