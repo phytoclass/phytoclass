@@ -21,7 +21,7 @@ library(here)
 
 ```{R}
 # sample matrix
-S_matrix <- read.csv(here("vignettes/custom-example-S.csv"))
+S_matrix <- read.csv(here("vignettes/custom-example-S.csv"), row.names = 1)
 ```
 
 ```{R}
@@ -64,6 +64,7 @@ if (all(grepl("^[0-9]+$", rownames(min_max_matrix)))) {
 phytoclass::simulated_annealing(
   S_matrix,
   Fmat = F_matrix,
-  user_defined_min_max = min_max_matrix
+  user_defined_min_max = min_max_matrix,
+  verbose = FALSE
 )
 ```
