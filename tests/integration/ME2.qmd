@@ -12,21 +12,56 @@ library(here)
 ```
 
 ```{R}
-# sample matrix
-S_matrix <- read.csv(here("tests/integration/ME2-S.csv"))
+# Load and prepare S_matrix
+S_df <- read.csv(here("tests/integration/ME2-S.csv"))
+sample_names <- S_df[[1]]
+S_matrix <- S_df[, -1]
 ```
 
 ```{R}
-# pigment-taxa occurrence matrix (specific to an oceanographic region)
-F_matrix <- read.csv(here("tests/integration/ME2-F.csv"))
+# Load and prepare F_matrix
+F_df <- read.csv(here("tests/integration/ME2-F.csv"), row.names = 1)
+F_matrix <- as.matrix(F_df)  # Keeps taxa as rownames
 ```
 
 ```{R}
-phytoclass::simulated_annealing(
+# Build custom min-max matrix
+k <- which(F_matrix > 0, arr.ind = TRUE)
+taxa    <- rownames(F_matrix)[k[, 1]]
+pigment <- colnames(F_matrix)[k[, 2]]
+
+min_max_matrix <- data.frame(
+  class   = taxa,
+  pigment = pigment,
+  min     = rep(0.001, length(taxa)),
+  max     = rep(1, length(taxa)),
+  stringsAsFactors = FALSE
+)
+```
+
+```{R}
+
+# Run model
+result <- phytoclass::simulated_annealing(
   S_matrix,
   Fmat = F_matrix,
-  user_defined_min_max = min_max_matrix
+  user_defined_min_max = min_max_matrix,
+  niter = 30
 )
+```
+
+```{R}
+# Add sample names back to output
+taxa_abundance <- result[[4]]
+rownames(taxa_abundance) <- sample_names
+
+# Display results
+knitr::kable(taxa_abundance, caption = "Taxa estimation with sample names")
+
+```
+```{r figure-output, fig.width=7, fig.height=5}
+# Plot the results figure
+result$Figure
 ```
 
 "Error in rowSums(Fmat) : 'x' must be numeric."
