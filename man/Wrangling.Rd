@@ -7,7 +7,7 @@
 Wrangling(Fl, min.val, max.val)
 }
 \arguments{
-\item{Fl}{A matrix of initial F (i.e. pigment ratio matrix)}
+\item{Fl}{A matrix of the initial F matrix (i.e. pigment ratio matrix)}
 
 \item{min.val}{A vector of the minimum values for each non-zero pigment ratios}
 
