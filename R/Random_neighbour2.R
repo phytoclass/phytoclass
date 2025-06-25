@@ -30,24 +30,22 @@ Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.va
 
   # F matrix indexes that are outside the range of min and max
   d    <- which(SA < minF | SA > maxF) 
-  maxd <- maxF
-  mind <- minF
   
   loop <- 1
   while (length(d) > 0) {
     loop  <- loop + 1
     nr    <- round(runif(length(d), -1, 1), 4)
-    SA2   <- SE[d] + Temp * (maxd[d] - mind[d]) * nr
-    SA[d] <- SA2
+    SA[d] <- SE[d] + Temp * (maxF[d] - minF[d]) * nr
     d     <- which(SA < minF | SA > maxF)
     
     if (loop > 50) {
-      SA[d] <- round(runif(n = length(d), (minF[d] * 1.20), (maxF[d] * 0.80)), 4)
+      SA[d] <- round(runif(n = length(d), minF[d] * 1.20, maxF[d] * 0.80), 4)
       d     <- which(SA < minF | SA > maxF)
     }
   }
   
-  Fn           <- Fn[, -ncol(Fn)] #### If error is lower, reassign the values
+  # If error is lower, reassign the values
+  Fn           <- Fn[, -ncol(Fn)] 
   Fn[Fn > 0]   <- SA
   Fn           <- cbind(Fn, chlv)
   colnames(Fn) <- colnames(FALSE)
@@ -55,4 +53,3 @@ Random_neighbour2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.va
   return(NNLS_MF(Fn, S, cm))
 
 }
-
