@@ -21,33 +21,31 @@
 #' Fnew <- MC$Fnew
 #' SDRes <- Steepest_Desc(Fnew,Snew, num.loops = 20)
 #' 
-Steepest_Desc <-  function (Fmat, S, num.loops) 
-{
+Steepest_Desc <- function(Fmat, S, num.loops) {
   S_Chl <- S[, ncol(S)]
-  cm <- Bounded_weights(S,30)
-  place <- which(Fmat[,1:ncol(Fmat)-1] > 0)
-  
-  loop <- 1
-  F.new <- NNLS_MF(Fmat, S, cm)
+  cm    <- Bounded_weights(S, 30)
+  place <- which(Fmat[, 1:ncol(Fmat) - 1] > 0)
+
+  loop      <- 1
+  F.new     <- NNLS_MF(Fmat, S, cm)
   F.initial <- F.new
+  
   for (i in 1:num.loops) {
-    F.new <- Minimise_elements(F.initial[[1]], place, S, 
-                               cm)
-    loop = loop + 1
+    F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 3)
+    loop <- loop + 1
     loop_2 <- 1
     while (F.new[[2]] > F.initial[[2]]) {
-      loop_2 = loop_2 + 1
-      F.new <- Minimise_elements(F.initial[[1]], place, 
-                                 S, cm)
-      if (loop_2 > 5) {
-        F.new <- Minimise_elements1(F.initial[[1]], place, 
-                                    S, cm)
-      }
-      if (loop_2 > 10) {
-        F.new <- Minimise_elements2(F.initial[[1]], place, 
-                                    S, cm)
-      }
-      if (loop_2 > 100) {
+      loop_2 <- loop_2 + 1
+      
+      if (loop_2 <= 5) {
+        F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 3)
+      } else if (loop_2 < 10) {
+        F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 1)
+      } else if (loop_2 <= 100) {
+        # If it doesn't work the first time, it randomises at a lower rate
+        F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 2)
+      } else if (loop_2 > 100) {
+        # it will continue for 100 iterations, and then stop
         break
       }
     }
@@ -56,3 +54,6 @@ Steepest_Desc <-  function (Fmat, S, num.loops)
   F.new <- NNLS_MF_Final(as.matrix(F.new[[1]]), S, S_Chl, cm)
   return(F.new)
 }
+
+
+
