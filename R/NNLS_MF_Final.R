@@ -50,7 +50,7 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, cm){
   #  -  no visible binding for global variable
   vals <-  NULL
   .data <- NULL
-  PLE <- tidyr::pivot_longer(data = k, cols = cn, names_to = 'names', values_to = 'vals' )
+  PLE <- tidyr::pivot_longer(data = k, cols = tidyselect::all_of(cn), names_to = 'names', values_to = 'vals')
   colorBlindGrey8   <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
                          "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73","#001E73","#013E73")
   gr <- colnames(PLE)[[1]]
