@@ -37,9 +37,18 @@ Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
     }
   )
   
+  # extract the pigments positions that, when adjusted, gives a better RMSE
+  # ===
+  # loops through each list of adjusted pigments and determines which adjustment
+  # leads to a better RMSE based on the 4th list from `Replace_Rand` 
   cont  <- vapply(F.new, function(i) {i[[4]]}, logical(1))
-  conts <- which(cont == 1)
+  # extracts the index which has a better RMSE (i.e. TRUE)
+  conts <- which(cont == 1) 
   
+  # if the length is null, will either run through NNLS or recursively go to 
+  # level one of Fac_F_RR
+  # NOTE: this doesn't seem to be possible because when length(NULL) = 0 and is
+  #       never null
   if (is.null(length(conts))) {
     if (fac_rr == 1) {
       F.new <- NNLS_MF(Fmat[[1]], S, cm)
@@ -52,6 +61,8 @@ Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
     }
   }
   
+  # when at least one pigment adjustment has a better RMSE, will replace all
+  # pigment ratios in the Fmat with the better one and re-run NNLS
   if (length(conts) > 0) {
     F.news <- vector(length = length(conts)) # initialize new ratios
     for (i in 1:length(conts)) {
@@ -62,17 +73,20 @@ Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
     F.new <- replace(Fmat[[1]], vary[conts], F.news)
     F.new <- NNLS_MF(F.new, S, cm)
   } else {
-    
+    # if no pigments return a better RMSE, depending on the number of iterations
+    # in `Steepest_Descent`, will try a smaller range of scaler values
     if (fac_rr == 1) {
+      # fac_rr = 1: smallest range, not re-running and extracting output only
+      # from NNLS
       F.new <- NNLS_MF(Fmat[[1]], S, cm)
       cont  <- vary
     } else if (fac_rr == 2) {
-      
+      # fac_rr = 2: medium range going down to smallest range
       C1    <- Fac_F_RR(Fmat, place, S, cm, fac_rr = 1)
       F.new <- C1[[1]]
       cont  <- C[[2]]
     } else if (fac_rr == 3) {
-      
+      # fac_rr = 3: largest range going down to smaller range
       C1    <- Fac_F_RR(Fmat, vary, place = place, S, cm, fac_rr = 2)
       F.new <- C1[[1]]
       cont  <- C1[[2]]  
