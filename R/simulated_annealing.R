@@ -148,8 +148,11 @@ simulated_annealing <- function(S,
       new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
                              max.val, place, S, cm, num.loops = 2)
     }
-    minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-    maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
+    
+    wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
+    minF <- wrangled[[1]]
+    maxF <- wrangled[[2]]
+    
     s_n <- new_neighbour[[1]]
     f_n <- new_neighbour[[2]]
     loop <- 1
@@ -173,8 +176,9 @@ simulated_annealing <- function(S,
           s_n <- new_neighbour[[1]]
           f_n <- new_neighbour[[2]]
           
-          minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-          maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
+          wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
+          minF     <- wrangled[[1]]
+          maxF     <- wrangled[[2]]
           
           d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
           
@@ -196,8 +200,9 @@ simulated_annealing <- function(S,
         s_n <- new_neighbour[[1]]
         f_n <- new_neighbour[[2]]
         
-        minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-        maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
+        wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
+        minF     <- wrangled[[1]]
+        maxF     <- wrangled[[2]]
         
         d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
         
