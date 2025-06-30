@@ -15,10 +15,12 @@
 <url><loc>/reference/Bounded_weights.html</loc></url>
 <url><loc>/reference/Cluster.html</loc></url>
 <url><loc>/reference/Condition_test.html</loc></url>
+<url><loc>/reference/Conduit.html</loc></url>
 <url><loc>/reference/Conduit_1.html</loc></url>
 <url><loc>/reference/Conduit_2.html</loc></url>
 <url><loc>/reference/Conduit_3.html</loc></url>
 <url><loc>/reference/Default_min_max.html</loc></url>
+<url><loc>/reference/Fac_F_RR.html</loc></url>
 <url><loc>/reference/Fac_F_RR1.html</loc></url>
 <url><loc>/reference/Fac_F_RR2.html</loc></url>
 <url><loc>/reference/Fac_F_RR3.html</loc></url>
@@ -28,6 +30,7 @@
 <url><loc>/reference/Minimise_elements.html</loc></url>
 <url><loc>/reference/Minimise_elements1.html</loc></url>
 <url><loc>/reference/Minimise_elements2.html</loc></url>
+<url><loc>/reference/Minimise_elements_comb.html</loc></url>
 <url><loc>/reference/NNLS_MF.html</loc></url>
 <url><loc>/reference/NNLS_MF_Final.html</loc></url>
 <url><loc>/reference/Normalise_F.html</loc></url>
