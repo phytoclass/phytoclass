@@ -129,8 +129,6 @@ simulated_annealing <- function(S,
       Dn[[i]] <- temp[[2]] # extract RMSE
     }
 
-    # --- above
-    
     nk <- which.min(Dn)
     new_neighbour <- D[[nk]]
     
@@ -150,10 +148,6 @@ simulated_annealing <- function(S,
     
     while (length(d) > 0) {
       
-      # num_loop3 <- ifelse(k > niter - 20, 300, 120)
-      # N <- place[d]
-      
-      # --- below
       num_loop3 <- ifelse(k > niter - 20, 300, 120)
       N <- place[d]
       
@@ -165,7 +159,6 @@ simulated_annealing <- function(S,
         Dn2[[i]] <- temp[[2]] # extract RMSE
       }
       
-      # --- above
       nk <- which.min(c(Dn, Dn2))
       
       new_neighbour <- c(D, D2)[[nk]]
