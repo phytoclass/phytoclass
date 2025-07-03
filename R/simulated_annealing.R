@@ -120,20 +120,6 @@ simulated_annealing <- function(S,
     new_neighbour <- Random_neighbour(s_c, Temp, chlv, s_c, N = place,
                                        place, S, cm, min.val, max.val)
     
-    
-    # num_iter <- ifelse(k > niter - 20, 300, 120)
-    # D <- list()
-    # for (i in seq(num_iter)){
-    #   chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-    #   D[[length(D)+1]] <- Random_neighbour(s_c, Temp, N = place,
-    #                                        chlv, s_c, place, S, cm, min.val, max.val)
-    # }
-    # 
-    # Dn <- list()
-    # for (i in D) {
-    #   Dn[[length(Dn) + 1]] <- i[[2]]
-    # }
-    
     num_loop <- ifelse(k > niter - 20, 300, 120)
     Dn <- D <- vector("list", num_loop)
     for (i in seq(num_loop)) {
@@ -172,19 +158,6 @@ simulated_annealing <- function(S,
       # --- below
       num_loop3 <- ifelse(k > niter - 20, 300, 120)
       N <- place[d]
-      
-      
-      
-      # for (i in seq(num_loop3)) {
-      #   chlv <- Wrangling(s_n, min.val, max.val)[[4]]
-      #   D[[length(D) + 1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
-      # }
-      # 
-      # Dn <- list()
-      # for (i in D){
-      #   Dn[[length(Dn)+1]] <-  i[[2]]
-      # }
-      
       
       Dn2 <- D2 <- vector("list", num_loop3)
       for (i in seq(num_loop3)) {
