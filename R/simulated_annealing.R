@@ -148,8 +148,6 @@ simulated_annealing <- function(S,
     d    <- which(vectorise(s_n[, 1:(ncol(s_n) - 1)]) < minF | 
                   vectorise(s_n[, 1:(ncol(s_n) - 1)]) > maxF)
     
-    
-    
     while (length(d) > 0) {
       
       # num_loop3 <- ifelse(k > niter - 20, 300, 120)
