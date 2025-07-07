@@ -198,9 +198,6 @@ simulated_annealing <- function(
       
     } 
     
-    # A <-  target(f_n_err)/target(f_c_err)
-    # diff <- f_n_err - f_c_err
-    
     # check RMSE of neighbor is better than current 
     if (f_n_err < f_c_err || 
         exp(-(f_n_err - f_c_err)) < stats::runif(1, 0, 1)
@@ -228,10 +225,6 @@ simulated_annealing <- function(
 
   }
 
-  # res <- list(f_b, f_b_err)
-  # A   <- res[[1]]
-  
-  # final.results <- NNLS_MF_Final(A, S, S_Chl, S_weights)
   final.results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
   return(final.results)
 }
