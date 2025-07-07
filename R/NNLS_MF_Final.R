@@ -19,16 +19,17 @@
 #'
 #' @examples  
 NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
-  F_sum <- Normalise_F(Fn)[[2]]
-  Fn    <- Normalise_F(Fn)[[1]]
-  Fn    <- Fn * F_sum
+  # normalize F matrix
+  F_norm <- Normalise_F(Fn)
+  Fn     <- F_norm[[1]] * F_norm[[2]]
 
   Fn_wt_err <- t(Weight_error(Fn, S_weights))
   S_wt_err  <- t(Weight_error(S, S_weights))
   
-  b       <- crossprod(Fn_wt_err, S_wt_err)
-  Fn_prod <- crossprod(Fn_wt_err)
+  b       <- crossprod(Fn_wt_err, S_wt_err) # right hand side of linear eq
+  Fn_prod <- crossprod(Fn_wt_err) # positive definite matrix with coefficients 
 
+  # ---- calc NNLS ---- #
   C_new2  <- 
     RcppML::nnls(
       Fn_prod,
