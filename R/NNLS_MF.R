@@ -29,8 +29,8 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
   Fn_wt_err <- t(Weight_error(Fn, S_weights))
   S_wt_err  <- t(Weight_error(S, S_weights))
   
-  b       <- crossprod(Fn_wt_err, S_wt_err)
-  Fn_prod <- crossprod(Fn_wt_err)
+  b       <- crossprod(Fn_wt_err, S_wt_err) # right hand side of linear eq
+  Fn_prod <- crossprod(Fn_wt_err) # positive definite matrix with coefficents 
   
   C_new2  <- 
     RcppML::nnls(
@@ -39,8 +39,8 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
       cd_maxit = 1000, 
       cd_tol   = 1e-8
     )
-  C_new2 <- t(C_new2)
-  Cn2    <- Normalise_S(C_new2) # Row sums to one
+  C_new2        <- t(C_new2)
+  Cn2           <- Normalise_S(C_new2) # Row sums to one
   colnames(Cn2) <- rownames(Fn)
   
   # ---- calculate error term ---- #
