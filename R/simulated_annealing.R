@@ -186,10 +186,11 @@ simulated_annealing <- function(S,
       
     } 
     
+    # check RMSE
     # A <-  target(f_n_err)/target(f_c_err)
     diff <- f_n_err - f_c_err
     if (f_n_err < f_c_err || exp(-(f_n_err - f_c_err)) < stats::runif(1, 0, 1)) {
-      f_c <- f_n
+      f_c     <- f_n
       f_c_err <- f_n_err
     }
     
@@ -201,7 +202,7 @@ simulated_annealing <- function(S,
     }
     
     if (f_n_err < f_b_err) {
-      f_b <- f_n
+      f_b     <- f_n
       f_b_err <- f_n_err
     }
 
