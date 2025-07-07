@@ -68,7 +68,8 @@ simulated_annealing <- function(
   
   S_Chl <- S[, ncol(S)]
   S     <- Normalise_S(S)
-  cm    <- Bounded_weights(S, weight.upper.bound)
+  # cm    <- Bounded_weights(S, weight.upper.bound)
+  S_weights <- Bounded_weights(S, weight.upper.bound)
   place <- which(Fmat[,1:ncol(Fmat) - 1] > 0)
   
   if (is.null(user_defined_min_max)) {
@@ -110,7 +111,7 @@ simulated_annealing <- function(
 
   Fmat <- ifelse(Fmat > 0, 1, 0)
   # SE   <- vectorise(Fmat)
-  nnls_initial <- NNLS_MF(Fmat, S, cm)
+  nnls_initial <- NNLS_MF(Fmat, S, S_weights)
   
   # initialize F matrix and RMSE
   # n = neighbor
@@ -121,29 +122,41 @@ simulated_annealing <- function(
   
   # Initialize progress bar if verbose is FALSE
   if (!verbose) {
+  # if (verbose) {
     pb <- progress::progress_bar$new(
       format = "  Simulated Annealing [:bar] :percent ETA: :eta",
       total  = niter, clear = FALSE, width = 60
     )
   }
   
-  chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
+  # chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
+  wrangled <- Wrangling(f_c, min.val, max.val)
+  minF     <- wrangled[[1]]
+  maxF     <- wrangled[[2]]
+  chlv     <- wrangled[[4]]
   
   for (k in 1:niter) {
     
     if (!verbose) pb$tick()
+    # if (verbose) pb$tick()
     
     Temp <- (1 - step)^(k)
     # chlv <- Wrangling(f_c, min.val, max.val)[[4]]
     new_neighbour <- Random_neighbour(f_c, Temp, chlv, f_c, N = place,
-                                       place, S, cm, min.val, max.val)
+                                       place, S, S_weights, 
+                                      # min.val, max.val
+                                      minF, maxF
+                                      )
     
     num_loop <- ifelse(k > niter - 20, 300, 120)
     Dn       <- D <- vector("list", num_loop)
     
     for (i in seq(num_loop)) {
       # chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
-      temp    <- Random_neighbour(f_c, Temp, N = place, chlv, f_c, place, S, cm, min.val, max.val)
+      temp    <- Random_neighbour(f_c, Temp, N = place, chlv, f_c, place, S, S_weights, 
+                                  # min.val, max.val
+                                  minF, maxF
+                                  )
       D[[i]]  <- temp
       Dn[[i]] <- temp[[2]] # extract RMSE
     }
@@ -153,12 +166,12 @@ simulated_annealing <- function(
     
     num_loop2     <- ifelse(Temp > 0.3, 10, 2)
     new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
-                           max.val, place, S, cm, num.loops = num_loop2)
+                           max.val, place, S, S_weights, num.loops = num_loop2)
     
-    wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
-    minF     <- wrangled[[1]]
-    maxF     <- wrangled[[2]]
-    
+    # wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
+    # minF     <- wrangled[[1]]
+    # maxF     <- wrangled[[2]]
+
     f_n      <- new_neighbour[[1]]
     f_n_err  <- new_neighbour[[2]]
     loop     <- 1
@@ -173,7 +186,10 @@ simulated_annealing <- function(
       Dn2 <- D2 <- vector("list", num_loop3)
       for (i in seq(num_loop3)) {
         # chlv     <- Wrangling(f_n, min.val, max.val)[[4]]
-        temp     <- Random_neighbour(f_n, Temp, chlv, f_n, N, place, S, cm, min.val, max.val)
+        temp     <- Random_neighbour(f_n, Temp, chlv, f_n, N, place, S, S_weights, 
+                                     # min.val, max.val
+                                     minF, maxF
+                                     )
         D2[[i]]  <- temp
         Dn2[[i]] <- temp[[2]] # extract RMSE
       }
@@ -184,23 +200,30 @@ simulated_annealing <- function(
       f_n           <- new_neighbour[[1]]
       f_n_err       <- new_neighbour[[2]]
       
-      wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
-      minF     <- wrangled[[1]]
-      maxF     <- wrangled[[2]]
-      
+      # wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
+      # minF     <- wrangled[[1]]
+      # maxF     <- wrangled[[2]]
+
       d <- which(vectorise(f_n[,1:(ncol(f_n) - 1)]) < minF |
                  vectorise(f_n[,1:(ncol(f_n) - 1)]) > maxF) 
       
     } 
     
-    # check RMSE
     # A <-  target(f_n_err)/target(f_c_err)
-    diff <- f_n_err - f_c_err
+    # diff <- f_n_err - f_c_err
+    
+    # check RMSE of neighbor is better than current 
     if (f_n_err < f_c_err || 
         exp(-(f_n_err - f_c_err)) < stats::runif(1, 0, 1)
         ) {
       f_c     <- f_n
       f_c_err <- f_n_err
+    }
+    
+    # update F matrix and RMSE when neighbor F matrix has lower RMSE
+    if (f_n_err < f_b_err) {
+      f_b     <- f_n
+      f_b_err <- f_n_err
     }
     
     if (verbose) {
@@ -210,16 +233,12 @@ simulated_annealing <- function(
       message(" ")
     }
     
-    if (f_n_err < f_b_err) {
-      f_b     <- f_n
-      f_b_err <- f_n_err
-    }
 
   }
   
   res <- list(f_b, f_b_err)
   A   <- res[[1]]
   
-  final.results <- NNLS_MF_Final(A, S, S_Chl, cm)
+  final.results <- NNLS_MF_Final(A, S, S_Chl, S_weights)
   return(final.results)
 }

@@ -17,14 +17,21 @@
 #' @return
 #'
 #' @examples
-Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val) {
+Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, 
+                             # min.val, max.val
+                             minF, maxF
+                             ) {
   k        <- match(N, place)
   s_c      <- s_c[N]
-  wrangled <- Wrangling(Fn, min.val, max.val)
-  minF     <- wrangled[[1]][k]
-  maxF     <- wrangled[[2]][k]
-  SE       <- wrangled[[3]][k]
-
+  # wrangled <- Wrangling(Fn, min.val, max.val)
+  # minF     <- wrangled[[1]][k]
+  # maxF     <- wrangled[[2]][k]
+  # SE       <- wrangled[[3]][k]
+  
+  SE   <- vectorise(Fn)[k]
+  minF <- minF[k]
+  maxF <- maxF[k]
+  
   rand <- round(runif(n = length(s_c), -1, 1), 4)
   SA   <- SE + (Temp) * (maxF - minF) * rand
   d    <- which(SA < minF | SA > maxF)
