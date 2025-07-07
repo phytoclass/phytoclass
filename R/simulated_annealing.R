@@ -165,14 +165,14 @@ simulated_annealing <- function(
     f_n_err  <- new_neighbour[[2]]
     
     # check if ratios are out of bounds (min\max)
-    d <- which(vectorise(f_n[, -ncol(f_n)]) < minF | 
-               vectorise(f_n[, -ncol(f_n)]) > maxF)
+    oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF | 
+                 vectorise(f_n[, -ncol(f_n)]) > maxF)
     
     # if new lowest neighbor has a ratio outside of bounds, will change only 
     # those ones
-    while (length(d) > 0) {
+    while (length(oob) > 0) {
       
-      N <- place[d] # where in F matrix is the ratio out of bounds
+      N <- place[oob] # where in F matrix is the ratio out of bounds
       Dn2 <- D2 <- vector("list", num_loop)
 
       for (i in seq(num_loop)) {
@@ -191,8 +191,8 @@ simulated_annealing <- function(
       f_n_err       <- new_neighbour[[2]]
       
       # check if ratios are out of bounds (min\max)
-      d <- which(vectorise(f_n[, -ncol(f_n)]) < minF |
-                 vectorise(f_n[, -ncol(f_n)]) > maxF) 
+      oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF |
+                   vectorise(f_n[, -ncol(f_n)]) > maxF) 
       
     } 
     
