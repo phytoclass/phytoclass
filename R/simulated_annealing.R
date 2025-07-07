@@ -28,20 +28,20 @@
 #' set.seed(5326)
 #' sa.example <- simulated_annealing(Sm, Fm, niter = 5)
 #' sa.example$Figure
-simulated_annealing <- function(S,
-                                Fmat = NULL, 
-                                user_defined_min_max = NULL,
-                                do_matrix_checks = TRUE,
-                                niter = 500,
-                                step = 0.009,
-                                weight.upper.bound = 30, 
-                                verbose = TRUE,
-                                seed = NULL){
+simulated_annealing <- function(
+  S,
+  Fmat                 = NULL, 
+  user_defined_min_max = NULL,
+  do_matrix_checks     = TRUE,
+  niter                = 500,
+  step                 = 0.009,
+  weight.upper.bound   = 30, 
+  verbose              = TRUE,
+  seed                 = NULL) {
   
   if (!is.null(seed)) {
     set.seed(seed)
   }
-  
   
   if (is.null(Fmat)) {
     Fmat <- phytoclass::Fm
@@ -51,11 +51,12 @@ simulated_annealing <- function(S,
     Fmat <- as.matrix(Fmat)
   }
     
-  if (is.data.frame(S)){
-  char_cols <- sapply(S, is.character)
-  S <- S[, !char_cols]}
+  if (is.data.frame(S)) {
+    char_cols <- sapply(S, is.character)
+    S <- S[, !char_cols]
+  }
   
-  if (!is.matrix(S)){
+  if (!is.matrix(S)) {
     S <- as.matrix(S)
   }
 
@@ -68,14 +69,13 @@ simulated_annealing <- function(S,
   S_Chl <- S[, ncol(S)]
   S     <- Normalise_S(S)
   cm    <- Bounded_weights(S, weight.upper.bound)
-  place <- which(Fmat[,1:ncol(Fmat)-1] > 0)
+  place <- which(Fmat[,1:ncol(Fmat) - 1] > 0)
   
   if (is.null(user_defined_min_max)) {
-    K <- Default_min_max(phytoclass::min_max, Fmat[,1:ncol(Fmat)-1], place)
+    K <- Default_min_max(phytoclass::min_max, Fmat[,1:ncol(Fmat) - 1], place)
     min.val <- K[[1]]
     max.val <- K[[2]]
-  }
-  else {
+  } else {
     K <- Default_min_max(user_defined_min_max,Fmat[, 1:ncol(Fmat) - 1], place)
     min.val <- K[[1]]
     max.val <- K[[2]]
@@ -87,7 +87,13 @@ simulated_annealing <- function(S,
     # }
   }
   
-  condition.test <- Condition_test(S[,1:ncol(S)-1], Fmat[,1:ncol(Fmat)-1], min.val, max.val)
+  # start kappa condition check
+  condition.test <- Condition_test(
+    S[,1:ncol(S) - 1], 
+    Fmat[,1:ncol(Fmat) - 1], 
+    min.val, max.val
+    )
+  
   if (verbose) {
    message(paste0(
      "\nCondition number = ", round(condition.test),
@@ -106,7 +112,7 @@ simulated_annealing <- function(S,
   # SE   <- vectorise(Fmat)
   nnls_initial <- NNLS_MF(Fmat, S, cm)
   
-  # initialize F matrix
+  # initialize F matrix and RMSE
   # n = neighbor
   # c = current
   # b = best
@@ -182,14 +188,17 @@ simulated_annealing <- function(S,
       minF     <- wrangled[[1]]
       maxF     <- wrangled[[2]]
       
-      d <- which(vectorise(f_n[,1:(ncol(f_n)-1)]) < minF | vectorise(f_n[,1:(ncol(f_n)-1)]) > maxF) 
+      d <- which(vectorise(f_n[,1:(ncol(f_n) - 1)]) < minF |
+                 vectorise(f_n[,1:(ncol(f_n) - 1)]) > maxF) 
       
     } 
     
     # check RMSE
     # A <-  target(f_n_err)/target(f_c_err)
     diff <- f_n_err - f_c_err
-    if (f_n_err < f_c_err || exp(-(f_n_err - f_c_err)) < stats::runif(1, 0, 1)) {
+    if (f_n_err < f_c_err || 
+        exp(-(f_n_err - f_c_err)) < stats::runif(1, 0, 1)
+        ) {
       f_c     <- f_n
       f_c_err <- f_n_err
     }
