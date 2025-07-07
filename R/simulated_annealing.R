@@ -74,12 +74,8 @@ simulated_annealing <- function(
   
   if (is.null(user_defined_min_max)) {
     K <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
-    # min.val <- K[[1]]
-    # max.val <- K[[2]]
   } else {
     K <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
-    # min.val <- K[[1]]
-    # max.val <- K[[2]]
   }
     # if (length(min.val) != length(place)) {
     #   message(paste0("\nNumber of rows for user_defined_min_max = ", 
@@ -91,7 +87,8 @@ simulated_annealing <- function(
   min.val <- K[[1]]
   max.val <- K[[2]]
   
-  # start kappa condition check
+  # ---- start kappa condition check ---- #
+
   condition.test <- Condition_test(
     S[, -ncol(S)], 
     Fmat[, -ncol(Fmat)], 
@@ -171,10 +168,11 @@ simulated_annealing <- function(
     d <- which(vectorise(f_n[, -ncol(f_n)]) < minF | 
                vectorise(f_n[, -ncol(f_n)]) > maxF)
     
-    # if new lowest neighbor has ratio outside of bounds
+    # if new lowest neighbor has a ratio outside of bounds, will change only 
+    # those ones
     while (length(d) > 0) {
       
-      N <- place[d]
+      N <- place[d] # where in F matrix is the ratio out of bounds
       Dn2 <- D2 <- vector("list", num_loop)
 
       for (i in seq(num_loop)) {
