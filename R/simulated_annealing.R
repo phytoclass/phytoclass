@@ -140,14 +140,14 @@ simulated_annealing <- function(
     Temp <- (1 - step)^(k)
     
     # needs to be run but not used, due to random number generator
-    Random_neighbour(f_c, Temp, chlv, f_c, N = place, place, S, S_weights, minF, maxF)
+    Random_neighbour(f_c, Temp, chlv, N = place, place, S, S_weights, minF, maxF)
     
     num_loop <- ifelse(k > niter - 20, 300, 120)
     Dn       <- D <- vector("list", num_loop)
     
     for (i in seq(num_loop)) {
       temp_rand <- Random_neighbour(
-        f_c, Temp, N = place, chlv, f_c, place, S, S_weights, minF, maxF
+        f_c, Temp, N = place, chlv, place, S, S_weights, minF, maxF
         )
       D[[i]]  <- temp_rand
       Dn[[i]] <- temp_rand[[2]] # extract RMSE
@@ -177,7 +177,7 @@ simulated_annealing <- function(
 
       for (i in seq(num_loop)) {
         temp_rand <- Random_neighbour(
-          f_n, Temp, chlv, f_n, N, place, S, S_weights,minF, maxF
+          f_n, Temp, chlv, N, place, S, S_weights,minF, maxF
           )
         D2[[i]]  <- temp_rand
         Dn2[[i]] <- temp_rand[[2]] # extract RMSE
@@ -223,6 +223,6 @@ simulated_annealing <- function(
 
   }
 
-  final.results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
-  return(final.results)
+  final_results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
+  return(final_results)
 }
