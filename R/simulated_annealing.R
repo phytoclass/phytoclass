@@ -68,7 +68,6 @@ simulated_annealing <- function(
   
   S_Chl <- S[, ncol(S)]
   S     <- Normalise_S(S)
-  # cm    <- Bounded_weights(S, weight.upper.bound)
   S_weights <- Bounded_weights(S, weight.upper.bound)
   place <- which(Fmat[, -ncol(Fmat)] > 0)
   
