@@ -70,28 +70,31 @@ simulated_annealing <- function(
   S     <- Normalise_S(S)
   # cm    <- Bounded_weights(S, weight.upper.bound)
   S_weights <- Bounded_weights(S, weight.upper.bound)
-  place <- which(Fmat[,1:ncol(Fmat) - 1] > 0)
+  place <- which(Fmat[, -ncol(Fmat)] > 0)
   
   if (is.null(user_defined_min_max)) {
-    K <- Default_min_max(phytoclass::min_max, Fmat[,1:ncol(Fmat) - 1], place)
-    min.val <- K[[1]]
-    max.val <- K[[2]]
+    K <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
+    # min.val <- K[[1]]
+    # max.val <- K[[2]]
   } else {
-    K <- Default_min_max(user_defined_min_max,Fmat[, 1:ncol(Fmat) - 1], place)
-    min.val <- K[[1]]
-    max.val <- K[[2]]
+    K <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
+    # min.val <- K[[1]]
+    # max.val <- K[[2]]
+  }
     # if (length(min.val) != length(place)) {
     #   message(paste0("\nNumber of rows for user_defined_min_max = ", 
     #                  length(min.val)))
     #   message(paste0("Length of place = ", length(place)))
     #   stop("\nThese do not match.")
     # }
-  }
+  
+  min.val <- K[[1]]
+  max.val <- K[[2]]
   
   # start kappa condition check
   condition.test <- Condition_test(
-    S[,1:ncol(S) - 1], 
-    Fmat[,1:ncol(Fmat) - 1], 
+    S[, -ncol(S)], 
+    Fmat[, -ncol(Fmat)], 
     min.val, max.val
     )
   
@@ -109,8 +112,7 @@ simulated_annealing <- function(
   
   # ---- start iteration process ---- #
 
-  Fmat <- ifelse(Fmat > 0, 1, 0)
-  # SE   <- vectorise(Fmat)
+  Fmat         <- ifelse(Fmat > 0, 1, 0)
   nnls_initial <- NNLS_MF(Fmat, S, S_weights)
   
   # initialize F matrix and RMSE
@@ -129,7 +131,6 @@ simulated_annealing <- function(
   }
   
   # extract min and max F matrix thresholds and last column ratio
-  # chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
   wrangled <- Wrangling(f_c, min.val, max.val)
   minF     <- wrangled[[1]]
   maxF     <- wrangled[[2]]
@@ -140,20 +141,14 @@ simulated_annealing <- function(
     if (!verbose) pb$tick()
     
     Temp <- (1 - step)^(k)
-    # chlv <- Wrangling(f_c, min.val, max.val)[[4]]
-    # new_neighbour <- Random_neighbour(f_c, Temp, chlv, f_c, N = place,
+    
     # needs to be run but not used, due to random number generator
-    Random_neighbour(f_c, Temp, chlv, f_c, N = place,
-                                       place, S, S_weights,
-                                      # min.val, max.val
-                                      minF, maxF
-                                      )
+    Random_neighbour(f_c, Temp, chlv, f_c, N = place, place, S, S_weights, minF, maxF)
     
     num_loop <- ifelse(k > niter - 20, 300, 120)
     Dn       <- D <- vector("list", num_loop)
     
     for (i in seq(num_loop)) {
-      # chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
       temp_rand <- Random_neighbour(
         f_c, Temp, N = place, chlv, f_c, place, S, S_weights, minF, maxF
         )
@@ -179,12 +174,10 @@ simulated_annealing <- function(
     # if new lowest neighbor has ratio outside of bounds
     while (length(d) > 0) {
       
-      num_loop3 <- ifelse(k > niter - 20, 300, 120)
       N <- place[d]
-      
-      Dn2 <- D2 <- vector("list", num_loop3)
-      for (i in seq(num_loop3)) {
-        # chlv     <- Wrangling(f_n, min.val, max.val)[[4]]
+      Dn2 <- D2 <- vector("list", num_loop)
+
+      for (i in seq(num_loop)) {
         temp_rand <- Random_neighbour(
           f_n, Temp, chlv, f_n, N, place, S, S_weights,minF, maxF
           )
@@ -223,18 +216,22 @@ simulated_annealing <- function(
     }
     
     if (verbose) {
-      message(paste("Current error: ", round(f_c_err, 4)))
-      message(paste("Neighbour's error: ", round(f_n_err, 4)))
-      message(paste("Temperature (%): ", round(Temp * 100, 2)))
-      message(" ")
+      message(
+        paste(
+          "Current error: ", round(f_c_err, 4),
+          "\nNeighbour's error: ", round(f_n_err, 4),
+          "\nTemperature (%): ", round(Temp * 100, 2), "\n"
+          )
+        )
     }
     
 
   }
+
+  # res <- list(f_b, f_b_err)
+  # A   <- res[[1]]
   
-  res <- list(f_b, f_b_err)
-  A   <- res[[1]]
-  
-  final.results <- NNLS_MF_Final(A, S, S_Chl, S_weights)
+  # final.results <- NNLS_MF_Final(A, S, S_Chl, S_weights)
+  final.results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
   return(final.results)
 }
