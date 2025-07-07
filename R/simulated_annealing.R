@@ -122,13 +122,13 @@ simulated_annealing <- function(
   
   # Initialize progress bar if verbose is FALSE
   if (!verbose) {
-  # if (verbose) {
     pb <- progress::progress_bar$new(
       format = "  Simulated Annealing [:bar] :percent ETA: :eta",
       total  = niter, clear = FALSE, width = 60
     )
   }
   
+  # extract min and max F matrix thresholds and last column ratio
   # chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
   wrangled <- Wrangling(f_c, min.val, max.val)
   minF     <- wrangled[[1]]
@@ -138,12 +138,13 @@ simulated_annealing <- function(
   for (k in 1:niter) {
     
     if (!verbose) pb$tick()
-    # if (verbose) pb$tick()
     
     Temp <- (1 - step)^(k)
     # chlv <- Wrangling(f_c, min.val, max.val)[[4]]
-    new_neighbour <- Random_neighbour(f_c, Temp, chlv, f_c, N = place,
-                                       place, S, S_weights, 
+    # new_neighbour <- Random_neighbour(f_c, Temp, chlv, f_c, N = place,
+    # needs to be run but not used, due to random number generator
+    Random_neighbour(f_c, Temp, chlv, f_c, N = place,
+                                       place, S, S_weights,
                                       # min.val, max.val
                                       minF, maxF
                                       )
@@ -153,31 +154,30 @@ simulated_annealing <- function(
     
     for (i in seq(num_loop)) {
       # chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
-      temp    <- Random_neighbour(f_c, Temp, N = place, chlv, f_c, place, S, S_weights, 
+      temp_rand <- Random_neighbour(f_c, Temp, N = place, chlv, f_c, place, S, S_weights, 
                                   # min.val, max.val
                                   minF, maxF
                                   )
-      D[[i]]  <- temp
-      Dn[[i]] <- temp[[2]] # extract RMSE
+      D[[i]]  <- temp_rand
+      Dn[[i]] <- temp_rand[[2]] # extract RMSE
     }
-
+  
+    # select neighbor with lowest RMSE
     nk <- which.min(Dn)
     new_neighbour <- D[[nk]]
     
     num_loop2     <- ifelse(Temp > 0.3, 10, 2)
     new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
                            max.val, place, S, S_weights, num.loops = num_loop2)
-    
-    # wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
-    # minF     <- wrangled[[1]]
-    # maxF     <- wrangled[[2]]
 
     f_n      <- new_neighbour[[1]]
     f_n_err  <- new_neighbour[[2]]
-    loop     <- 1
-    d        <- which(vectorise(f_n[, 1:(ncol(f_n) - 1)]) < minF | 
-                      vectorise(f_n[, 1:(ncol(f_n) - 1)]) > maxF)
     
+    # check if ratios are out of bounds (min\max)
+    d <- which(vectorise(f_n[, 1:(ncol(f_n) - 1)]) < minF | 
+               vectorise(f_n[, 1:(ncol(f_n) - 1)]) > maxF)
+    
+    # if new lowest neighbor has ratio outside of bounds
     while (length(d) > 0) {
       
       num_loop3 <- ifelse(k > niter - 20, 300, 120)
@@ -186,24 +186,22 @@ simulated_annealing <- function(
       Dn2 <- D2 <- vector("list", num_loop3)
       for (i in seq(num_loop3)) {
         # chlv     <- Wrangling(f_n, min.val, max.val)[[4]]
-        temp     <- Random_neighbour(f_n, Temp, chlv, f_n, N, place, S, S_weights, 
+        temp_rand <- Random_neighbour(f_n, Temp, chlv, f_n, N, place, S, S_weights, 
                                      # min.val, max.val
                                      minF, maxF
                                      )
-        D2[[i]]  <- temp
-        Dn2[[i]] <- temp[[2]] # extract RMSE
+        D2[[i]]  <- temp_rand
+        Dn2[[i]] <- temp_rand[[2]] # extract RMSE
       }
       
+      # select new neighbor with lowest RMSE 
       nk <- which.min(c(Dn, Dn2))
       
       new_neighbour <- c(D, D2)[[nk]]
       f_n           <- new_neighbour[[1]]
       f_n_err       <- new_neighbour[[2]]
       
-      # wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
-      # minF     <- wrangled[[1]]
-      # maxF     <- wrangled[[2]]
-
+      # check if ratios are out of bounds (min\max)
       d <- which(vectorise(f_n[,1:(ncol(f_n) - 1)]) < minF |
                  vectorise(f_n[,1:(ncol(f_n) - 1)]) > maxF) 
       
