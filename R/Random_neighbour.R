@@ -3,33 +3,23 @@
 #' 
 #' @keywords internal
 #'
-#' @param Fn  xx
+#' @param Fn xx
 #' @param Temp xx
 #' @param chlv xx
 #' @param s_c xx
-#' @param N   xx
-#' @param place  xx
-#' @param S   xx
-#' @param cm   xx
-#' @param min.val  xx
-#' @param max.val  xx
+#' @param N xx
+#' @param place xx
+#' @param S xx
+#' @param S_weights xx
 #' @param minF xx
 #' @param maxF xx
 #'
 #' @return
 #'
 #' @examples
-Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm, 
-                             # min.val, max.val
-                             minF, maxF
-                             ) {
-  k        <- match(N, place)
-  s_c      <- s_c[N]
-  # wrangled <- Wrangling(Fn, min.val, max.val)
-  # minF     <- wrangled[[1]][k]
-  # maxF     <- wrangled[[2]][k]
-  # SE       <- wrangled[[3]][k]
-  
+Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, S_weights, minF, maxF) {
+  k    <- match(N, place)
+  s_c  <- s_c[N]
   SE   <- vectorise(Fn)[k]
   minF <- minF[k]
   maxF <- maxF[k]
@@ -57,5 +47,5 @@ Random_neighbour <- function(Fn, Temp, chlv, s_c, N, place, S, cm,
   Fn[N]        <- SA
   Fn           <- cbind(Fn, chlv)
   colnames(Fn) <- colnames(FALSE)
-  return(NNLS_MF(Fn, S, cm))
+  return(NNLS_MF(Fn, S, S_weights))
 }
