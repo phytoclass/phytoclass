@@ -154,10 +154,9 @@ simulated_annealing <- function(
     
     for (i in seq(num_loop)) {
       # chlv    <- Wrangling(f_c, min.val, max.val)[[4]]
-      temp_rand <- Random_neighbour(f_c, Temp, N = place, chlv, f_c, place, S, S_weights, 
-                                  # min.val, max.val
-                                  minF, maxF
-                                  )
+      temp_rand <- Random_neighbour(
+        f_c, Temp, N = place, chlv, f_c, place, S, S_weights, minF, maxF
+        )
       D[[i]]  <- temp_rand
       Dn[[i]] <- temp_rand[[2]] # extract RMSE
     }
@@ -174,8 +173,8 @@ simulated_annealing <- function(
     f_n_err  <- new_neighbour[[2]]
     
     # check if ratios are out of bounds (min\max)
-    d <- which(vectorise(f_n[, 1:(ncol(f_n) - 1)]) < minF | 
-               vectorise(f_n[, 1:(ncol(f_n) - 1)]) > maxF)
+    d <- which(vectorise(f_n[, -ncol(f_n)]) < minF | 
+               vectorise(f_n[, -ncol(f_n)]) > maxF)
     
     # if new lowest neighbor has ratio outside of bounds
     while (length(d) > 0) {
@@ -186,10 +185,9 @@ simulated_annealing <- function(
       Dn2 <- D2 <- vector("list", num_loop3)
       for (i in seq(num_loop3)) {
         # chlv     <- Wrangling(f_n, min.val, max.val)[[4]]
-        temp_rand <- Random_neighbour(f_n, Temp, chlv, f_n, N, place, S, S_weights, 
-                                     # min.val, max.val
-                                     minF, maxF
-                                     )
+        temp_rand <- Random_neighbour(
+          f_n, Temp, chlv, f_n, N, place, S, S_weights,minF, maxF
+          )
         D2[[i]]  <- temp_rand
         Dn2[[i]] <- temp_rand[[2]] # extract RMSE
       }
@@ -202,8 +200,8 @@ simulated_annealing <- function(
       f_n_err       <- new_neighbour[[2]]
       
       # check if ratios are out of bounds (min\max)
-      d <- which(vectorise(f_n[,1:(ncol(f_n) - 1)]) < minF |
-                 vectorise(f_n[,1:(ncol(f_n) - 1)]) > maxF) 
+      d <- which(vectorise(f_n[, -ncol(f_n)]) < minF |
+                 vectorise(f_n[, -ncol(f_n)]) > maxF) 
       
     } 
     
