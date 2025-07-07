@@ -109,7 +109,7 @@ simulated_annealing <- function(S,
   if (!verbose) {
     pb <- progress::progress_bar$new(
       format = "  Simulated Annealing [:bar] :percent ETA: :eta",
-      total = niter, clear = FALSE, width = 60
+      total  = niter, clear = FALSE, width = 60
     )
   }
   
@@ -117,98 +117,65 @@ simulated_annealing <- function(S,
     if (!verbose) pb$tick()
     Temp <- (1 - step)^(k)
     chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-    new_neighbour <- Random_neighbour2(s_c, Temp, chlv, s_c, 
+    new_neighbour <- Random_neighbour(s_c, Temp, chlv, s_c, N = place,
                                        place, S, cm, min.val, max.val)
-    D <- list()
-    if (k > niter-20){
-      for (i in 1:300){
-        chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-        D[[length(D)+1]] <- Random_neighbour2(s_c, Temp,
-                                              chlv, s_c, place, S, cm, min.val, max.val)
-      }
+    
+    num_loop <- ifelse(k > niter - 20, 300, 120)
+    Dn <- D <- vector("list", num_loop)
+    for (i in seq(num_loop)) {
+      chlv    <- Wrangling(s_c, min.val, max.val)[[4]]
+      temp    <- Random_neighbour(s_c, Temp, N = place, chlv, s_c, place, S, cm, min.val, max.val)
+      D[[i]]  <- temp
+      Dn[[i]] <- temp[[2]] # extract RMSE
     }
-    else{
-      for (i in 1:120){
-        chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-        D[[length(D)+1]] <- Random_neighbour2(s_c, Temp,
-                                              chlv, s_c, place, S, cm, min.val, max.val)
-      }
-    }
-    Dn <- list()
-    for (i in D) {
-      Dn[[length(Dn) + 1]] <- i[[2]]
-    }
+
     nk <- which.min(Dn)
     new_neighbour <- D[[nk]]
-    if (Temp > 0.3) {
-      new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
-                             max.val, place, S, cm, num.loops = 10)
-    }
-    else {
-      new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
-                             max.val, place, S, cm, num.loops = 2)
-    }
-    minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-    maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
-    s_n <- new_neighbour[[1]]
-    f_n <- new_neighbour[[2]]
+    
+    num_loop2     <- ifelse(Temp > 0.3, 10, 2)
+    new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
+                           max.val, place, S, cm, num.loops = num_loop2)
+    
+    wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
+    minF     <- wrangled[[1]]
+    maxF     <- wrangled[[2]]
+    
+    s_n  <- new_neighbour[[1]]
+    f_n  <- new_neighbour[[2]]
     loop <- 1
-    d <- which(vectorise(s_n[, 1:(ncol(s_n) - 1)]) < minF | 
-                 vectorise(s_n[, 1:(ncol(s_n) - 1)]) > maxF)
+    d    <- which(vectorise(s_n[, 1:(ncol(s_n) - 1)]) < minF | 
+                  vectorise(s_n[, 1:(ncol(s_n) - 1)]) > maxF)
+    
     while (length(d) > 0) {
-        if (k > niter-20){
-          N <- place[d]
-          for (i in 1:300){
-            chlv <- Wrangling(s_n, min.val, max.val)[[4]]
-            D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
-          }
-          Dn <- list()
-          for (i in D){
-            Dn[[length(Dn)+1]] <-  i[[2]]
-          }
-          
-          nk <- which.min(Dn)
-          
-          new_neighbour <- D[[nk]]
-          s_n <- new_neighbour[[1]]
-          f_n <- new_neighbour[[2]]
-          
-          minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-          maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
-          
-          d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
-          
-        }
-      else{
-        N <- place[d]
-        for (i in 1:120){
-          chlv <- Wrangling(s_n, min.val, max.val)[[4]]
-          D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
-        }
-        Dn <- list()
-        for (i in D){
-          Dn[[length(Dn)+1]] <-  i[[2]]
-        }
-        
-        nk <- which.min(Dn)
-        
-        new_neighbour <- D[[nk]]
-        s_n <- new_neighbour[[1]]
-        f_n <- new_neighbour[[2]]
-        
-        minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-        maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
-        
-        d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
-        
+      
+      num_loop3 <- ifelse(k > niter - 20, 300, 120)
+      N <- place[d]
+      
+      Dn2 <- D2 <- vector("list", num_loop3)
+      for (i in seq(num_loop3)) {
+        chlv     <- Wrangling(s_n, min.val, max.val)[[4]]
+        temp     <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
+        D2[[i]]  <- temp
+        Dn2[[i]] <- temp[[2]] # extract RMSE
       }
       
-    }
+      nk <- which.min(c(Dn, Dn2))
+      
+      new_neighbour <- c(D, D2)[[nk]]
+      s_n           <- new_neighbour[[1]]
+      f_n           <- new_neighbour[[2]]
+      
+      wrangled <- Wrangling(new_neighbour[[1]], min.val, max.val)
+      minF     <- wrangled[[1]]
+      maxF     <- wrangled[[2]]
+      
+      d <- which(vectorise(s_n[,1:(ncol(s_n)-1)]) < minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
+      
+    } 
     
-    A = target(f_n)/target(f_c)
+    # A <-  target(f_n)/target(f_c)
     diff <- f_n - f_c
-    if (f_n < f_c || exp(-(f_n - f_c)) < stats::runif(1, 
-                                                      0, 1)) {
+    if (f_n < f_c || exp(-(f_n - f_c)) < stats::runif(1, 0, 1)) {
       s_c <- s_n
       f_c <- f_n
     }
@@ -227,7 +194,7 @@ simulated_annealing <- function(S,
   }
   
   res <- list(s_b, f_b)
-  A <- res[[1]]
+  A   <- res[[1]]
   
   final.results <- NNLS_MF_Final(A, S, S_Chl, cm)
   return(final.results)
