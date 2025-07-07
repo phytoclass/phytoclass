@@ -30,8 +30,9 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
   S_wt_err  <- t(Weight_error(S, S_weights))
   
   b       <- crossprod(Fn_wt_err, S_wt_err) # right hand side of linear eq
-  Fn_prod <- crossprod(Fn_wt_err) # positive definite matrix with coefficents 
+  Fn_prod <- crossprod(Fn_wt_err) # positive definite matrix with coefficients 
   
+  # ---- calc NNLS ---- #
   C_new2  <- 
     RcppML::nnls(
       Fn_prod,
