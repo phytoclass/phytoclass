@@ -13,6 +13,8 @@
 #' @param cm   xx
 #' @param min.val  xx
 #' @param max.val  xx
+#' @param minF xx
+#' @param maxF xx
 #'
 #' @return
 #'
