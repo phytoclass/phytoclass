@@ -5,31 +5,29 @@
 #' @param Fmat xx
 #' @param place xx
 #' @param S   xx
-#' @param cm   xx
+#' @param S_weights   xx
 #' @param num.loops   xx
 #'
 #' @return
 #'
 #' @examples
-Steepest_Descent <- function(Fmat, place, S, cm, num.loops) {
-  # loop      <- 1
-  F.new     <- NNLS_MF(Fmat, S, cm)
-  F.initial <- F.new
+Steepest_Descent <- function(Fmat, place, S, S_weights, num.loops) {
+  F_new     <- NNLS_MF(Fmat, S, S_weights)
+  F_initial <- F_new
   
   for (i in 1:num.loops) { # should always be small. It would be nice to allow the
-    F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 3)
-    
-    # loop   <- loop + 1
+    F_new <- Minimise_elements_comb(F_initial[[1]], place, S, S_weights, c1_num = 3)
+
     loop <- 1
-    while (F.new[[2]] > F.initial[[2]]) {
+    while (F_new[[2]] > F_initial[[2]]) {
 
       if (loop <= 5) {
-        F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 3)
+        F_new <- Minimise_elements_comb(F_initial[[1]], place, S, S_weights, c1_num = 3)
       } else if (loop < 10) {
-        F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 1)
+        F_new <- Minimise_elements_comb(F_initial[[1]], place, S, S_weights, c1_num = 1)
       } else if (loop <= 100) {
         # If it doesn't work the first time, it randomises at a lower rate
-        F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 2)
+        F_new <- Minimise_elements_comb(F_initial[[1]], place, S, S_weights, c1_num = 2)
       } else if (loop > 100) {
         # it will continue for 100 iterations, and then stop
         break
@@ -37,7 +35,7 @@ Steepest_Descent <- function(Fmat, place, S, cm, num.loops) {
       
       loop <- loop + 1
     }
-    F.initial <- F.new
+    F_initial <- F_new
   }
-  return(F.new)
+  return(F_new)
 }
