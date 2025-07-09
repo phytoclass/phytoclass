@@ -72,29 +72,23 @@ simulated_annealing <- function(
   place <- which(Fmat[, -ncol(Fmat)] > 0)
   
   if (is.null(user_defined_min_max)) {
-    min_max <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
-    # K <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
+    min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
   } else {
-    # K <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
-    min_max <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
+    min_max_mat <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
   }
-    # if (length(min.val) != length(place)) {
+    # if (length(min_max_mat[[1]]) != length(place)) {
     #   message(paste0("\nNumber of rows for user_defined_min_max = ", 
-    #                  length(min.val)))
+    #                  length(min_max_mat[[1]])))
     #   message(paste0("Length of place = ", length(place)))
     #   stop("\nThese do not match.")
     # }
-  
-  # min.val <- K[[1]]
-  # max.val <- K[[2]]
   
   # ---- start kappa condition check ---- #
 
   condition.test <- Condition_test(
     S[, -ncol(S)], 
     Fmat[, -ncol(Fmat)], 
-    # min.val, max.val
-    min_max[[1]], min_max[[2]]
+    min_max_mat[[1]], min_max_mat[[2]]
     )
   
   if (verbose) {
@@ -131,7 +125,7 @@ simulated_annealing <- function(
   
   # extract min and max F matrix thresholds and last column ratio
   # wrangled <- Wrangling(f_c, min.val, max.val)
-  wrangled <- Wrangling(f_c, min_max[[1]], min_max[[2]])
+  wrangled <- Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])
   minF     <- wrangled[[1]]
   maxF     <- wrangled[[2]]
   chlv     <- wrangled[[4]]
