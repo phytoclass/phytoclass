@@ -131,12 +131,14 @@ simulated_annealing <- function(
   minF     <- wrangled[[1]]
   maxF     <- wrangled[[2]]
   chlv     <- wrangled[[4]]
+  step     <- 1 - step
+  
   
   for (k in 1:niter) {
     
     if (!verbose) pb$tick()
     
-    Temp <- (1 - step)^(k)
+    Temp <- step^(k)
     
     # needs to be run but not used, due to random number generator
     Random_neighbour(f_c, Temp, chlv, N = place, place, S, S_weights, minF, maxF)
@@ -157,11 +159,13 @@ simulated_annealing <- function(
     new_neighbour <- D[[nk]]
     
     num_loop2     <- ifelse(Temp > 0.3, 10, 2)
-    new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
-                           max.val, place, S, S_weights, num.loops = num_loop2)
+    # new_neighbour <- SAALS(new_neighbour[[1]], min.val,
+    #                        max.val, place, S, S_weights, num.loops = num_loop2)
 
+    new_neighbour <- Steepest_Descent(new_neighbour[[1]], place, S, S_weights, num.loops = num_loop2)
+    
     f_n      <- new_neighbour[[1]]
-    f_n_err  <- new_neighbour[[2]]
+    # f_n_err  <- new_neighbour[[2]]
     
     # check if ratios are out of bounds (min\max)
     oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF | 
@@ -187,13 +191,15 @@ simulated_annealing <- function(
       
       new_neighbour <- c(D, D2)[[nk]]
       f_n           <- new_neighbour[[1]]
-      f_n_err       <- new_neighbour[[2]]
+      # f_n_err       <- new_neighbour[[2]]
       
       # check if ratios are out of bounds (min\max)
       oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF |
                    vectorise(f_n[, -ncol(f_n)]) > maxF) 
       
     } 
+    
+    f_n_err  <- new_neighbour[[2]]
     
     # check RMSE of neighbor is better than current 
     if (f_n_err < f_c_err || 
