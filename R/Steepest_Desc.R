@@ -24,30 +24,30 @@
 Steepest_Desc <- function(Fmat, S, num.loops) {
   S_Chl <- S[, ncol(S)]
   cm    <- Bounded_weights(S, 30)
-  place <- which(Fmat[, 1:ncol(Fmat) - 1] > 0)
+  place <- which(Fmat[, -ncol(Fmat)] > 0)
 
-  loop      <- 1
+  # loop      <- 1
   F.new     <- NNLS_MF(Fmat, S, cm)
   F.initial <- F.new
   
   for (i in 1:num.loops) {
-    F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 3)
-    loop <- loop + 1
-    loop_2 <- 1
+    F.new  <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 3)
+    # loop   <- loop + 1
+    loop <- 1
     while (F.new[[2]] > F.initial[[2]]) {
-      loop_2 <- loop_2 + 1
       
-      if (loop_2 <= 5) {
+      if (loop <= 5) {
         F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 3)
-      } else if (loop_2 < 10) {
+      } else if (loop < 10) {
         F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 1)
-      } else if (loop_2 <= 100) {
+      } else if (loop <= 100) {
         # If it doesn't work the first time, it randomises at a lower rate
         F.new <- Minimise_elements_comb(F.initial[[1]], place, S, cm, c1_num = 2)
-      } else if (loop_2 > 100) {
+      } else if (loop > 100) {
         # it will continue for 100 iterations, and then stop
         break
       }
+      loop <- loop + 1
     }
     F.initial <- F.new
   }
