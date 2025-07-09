@@ -163,8 +163,8 @@ simulated_annealing <- function(
     f_n      <- new_neighbour[[1]]
 
     # check if ratios are out of bounds (min\max)
-    oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF | 
-                 vectorise(f_n[, -ncol(f_n)]) > maxF)
+    vect <- vectorise(f_n[, -ncol(f_n)])
+    oob  <- which(vect < minF | vect > maxF) 
     
     # if new lowest neighbor has a ratio outside of bounds, will change only 
     # those ones
@@ -188,8 +188,8 @@ simulated_annealing <- function(
       f_n           <- new_neighbour[[1]]
       
       # check if ratios are out of bounds (min\max)
-      oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF |
-                   vectorise(f_n[, -ncol(f_n)]) > maxF) 
+      vect <- vectorise(f_n[, -ncol(f_n)])
+      oob  <- which(vect < minF | vect > maxF) 
       
     } 
     
@@ -211,7 +211,8 @@ simulated_annealing <- function(
     if (verbose) {
       message(
         paste(
-          "Current error: ", round(f_c_err, 4),
+          "Iterations: ", k, "of", niter,
+          "\nCurrent error: ", round(f_c_err, 4),
           "\nNeighbour's error: ", round(f_n_err, 4),
           "\nTemperature (%): ", round(Temp * 100, 2), "\n"
           )
