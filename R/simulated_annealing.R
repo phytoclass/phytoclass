@@ -211,10 +211,10 @@ simulated_annealing <- function(
     if (verbose) {
       message(
         paste(
-          "Iterations: ", k, "of", niter,
-          "\nCurrent error: ", round(f_c_err, 4),
+          "Iterations:        ", k, "of", niter,
+          "\nCurrent error:     ", round(f_c_err, 4),
           "\nNeighbour's error: ", round(f_n_err, 4),
-          "\nTemperature (%): ", round(Temp * 100, 2), "\n"
+          "\nTemperature (%):   ", round(Temp * 100, 2), "\n"
           )
         )
     }
