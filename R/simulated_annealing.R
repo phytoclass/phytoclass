@@ -28,20 +28,20 @@
 #' set.seed(5326)
 #' sa.example <- simulated_annealing(Sm, Fm, niter = 5)
 #' sa.example$Figure
-simulated_annealing <- function(S,
-                                Fmat = NULL, 
-                                user_defined_min_max = NULL,
-                                do_matrix_checks = TRUE,
-                                niter = 500,
-                                step = 0.009,
-                                weight.upper.bound = 30, 
-                                verbose = TRUE,
-                                seed = NULL){
+simulated_annealing <- function(
+  S,
+  Fmat                 = NULL, 
+  user_defined_min_max = NULL,
+  do_matrix_checks     = TRUE,
+  niter                = 500,
+  step                 = 0.009,
+  weight.upper.bound   = 30, 
+  verbose              = TRUE,
+  seed                 = NULL) {
   
   if (!is.null(seed)) {
     set.seed(seed)
   }
-  
   
   if (is.null(Fmat)) {
     Fmat <- phytoclass::Fm
@@ -51,43 +51,46 @@ simulated_annealing <- function(S,
     Fmat <- as.matrix(Fmat)
   }
     
-  if (is.data.frame(S)){
-  char_cols <- sapply(S, is.character)
-  S <- S[, !char_cols]}
+  if (is.data.frame(S)) {
+    char_cols <- sapply(S, is.character)
+    S <- S[, !char_cols]
+  }
   
-  if (!is.matrix(S)){
+  if (!is.matrix(S)) {
     S <- as.matrix(S)
   }
 
   if (do_matrix_checks) {
-    L <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
-    S <- as.matrix(L[[1]])
+    L    <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
+    S    <- as.matrix(L[[1]])
     Fmat <- as.matrix(L[[2]])
   }
   
   S_Chl <- S[, ncol(S)]
-  S <- Normalise_S(S)
-  cm <- Bounded_weights(S, weight.upper.bound)
-  place <- which(Fmat[,1:ncol(Fmat)-1] > 0)
+  S     <- Normalise_S(S)
+  S_weights <- Bounded_weights(S, weight.upper.bound)
+  place <- which(Fmat[, -ncol(Fmat)] > 0)
   
   if (is.null(user_defined_min_max)) {
-    K <- Default_min_max(phytoclass::min_max, Fmat[,1:ncol(Fmat)-1], place)
-    min.val <- K[[1]]
-    max.val <- K[[2]]
+    min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
+  } else {
+    min_max_mat <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
   }
-  else {
-    K <- Default_min_max(user_defined_min_max,Fmat[, 1:ncol(Fmat) - 1], place)
-  min.val <- K[[1]]
-  max.val <- K[[2]]
-    # if (length(min.val) != length(place)) {
+    # if (length(min_max_mat[[1]]) != length(place)) {
     #   message(paste0("\nNumber of rows for user_defined_min_max = ", 
-    #                  length(min.val)))
+    #                  length(min_max_mat[[1]])))
     #   message(paste0("Length of place = ", length(place)))
     #   stop("\nThese do not match.")
     # }
-  }
   
-  condition.test <- Condition_test(S[,1:ncol(S)-1], Fmat[,1:ncol(Fmat)-1], min.val, max.val)
+  # ---- start kappa condition check ---- #
+
+  condition.test <- Condition_test(
+    S[, -ncol(S)], 
+    Fmat[, -ncol(Fmat)], 
+    min_max_mat[[1]], min_max_mat[[2]]
+    )
+  
   if (verbose) {
    message(paste0(
      "\nCondition number = ", round(condition.test),
@@ -99,136 +102,124 @@ simulated_annealing <- function(S,
     print("Abort process: condition number of S matrix greater than 100 000\n")
   }
   
-  Fi <- ifelse(Fmat > 0, 1, 0)
-  SE <- vectorise(Fi)
-  nc <- NNLS_MF(Fi, S, cm)
-  s_b <- s_c <- s_n <- nc[[1]]
-  f_b <- f_c <- f_n <- nc[[2]]
+  
+  # ---- start iteration process ---- #
+
+  Fmat         <- ifelse(Fmat > 0, 1, 0)
+  nnls_initial <- NNLS_MF(Fmat, S, S_weights)
+  
+  # initialize F matrix and RMSE
+  # n = neighbor
+  # c = current
+  # b = best
+  f_b     <- f_c     <- f_n     <- nnls_initial[[1]] # F matrix
+  f_b_err <- f_c_err <- f_n_err <- nnls_initial[[2]] # RMSE
   
   # Initialize progress bar if verbose is FALSE
   if (!verbose) {
     pb <- progress::progress_bar$new(
       format = "  Simulated Annealing [:bar] :percent ETA: :eta",
-      total = niter, clear = FALSE, width = 60
+      total  = niter, clear = FALSE, width = 60
     )
   }
   
+  # extract min and max F matrix thresholds and last column ratio
+  # wrangled <- Wrangling(f_c, min.val, max.val)
+  wrangled <- Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])
+  minF     <- wrangled[[1]]
+  maxF     <- wrangled[[2]]
+  chlv     <- wrangled[[4]]
+  step     <- 1 - step
+  
+  
   for (k in 1:niter) {
+    
     if (!verbose) pb$tick()
-    Temp <- (1 - step)^(k)
-    chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-    new_neighbour <- Random_neighbour2(s_c, Temp, chlv, s_c, 
-                                       place, S, cm, min.val, max.val)
-    D <- list()
-    if (k > niter-20){
-      for (i in 1:300){
-        chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-        D[[length(D)+1]] <- Random_neighbour2(s_c, Temp,
-                                              chlv, s_c, place, S, cm, min.val, max.val)
-      }
+    
+    Temp <- step^(k)
+    
+    # needs to be run but not used, due to random number generator
+    Random_neighbour(f_c, Temp, chlv, N = place, place, S, S_weights, minF, maxF)
+    
+    num_loop <- ifelse(k > niter - 20, 300, 120)
+    Dn       <- D <- vector("list", num_loop)
+    
+    for (i in seq(num_loop)) {
+      temp_rand <- Random_neighbour(
+        f_c, Temp, N = place, chlv, place, S, S_weights, minF, maxF
+        )
+      D[[i]]  <- temp_rand
+      Dn[[i]] <- temp_rand[[2]] # extract RMSE
     }
-    else{
-      for (i in 1:120){
-        chlv <- Wrangling(s_c, min.val, max.val)[[4]]
-        D[[length(D)+1]] <- Random_neighbour2(s_c, Temp,
-                                              chlv, s_c, place, S, cm, min.val, max.val)
-      }
-    }
-    Dn <- list()
-    for (i in D) {
-      Dn[[length(Dn) + 1]] <- i[[2]]
-    }
+  
+    # select neighbor with lowest RMSE
     nk <- which.min(Dn)
     new_neighbour <- D[[nk]]
-    if (Temp > 0.3) {
-      new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
-                             max.val, place, S, cm, num.loops = 10)
-    }
-    else {
-      new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
-                             max.val, place, S, cm, num.loops = 2)
-    }
-    minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-    maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
-    s_n <- new_neighbour[[1]]
-    f_n <- new_neighbour[[2]]
-    loop <- 1
-    d <- which(vectorise(s_n[, 1:(ncol(s_n) - 1)]) < minF | 
-                 vectorise(s_n[, 1:(ncol(s_n) - 1)]) > maxF)
-    while (length(d) > 0) {
-        if (k > niter-20){
-          N <- place[d]
-          for (i in 1:300){
-            chlv <- Wrangling(s_n, min.val, max.val)[[4]]
-            D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
-          }
-          Dn <- list()
-          for (i in D){
-            Dn[[length(Dn)+1]] <-  i[[2]]
-          }
-          
-          nk <- which.min(Dn)
-          
-          new_neighbour <- D[[nk]]
-          s_n <- new_neighbour[[1]]
-          f_n <- new_neighbour[[2]]
-          
-          minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-          maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
-          
-          d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
-          
-        }
-      else{
-        N <- place[d]
-        for (i in 1:120){
-          chlv <- Wrangling(s_n, min.val, max.val)[[4]]
-          D[[length(D)+1]] <- Random_neighbour(s_n, Temp, chlv, s_n, N, place, S, cm, min.val, max.val)
-        }
-        Dn <- list()
-        for (i in D){
-          Dn[[length(Dn)+1]] <-  i[[2]]
-        }
-        
-        nk <- which.min(Dn)
-        
-        new_neighbour <- D[[nk]]
-        s_n <- new_neighbour[[1]]
-        f_n <- new_neighbour[[2]]
-        
-        minF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
-        maxF <- Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
-        
-        d <- which(vectorise(s_n[,1:(ncol(s_n)-1)])<minF | vectorise(s_n[,1:(ncol(s_n)-1)]) > maxF) 
-        
+    
+    num_loop2     <- ifelse(Temp > 0.3, 10, 2)
+    new_neighbour <- Steepest_Descent(new_neighbour[[1]], place, S, S_weights, 
+                                      num.loops = num_loop2)
+    
+    f_n      <- new_neighbour[[1]]
+
+    # check if ratios are out of bounds (min\max)
+    vect <- vectorise(f_n[, -ncol(f_n)])
+    oob  <- which(vect < minF | vect > maxF) 
+    
+    # if new lowest neighbor has a ratio outside of bounds, will change only 
+    # those ones
+    while (length(oob) > 0) {
+      
+      N <- place[oob] # where in F matrix is the ratio out of bounds
+      Dn2 <- D2 <- vector("list", num_loop)
+
+      for (i in seq(num_loop)) {
+        temp_rand <- Random_neighbour(
+          f_n, Temp, chlv, N, place, S, S_weights,minF, maxF
+          )
+        D2[[i]]  <- temp_rand
+        Dn2[[i]] <- temp_rand[[2]] # extract RMSE
       }
       
+      # select new neighbor with lowest RMSE 
+      nk <- which.min(c(Dn, Dn2))
+      
+      new_neighbour <- c(D, D2)[[nk]]
+      f_n           <- new_neighbour[[1]]
+      
+      # check if ratios are out of bounds (min\max)
+      vect <- vectorise(f_n[, -ncol(f_n)])
+      oob  <- which(vect < minF | vect > maxF) 
+      
+    } 
+    
+    # check RMSE of neighbor is better than current 
+    f_n_err  <- new_neighbour[[2]] # RMSE
+    if (f_n_err < f_c_err || 
+        exp(-(f_n_err - f_c_err)) < stats::runif(1, 0, 1)
+        ) {
+      f_c     <- f_n
+      f_c_err <- f_n_err
     }
     
-    A = target(f_n)/target(f_c)
-    diff <- f_n - f_c
-    if (f_n < f_c || exp(-(f_n - f_c)) < stats::runif(1, 
-                                                      0, 1)) {
-      s_c <- s_n
-      f_c <- f_n
+    # update F matrix and RMSE when neighbor F matrix has lower RMSE
+    if (f_n_err < f_b_err) {
+      f_b     <- f_n
+      f_b_err <- f_n_err
     }
     
     if (verbose) {
-      message(paste("Current error: ", round(f_c, 4)))
-      message(paste("Neighbour's error: ", round(f_n, 4)))
-      message(paste("Temperature (%): ", round(Temp * 100, 2)))
-      message(" ")
-    }
-    
-    if (f_n < f_b) {
-      s_b <- s_n
-      f_b <- f_n
+      message(
+        paste(
+          "Iterations:        ", sprintf("%03d", k), "of", niter,
+          "\nCurrent error:     ", round(f_c_err, 4),
+          "\nNeighbour's error: ", round(f_n_err, 4),
+          "\nTemperature (%):   ", round(Temp * 100, 2), "\n"
+          )
+        )
     }
   }
-  
-  res <- list(s_b, f_b)
-  A <- res[[1]]
-  
-  final.results <- NNLS_MF_Final(A, S, S_Chl, cm)
-  return(final.results)
+
+  final_results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
+  return(final_results)
 }

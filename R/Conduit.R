@@ -11,7 +11,10 @@
 #'
 #' @examples
 Conduit <- function(Fmat, place, S, cm, c_num = c(1, 2, 3)) {
+  # run NNLS to get previous RMSE
   F.old <- NNLS_MF(Fmat, S, cm)
+  
+  # 
   place1 <- NULL
   if (c_num != 1) {place1 <- place }
   

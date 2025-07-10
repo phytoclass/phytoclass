@@ -6,7 +6,7 @@
 pigment ratios. To use this function, pigment and phytoplankton group
 names will need to fit the naming criteria of phytoclass.}
 \usage{
-Default_min_max(min_max, Fmat)
+Default_min_max(min_max, Fmat, place)
 }
 \arguments{
 \item{min_max}{A data.frame with 3 4 columns for class, pigment, min and max.}
