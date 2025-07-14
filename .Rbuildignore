@@ -12,3 +12,6 @@
 
 # integration tests & testing data
 ^tests/integration$
+
+# non-standard (according to CRAN) documentation files
+CONTRIBUTING.md
