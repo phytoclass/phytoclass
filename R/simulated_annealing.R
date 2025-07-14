@@ -72,26 +72,23 @@ simulated_annealing <- function(
   place <- which(Fmat[, -ncol(Fmat)] > 0)
   
   if (is.null(user_defined_min_max)) {
-    K <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
+    min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
   } else {
-    K <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
+    min_max_mat <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
   }
-    # if (length(min.val) != length(place)) {
+    # if (length(min_max_mat[[1]]) != length(place)) {
     #   message(paste0("\nNumber of rows for user_defined_min_max = ", 
-    #                  length(min.val)))
+    #                  length(min_max_mat[[1]])))
     #   message(paste0("Length of place = ", length(place)))
     #   stop("\nThese do not match.")
     # }
-  
-  min.val <- K[[1]]
-  max.val <- K[[2]]
   
   # ---- start kappa condition check ---- #
 
   condition.test <- Condition_test(
     S[, -ncol(S)], 
     Fmat[, -ncol(Fmat)], 
-    min.val, max.val
+    min_max_mat[[1]], min_max_mat[[2]]
     )
   
   if (verbose) {
@@ -127,16 +124,19 @@ simulated_annealing <- function(
   }
   
   # extract min and max F matrix thresholds and last column ratio
-  wrangled <- Wrangling(f_c, min.val, max.val)
+  # wrangled <- Wrangling(f_c, min.val, max.val)
+  wrangled <- Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])
   minF     <- wrangled[[1]]
   maxF     <- wrangled[[2]]
   chlv     <- wrangled[[4]]
+  step     <- 1 - step
+  
   
   for (k in 1:niter) {
     
     if (!verbose) pb$tick()
     
-    Temp <- (1 - step)^(k)
+    Temp <- step^(k)
     
     # needs to be run but not used, due to random number generator
     Random_neighbour(f_c, Temp, chlv, N = place, place, S, S_weights, minF, maxF)
@@ -157,15 +157,14 @@ simulated_annealing <- function(
     new_neighbour <- D[[nk]]
     
     num_loop2     <- ifelse(Temp > 0.3, 10, 2)
-    new_neighbour <- SAALS(new_neighbour[[1]], min.val, 
-                           max.val, place, S, S_weights, num.loops = num_loop2)
-
-    f_n      <- new_neighbour[[1]]
-    f_n_err  <- new_neighbour[[2]]
+    new_neighbour <- Steepest_Descent(new_neighbour[[1]], place, S, S_weights, 
+                                      num.loops = num_loop2)
     
+    f_n      <- new_neighbour[[1]]
+
     # check if ratios are out of bounds (min\max)
-    oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF | 
-                 vectorise(f_n[, -ncol(f_n)]) > maxF)
+    vect <- vectorise(f_n[, -ncol(f_n)])
+    oob  <- which(vect < minF | vect > maxF) 
     
     # if new lowest neighbor has a ratio outside of bounds, will change only 
     # those ones
@@ -187,15 +186,15 @@ simulated_annealing <- function(
       
       new_neighbour <- c(D, D2)[[nk]]
       f_n           <- new_neighbour[[1]]
-      f_n_err       <- new_neighbour[[2]]
       
       # check if ratios are out of bounds (min\max)
-      oob <- which(vectorise(f_n[, -ncol(f_n)]) < minF |
-                   vectorise(f_n[, -ncol(f_n)]) > maxF) 
+      vect <- vectorise(f_n[, -ncol(f_n)])
+      oob  <- which(vect < minF | vect > maxF) 
       
     } 
     
     # check RMSE of neighbor is better than current 
+    f_n_err  <- new_neighbour[[2]] # RMSE
     if (f_n_err < f_c_err || 
         exp(-(f_n_err - f_c_err)) < stats::runif(1, 0, 1)
         ) {
@@ -212,14 +211,13 @@ simulated_annealing <- function(
     if (verbose) {
       message(
         paste(
-          "Current error: ", round(f_c_err, 4),
+          "Iterations:        ", sprintf("%03d", k), "of", niter,
+          "\nCurrent error:     ", round(f_c_err, 4),
           "\nNeighbour's error: ", round(f_n_err, 4),
-          "\nTemperature (%): ", round(Temp * 100, 2), "\n"
+          "\nTemperature (%):   ", round(Temp * 100, 2), "\n"
           )
         )
     }
-    
-
   }
 
   final_results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
