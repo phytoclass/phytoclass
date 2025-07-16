@@ -37,7 +37,9 @@ simulated_annealing <- function(
   step                 = 0.009,
   weight.upper.bound   = 30, 
   verbose              = TRUE,
-  seed                 = NULL) {
+  seed                 = NULL,
+  convergance = T
+  ) {
   
   if (!is.null(seed)) {
     set.seed(seed)
@@ -115,16 +117,36 @@ simulated_annealing <- function(
   f_b     <- f_c     <- f_n     <- nnls_initial[[1]] # F matrix
   f_b_err <- f_c_err <- f_n_err <- nnls_initial[[2]] # RMSE
   
-  # Initialize progress bar if verbose is FALSE
+  # initialize progress bar if verbose is FALSE
   if (!verbose) {
     pb <- progress::progress_bar$new(
       format = "  Simulated Annealing [:bar] :percent ETA: :eta",
       total  = niter, clear = FALSE, width = 60
     )
   }
+ 
+  # initialize convergence plot data.frame
+  check_converg <- 
+    identical(convergance, TRUE) || 
+    (is.numeric(convergance) && 
+       length(convergance) == 1 && 
+       !is.na(convergance))
+  if (check_converg) {
+    
+    if (convergance > niter) convergance <- niter
+    
+    non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
+    
+    fm_iter <- 
+      data.frame(
+        iter    = 0, # iteration number
+        phyto   = rownames(f_b)[non_zero_idx[, 1]], # phyto groups
+        pigment = colnames(Fmat)[non_zero_idx[, 2]], # pigments
+        ratio   = f_b[non_zero_idx] # pigment ratios
+      )
+  }
   
   # extract min and max F matrix thresholds and last column ratio
-  # wrangled <- Wrangling(f_c, min.val, max.val)
   wrangled <- Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])
   minF     <- wrangled[[1]]
   maxF     <- wrangled[[2]]
@@ -218,8 +240,31 @@ simulated_annealing <- function(
           )
         )
     }
+    
+    # capture f_b for convergence plot per iteration
+    if (check_converg && k %% convergance == 0) {
+      
+      non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
+      fm_temp <- 
+        data.frame(
+          iter    = k, # iteration number
+          phyto   = rownames(f_b)[non_zero_idx[, 1]], # phyto groups
+          pigment = colnames(Fmat)[non_zero_idx[, 2]], # pigments
+          ratio   = f_b[non_zero_idx] # pigment ratios
+        )
+      fm_iter <- rbind(fm_iter, fm_temp)
+    }
   }
 
   final_results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
+  
+  # create convergence plot
+  if (check_converg) {
+    
+    converge <- convegence_figure(fm_iter, niter)
+    return(c(final_results, converge))
+    
+  }
+  
   return(final_results)
 }
