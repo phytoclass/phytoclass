@@ -9,7 +9,7 @@
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
 #' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
-#' @param convergance TRUE/FALSE/integer to add each iteration of F matrix and plot
+#' @param convergence  TRUE/FALSE/integer to add each iteration of F matrix and plot
 #'
 #' @return A list containing 
 #' \enumerate{
@@ -39,7 +39,7 @@ simulated_annealing <- function(
   weight.upper.bound   = 30, 
   verbose              = TRUE,
   seed                 = NULL,
-  convergance          = FALSE
+  convergence          = FALSE
   ) {
   
   if (!is.null(seed)) {
@@ -128,13 +128,13 @@ simulated_annealing <- function(
  
   # initialize convergence plot data.frame
   check_converg <- 
-    identical(convergance, TRUE) || 
-    (is.numeric(convergance) && 
-       length(convergance) == 1 && 
-       !is.na(convergance))
+    identical(convergence , TRUE) || 
+    (is.numeric(convergence ) && 
+       length(convergence ) == 1 && 
+       !is.na(convergence ))
   if (check_converg) {
     
-    if (convergance > niter) convergance <- niter
+    if (convergence  > niter) convergence  <- niter
     
     non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
     
@@ -243,7 +243,7 @@ simulated_annealing <- function(
     }
     
     # capture f_b for convergence plot per iteration
-    if (check_converg && k %% convergance == 0) {
+    if (check_converg && k %% convergence  == 0) {
       
       non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
       fm_temp <- 
