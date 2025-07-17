@@ -55,9 +55,9 @@ Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
       cont  <- vary
     } else {
       # TODO: remove because doesnt have enough inputs to work
-      C1    <- Fac_F_RR(Fmat, place, fac_rr = 1)
-      F.new <- C1[[1]]
-      cont  <- C1[[2]]
+      c1    <- Fac_F_RR(Fmat, place, fac_rr = 1)
+      F.new <- c1[[1]]
+      cont  <- c1[[2]]
     }
   }
   
@@ -82,14 +82,14 @@ Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
       cont  <- vary
     } else if (fac_rr == 2) {
       # fac_rr = 2: medium range going down to smallest range
-      C1    <- Fac_F_RR(Fmat, place, S, cm, fac_rr = 1)
-      F.new <- C1[[1]]
-      cont  <- C[[2]]
+      c1    <- Fac_F_RR(Fmat, place, S, cm, fac_rr = 1)
+      F.new <- c1[[1]]
+      cont  <- c1[[2]]
     } else if (fac_rr == 3) {
       # fac_rr = 3: largest range going down to smaller range
-      C1    <- Fac_F_RR(Fmat, vary, place = place, S, cm, fac_rr = 2)
-      F.new <- C1[[1]]
-      cont  <- C1[[2]]  
+      c1    <- Fac_F_RR(Fmat, vary, place = place, S, cm, fac_rr = 2)
+      F.new <- c1[[1]]
+      cont  <- c1[[2]]  
     }
   }
   
