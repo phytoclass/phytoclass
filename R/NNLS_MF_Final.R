@@ -76,7 +76,7 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
     )
   
   plt <- 
-    ggplot2::ggplot(PLE, ggplot2::aes_string(x = row_num, y = vals, fill = names)) +
+    ggplot2::ggplot(PLE, ggplot2::aes(x = row_num, y = vals, fill = names)) +
     ggplot2::geom_area() +
     ggplot2::scale_color_manual(values = colorBlindGrey8) +
     ggplot2::scale_fill_manual(values = colorBlindGrey8) +
