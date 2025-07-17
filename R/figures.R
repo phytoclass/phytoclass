@@ -9,11 +9,17 @@
 #' @examples
 #' # ADD_EXAMPLES_HERE
 phyto_figure <- function(c_matrix) {
+  # NULL assignment to stop NOTE during the package "R-CMD-check"
+  #   error -  `no visible binding for global variable`
+  vals    <- NULL
+  row_num <- NULL
+  
+  # TODO: add situation with more than 11 taxa
   colorBlindGrey8   <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
                          "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73",
                          "#001E73", "#013E73")
   
-  vals <- NULL
+  
   PLE  <- tidyr::pivot_longer(
     data      = cbind(c_matrix, "row_num" = seq(nrow(c_matrix))), 
     cols      = -row_num, 
@@ -50,11 +56,20 @@ phyto_figure <- function(c_matrix) {
 #' @examples
 #' # ADD_EXAMPLES_HERE
 convegence_figure <- function(fm_iter, niter) {
+  # NULL assignment to stop NOTE during the package "R-CMD-check"
+  #   error -  `no visible binding for global variable`
+  iter    <- NULL
+  ratio   <- NULL
+  pigment <- NULL
+  
+  # TODO: add situation with more than 11 taxa
   colorBlindGrey8 <- c(
     "#999999", "#E69F00", "#56B4E9", "#009E73",
     "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#009E73",
     "#001E73", "#013E73"
   )
+  
+  # add pretty breaks
   break_pts <- if (niter < 10) {
     seq(0, niter, 1)
   } else if (niter < 50) {
