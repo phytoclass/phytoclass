@@ -5,16 +5,12 @@
 \title{Select a random neighbour when the previous random neighbour is beyond
 the minimum or maximum value.}
 \usage{
-Random_neighbour(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val)
+Random_neighbour(f_new, Temp, chlv, N, place, S, S_weights, minF, maxF)
 }
 \arguments{
-\item{Fn}{xx}
-
 \item{Temp}{xx}
 
 \item{chlv}{xx}
-
-\item{s_c}{xx}
 
 \item{N}{xx}
 
@@ -22,11 +18,13 @@ Random_neighbour(Fn, Temp, chlv, s_c, N, place, S, cm, min.val, max.val)
 
 \item{S}{xx}
 
-\item{cm}{xx}
+\item{S_weights}{xx}
 
-\item{min.val}{xx}
+\item{minF}{xx}
 
-\item{max.val}{xx}
+\item{maxF}{xx}
+
+\item{Fn}{xx}
 }
 \description{
 Select a random neighbour when the previous random neighbour is beyond
