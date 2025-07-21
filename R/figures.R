@@ -51,12 +51,13 @@ phyto_figure <- function(c_matrix) {
 #' iterations
 #'
 #' @param fm_iter A data.frame with columns of iter, phyto, pigment and ratio
-#' @param niter DESCRIPTION.
+#' @param niter Optional: the number of iterations on the x axis. 
+#'              If `NULL`, will extract from the `iter` column of `fm_iter`.
 #'
 #' @return A figure with each pigment ratio per iteration per group
 #' @examples
 #' # ADD_EXAMPLES_HERE
-convegence_figure <- function(fm_iter, niter) {
+convergence_figure <- function(fm_iter, niter = NULL) {
   
   # NOTE: NULL assignment to stop NOTE during the package "R-CMD-check"
   #   error -  `no visible binding for global variable`
@@ -70,6 +71,9 @@ convegence_figure <- function(fm_iter, niter) {
     "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#009E73",
     "#001E73", "#013E73"
   )
+  
+  if (is.null(niter)) niter <- max(unique(x$ratio_iter$iter))
+  
   
   # add pretty breaks
   break_pts <- if (niter < 10) {

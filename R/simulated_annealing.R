@@ -266,7 +266,7 @@ simulated_annealing <- function(
   # create convergence plot
   if (converge_tf) {
     
-    converge <- convegence_figure(fm_iter, niter)
+    converge <- convergence_figure(fm_iter, niter)
     return(c(final_results, converge))
     
   }
