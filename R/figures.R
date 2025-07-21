@@ -100,7 +100,7 @@ convegence_figure <- function(fm_iter, niter) {
     ggplot2::theme_bw() +
     ggplot2::coord_cartesian(expand = FALSE)
 
-  converge <- list("ratio_iter" = fm_iter, "converge_plot" = converge_plt)
+  converge <- list("F_mat_iter" = fm_iter, "converge_plot" = converge_plt)
 
   return(converge)
 }
