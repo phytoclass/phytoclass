@@ -9,7 +9,8 @@
 #' @examples
 #' # ADD_EXAMPLES_HERE
 phyto_figure <- function(c_matrix) {
-  # NULL assignment to stop NOTE during the package "R-CMD-check"
+  
+  # NOTE: NULL assignment to stop NOTE during the package "R-CMD-check"
   #   error -  `no visible binding for global variable`
   vals    <- NULL
   row_num <- NULL
@@ -56,7 +57,8 @@ phyto_figure <- function(c_matrix) {
 #' @examples
 #' # ADD_EXAMPLES_HERE
 convegence_figure <- function(fm_iter, niter) {
-  # NULL assignment to stop NOTE during the package "R-CMD-check"
+  
+  # NOTE: NULL assignment to stop NOTE during the package "R-CMD-check"
   #   error -  `no visible binding for global variable`
   iter    <- NULL
   ratio   <- NULL
