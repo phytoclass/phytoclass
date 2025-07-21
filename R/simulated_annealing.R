@@ -9,6 +9,7 @@
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
 #' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
+#' @param seed Set number to reproduce the same results
 #' @param check_converge  TRUE/FALSE/integer to add each iteration of F matrix and plot
 #'
 #' @return A list containing 
