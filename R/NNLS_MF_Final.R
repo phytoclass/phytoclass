@@ -60,6 +60,8 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
   
   # NULL assignment to stop NOTE during the package "Check"
   #  -  no visible binding for global variable
+  vals    <- NULL
+  row_num <- NULL
   
   # ---- plot final results ---- #
   plt <- phyto_figure(Cn2)
