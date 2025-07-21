@@ -34,6 +34,8 @@ simulated_annealing(
 
 \item{verbose}{Logical value. Output error and temperature at each iteration. Default value of TRUE}
 
+\item{seed}{Set number to reproduce the same results}
+
 \item{check_converge}{TRUE/FALSE/integer to add each iteration of F matrix and plot}
 }
 \value{
