@@ -72,7 +72,7 @@ Matrix_checks <- function(S, Fmat) {
   for (i in seq(nrow(check_mat))) {
     phyto_row <- which(rownames(f_mat) == check_mat[i, 1])
     pig_col   <- which(colnames(s_mat) == check_mat[i, 2])
-    if(length(pig_col) == 0 & length(phyto_row) > 0) {
+    if (length(pig_col) == 0 & length(phyto_row) > 0) {
       print("removing something")
       f_mat <- f_mat[-phyto_row,]
     }
