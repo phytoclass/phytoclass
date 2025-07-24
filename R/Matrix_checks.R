@@ -31,9 +31,8 @@ Matrix_checks <- function(S, Fmat) {
   
   # if column names dont match, select the columns that overlap with Fmat
   # also reorders to match Fmat
-  s_mat <- S[intersect(colnames(f_mat), colnames(S))]
-  f_mat <- f_mat[intersect(colnames(f_mat), colnames(S))]
-  
+  s_mat <- S[,intersect(colnames(f_mat), colnames(S))]
+  f_mat <- f_mat[,intersect(colnames(f_mat), colnames(S))]
   
   # remove pigments when occur in less than 1% of samples 
   s_nrow   <- nrow(s_mat)
@@ -41,8 +40,8 @@ Matrix_checks <- function(S, Fmat) {
   s_indx   <- which(s_colsum / s_nrow <= -0.01) # less than 1% have value for this pigments?
   s_indx   <- !(s_colsum / s_nrow <= 0.01) # less than 1% have value for this pigments?
   keep_col <- colnames(s_mat)[!(s_colsum / s_nrow <= 0.01)] # pigments to keep
-  s_mat    <- s_mat[keep_col]
-  f_mat       <- f_mat[keep_col]
+  s_mat    <- s_mat[,keep_col]
+  f_mat    <- f_mat[,keep_col]
   
   
   # check S matrix that pigments occur in > 50% of samples and total concentration
@@ -71,8 +70,6 @@ Matrix_checks <- function(S, Fmat) {
     )
   
   for (i in seq(nrow(check_mat))) {
-    print(sprintf("%s: %s and %s",i, check_mat[i, 1], check_mat[i, 2]))
-    
     phyto_row <- which(rownames(f_mat) == check_mat[i, 1])
     pig_col   <- which(colnames(s_mat) == check_mat[i, 2])
     if(length(pig_col) == 0 & length(phyto_row) > 0) {
