@@ -15,6 +15,9 @@
 #' 
 Matrix_checks <- function(S, Fmat) {
   
+  f_mat_og <- Fmat
+  Fmat[Fmat > 0] <- 1
+  
   # check if non-numeric and if all groups have more than 1 pigment
   f_rowsum <- tryCatch({
     rowSums(Fmat)
@@ -62,13 +65,29 @@ Matrix_checks <- function(S, Fmat) {
           "Haptophytes-L", "Diatoms-1", "Pelagophytes", "Prasinophytes"
         ),
         c(
-          "Chl_b", "Chl_b", "Pra", "Per", "Chl_c1", "Fuco", "Zea", "Allo", 
+          "Chl_b", "Chl_b", "Pra", "Per", "Chl_c1", "Fuco", "Zea", "Allo",
           "X19hex", "X19hex", "Fuco", "X19but", "Chl_b"
         )
       ),
       ncol = 2
     )
   
+  # TODO: test more using F matrix with "2" showing major pigment
+  # f_check_indx <- which(f_mat_og == 2, arr.ind = TRUE)
+  # f_check <- data.frame(
+  #   phtyo = rownames(f_check_indx),
+  #   f_check_indx,
+  #   row.names = NULL
+  #  )
+  # 
+  # check_mat <- cbind(
+  #   f_check,
+  #   pig = colnames(f_mat_og)[f_check_indx[, 2]]
+  #   )[, -c(2:3)]
+  #   
+  # TODO: add warning if no major pigments are found that they should examine
+  # F matrix
+
   for (i in seq(nrow(check_mat))) {
     phyto_row <- which(rownames(f_mat) == check_mat[i, 1])
     pig_col   <- which(colnames(s_mat) == check_mat[i, 2])
