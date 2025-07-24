@@ -1,3 +1,11 @@
+# phytoclass 2.1.0
+* performance improvements
+* improved documentation
+* + continuous integration
+* + tests
+* improved matrix checks
+* improved error messages
+
 # phytoclass 2.0.0
 
 # phytoclass 1.2.0

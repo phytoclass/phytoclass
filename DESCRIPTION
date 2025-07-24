@@ -1,8 +1,17 @@
 Package: phytoclass
 Title: Estimate Chla Concentrations of Phytoplankton Groups
-Version: 2.0.0
-Authors@R: c(person("Alexander", "Hayward", role = c("aut", "cre", "cph"), email = "phytoclass@outlook.com"),
-	person("Tylar", "Murray", role = c("aut")), person("Andy", "McKenzie", role = c("aut")))
+Version: 2.1.0
+Authors@R: c(person(
+    "Alexander", "Hayward", role = c("aut", "cre", "cph"), email = "phytoclass@outlook.com"
+  ), person(
+    "Tylar", "Murray", role = c("aut")
+  ), person(
+    "Andy", "McKenzie", role = c("aut")
+  , person(
+    "Sebatian", "Digeronimo", role = c("aut"))
+  ), person(
+    "Khan", "Mohd", "Aasim", "Maqsood", role = c("aut"))
+  )
 Description: Determine the chlorophyll a (Chl a) concentrations of different 
     phytoplankton groups based on their pigment biomarkers. The method uses
     non-negative matrix factorisation and simulated annealing to minimise error
