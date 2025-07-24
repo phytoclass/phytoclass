@@ -173,3 +173,11 @@ Results$Figure
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
+
+
+## Citation
+If used please cite the following paper:
+
+```
+Hayward, Alexander, Matthew H. Pinkerton, and Andres Gutierrez‐Rodriguez. "phytoclass: A pigment‐based chemotaxonomic method to determine the biomass of phytoplankton classes." Limnology and Oceanography: Methods 21.4 (2023): 220-241.
+```
