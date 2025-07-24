@@ -10,6 +10,7 @@
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
 #' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
 #' @param seed Set number to reproduce the same results
+#' @param check_converge  TRUE/FALSE/integer to add each iteration of F matrix and plot
 #'
 #' @return A list containing 
 #' \enumerate{
@@ -20,6 +21,8 @@
 #'  \item Figure (plot of results)
 #'  \item MAE (Mean Absolute Error)
 #'  \item Error
+#'  \item F_mat_iter
+#'  \item converge_plot 
 #'  }
 #' @export
 #'
@@ -38,7 +41,9 @@ simulated_annealing <- function(
   step                 = 0.009,
   weight.upper.bound   = 30, 
   verbose              = TRUE,
-  seed                 = NULL) {
+  seed                 = NULL,
+  check_converge       = FALSE
+  ) {
   
   if (!is.null(seed)) {
     set.seed(seed)
@@ -116,16 +121,38 @@ simulated_annealing <- function(
   f_b     <- f_c     <- f_n     <- nnls_initial[[1]] # F matrix
   f_b_err <- f_c_err <- f_n_err <- nnls_initial[[2]] # RMSE
   
-  # Initialize progress bar if verbose is FALSE
+  # initialize progress bar if verbose is FALSE
   if (!verbose) {
     pb <- progress::progress_bar$new(
       format = "  Simulated Annealing [:bar] :percent ETA: :eta",
       total  = niter, clear = FALSE, width = 60
     )
   }
+ 
+  # initialize convergence check plot data.frame
+  converge_tf <- 
+    identical(check_converge, TRUE) || 
+    (is.numeric(check_converge) && 
+       length(check_converge) == 1 && 
+       !is.na(check_converge) &&
+       check_converge > 0)
+  
+  if (converge_tf) {
+    if (is.logical(check_converge)) check_converge  <- 1
+    if (check_converge  > niter) check_converge     <- niter
+    
+    non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
+    
+    fm_iter <- 
+      data.frame(
+        iter    = 0, # iteration number
+        phyto   = rownames(f_b)[non_zero_idx[, 1]], # phyto groups
+        pigment = colnames(Fmat)[non_zero_idx[, 2]], # pigments
+        ratio   = f_b[non_zero_idx] # pigment ratios
+      )
+  }
   
   # extract min and max F matrix thresholds and last column ratio
-  # wrangled <- Wrangling(f_c, min.val, max.val)
   wrangled <- Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])
   minF     <- wrangled[[1]]
   maxF     <- wrangled[[2]]
@@ -219,8 +246,31 @@ simulated_annealing <- function(
           )
         )
     }
+    
+    # capture f_b for convergence plot per iteration
+    if (converge_tf && (k %% check_converge  == 0 || k == niter)) {
+      
+      non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
+      fm_temp <- 
+        data.frame(
+          iter    = k, # iteration number
+          phyto   = rownames(f_b)[non_zero_idx[, 1]], # phyto groups
+          pigment = colnames(Fmat)[non_zero_idx[, 2]], # pigments
+          ratio   = f_b[non_zero_idx] # pigment ratios
+        )
+      fm_iter <- rbind(fm_iter, fm_temp)
+    }
   }
 
   final_results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights)
+  
+  # create convergence plot
+  if (converge_tf) {
+    
+    converge <- convergence_figure(fm_iter, niter)
+    return(c(final_results, converge))
+    
+  }
+  
   return(final_results)
 }
