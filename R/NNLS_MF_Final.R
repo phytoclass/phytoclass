@@ -60,13 +60,14 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
   
   # NULL assignment to stop NOTE during the package "Check"
   #  -  no visible binding for global variable
+  vals    <- NULL
+  row_num <- NULL
   
   # ---- plot final results ---- #
   colorBlindGrey8   <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
                          "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73",
                          "#001E73", "#013E73")
-  
-  vals <- NULL
+
   PLE  <- tidyr::pivot_longer(
     data      = cbind(Cn2, "row_num" = seq(nrow(Cn2))), 
     cols      = -row_num, 

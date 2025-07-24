@@ -6,14 +6,14 @@
 pigments and pigment ratios, to attain an estimate of phytoplankton
 class abundances.}
 \usage{
-NNLS_MF(Fn, S, cm = NULL)
+NNLS_MF(Fn, S, S_weights = NULL)
 }
 \arguments{
 \item{Fn}{Pigment to Chl a matrix}
 
 \item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{cm}{Weights for each column}
+\item{S_weights}{Weights for each column}
 }
 \value{
 A list containing
@@ -32,7 +32,7 @@ class abundances.
 MC <- Matrix_checks(Sm,Fm)
 Snew <- MC$Snew
 Fnew <- MC$Fnew
-cm <- Bounded_weights(Snew, weight.upper.bound = 30)
-NNLS_MF(Fnew, Snew, cm)
+S_weights <- Bounded_weights(Snew, weight.upper.bound = 30)
+NNLS_MF(Fnew, Snew, S_weights)
 
 }
