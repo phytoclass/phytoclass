@@ -13,7 +13,8 @@ simulated_annealing(
   step = 0.009,
   weight.upper.bound = 30,
   verbose = TRUE,
-  seed = NULL
+  seed = NULL,
+  check_converge = FALSE
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ simulated_annealing(
 \item{verbose}{Logical value. Output error and temperature at each iteration. Default value of TRUE}
 
 \item{seed}{Set number to reproduce the same results}
+
+\item{check_converge}{TRUE/FALSE/integer to add each iteration of F matrix and plot}
 }
 \value{
 A list containing
@@ -45,6 +48,8 @@ A list containing
 \item Figure (plot of results)
 \item MAE (Mean Absolute Error)
 \item Error
+\item F_mat_iter
+\item converge_plot
 }
 }
 \description{

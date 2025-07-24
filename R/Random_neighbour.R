@@ -37,9 +37,12 @@ Random_neighbour <- function(f_new, Temp, chlv, N, place, S, S_weights, minF, ma
     oob   <- which(p_new < minF | p_new > maxF)
     # print(loop) # if loop is > 3000, just select it from a uniform distribution between the max and min
 
-    if (loop > 50) {
-      p_new[oob] <- round(runif(n = length(oob), minF[oob] * 1.2, maxF[oob] * 0.80), 4)
-      oob        <- which(p_new < minF | p_new > maxF)
+    if (loop > 50 & length(oob) > 0) {
+      # sort bound limits for when bounds are small enough to overlap 
+      sort_min_max <- cbind(minF[oob] * 1.2, maxF[oob] * 0.80) 
+      sort_min_max <- t(apply(sort_min_max, 1, sort))
+      p_new[oob]   <- round(runif(length(oob), sort_min_max[, 1], sort_min_max[, 2]), 4)
+      oob          <- which(p_new < minF | p_new > maxF)
     }
   }
   
