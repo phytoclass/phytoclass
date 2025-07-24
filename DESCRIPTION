@@ -6,7 +6,7 @@ Authors@R: c(person(
   ), person(
     given="Tylar", family="Murray", role = c("aut")
   ), person(
-    given="Sebatian", family="Digeronimo", role = c("aut")
+    given="Sebastian", family="Di Geronimo", role = c("aut")
   ), person(
     given = "Mohd Aasim Maqsood", family = "Khan", role = c("aut")
   ), person(
