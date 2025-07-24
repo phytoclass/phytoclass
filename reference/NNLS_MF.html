@@ -53,7 +53,7 @@ class abundances.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">NNLS_MF</span><span class="op">(</span><span class="va">Fn</span>, <span class="va">S</span>, cm <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">NNLS_MF</span><span class="op">(</span><span class="va">Fn</span>, <span class="va">S</span>, S_weights <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,7 +68,7 @@ class abundances.</p>
 <dd><p>Sample data matrix – a matrix of pigment samples</p></dd>
 
 
-<dt id="arg-cm">cm<a class="anchor" aria-label="anchor" href="#arg-cm"></a></dt>
+<dt id="arg-s-weights">S_weights<a class="anchor" aria-label="anchor" href="#arg-s-weights"></a></dt>
 <dd><p>Weights for each column</p></dd>
 
 </dl></div>
@@ -84,8 +84,8 @@ class abundances.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">MC</span> <span class="op">&lt;-</span> <span class="fu"><a href="Matrix_checks.html">Matrix_checks</a></span><span class="op">(</span><span class="va">Sm</span>,<span class="va">Fm</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">Snew</span> <span class="op">&lt;-</span> <span class="va">MC</span><span class="op">$</span><span class="va">Snew</span></span></span>
 <span class="r-in"><span><span class="va">Fnew</span> <span class="op">&lt;-</span> <span class="va">MC</span><span class="op">$</span><span class="va">Fnew</span></span></span>
-<span class="r-in"><span><span class="va">cm</span> <span class="op">&lt;-</span> <span class="fu"><a href="Bounded_weights.html">Bounded_weights</a></span><span class="op">(</span><span class="va">Snew</span>, weight.upper.bound <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">NNLS_MF</span><span class="op">(</span><span class="va">Fnew</span>, <span class="va">Snew</span>, <span class="va">cm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">S_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="Bounded_weights.html">Bounded_weights</a></span><span class="op">(</span><span class="va">Snew</span>, weight.upper.bound <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">NNLS_MF</span><span class="op">(</span><span class="va">Fnew</span>, <span class="va">Snew</span>, <span class="va">S_weights</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`F matrix `</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   Per X19but Fuco Neox Pra Viol X19hex Allo Zea Chl_b Tchla</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Prasinophytes       0      0    0    1   1    1      0    0   1     1     1</span>
