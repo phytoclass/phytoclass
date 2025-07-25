@@ -30,6 +30,9 @@ the final column.
 There is a separate function when Divinyl chlorophyll a and
 Prochlorococcus are used. Here Divynl chlorophyll a must be the 2nd to
 last column (see ‘Fp’).
+Note: If dvchl is detected as the second-to-last column in your input matrix, 
+the simulated_annealing() function will automatically call the 
+Prochlorococcus-optimized version (simulated_annealing_Prochloro()).
 
 The ’Steepest Descent’function is similar to that of CHEMTAX, and is
 unconstrained by minimum and maximum values, unlike the simualted
