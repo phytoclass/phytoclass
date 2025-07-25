@@ -38,6 +38,27 @@ simulated_annealing <- function(S,
                                 verbose = TRUE,
                                 seed = NULL){
   
+  # Check for dvchl/dvchla in penultimate column and use Prochlorococcus variant
+  if (is.data.frame(S)) {
+    col_names <- tolower(colnames(S))
+    penultimate_col <- col_names[length(col_names) - 1]
+    
+    if (!is.null(penultimate_col) &&
+        penultimate_col %in% c("dvchl", "dvchla")) {
+      
+        message("Detected dvchl column. Using simulated_annealing_Prochloro().")
+        
+        return(simulated_annealing_Prochloro(S = S,
+                                             Fmat = Fmat,
+                                             user_defined_min_max = user_defined_min_max,
+                                             do_matrix_checks = do_matrix_checks,
+                                             niter = niter,
+                                             step = step,
+                                             weight.upper.bound = weight.upper.bound,
+                                             verbose = verbose))
+    }
+  }
+  
   if (!is.null(seed)) {
     set.seed(seed)
   }
