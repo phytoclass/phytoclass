@@ -3,7 +3,7 @@
 #' 
 #' @keywords internal
 #'
-#' @param Fn xx
+#' @param f_new xx
 #' @param Temp xx
 #' @param chlv xx
 #' @param N xx
