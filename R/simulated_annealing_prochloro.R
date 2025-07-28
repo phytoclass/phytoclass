@@ -1,4 +1,6 @@
-#' Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus. Divinyl chlorophyll must be the final column of both S and F matrices, with chlorophyll a the 2nd to last column. See how the example Sp and Fp matrices are organised.
+#' Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus. 
+#' Chlorophyll must be the final column of both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column. 
+#' See how the example Sp and Fp matrices are organised.
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix
