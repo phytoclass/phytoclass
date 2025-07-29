@@ -40,6 +40,7 @@ simulated_annealing <- function(
   verbose              = TRUE,
   seed                 = NULL) {
   
+  
   if (!is.null(seed)) {
     set.seed(seed)
   }
@@ -65,6 +66,25 @@ simulated_annealing <- function(
     L    <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
     S    <- as.matrix(L[[1]])
     Fmat <- as.matrix(L[[2]])
+  }
+  
+  # Check for dvchl/dvchla
+  col_names <- tolower(colnames(S))
+  penultimate_col <- col_names[length(col_names) - 1]
+
+  if (!is.null(penultimate_col) &&
+      penultimate_col %in% c("dvchl", "dvchla")) {
+
+    message("Detected dvchl column. Using simulated_annealing_Prochloro().")
+
+    return(simulated_annealing_Prochloro(S = S,
+                                         Fmat = Fmat,
+                                         user_defined_min_max = user_defined_min_max,
+                                         do_matrix_checks = do_matrix_checks,
+                                         niter = niter,
+                                         step = step,
+                                         weight.upper.bound = weight.upper.bound,
+                                         verbose = verbose))
   }
   
   S_Chl <- S[, ncol(S)]
