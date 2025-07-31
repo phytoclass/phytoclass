@@ -19,7 +19,7 @@
 #' @examples
 #' @importFrom stats runif
 Prochloro_Random_Neighbour_2 <- function(Fn, Temp, chlv, s_c, place, S, cm, min.val, max.val,chlvp) 
-{
+ {
   s_c <- vectorise(s_c[, 1:ncol(s_c) - 1])
   s_c <- s_c[1:length(s_c)-1]
   SE <- Prochloro_Wrangling(Fn, min.val, max.val)[[3]]
