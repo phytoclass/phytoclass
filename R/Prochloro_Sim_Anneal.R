@@ -26,7 +26,7 @@
 #' set.seed(5326)
 #' sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 5)
 #' sa.example$Figure
-simulated_annealing_Prochloro1 <- function (S, 
+simulated_annealing_Prochloro <- function (S, 
                                            Fmat = NULL,
                                            user_defined_min_max = NULL,
                                            do_matrix_checks = TRUE, 
@@ -63,13 +63,13 @@ simulated_annealing_Prochloro1 <- function (S,
   }
   else {
     K <- phytoclass:::Default_min_max(user_defined_min_max, Fmat[, 1:ncol(Fmat) - 
-                                                      1], place)
+                                                                   1], place)
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
   
   condition.test <- phytoclass:::Condition_test(S[, 1:ncol(S) - 1], Fmat[, 
-                                                            1:ncol(Fmat) - 1], min.val, max.val)
+                                                                         1:ncol(Fmat) - 1], min.val, max.val)
   if (verbose) {
     message(paste0("\nCondition number = ", round(condition.test), 
                    "\n\n"))
@@ -99,9 +99,9 @@ simulated_annealing_Prochloro1 <- function (S,
         chlv <- Prochloro_Wrangling(s_c, min.val, max.val)[[4]]
         chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
         D[[length(D) + 1]] <- Prochloro_Random_Neighbour_2(s_c, 
-                                                Temp, chlv, 
-                                                s_c, place, S, cm, 
-                                                min.val, max.val)
+                                                           Temp, chlv, 
+                                                           s_c, place, S, cm, 
+                                                           min.val, max.val)
       }
     }
     else {
@@ -109,9 +109,9 @@ simulated_annealing_Prochloro1 <- function (S,
         chlv <- Prochloro_Wrangling(s_c, min.val, max.val)[[4]]
         chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
         D[[length(D) + 1]] <- Prochloro_Random_Neighbour_2(s_c, 
-                                                Temp, chlv,s_c, 
-                                                place, S, cm,
-                                                min.val, max.val)
+                                                           Temp, chlv,s_c, 
+                                                           place, S, cm,
+                                                           min.val, max.val)
       }
     }
     Dn <- list()
@@ -122,11 +122,11 @@ simulated_annealing_Prochloro1 <- function (S,
     new_neighbour <- D[[nk]]
     if (Temp > 0.3) {
       new_neighbour <- phytoclass:::SAALS(new_neighbour[[1]], min.val, 
-                             max.val, place, S, cm, num.loops = 10)
+                                          max.val, place, S, cm, num.loops = 10)
     }
     else {
       new_neighbour <- phytoclass:::SAALS(new_neighbour[[1]], min.val, 
-                             max.val, place, S, cm, num.loops = 2)
+                                          max.val, place, S, cm, num.loops = 2)
     }
     minF <- Prochloro_Wrangling(new_neighbour[[1]], min.val, max.val)[[1]]
     maxF <- Prochloro_Wrangling(new_neighbour[[1]], min.val, max.val)[[2]]
@@ -142,9 +142,9 @@ simulated_annealing_Prochloro1 <- function (S,
           chlv <- Prochloro_Wrangling(s_n, min.val, max.val)[[4]]
           chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
           D[[length(D) + 1]] <- Prochloro_Random_Neighbour(s_n, 
-                                                 Temp, chlv, s_n,
-                                                 N, place, S, cm, min.val, 
-                                                 max.val)
+                                                           Temp, chlv, s_n,
+                                                           N, place, S, cm, min.val, 
+                                                           max.val)
         }
         Dn <- list()
         for (i in D) {
@@ -155,9 +155,9 @@ simulated_annealing_Prochloro1 <- function (S,
         s_n <- new_neighbour[[1]]
         f_n <- new_neighbour[[2]]
         minF <- Prochloro_Wrangling(new_neighbour[[1]], min.val, 
-                          max.val)[[1]]
+                                    max.val)[[1]]
         maxF <- Prochloro_Wrangling(new_neighbour[[1]], min.val, 
-                          max.val)[[2]]
+                                    max.val)[[2]]
         d <- which(phytoclass:::vectorise(s_n[, 1:(ncol(s_n) - 1)]) < 
                      minF | phytoclass:::vectorise(s_n[, 1:(ncol(s_n) - 1)]) > 
                      maxF)
@@ -168,8 +168,8 @@ simulated_annealing_Prochloro1 <- function (S,
           chlv <- Prochloro_Wrangling(s_n, min.val, max.val)[[4]]
           chlvp <- Prochloro_Wrangling(s_c, min.val, max.val)[[5]]
           D[[length(D) + 1]] <- Prochloro_Random_Neighbour(s_n, 
-                                                 Temp, chlv, s_n, N, place, S, cm, min.val, 
-                                                 max.val)
+                                                           Temp, chlv, s_n, N, place, S, cm, min.val, 
+                                                           max.val)
         }
         Dn <- list()
         for (i in D) {
@@ -180,9 +180,9 @@ simulated_annealing_Prochloro1 <- function (S,
         s_n <- new_neighbour[[1]]
         f_n <- new_neighbour[[2]]
         minF <- Prochloro_Wrangling(new_neighbour[[1]], min.val, 
-                          max.val)[[1]]
+                                    max.val)[[1]]
         maxF <- Prochloro_Wrangling(new_neighbour[[1]], min.val, 
-                          max.val)[[2]]
+                                    max.val)[[2]]
         d <- which(phytoclass:::vectorise(s_n[, 1:(ncol(s_n) - 1)]) < 
                      minF | phytoclass:::vectorise(s_n[, 1:(ncol(s_n) - 1)]) > 
                      maxF)
@@ -212,4 +212,3 @@ simulated_annealing_Prochloro1 <- function (S,
   final.results <- Prochloro_NNLS_MF_Final(A, S, S_Chl, cm, S_dvChl)
   return(final.results)
 }
-
