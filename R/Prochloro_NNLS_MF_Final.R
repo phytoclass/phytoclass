@@ -59,3 +59,6 @@ Prochloro_NNLS_MF_Final <- function (Fn, S, S_Chl, cm, S_dvChl)
   return(list(`F matrix` = Fn, RMSE = error, `condition number` = cd, 
               `Class abundances` = Cn2, Figure = n, MAE = gs, Error = G))
 }
+
+
+
