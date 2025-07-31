@@ -26,7 +26,7 @@
 #' set.seed(5326)
 #' sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 5)
 #' sa.example$Figure
-simulated_annealing_Prochloro <- function (S, 
+simulated_annealing_Prochloro1 <- function (S, 
                                            Fmat = NULL,
                                            user_defined_min_max = NULL,
                                            do_matrix_checks = TRUE, 
