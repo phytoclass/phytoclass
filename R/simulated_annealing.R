@@ -42,9 +42,9 @@ simulated_annealing <- function(
   weight.upper.bound   = 30, 
   verbose              = TRUE,
   seed                 = NULL,
-  check_converge       = FALSE
+  check_converge       = floor(niter * 0.05)
   ) {
-  
+
   if (!is.null(seed)) {
     set.seed(seed)
   }
