@@ -33,3 +33,5 @@ Prochloro_Wrangling <- function (Fl, min.val, max.val)
   SE <- vectorise(Fd[, 1:ncol(Fd) - 1])
   res <- list(Fmin, Fmax, SE, chlv,chlvp)
 }
+
+
