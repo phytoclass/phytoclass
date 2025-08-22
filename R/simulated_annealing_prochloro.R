@@ -186,4 +186,4 @@ simulated_annealing_Prochloro <- function (
   # Final NNLS + aggregation (unchanged)
   return(Prochloro_NNLS_MF_Final(s_b, S, S_Chl, cm, S_dvChl))
 }
-}
+
