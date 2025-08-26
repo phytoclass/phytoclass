@@ -10,7 +10,8 @@
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
 #' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
 #' @param seed Set number to reproduce the same results
-#' @param check_converge  TRUE/FALSE/integer to add each iteration of F matrix and plot
+#' @param check_converge  TRUE/FALSE/integer; set the number of F matrices to 
+#'                        for convergence checking
 #'
 #' @return A list containing 
 #' \enumerate{
