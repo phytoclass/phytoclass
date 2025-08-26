@@ -71,9 +71,8 @@ convergence_figure <- function(fm_iter, niter = NULL) {
     "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#009E73",
     "#001E73", "#013E73"
   )
-  
-  if (is.null(niter)) niter <- max(unique(x$ratio_iter$iter))
-  
+
+  if (is.null(niter)) niter <- max(fm_iter$iter)
   
   # add pretty breaks
   break_pts <- if (niter < 10) {
