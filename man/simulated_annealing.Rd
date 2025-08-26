@@ -14,7 +14,7 @@ simulated_annealing(
   weight.upper.bound = 30,
   verbose = TRUE,
   seed = NULL,
-  check_converge = floor(niter * 0.05)
+  check_converge = 100
 )
 }
 \arguments{
@@ -36,7 +36,8 @@ simulated_annealing(
 
 \item{seed}{Set number to reproduce the same results}
 
-\item{check_converge}{TRUE/FALSE/integer to add each iteration of F matrix and plot}
+\item{check_converge}{TRUE/FALSE/integer; set the number of F matrices to
+for convergence checking}
 }
 \value{
 A list containing
