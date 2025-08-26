@@ -162,7 +162,7 @@ simulated_annealing <- function(
       isTRUE(check_converge) || check_converge >= niter, 
       niter, check_converge
       )
-    check_converge <- round(seq(1, niter, length.out = check_converge))
+    check_converge <- round(seq(1, niter, length.out = check_converge))[-1]
     
     
     non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
