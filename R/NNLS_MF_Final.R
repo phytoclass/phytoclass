@@ -51,9 +51,9 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
   rownames(Cn2) <- rownames(S)
   
   # ---- calculate error terms ---- #
-  S_rmse     <- sqrt(mean((S - C_new2 %*% Fn)^2))  # RMSE
-  S_residual <- S - (C_new2 %*% Fn)                # residual error
-  S_mae      <- colMeans(abs((C_new2 %*% Fn) - S)) # MAE
+  S_residual <- S - (C_new2 %*% Fn)       # residual error
+  S_rmse     <- sqrt(mean(S_residual^2))  # RMSE
+  S_mae      <- colMeans(abs(S_residual)) # MAE
   
   # ---- condition number ---- #
   cd <- kappa(Fn %*% t(S))
