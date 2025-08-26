@@ -42,7 +42,7 @@ simulated_annealing <- function(
   weight.upper.bound   = 30, 
   verbose              = TRUE,
   seed                 = NULL,
-  check_converge       = floor(niter * 0.05)
+  check_converge       = 100
   ) {
 
   if (!is.null(seed)) {
@@ -150,15 +150,20 @@ simulated_annealing <- function(
  
   # initialize convergence check plot data.frame
   converge_tf <- 
-    identical(check_converge, TRUE) || 
-    (is.numeric(check_converge) && 
+    identical(check_converge, TRUE) || # if TRUE
+    (is.numeric(check_converge) &&     # if numeric and length is 1 and is not NA and not 0
        length(check_converge) == 1 && 
        !is.na(check_converge) &&
        check_converge > 0)
   
   if (converge_tf) {
-    if (is.logical(check_converge)) check_converge  <- 1
-    if (check_converge  > niter) check_converge     <- niter
+    # set vector of iterations
+    check_converge <- ifelse(
+      isTRUE(check_converge) || check_converge >= niter, 
+      niter, check_converge
+      )
+    check_converge <- round(seq(1, niter, length.out = check_converge))
+    
     
     non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
     
@@ -267,7 +272,7 @@ simulated_annealing <- function(
     }
     
     # capture f_b for convergence plot per iteration
-    if (converge_tf && (k %% check_converge  == 0 || k == niter)) {
+    if (converge_tf && (k %in% check_converge)) {
       
       non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
       fm_temp <- 
