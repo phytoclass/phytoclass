@@ -56,7 +56,8 @@
 <span>  step <span class="op">=</span> <span class="fl">0.009</span>,</span>
 <span>  weight.upper.bound <span class="op">=</span> <span class="fl">30</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  seed <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  check_converge <span class="op">=</span> <span class="fl">100</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -99,6 +100,11 @@
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
 <dd><p>Set number to reproduce the same results</p></dd>
 
+
+<dt id="arg-check-converge">check_converge<a class="anchor" aria-label="anchor" href="#arg-check-converge"></a></dt>
+<dd><p>TRUE/FALSE/integer; set the number of F matrices to
+for convergence checking</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -109,6 +115,8 @@
 <li><p>Figure (plot of results)</p></li>
 <li><p>MAE (Mean Absolute Error)</p></li>
 <li><p>Error</p></li>
+<li><p>F_mat_iter</p></li>
+<li><p>converge_plot</p></li>
 </ol></div>
 
     <div class="section level2">
