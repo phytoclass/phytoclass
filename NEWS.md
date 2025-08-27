@@ -1,3 +1,7 @@
+# phytoclass 2.2.0
+* Add automatic switch to Prochlorococcus function based on dvchl column
+* added convergence plot
+
 # phytoclass 2.1.0
 * performance improvements
 * improved documentation

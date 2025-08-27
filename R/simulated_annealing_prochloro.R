@@ -56,7 +56,7 @@ simulated_annealing_Prochloro <- function (S,
   place <- which(Fmat[, 1:ncol(Fmat) - 1] > 0)
   if (is.null(user_defined_min_max)) {
     K <- Default_min_max(phytoclass::min_max, 
-                                      Fmat[, 1:ncol(Fmat) - 1], place)
+                                     Fmat[, 1:ncol(Fmat) - 1], place)
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
@@ -127,8 +127,8 @@ simulated_annealing_Prochloro <- function (S,
     f_n <- new_neighbour[[2]]
     loop <- 1
     d <- which(vectorise(s_n[, 1:(ncol(s_n) - 
-                                                 2)]) < minF[1:length(minF) - 1] | vectorise(s_n[, 
-                                                                                                              1:(ncol(s_n) - 2)]) > maxF[1:length(maxF) - 1])
+                                              2)]) < minF[1:length(minF) - 1] | vectorise(s_n[, 
+                                                                                                       1:(ncol(s_n) - 2)]) > maxF[1:length(maxF) - 1])
     while (length(d) > 0) {
       if (k > niter - 20) {
         N <- place[d]
@@ -153,9 +153,9 @@ simulated_annealing_Prochloro <- function (S,
         maxF <- Prochloro_Wrangling(new_neighbour[[1]], 
                                     min.val, max.val)[[2]]
         d <- which(vectorise(s_n[, 1:(ncol(s_n) - 
-                                                     2)]) < minF[1:length(minF) - 1] | vectorise(s_n[, 
-                                                                                                                  1:(ncol(s_n) - 2)]) > maxF[1:length(maxF) - 
-                                                                                                                                               1])
+                                                      2)]) < minF[1:length(minF) - 1] | vectorise(s_n[, 
+                                                                                                           1:(ncol(s_n) - 2)]) > maxF[1:length(maxF) - 
+                                                                                                                                        1])
       }
       else {
         N <- place[d]
@@ -180,9 +180,9 @@ simulated_annealing_Prochloro <- function (S,
         maxF <- Prochloro_Wrangling(new_neighbour[[1]], 
                                     min.val, max.val)[[2]]
         d <- which(vectorise(s_n[, 1:(ncol(s_n) - 
-                                                     2)]) < minF[1:length(minF) - 1] | vectorise(s_n[, 
-                                                                                                                  1:(ncol(s_n) - 2)]) > maxF[1:length(maxF) - 
-                                                                                                                                               1])
+                                                    2)]) < minF[1:length(minF) - 1] | vectorise(s_n[, 
+                                                                                                          1:(ncol(s_n) - 2)]) > maxF[1:length(maxF) - 
+                                                                                                                                        1])
       }
     }
     diff <- f_n - f_c

@@ -8,6 +8,8 @@ the minimum or maximum value.}
 Random_neighbour(f_new, Temp, chlv, N, place, S, S_weights, minF, maxF)
 }
 \arguments{
+\item{f_new}{xx}
+
 \item{Temp}{xx}
 
 \item{chlv}{xx}
@@ -23,8 +25,6 @@ Random_neighbour(f_new, Temp, chlv, N, place, S, S_weights, minF, maxF)
 \item{minF}{xx}
 
 \item{maxF}{xx}
-
-\item{Fn}{xx}
 }
 \description{
 Select a random neighbour when the previous random neighbour is beyond
