@@ -70,7 +70,9 @@ A list containing
 \description{
 Perform simulated annealing algorithm for S and F matrices
 
-Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus. Divinyl chlorophyll must be the final column of both S and F matrices, with chlorophyll a the 2nd to last column. See how the example Sp and Fp matrices are organised.
+Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus.
+Chlorophyll must be the final column of both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column.
+See how the example Sp and Fp matrices are organised.
 }
 \examples{
 # Using the built-in matrices Sp and Fp

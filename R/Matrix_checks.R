@@ -13,32 +13,13 @@
 #' Snew <- MC$Snew
 # 'Fnew <- MC$Fnew 
 #' 
-
-Matrix_checks <- function(S, Fmat){
-  # Only keep columns of Fmat that are in S
-  S.colnames <- colnames(S)
-  Fmat.colnames <- colnames(Fmat)
-  keep.these.columns <- (Fmat.colnames %in% S.colnames)
-  Fmat[, keep.these.columns]
-  #
-  ba <- rownames(Fmat)
-  ba1<- which(ba =="Syn")
-  if (ncol(S) > ncol(Fmat)){
-    S <- subset(S, select = c(colnames(Fmat)))}
-  b <- colSums(S)
-  g <- mean(S[,ncol(S)])
-  ba <- rownames(Fmat)
-  ba1<- which(ba =="Syn")
+Matrix_checks <- function(S, Fmat) {
   
-  b <- nrow(S)
-  c <- which(b ==0)
-  g <- colSums(S != 0)
-  l <- which(g/b <=.01)
-  if(length(l) > 0){
-    S <- S[,-l]
-    Fmat <- Fmat[,-l] 
-  }
-  k <- tryCatch({
+  f_mat_og <- Fmat
+  Fmat[Fmat > 0] <- 1
+  
+  # check if non-numeric and if all groups have more than 1 pigment
+  f_rowsum <- tryCatch({
     rowSums(Fmat)
   }, error = function(e) {
     if (grepl("'x' must be numeric", e$message)) {
@@ -47,125 +28,82 @@ Matrix_checks <- function(S, Fmat){
       stop(e)
     }
   })
-  kn <- which(k == 1)
-  if (length(kn) >0) {
-    Fmat <- Fmat[-kn,]
-  }
-  b <- nrow(S)
-  g <- colSums(S != 0)
-  n <- colSums(S[,1:ncol(S)-1])
-  l <- n/sum(n)
-  fn <- g/b
-  p <- which(l < 0.01  & fn[1:length(fn) - 1] <= 0.5)
-  #if (length(p) >0) {
-  #  F <- F[,-p]
-  #  S <- S[,-p]
-  #}
-  d <- colnames(S)
-  d1<- which(d =="Chl_b")
-  b <- rownames(Fmat)
-  b1<- which(b =="Chlorophytes")
   
-  if(length(d1) ==0 & length(b1) >0){
-    Fmat <- Fmat[-b1,]
-  }
-  c1 <- which(b =="Prasinophytes")
+  f_mat <- Fmat[!(f_rowsum <= 1),] # remove groups with only 1 pigment
+  f_mat <- f_mat[, colSums(Fmat) > 0] # remove columns if all are 0
   
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
-  c <- rownames(Fmat)
-  c1 <- which(c =="Prasinophytes")
-  d <- colnames(Fmat)
-  d1<- which(d =="Pra")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
-  c <- rownames(Fmat)
-  c1 <- which(c =="Dinoflagellates-1")
-  d <- colnames(Fmat)
-  d1<- which(d =="Per")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
-  c <- rownames(Fmat)
-  c1 <- which(c =="Diatoms-1")
-  d <- colnames(Fmat)
-  d1<- which(d =="Chl_c1")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
-  c <- rownames(Fmat)
-  c1 <- which(c =="Diatoms-2")
-  d <- colnames(Fmat)
-  d1<- which(d =="Fuco")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
-  c <- rownames(Fmat)
-  c1 <- which(c =="Dinoflagellates-1")
-  d <- colnames(Fmat)
-  d1<- which(d =="Per")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
-  c <- rownames(Fmat)
-  c1 <- which(c =="Syn")
-  d <- colnames(Fmat)
-  d1<- which(d =="Zea")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
+  # if column names dont match, select the columns that overlap with Fmat
+  # also reorders to match Fmat
+  s_mat <- S[,intersect(colnames(f_mat), colnames(S))]
+  f_mat <- f_mat[,intersect(colnames(f_mat), colnames(S))]
+  
+  # remove pigments when occur in less than 1% of samples 
+  s_nrow   <- nrow(s_mat)
+  s_colsum <- colSums(s_mat != 0) # number of present pigments
+  s_indx   <- which(s_colsum / s_nrow <= -0.01) # less than 1% have value for this pigments?
+  s_indx   <- !(s_colsum / s_nrow <= 0.01) # less than 1% have value for this pigments?
+  keep_col <- colnames(s_mat)[!(s_colsum / s_nrow <= 0.01)] # pigments to keep
+  s_mat    <- s_mat[,keep_col]
+  f_mat    <- f_mat[,keep_col]
+  
+  
+  # check S matrix that pigments occur in > 50% of samples and total concentration
+  # is >= 1% of total pigment pool
+  # NOTE: removal of pigments is not implemented
+  pig_percent_gt0 <- colSums(s_mat != 0)[-ncol(s_mat)] / s_nrow # pigment amount percent greater than 0 
+  pig_conc        <- colSums(s_mat[,-ncol(s_mat)]) # sums all non-chlor-a pigments
+  pig_percent     <- pig_conc / sum(pig_conc) # percent of total pigment conc
+  # f_mat <- f_mat[, !(pig_percent < 0.01  & pig_percent_gt0 <= 0.5)]
+  # s_mat <- s_mat[, !(pig_percent < 0.01  & pig_percent_gt0 <= 0.5)]
+  
+  check_mat <-
+    matrix(
+      c(
+        c(
+          "Chlorophytes", "Prasinophytes", "Prasinophytes", "Dinoflagellates-1",
+          "Diatoms-1", "Diatoms-2", "Syn", "Cryptophytes", "Haptophytes-H",
+          "Haptophytes-L", "Diatoms-1", "Pelagophytes", "Prasinophytes"
+        ),
+        c(
+          "Chl_b", "Chl_b", "Pra", "Per", "Chl_c1", "Fuco", "Zea", "Allo",
+          "X19hex", "X19hex", "Fuco", "X19but", "Chl_b"
+        )
+      ),
+      ncol = 2
+    )
+  
+  # TODO: test more using F matrix with "2" showing major pigment
+  # f_check_indx <- which(f_mat_og == 2, arr.ind = TRUE)
+  # f_check <- data.frame(
+  #   phtyo = rownames(f_check_indx),
+  #   f_check_indx,
+  #   row.names = NULL
+  #  )
+  # 
+  # check_mat <- cbind(
+  #   f_check,
+  #   pig = colnames(f_mat_og)[f_check_indx[, 2]]
+  #   )[, -c(2:3)]
+  #   
+  # TODO: add warning if no major pigments are found that they should examine
+  # F matrix
+
+  for (i in seq(nrow(check_mat))) {
+    phyto_row <- which(rownames(f_mat) == check_mat[i, 1])
+    pig_col   <- which(colnames(s_mat) == check_mat[i, 2])
+    if (length(pig_col) == 0 & length(phyto_row) > 0) {
+      f_mat <- f_mat[-phyto_row,]
+    }
   }
   
-  c <- rownames(Fmat)
-  c1 <- which(c =="Cryptophytes")
-  d <- colnames(Fmat)
-  d1<- which(d =="Allo")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
+  # final check to remove F cols with no pigments
+  kn <- which(colSums(f_mat) == 0)
+  if (length(kn) > 0) {
+    f_mat <- f_mat[,-kn]
+    s_mat <- s_mat[,-kn]
   }
   
-  c <- rownames(Fmat)
-  c1 <- which(c =="Haptophytes-H")
-  d <- colnames(Fmat)
-  d1<- which(d =="X19hex")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
-  c <- rownames(Fmat)
-  c1 <- which(c =="Haptophytes-L")
-  d <- colnames(Fmat)
-  d1<- which(d =="X19hex")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }  
-  c <- rownames(Fmat)
-  c1 <- which(c =="Diatoms-1")
-  d <- colnames(Fmat)
-  d1<- which(d =="Fuco")
-  if(length(d1) ==0 & length(c1) >0){
-    Fmat <- Fmat[-c1,]
-  }
+  return(list(Snew = as.matrix(s_mat), Fnew = as.matrix(f_mat)))
   
-  d <- colnames(S)
-  d1<- which(d =="X19but")
-  b <- rownames(Fmat)
-  b1<- which(b =="Pelagophytes")
-  if(length(d1) ==0 & length(b1) >0){
-    Fmat <- Fmat[-b1,]
-  }
-  d <- colnames(S)
-  d1<- which(d =="Chl_b")
-  b <- rownames(Fmat)
-  b1<- which(b =="Prasinophytes")
-  if(length(d1) == 0  & length(b1) >0){
-    Fmat <- Fmat[-b1,]
-  }
-  k <- colSums(Fmat)
-  kn <- which(k == 0)
-  if (length(kn) >0) {
-    Fmat <- Fmat[,-kn]
-    S <- S[,-kn]
-  }
-  return(list(Snew = as.matrix(S), Fnew = as.matrix(Fmat)))
 }
+
