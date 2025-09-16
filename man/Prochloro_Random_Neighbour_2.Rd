@@ -9,12 +9,13 @@ Prochloro_Random_Neighbour_2(
   Temp,
   chlv,
   s_c,
-  place,
+  place_full,
   S,
   cm,
-  min.val,
-  max.val,
-  chlvp
+  minF_vec,
+  maxF_vec,
+  chlvp,
+  Fi_mask
 )
 }
 \arguments{
@@ -26,17 +27,19 @@ Prochloro_Random_Neighbour_2(
 
 \item{s_c}{xx}
 
-\item{place}{xx}
+\item{place_full}{xx}
 
 \item{S}{xx}
 
 \item{cm}{xx}
 
-\item{min.val}{xx}
+\item{minF_vec}{xx}
 
-\item{max.val}{xx}
+\item{maxF_vec}{xx}
 
 \item{chlvp}{xx}
+
+\item{Fi_mask}{xx}
 }
 \description{
 Selects a random neighbour for the simulated annealing algorithm.

@@ -8,13 +8,13 @@ Prochloro_Random_Neighbour(
   Fn,
   Temp,
   chlv,
+  chlvp,
   s_c,
-  N,
-  place,
+  k_idx,
   S,
   cm,
-  min.val,
-  max.val
+  minF_vec,
+  maxF_vec
 )
 }
 \arguments{
@@ -26,17 +26,15 @@ Prochloro_Random_Neighbour(
 
 \item{s_c}{}
 
-\item{N}{}
-
-\item{place}{}
+\item{k_idx}{}
 
 \item{S}{}
 
 \item{cm}{}
 
-\item{min.val}{}
+\item{minF_vec}{}
 
-\item{max.val}{}
+\item{maxF_vec}{}
 }
 \description{
 Prochloro random neighbour

@@ -14,6 +14,8 @@ Prochloro_NNLS_MF_Final(Fn, S, S_Chl, cm, S_dvChl)
 \item{S_Chl}{}
 
 \item{cm}{}
+
+\item{S_dvChl}{}
 }
 \description{
 Final step for MF with prochlorococcus
