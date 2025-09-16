@@ -51,9 +51,9 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
   rownames(Cn2) <- rownames(S)
   
   # ---- calculate error terms ---- #
-  S_rmse     <- sqrt(mean((S - C_new2 %*% Fn)^2))  # RMSE
-  S_residual <- S - (C_new2 %*% Fn)                # residual error
-  S_mae      <- colMeans(abs((C_new2 %*% Fn) - S)) # MAE
+  S_residual <- S - (C_new2 %*% Fn)       # residual error
+  S_rmse     <- sqrt(mean(S_residual^2))  # RMSE
+  S_mae      <- colMeans(abs(S_residual)) # MAE
   
   # ---- condition number ---- #
   cd <- kappa(Fn %*% t(S))
@@ -64,27 +64,8 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
   row_num <- NULL
   
   # ---- plot final results ---- #
-  colorBlindGrey8   <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
-                         "#F0E442", "#0072B2", "#D55E00", "#CC79A7","#009E73",
-                         "#001E73", "#013E73")
+  plt <- phyto_figure(Cn2)
 
-  PLE  <- tidyr::pivot_longer(
-    data      = cbind(Cn2, "row_num" = seq(nrow(Cn2))), 
-    cols      = -row_num, 
-    names_to  = 'names', 
-    values_to = 'vals'
-    )
-  
-  plt <- 
-    ggplot2::ggplot(PLE, ggplot2::aes(x = row_num, y = vals, fill = names)) +
-    ggplot2::geom_area() +
-    ggplot2::scale_color_manual(values = colorBlindGrey8) +
-    ggplot2::scale_fill_manual(values = colorBlindGrey8) +
-    ggplot2::xlab("Sample number") +
-    ggplot2::ylab("Chl a concentrations") +
-    ggplot2::theme_bw()
-
-  
   return(list(
     "F matrix"         = Fn,
     "RMSE"             = S_rmse,
