@@ -9,7 +9,6 @@ Prochloro_Random_Neighbour(
   Temp,
   chlv,
   chlvp,
-  s_c,
   k_idx,
   S,
   S_weights,
@@ -23,8 +22,6 @@ Prochloro_Random_Neighbour(
 \item{Temp}{}
 
 \item{chlv}{}
-
-\item{s_c}{}
 
 \item{k_idx}{}
 
