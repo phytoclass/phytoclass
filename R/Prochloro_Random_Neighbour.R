@@ -24,24 +24,22 @@ Prochloro_Random_Neighbour <- function(
   core <- Fn[, 1:(ncol(Fn) - 2)]
   core_vec <- as.vector(core)
   
-  p_chg   <- core_vec[k_idx]
-  minF <- minF_vec[k_idx]
-  maxF <- maxF_vec[k_idx]
-  # ki   <- (maxF - minF)
+  p_chg <- core_vec[k_idx]
+  minF  <- minF_vec[k_idx]
+  maxF  <- maxF_vec[k_idx]
   
   # randomize pigment ratios
   rand <- round(runif(n = length(p_chg), -1, 1), 4)
   p_new   <- p_chg + Temp * (maxF - minF) * rand # new values for ratios
   oob <- which(p_new < minF | p_new > maxF)      # out of bounds ratios
-  # d <- which(SA < minF | SA > maxF)
   
   loop <- 0
   max_loops <- 100
   while (length(oob) > 0) {
-    loop <- loop + 1
-    nr <- round(runif(length(oob), -1, 1), 4)
+    loop       <- loop + 1
+    nr         <- round(runif(length(oob), -1, 1), 4)
     p_new[oob] <- p_chg[oob] + Temp * (maxF[oob] - minF[oob]) * nr
-    oob <- which(p_new < minF | p_new > maxF)
+    oob        <- which(p_new < minF | p_new > maxF)
     
     # if (loop > max_loops) {
     #   p_new[oob] <- (minF[oob] + maxF[oob]) / 2
@@ -58,6 +56,7 @@ Prochloro_Random_Neighbour <- function(
     
   }
   
+  # Write back ONLY to allowed cells
   v        <- core_vec
   v[k_idx] <- p_new
   core[]   <- v
