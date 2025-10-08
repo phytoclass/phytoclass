@@ -28,16 +28,16 @@
 #' set.seed(5326)
 #' sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
 #' sa.example$Figure
-simulated_annealing_Prochloro <- function (
+simulated_annealing_Prochloro <- function(
     S, 
-    Fmat = NULL,
+    Fmat                 = NULL,
     user_defined_min_max = NULL,
-    do_matrix_checks = TRUE, 
-    niter = 500, 
-    step = 0.009, 
-    weight.upper.bound = 30, 
-    verbose = TRUE
-) {
+    do_matrix_checks     = TRUE, 
+    niter                = 500, 
+    step                 = 0.009, 
+    weight.upper.bound   = 30, 
+    verbose              = TRUE
+  ) {
   if (is.null(Fmat)) Fmat <- phytoclass::Fp
   
   # Strip text cols if any
