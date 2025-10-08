@@ -92,6 +92,15 @@ simulated_annealing_Prochloro <- function (
   s_b <- s_c <- s_n <- nc[[1]]
   f_b <- f_c <- f_n <- nc[[2]]
   
+  # initialize progress bar if verbose is FALSE
+  if (!verbose) {
+    pb <- progress::progress_bar$new(
+      format = "  Simulated Annealing [:bar] :percent ETA: :eta",
+      total  = niter, clear = FALSE, width = 60
+    )
+  }
+  
+  
   # ---- Static bounds for the CORE (exclude dvChl & Chl), computed once from s_c
   W0        <- Prochloro_Wrangling(s_c, min.val, max.val)  # returns vectorised core min/max
   minF_fix  <- W0[[1]]
@@ -111,6 +120,9 @@ simulated_annealing_Prochloro <- function (
   }
   
   for (k in 1:niter) {
+    
+    if (!verbose) pb$tick()
+    
     Temp <- (1 - step)^k
     
     # Always source dvChl/Chl from the same matrix we perturb
