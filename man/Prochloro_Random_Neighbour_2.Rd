@@ -11,7 +11,7 @@ Prochloro_Random_Neighbour_2(
   s_c,
   place_full,
   S,
-  cm,
+  S_weights,
   minF_vec,
   maxF_vec,
   chlvp,
@@ -31,7 +31,7 @@ Prochloro_Random_Neighbour_2(
 
 \item{S}{xx}
 
-\item{cm}{xx}
+\item{S_weights}{xx}
 
 \item{minF_vec}{xx}
 
