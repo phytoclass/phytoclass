@@ -41,5 +41,5 @@ Prochloro_Normalise_F <- function(Fmat) {
   # compute row sums AFTER pigment scaling; return the *pre-row-sum* scaled version via Fn <- Fn * F.sum
   f_sum <- rowSums(f_new)
   f_norm <- f_new / f_sum
-  list(as.matrix(f_norm), f_sum)
+  return(list(as.matrix(f_norm), f_sum))
 }
