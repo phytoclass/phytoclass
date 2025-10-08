@@ -26,7 +26,6 @@ Imports:
     dplyr,
     dynamicTreeCut,
     ggplot2,
-    Metrics,
     RcppML,
     stats,
     tidyr,
