@@ -10,7 +10,7 @@
 #' @return
 #'
 #' @examples
-Prochloro_NNLS_MF_Final <- function (Fn, S, S_Chl, S_weights, S_dvChl) {
+Prochloro_NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl) {
   F.sum <- Prochloro_Normalise_F(Fn)[[2]]
   Fn    <- Prochloro_Normalise_F(Fn)[[1]]
   Fn    <- Fn * F.sum
