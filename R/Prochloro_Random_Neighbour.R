@@ -6,7 +6,6 @@
 #' @param Temp 
 #' @param chlv 
 #' @param chlvp
-#' @param s_c 
 #' @param k_idx 
 #' @param S 
 #' @param S_weights 
@@ -17,7 +16,7 @@
 #'
 #' @examples
 Prochloro_Random_Neighbour <- function(
-    Fn, Temp, chlv, chlvp, s_c, k_idx, S, S_weights,
+    Fn, Temp, chlv, chlvp, k_idx, S, S_weights,
     minF_vec, maxF_vec
   ) {
   
@@ -62,8 +61,7 @@ Prochloro_Random_Neighbour <- function(
   core[]   <- v
   
   f_new           <- cbind(core, chlvp, chlv)
-  colnames(f_new) <- colnames(S)
-  
+  # colnames(f_new) <- colnames(S)
   return(NNLS_MF(f_new, S, S_weights))
   
 }
