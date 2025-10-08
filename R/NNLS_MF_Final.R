@@ -18,7 +18,7 @@
 #' @return
 #'
 #' @examples  
-NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
+NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights) {
   # normalize F matrix
   F_norm <- Normalise_F(Fn)
   Fn     <- F_norm[[1]] * F_norm[[2]]
@@ -41,8 +41,8 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
 
   C_new2        <- as.matrix(C_new2)
   Cn.s2         <- rowSums(C_new2)
-  Cn.s2_safe    <- ifelse(Cn.s2 == 0, 1, Cn.s2)
-  Cn2           <- C_new2 / Cn.s2_safe
+  Cn.s2         <- ifelse(Cn.s2 == 0, 1, Cn.s2)
+  Cn2           <- C_new2 / Cn.s2
   Cn2           <- as.matrix(Cn2)
   Cn2           <- Cn2 * S_Chl
   colnames(Cn2) <- rownames(Fn)
