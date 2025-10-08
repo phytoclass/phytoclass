@@ -12,7 +12,7 @@ Prochloro_Random_Neighbour(
   s_c,
   k_idx,
   S,
-  cm,
+  S_weights,
   minF_vec,
   maxF_vec
 )
@@ -30,7 +30,7 @@ Prochloro_Random_Neighbour(
 
 \item{S}{}
 
-\item{cm}{}
+\item{S_weights}{}
 
 \item{minF_vec}{}
 
