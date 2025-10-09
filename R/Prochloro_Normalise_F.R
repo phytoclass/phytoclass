@@ -13,7 +13,8 @@ Prochloro_Normalise_F <- function(Fmat) {
   p <- ncol(f_new)
   
   # Identify Pro row (prefer rowname; else assume last row)
-  i_pro <- which(tolower(rownames(f_new)) %in% c("pro", "prochlorococcus", "prochlorococcus-1", "pro-1"))
+  pro_names <- c("pro", "prochlorococcus", "prochlorococcus-1", "pro-1")
+  i_pro <- which(tolower(rownames(Fmat)) %in% pro_names)
   if (length(i_pro) != 1) i_pro <- n
   i_nonpro <- setdiff(seq_len(n), i_pro)
   
