@@ -14,7 +14,8 @@ simulated_annealing_Prochloro(
   step = 0.009,
   weight.upper.bound = 30,
   verbose = TRUE,
-  seed = NULL
+  seed = NULL,
+  check_converge = 100
 )
 
 simulated_annealing_Prochloro(
@@ -26,7 +27,8 @@ simulated_annealing_Prochloro(
   step = 0.009,
   weight.upper.bound = 30,
   verbose = TRUE,
-  seed = NULL
+  seed = NULL,
+  check_converge = 100
 )
 }
 \arguments{
@@ -47,6 +49,9 @@ simulated_annealing_Prochloro(
 \item{verbose}{Logical value. Output error and temperature at each iteration. Default value of TRUE}
 
 \item{seed}{Set seed number to reproduce the same results}
+
+\item{check_converge}{TRUE/FALSE/integer; set the number of F matrices to
+for convergence checking}
 }
 \value{
 A list containing
