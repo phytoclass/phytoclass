@@ -11,7 +11,9 @@
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
 #' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
 #' @param seed Set seed number to reproduce the same results
-#'
+#' @param check_converge  TRUE/FALSE/integer; set the number of F matrices to 
+#'                        for convergence checking
+#'                        
 #' @return A list containing 
 #' \enumerate{
 #'  \item Fmat matrix
@@ -38,7 +40,8 @@ simulated_annealing_Prochloro <- function(
     step                 = 0.009, 
     weight.upper.bound   = 30, 
     verbose              = TRUE,
-    seed                 = NULL
+    seed                 = NULL,
+    check_converge       = 100
   ) {
   
   # set seed
@@ -80,14 +83,10 @@ simulated_annealing_Prochloro <- function(
   
   # min/max lookup for SAALS domain
   if (is.null(user_defined_min_max)) {
-    # K <- Default_min_max(phytoclass::min_max, Fmat[, 1:(ncol(Fmat) - 1)], place_full)
     min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place_full)
   } else {
     min_max_mat <- Default_min_max(user_defined_min_max, Fmat[, -ncol(Fmat)], place_full)
-    # K <- Default_min_max(user_defined_min_max,     Fmat[, 1:(ncol(Fmat) - 1)], place_full)
   }
-  # min.val <- K[[1]]
-  # max.val <- K[[2]]
   
   # Condition number (unchanged logic)
   condition.test <- Condition_test(
@@ -124,6 +123,33 @@ simulated_annealing_Prochloro <- function(
     )
   }
   
+  # initialize convergence check plot data.frame
+  converge_tf <- 
+    identical(check_converge, TRUE) || # if TRUE
+    (is.numeric(check_converge) &&     # if numeric and length is 1 and is not NA and not 0
+       length(check_converge) == 1 && 
+       !is.na(check_converge) &&
+       check_converge > 0)
+  
+  if (converge_tf) {
+    # set vector of iterations
+    check_converge <- ifelse(
+      isTRUE(check_converge) || check_converge >= niter, 
+      niter, check_converge
+    )
+    check_converge <- round(seq(1, niter, length.out = check_converge))[-1]
+    
+    
+    non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
+    
+    fm_iter <- 
+      data.frame(
+        iter    = 0, # iteration number
+        phyto   = rownames(f_b)[non_zero_idx[, 1]], # phyto groups
+        pigment = colnames(Fmat)[non_zero_idx[, 2]], # pigments
+        ratio   = f_b[non_zero_idx] # pigment ratios
+      )
+  }
   
   # ---- Static bounds for the CORE (exclude dvChl & Chl), computed once from f_c
   W0        <- Prochloro_Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])  # returns vectorised core min/max
@@ -294,13 +320,6 @@ simulated_annealing_Prochloro <- function(
       f_b_err <- f_n_err
     }
     
-    # if (verbose) {
-    #   message(paste("Current error: ", round(f_c_err, 4)))
-    #   message(paste("Neighbour's error: ", round(f_n_err, 4)))
-    #   message(paste("Temperature (%): ", round(Temp * 100, 2)))
-    #   message(" ")
-    # }
-    
     if (verbose) {
       message(
         paste(
@@ -312,32 +331,32 @@ simulated_annealing_Prochloro <- function(
       )
     }
     
-    # # capture f_b for convergence plot per iteration
-    # if (converge_tf && (k %in% check_converge)) {
-    #   
-    #   non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
-    #   fm_temp <- 
-    #     data.frame(
-    #       iter    = k, # iteration number
-    #       phyto   = rownames(f_b)[non_zero_idx[, 1]], # phyto groups
-    #       pigment = colnames(Fmat)[non_zero_idx[, 2]], # pigments
-    #       ratio   = f_b[non_zero_idx] # pigment ratios
-    #     )
-    #   fm_iter <- rbind(fm_iter, fm_temp)
-    # }
+    # capture f_b for convergence plot per iteration
+    if (converge_tf && (k %in% check_converge)) {
+
+      non_zero_idx <- which(f_b != 0, arr.ind = TRUE)
+      fm_temp <-
+        data.frame(
+          iter    = k, # iteration number
+          phyto   = rownames(f_b)[non_zero_idx[, 1]], # phyto groups
+          pigment = colnames(Fmat)[non_zero_idx[, 2]], # pigments
+          ratio   = f_b[non_zero_idx] # pigment ratios
+        )
+      fm_iter <- rbind(fm_iter, fm_temp)
+    }
     
   }
   
   # Final NNLS + aggregation (unchanged)
   final_results <- Prochloro_NNLS_MF_Final(f_b, S, S_Chl, S_weights, S_dvChl)
   
-  # # create convergence plot
-  # if (converge_tf) {
-  #   
-  #   converge <- convergence_figure(fm_iter, niter)
-  #   return(c(final_results, converge))
-  #   
-  # }
+  # create convergence plot
+  if (converge_tf) {
+
+    converge <- convergence_figure(fm_iter, niter)
+    return(c(final_results, converge))
+
+  }
   
   return(final_results)
 }
