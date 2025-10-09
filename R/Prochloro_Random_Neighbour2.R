@@ -5,26 +5,23 @@
 #' @param Fn xx
 #' @param Temp xx
 #' @param chlv xx
-#' @param s_c xx
-#' @param place_full  xx
 #' @param S  xx
 #' @param S_weights  xx
 #' @param minF_vec  xx
 #' @param maxF_vec  xx
 #' @param chlvp  xx
 #' @param Fi_mask  xx
-
 #'
 #' @return
 #' 
 #' @examples
 #' @importFrom stats runif
 Prochloro_Random_Neighbour_2 <- function(
-    Fn, Temp, chlv, s_c, place_full, S, S_weights,
+    Fn, Temp, chlv, S, S_weights,
     minF_vec, maxF_vec, chlvp, Fi_mask
   ) {
-  core <- Fn[, 1:(ncol(Fn) - 2)]
-  mask_core <- Fi_mask[, 1:(ncol(Fi_mask) - 2)]
+  core <- Fn[, seq(ncol(Fn) - 2)]
+  mask_core <- Fi_mask[, seq(ncol(Fi_mask) - 2)]
   
   core_vec <- as.vector(core)
   mask_vec <- as.vector(mask_core)

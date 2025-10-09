@@ -8,8 +8,6 @@ Prochloro_Random_Neighbour_2(
   Fn,
   Temp,
   chlv,
-  s_c,
-  place_full,
   S,
   S_weights,
   minF_vec,
@@ -19,15 +17,11 @@ Prochloro_Random_Neighbour_2(
 )
 }
 \arguments{
-\item{Fn}{xx}
+\item{Fn}{F matrix}
 
-\item{Temp}{xx}
+\item{Temp}{temperature of the annealing}
 
-\item{chlv}{xx}
-
-\item{s_c}{xx}
-
-\item{place_full}{xx}
+\item{chlv}{Chlorophyll-a column}
 
 \item{S}{xx}
 
