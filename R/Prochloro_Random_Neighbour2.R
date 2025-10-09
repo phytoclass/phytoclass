@@ -2,34 +2,29 @@
 #' 
 #' @keywords internal
 #'
-#' @param Fn xx
-#' @param Temp xx
-#' @param chlv xx
+#' @param Fn F matrix
+#' @param Temp temperature of the annealing
+#' @param chlv Chlorophyll-a column
 #' @param S  xx
 #' @param S_weights  xx
 #' @param minF_vec  xx
 #' @param maxF_vec  xx
-#' @param chlvp  xx
-#' @param Fi_mask  xx
+#' @param chlvp  Dvchla column
 #'
 #' @return
 #' 
 #' @examples
 #' @importFrom stats runif
 Prochloro_Random_Neighbour_2 <- function(
-    Fn, Temp, chlv, S, S_weights,
-    minF_vec, maxF_vec, chlvp, Fi_mask
+    f_new, Temp, chlv, chlvp, N, place, S, S_weights,
+    minF, maxF
   ) {
-  core <- Fn[, seq(ncol(Fn) - 2)]
-  mask_core <- Fi_mask[, seq(ncol(Fi_mask) - 2)]
-  
-  core_vec <- as.vector(core)
-  mask_vec <- as.vector(mask_core)
-  idx      <- which(mask_vec > 0)
-  
-  p_chg <- core_vec[idx]
-  minF  <- minF_vec[idx]
-  maxF  <- maxF_vec[idx]
+
+  # extract ratios to be changed
+  k     <- match(N, place)
+  p_chg <- vectorise(f_new)[k] 
+  minF  <- minF[k]
+  maxF  <- maxF[k]
   
   # randomize pigment ratios
   rand  <- round(runif(n = length(p_chg), -1, 1), 4)
@@ -50,6 +45,7 @@ Prochloro_Random_Neighbour_2 <- function(
     # }
     
     if (loop > max_loops & length(oob) > 0) {
+      # print("on rand neigh loop > 100")
       # sort bound limits for when bounds are small enough to overlap 
       sort_min_max <- cbind(minF[oob] * 1.2, maxF[oob] * 0.80) 
       sort_min_max <- t(apply(sort_min_max, 1, sort))
@@ -58,14 +54,11 @@ Prochloro_Random_Neighbour_2 <- function(
     }
     
   }
+
+  # If error is lower, reassign the values
+  f_new           <- f_new[, seq(ncol(f_new) - 2)]
+  f_new[N]        <- p_new
+  f_new           <- cbind(f_new, chlvp, chlv)
   
-  # Write back ONLY to allowed cells
-  v      <- core_vec
-  v[idx] <- p_new
-  core[] <- v
-  
-  F_new <- cbind(core, chlvp, chlv)
-  colnames(F_new) <- colnames(S)
-  
-  return(NNLS_MF(F_new, S, S_weights))
+  return(NNLS_MF(f_new, S, S_weights))
 }

@@ -16,21 +16,20 @@
 #'
 #' @examples
 Prochloro_Random_Neighbour <- function(
-    Fn, Temp, chlv, chlvp, k_idx, S, S_weights,
-    minF_vec, maxF_vec
+    f_new, Temp, chlv, chlvp, N, place, S, S_weights,
+    minF, maxF
   ) {
   
-  core <- Fn[, 1:(ncol(Fn) - 2)]
-  core_vec <- as.vector(core)
-  
-  p_chg <- core_vec[k_idx]
-  minF  <- minF_vec[k_idx]
-  maxF  <- maxF_vec[k_idx]
+  # extract ratios to be changed
+  k     <- match(N, place)
+  p_chg <- vectorise(f_new)[k] 
+  minF  <- minF[k]
+  maxF  <- maxF[k]
   
   # randomize pigment ratios
-  rand <- round(runif(n = length(p_chg), -1, 1), 4)
-  p_new   <- p_chg + Temp * (maxF - minF) * rand # new values for ratios
-  oob <- which(p_new < minF | p_new > maxF)      # out of bounds ratios
+  rand  <- round(runif(n = length(p_chg), -1, 1), 4)
+  p_new <- p_chg + Temp * (maxF - minF) * rand # new values for ratios
+  oob   <- which(p_new < minF | p_new > maxF)      # out of bounds ratios
   
   loop <- 0
   max_loops <- 100
@@ -41,7 +40,7 @@ Prochloro_Random_Neighbour <- function(
     oob        <- which(p_new < minF | p_new > maxF)
     
     # if (loop > max_loops) {
-    #   p_new[oob] <- (minF[oob] + maxF[oob]) / 2
+    #   p_new[oob] <- (minF[oob] + maxF[oob]) / 2  # midpoint fallback
     #   oob <- which(p_new < minF | p_new > maxF)
     # }
     
@@ -54,14 +53,12 @@ Prochloro_Random_Neighbour <- function(
     }
     
   }
-  
-  # Write back ONLY to allowed cells
-  v        <- core_vec
-  v[k_idx] <- p_new
-  core[]   <- v
-  
-  f_new           <- cbind(core, chlvp, chlv)
-  # colnames(f_new) <- colnames(S)
+
+  # If error is lower, reassign the values
+  f_new           <- f_new[, seq(ncol(f_new) - 2)]
+  f_new[N]        <- p_new
+  f_new           <- cbind(f_new, chlvp, chlv)
+
   return(NNLS_MF(f_new, S, S_weights))
   
 }
