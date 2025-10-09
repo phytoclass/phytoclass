@@ -57,19 +57,19 @@ simulated_annealing_Prochloro <- function(S,
   place <- which(Fmat[, 1:ncol(Fmat) - 1] > 0)
   
   if (is.null(user_defined_min_max)) {
-    K <- phytoclass:::Default_min_max(phytoclass::min_max, Fmat[, 1:ncol(Fmat) - 1], place)
+    K <- phytoclass:::Default_min_max(phytoclass::min_max, Fmat[, 1:ncol(Fmat) - 1])
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
   else {
-    K <- phytoclass:::Default_min_max(user_defined_min_max, Fmat[, 1:ncol(Fmat) - 
-                                                                   1], place)
+    K <- phytoclass:::Default_min_max(user_defined_min_max, Fmat[, 1:ncol(Fmat) - 1])
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
   
-  condition.test <- phytoclass:::Condition_test(S[, 1:ncol(S) - 1], Fmat[, 
-                                                                         1:ncol(Fmat) - 1], min.val, max.val)
+  condition.test <- phytoclass:::Condition_test(S[, 1:ncol(S) - 1], 
+                                                Fmat[, 1:ncol(Fmat) - 1], 
+                                                min.val, max.val)
   if (verbose) {
     message(paste0("\nCondition number = ", round(condition.test), 
                    "\n\n"))

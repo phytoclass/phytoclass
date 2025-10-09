@@ -83,9 +83,9 @@ simulated_annealing_Prochloro <- function(
   
   # min/max lookup for SAALS domain
   if (is.null(user_defined_min_max)) {
-    min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place_full)
+    min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)])
   } else {
-    min_max_mat <- Default_min_max(user_defined_min_max, Fmat[, -ncol(Fmat)], place_full)
+    min_max_mat <- Default_min_max(user_defined_min_max, Fmat[, -ncol(Fmat)])
   }
   
   # Condition number (unchanged logic)

@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' 
-Default_min_max <- function(min_max, Fmat, place) {
+Default_min_max <- function(min_max, Fmat) {
   
   # selects all non-zero pigment ratios and indexes the phyto names and pigments
   k     <- which(Fmat > 0, TRUE)

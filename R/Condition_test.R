@@ -10,12 +10,10 @@
 #' @return
 #'
 #' @examples
-
-
 Condition_test <- function(S, Fn, min.val=NULL, max.val=NULL){
    if (is.null(min.val) & is.null(max.val)) {
     place <- which(Fn > 0)
-    K <- Default_min_max(phytoclass::min_max, Fn, place)
+    K <- Default_min_max(phytoclass::min_max, Fn)
     min.val <- K[[1]]
     max.val <- K[[2]]
   }
