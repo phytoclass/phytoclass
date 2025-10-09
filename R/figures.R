@@ -48,14 +48,15 @@ phyto_figure <- function(c_matrix) {
     ggplot2::geom_area() +
     ggplot2::scale_y_continuous(
       limits = c(0, NA),
-      expand = ggplot2::expansion(mult = c(0, 1.2))
+      expand = ggplot2::expansion(mult = c(0, 0.2))
     ) +
+    ggplot2::scale_x_continuous(expand = ggplot2::expansion()) +
     ggplot2::labs(
       x = "Sample number",
       y = expression("Chl a concentrations" ~ (mg ~ m^-3)),
       fill = "Phytoplankton\nNames"
     ) +
-    ggplot2::theme_bw()
+    ggplot2::theme_bw() 
 
   if (length(names(c_matrix)) <= 15) {
     plt <-
@@ -139,8 +140,9 @@ convergence_figure <- function(fm_iter, niter = NULL) {
       y = "Pigment Ratio",
       color = "Pigment"
     ) +
+    ggplot2::coord_cartesian(expand = FALSE) +
     ggplot2::theme_bw() +
-    ggplot2::coord_cartesian(expand = FALSE)
+    ggplot2::theme(panel.spacing.x = ggplot2::unit(20, "pt"))
 
   if (length(unique(fm_iter$pigment)) <= 15) {
     converge_plt <- 
