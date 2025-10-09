@@ -79,7 +79,7 @@ simulated_annealing_Prochloro <- function(
   S_weights <- Bounded_weights(S, weight.upper.bound)
   
   # SAALS compatibility: 'place' includes dvChl, excludes Chl (as in your original)
-  place_full     <- which(Fmat[, -ncol(Fmat)] > 0) # non-zero, non-chla pigments
+  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0) # non-zero, non-chla pigments
   
   # min/max lookup for SAALS domain
   if (is.null(user_defined_min_max)) {
@@ -153,8 +153,8 @@ simulated_annealing_Prochloro <- function(
   
   # ---- Static bounds for the CORE (exclude dvChl & Chl), computed once from f_c
   W0        <- Prochloro_Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])  # returns vectorised core min/max
-  minF_fix  <- W0[[1]]
-  maxF_fix  <- W0[[2]]
+  minF_fix  <- W0[[1]] # non-0 min bound
+  maxF_fix  <- W0[[2]] # non-0 max bound
   # ---------------------------------------------------------------------------
   
   # # Helpers
@@ -182,9 +182,10 @@ simulated_annealing_Prochloro <- function(
     chlvp <- f_c[, ncol(f_c) - 1]    # dvChl a
     
     # Seed neighbour (all-at-once)
-    seed_nb <- Prochloro_Random_Neighbour_2(
-      f_c, Temp, chlv, S, S_weights,
-      minF_fix, maxF_fix, chlvp, Fi_mask = Fmat
+    # seed_nb <- Prochloro_Random_Neighbour_2(
+    seed_nb <- Prochloro_Random_Neighbour(
+      f_c, Temp, chlv, chlvp, N = place, place, S, S_weights,
+      minF_fix, maxF_fix
     )
     
     # Candidate pool
@@ -196,10 +197,10 @@ simulated_annealing_Prochloro <- function(
     for (i in seq(num_loop)) {
       chlv  <- f_c[, ncol(f_c)]
       chlvp <- f_c[, ncol(f_c) - 1]
-      temp_rand <- Prochloro_Random_Neighbour_2(
-        f_c, Temp, chlv, S, S_weights, 
-        minF_fix, maxF_fix, chlvp, 
-        Fi_mask = Fmat
+      # temp_rand <- Prochloro_Random_Neighbour_2(
+      temp_rand <- Prochloro_Random_Neighbour(
+        f_c, Temp, chlv, chlvp, N = place, place, S, S_weights, 
+        minF_fix, maxF_fix
       )
       
       rand_itr[[i]]     <- temp_rand
@@ -214,7 +215,7 @@ simulated_annealing_Prochloro <- function(
     
     # steepest descent
     num_loop2     <- ifelse(Temp > 0.3, 10, 2)
-    new_neighbour <- Steepest_Descent(new_neighbour[[1]], place_full, S, S_weights, 
+    new_neighbour <- Steepest_Descent(new_neighbour[[1]], place, S, S_weights, 
                                       num.loops = num_loop2)
     
     f_n     <- new_neighbour[[1]]
@@ -236,9 +237,9 @@ simulated_annealing_Prochloro <- function(
     # # Local search (unchanged API)
     # if (safe_bounds(min_max_mat[[1]], min_max_mat[[2]])) {
     #   if (Temp > 0.3) {
-    #     new_neighbour <- SAALS(new_neighbour[[1]], min_max_mat[[1]], min_max_mat[[2]], place_full, S, S_weights, num.loops = 10)
+    #     new_neighbour <- SAALS(new_neighbour[[1]], min_max_mat[[1]], min_max_mat[[2]], place, S, S_weights, num.loops = 10)
     #   } else {
-    #     new_neighbour <- SAALS(new_neighbour[[1]], min_max_mat[[1]], min_max_mat[[2]], place_full, S, S_weights, num.loops = 2)
+    #     new_neighbour <- SAALS(new_neighbour[[1]], min_max_mat[[1]], min_max_mat[[2]], place, S, S_weights, num.loops = 2)
     #   }
     # }
     # ========= delete end
@@ -263,13 +264,14 @@ simulated_annealing_Prochloro <- function(
     
     # check if ratios are out of bounds (min\max)
     vect    <- vectorise(f_n[, seq(ncol(f_n) - 2)])
-    oob     <- which(vect < min_max_mat[[1]][-length(min_max_mat[[1]])]
-                     | vect >  min_max_mat[[2]][-length( min_max_mat[[2]])]
-                     )
+    oob     <- which(
+        vect < min_max_mat[[1]][-length(min_max_mat[[1]])]
+      | vect > min_max_mat[[2]][-length(min_max_mat[[2]])]
+      )
     
     while (length(oob) > 0) {
       
-      oob_indx  <- place_full[oob] # where in F matrix is the ratio out of bounds
+      oob_indx  <- place[oob] # where in F matrix is the ratio out of bounds
       num_loop  <- ifelse(k > niter - 20, 300, 120)
       
       # set list to store random neighbors
@@ -280,7 +282,7 @@ simulated_annealing_Prochloro <- function(
         chlvp <- f_c[, ncol(f_c) - 1]
         
         temp_rand <- Prochloro_Random_Neighbour(
-          f_n, Temp, chlv, chlvp, oob_indx, S, S_weights, 
+          f_n, Temp, chlv, chlvp, oob_indx, place, S, S_weights, 
           minF_fix, maxF_fix
         )
         rand_itr2[[i]]     <- temp_rand
@@ -296,9 +298,10 @@ simulated_annealing_Prochloro <- function(
       
       # check if ratios are out of bounds (min\max)
       vect    <- vectorise(f_n[, seq(ncol(f_n) - 2)])
-      oob     <- which(vect < min_max_mat[[1]][-length(min_max_mat[[1]])]
-                       | vect >  min_max_mat[[2]][-length( min_max_mat[[2]])]
-                       )
+      oob     <- which(
+          vect < min_max_mat[[1]][-length(min_max_mat[[1]])]
+        | vect > min_max_mat[[2]][-length(min_max_mat[[2]])]
+        )
     }
     
     
