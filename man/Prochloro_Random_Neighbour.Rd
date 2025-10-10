@@ -5,29 +5,30 @@
 \title{Prochloro random neighbour}
 \usage{
 Prochloro_Random_Neighbour(
-  Fn,
+  f_new,
   Temp,
   chlv,
   chlvp,
-  k_idx,
+  N,
+  place,
   S,
   S_weights,
-  minF_vec,
-  maxF_vec
+  minF,
+  maxF
 )
 }
 \arguments{
-\item{Fn}{}
-
 \item{Temp}{}
 
 \item{chlv}{}
 
-\item{k_idx}{}
-
 \item{S}{}
 
 \item{S_weights}{}
+
+\item{Fn}{}
+
+\item{k_idx}{}
 
 \item{minF_vec}{}
 

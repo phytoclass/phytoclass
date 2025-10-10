@@ -5,35 +5,34 @@
 \title{Selects a random neighbour for the simulated annealing algorithm.}
 \usage{
 Prochloro_Random_Neighbour_2(
-  Fn,
+  f_new,
   Temp,
   chlv,
+  chlvp,
+  N,
+  place,
   S,
   S_weights,
-  minF_vec,
-  maxF_vec,
-  chlvp,
-  Fi_mask
+  minF,
+  maxF
 )
 }
 \arguments{
-\item{Fn}{F matrix}
-
 \item{Temp}{temperature of the annealing}
 
 \item{chlv}{Chlorophyll-a column}
+
+\item{chlvp}{Dvchla column}
 
 \item{S}{xx}
 
 \item{S_weights}{xx}
 
+\item{Fn}{F matrix}
+
 \item{minF_vec}{xx}
 
 \item{maxF_vec}{xx}
-
-\item{chlvp}{xx}
-
-\item{Fi_mask}{xx}
 }
 \description{
 Selects a random neighbour for the simulated annealing algorithm.
