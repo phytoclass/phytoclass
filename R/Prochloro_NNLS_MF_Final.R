@@ -11,9 +11,10 @@
 #'
 #' @examples
 Prochloro_NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl) {
-  F.sum <- Prochloro_Normalise_F(Fn)[[2]]
-  Fn    <- Prochloro_Normalise_F(Fn)[[1]]
-  Fn    <- Fn * F.sum
+  # normalize F matrix
+  F_norm <- Prochloro_Normalise_F(Fn)
+  Fn     <- F_norm[[1]] * F_norm[[2]]
+  
   
   # determine final class abundance for non-prochloro
   Fn_wt_err <- t(Weight_error(Fn, S_weights))

@@ -351,8 +351,8 @@ simulated_annealing_Prochloro <- function(
   }
   
   # Final NNLS + aggregation (unchanged)
-  final_results <- Prochloro_NNLS_MF_Final(f_b, S, S_Chl, S_weights, S_dvChl)
-  
+  final_results <- NNLS_MF_Final(f_b, S, S_Chl, S_weights, S_dvChl)
+
   # create convergence plot
   if (converge_tf) {
 
