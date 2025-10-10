@@ -1,7 +1,7 @@
 #' Cluster things
 #'
 #' @param Data S (sample) matrix
-#' @param minSamplesPerCluster the minimum number of samples required for a cluster
+#' @param min_cluster_size the minimum number of samples required for a cluster
 #'
 #' @return A named list of length two. The first element "cluster.list"
 #'  is a list of clusters, and the second element "cluster.plot" the 
@@ -12,87 +12,180 @@
 #' Cluster.result <- Cluster(Sm, 14)
 #' Cluster.result$cluster.list
 #' plot(Cluster.result$cluster.plot)
-Cluster <- function(Data, minSamplesPerCluster) {
-  
-  number_of_Samples <- nrow(Data)
-  number_of_Features <- ncol(Data) - 1 
-  
-  # Warn if minSamplesPerCluster is less than the number of features
-  if (minSamplesPerCluster < number_of_Features) {
-    warning(sprintf("minSamplesPerCluster (%d) is less than the number of features/pigments (%d). This may lead to poor clustering or errors.", 
-                    minSamplesPerCluster, number_of_Features))
+Cluster <- function(Data, min_cluster_size, row_ids = NULL) {
+  number_of_Samples  <- nrow(Data)
+  number_of_Features <- ncol(Data) - 1
+
+  # Warn if min_cluster_size is less than the number of features
+  if (min_cluster_size < number_of_Features) {
+    warning(sprintf(
+      paste(
+        "min_cluster_size (%d) is less than the number of ",
+        "features/pigments (%d). This may lead to poor clustering or errors."
+        ),
+      min_cluster_size, number_of_Features
+    ))
   }
-  
-  # Warn if minSamplesPerCluster exceeds half the total number of samples
+
+  # Warn if min_cluster_size exceeds half the total number of samples
   maxAllowed <- floor(number_of_Samples / 2)
-  if (minSamplesPerCluster > maxAllowed) {
-    stop(sprintf("minSamplesPerCluster (%d) exceeds half of total samples (%d). Clustering may not be meaningful.", 
-                    minSamplesPerCluster, maxAllowed))
+  if (min_cluster_size > maxAllowed) {
+    stop(sprintf(
+      paste(
+        "min_cluster_size (%d) exceeds half of total samples (%d).", 
+        "Clustering may not be meaningful."
+        ),
+      min_cluster_size, maxAllowed
+    ))
+  }
+
+  # ---- safety & naming ---- #
+  if (!is.null(row_ids)) {
+    stopifnot(length(row_ids) == nrow(Data))
+    rownames(Data) <- row_ids
+  } else if (is.null(rownames(Data))) {
+    rownames(Data) <- paste0("row_", seq_len(nrow(Data)))
   }
   
   standardise <- function(Data) {
-    b <- Data
-    b <- b[, 1:ncol(b) - 1]
-    Chl <- Data[, ncol(Data)]
+    b         <- Data[, -ncol(Data)]
     b[b == 0] <- 1e-6
-    b <- b / Chl
-    v <- lapply(b, bestNormalize::boxcox)
+    b         <- b / Data[, ncol(Data)]
+    v         <- sapply(b, bestNormalize::boxcox)
+    v         <- do.call("cbind", v[1,])
     return(v)
   }
 
-  v <- standardise(Data)
+  ndf <- standardise(Data)
+  rownames(ndf) <- rownames(Data)
 
-  L <- length(v)
-
-  ndf <- list()
-  for (i in 1:L) {
-    ndf[[length(ndf) + 1]] <- data.frame(v[[i]][1])
-  }
-
-  S <- Data
-  ndf <- do.call("cbind", ndf)
-  colnames(ndf) <- colnames(S[, ncol(S) - 1])
-
-
+  # cluster samples
   mscluster <- stats::dist(ndf, method = "euclidean")
   mv.hclust <- stats::hclust(mscluster, method = "ward.D2")
 
-  ev.clust <- Data
-  # Change the minSamplesPerCluster argument below to adjust how many samples 
+  # Change the min_cluster_size argument below to adjust how many samples
   # You might want to play around with it if you want ~ 6 clusters.
   # You could try setting it at 1/6th of the total sample number :)
-  dynamicCut <- dynamicTreeCut::cutreeDynamic(mv.hclust,
-    cutHeight = 70,
-    minClusterSize = minSamplesPerCluster,
-    method = "hybrid",
-    distM = as.matrix(stats::dist(ndf, method = "euclidean")), 
-    deepSplit = 4,
-    pamStage = TRUE, 
-    pamRespectsDendro = TRUE,
-    useMedoids = FALSE, 
-    maxDistToLabel = NULL,
-    maxPamDist = 50,
+  dynamicCut <- dynamicTreeCut::cutreeDynamic(
+    mv.hclust,
+    cutHeight            = 70,
+    minClusterSize       = min_cluster_size,
+    method               = "hybrid",
+    distM                = as.matrix(stats::dist(ndf, method = "euclidean")),
+    deepSplit            = 4,
+    pamStage             = TRUE,
+    pamRespectsDendro    = TRUE,
+    useMedoids           = FALSE,
+    maxDistToLabel       = NULL,
+    maxPamDist           = 50,
     respectSmallClusters = TRUE
   )
 
-  # NULL assignment to stop NOTE during the package "Check"
-  #  -  no visible binding for global variable
-  Clust <- NULL
+  # separate clusters into individual lists
+  clust_list     <- split(Data, dynamicCut)
 
-  ev.clust$Clust <- dynamicCut
+  # e <- numeric()
+  # for (i in 1:length(clust_list)) {
+  #   e[[length(e) + 1]] <- length(clust_list[[i]][[1]])
+  # }
 
-  L2 <- length(unique(ev.clust$Clust))
-  L <- list()
-  for (i in 1:L2) {
-    L[[length(L) + 1]] <- dplyr::filter(ev.clust, Clust == i)
+  return(list(cluster.list = clust_list, cluster.plot = mv.hclust))
+}
+
+
+cluster_fun <- function(
+    Data,
+    min_cluster_size,
+    row_ids       = NULL,
+    dist_method   = "euclidean",
+    hclust_method = "ward.D2"
+    ) {
+  
+  number_of_Samples  <- nrow(Data)
+  number_of_Features <- ncol(Data) - 1
+  
+  # Warn if min_cluster_size is less than the number of features
+  if (min_cluster_size < number_of_Features) {
+    warning(sprintf(
+      paste(
+        "min_cluster_size (%d) is less than the number of ",
+        "features/pigments (%d). This may lead to poor clustering or errors."
+      ),
+      min_cluster_size, number_of_Features
+    ))
+  }
+  
+  # Warn if min_cluster_size exceeds half the total number of samples
+  maxAllowed <- floor(number_of_Samples / 2)
+  if (min_cluster_size > maxAllowed) {
+    warning(sprintf(
+      paste(
+        "min_cluster_size (%d) exceeds half of total samples (%d).", 
+        "Clustering may not be meaningful."
+      ),
+      min_cluster_size, maxAllowed
+    ))
+  }
+  
+  # ---- safety & naming ---- #
+  if (!is.null(row_ids)) {
+    stopifnot(length(row_ids) == nrow(Data))
+    rownames(Data) <- row_ids
+  } else if (is.null(rownames(Data))) {
+    rownames(Data) <- paste0("row_", seq_len(nrow(Data)))
   }
 
-  L
-
-  e <- numeric()
-  for (i in 1:length(L)) {
-    e[[length(e) + 1]] <- length(L[[i]][[1]])
+  # ---- helpers ---- #
+  standardise <- function(Data) {
+    b         <- Data[, -ncol(Data), drop = FALSE]
+    b[b == 0] <- 1e-06
+    b         <- b / Data[, ncol(Data)]
+    v         <- sapply(b, bestNormalize::boxcox)
+    v         <- do.call("cbind", v[1,])
+    return(v)
   }
 
-  return(list(cluster.list = L, cluster.plot = mv.hclust))
+  ndf <- standardise(Data)
+  rownames(ndf) <- rownames(Data)
+
+  # ---- clustering ---- #
+  mscluster <- stats::dist(ndf, method = dist_method)
+  mv.hclust <- stats::hclust(mscluster, method = hclust_method)
+
+  # make sure dendrogram shows your row_ids
+  mv.hclust$labels <- rownames(ndf)
+
+  # dynamic tree cut
+  dynamicCut <- dynamicTreeCut::cutreeDynamic(
+    mv.hclust,
+    cutHeight            = 70,
+    minClusterSize       = min_cluster_size,
+    method               = "hybrid",
+    distM                = as.matrix(stats::dist(ndf, method = dist_method)),
+    deepSplit            = 4,
+    pamStage             = TRUE,
+    pamRespectsDendro    = TRUE,
+    useMedoids           = FALSE,
+    maxDistToLabel       = NULL,
+    maxPamDist           = 50,
+    respectSmallClusters = TRUE
+  )
+
+  # ---- outputs with row names preserved ----
+  clust_list     <- split(Data, dynamicCut)
+
+  assign_tbl <- data.frame(
+    ID          = rownames(Data),
+    Clust       = dynamicCut,
+    row.names   = rownames(Data),
+    check.names = FALSE
+    )
+
+  return(
+    list(
+      cluster.list = clust_list,
+      cluster.plot = mv.hclust,
+      assignments  = assign_tbl
+      )
+    )
 }
