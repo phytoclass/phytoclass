@@ -21,13 +21,13 @@
 #' @examples  
 NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL) {
   check_pro <- any(tolower(colnames(Fn)) %in% c("dvchl", "dvchla", "chlvp"))
+  
+  # normalize F matrix
   if (check_pro) {
     F_norm <- Prochloro_Normalise_F(Fn)
   } else {
     F_norm <- Normalise_F(Fn)
   }
-  # normalize F matrix
-  # F_norm <- Normalise_F(Fn)
   Fn     <- F_norm[[1]] * F_norm[[2]]
 
   Fn_wt_err <- t(Weight_error(Fn, S_weights))
