@@ -2,7 +2,8 @@
 % Please edit documentation in R/Prochloro_Random_Neighbour.R
 \name{Prochloro_Random_Neighbour}
 \alias{Prochloro_Random_Neighbour}
-\title{Prochloro random neighbour}
+\title{Selects a random neighbour for a subset of non-zero pigments that are outside
+the min and max bounds for the simulated annealing algorithm.}
 \usage{
 Prochloro_Random_Neighbour(
   f_new,
@@ -18,23 +19,28 @@ Prochloro_Random_Neighbour(
 )
 }
 \arguments{
-\item{Temp}{}
+\item{f_new}{F matrix of pigment ratios}
 
-\item{chlv}{}
+\item{Temp}{Temperature of the annealing}
 
-\item{S}{}
+\item{chlv}{Chlorophyll-a column}
 
-\item{S_weights}{}
+\item{chlvp}{Dvchla column}
 
-\item{Fn}{}
+\item{N}{Indexs of pigment ratios to be changed}
 
-\item{k_idx}{}
+\item{place}{Indexes in F matrix where values are non-zero}
 
-\item{minF_vec}{}
+\item{S}{S matrix of samples}
 
-\item{maxF_vec}{}
+\item{S_weights}{Weights for NNLS algorithm}
+
+\item{minF}{Minimum bounds for each phytoplankton group and pigments}
+
+\item{maxF}{Maximum bounds for each phytoplankton group and pigments}
 }
 \description{
-Prochloro random neighbour
+Selects a random neighbour for a subset of non-zero pigments that are outside
+the min and max bounds for the simulated annealing algorithm.
 }
 \keyword{internal}

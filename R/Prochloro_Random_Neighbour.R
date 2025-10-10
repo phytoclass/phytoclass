@@ -1,16 +1,18 @@
-#' Prochloro random neighbour
+#' Selects a random neighbour for a subset of non-zero pigments that are outside
+#' the min and max bounds for the simulated annealing algorithm.
 #' 
 #' @keywords internal
 #'
-#' @param Fn 
-#' @param Temp 
-#' @param chlv 
-#' @param chlvp
-#' @param k_idx 
-#' @param S 
-#' @param S_weights 
-#' @param minF_vec 
-#' @param maxF_vec 
+#' @param f_new F matrix of pigment ratios
+#' @param Temp Temperature of the annealing
+#' @param chlv Chlorophyll-a column
+#' @param chlvp Dvchla column
+#' @param N Indexs of pigment ratios to be changed
+#' @param place Indexes in F matrix where values are non-zero
+#' @param S S matrix of samples
+#' @param S_weights Weights for NNLS algorithm
+#' @param minF Minimum bounds for each phytoplankton group and pigments
+#' @param maxF Maximum bounds for each phytoplankton group and pigments
 #'
 #' @return
 #'

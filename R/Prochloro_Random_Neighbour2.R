@@ -1,15 +1,18 @@
-#' Selects a random neighbour for the simulated annealing algorithm.
+#' Selects a random neighbours for all non-zero pigments in the simulated 
+#' annealing algorithm.
 #' 
 #' @keywords internal
 #'
-#' @param Fn F matrix
-#' @param Temp temperature of the annealing
+#' @param f_new F matrix
+#' @param Temp Temperature of the annealing
 #' @param chlv Chlorophyll-a column
-#' @param S  xx
-#' @param S_weights  xx
-#' @param minF_vec  xx
-#' @param maxF_vec  xx
 #' @param chlvp  Dvchla column
+#' @param N Indexs of pigment ratios to be changed
+#' @param place Indexes in F matrix where values are non-zero
+#' @param S S matrix of samples
+#' @param S_weights Weights for NNLS algorithm
+#' @param minF Minimum bounds for each phytoplankton group and pigments
+#' @param maxF Maximum bounds for each phytoplankton group and pigments
 #'
 #' @return
 #' 
