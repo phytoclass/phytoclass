@@ -14,13 +14,20 @@
 #' @param S   xx
 #' @param S_Chl   xx
 #' @param S_weights  xx
+#' @param S_dvChl xx
 #'
 #' @return
 #'
 #' @examples  
-NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
+NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL) {
+  check_pro <- any(tolower(colnames(Fn)) %in% c("dvchl", "dvchla", "chlvp"))
+  
   # normalize F matrix
-  F_norm <- Normalise_F(Fn)
+  if (check_pro) {
+    F_norm <- Prochloro_Normalise_F(Fn)
+  } else {
+    F_norm <- Normalise_F(Fn)
+  }
   Fn     <- F_norm[[1]] * F_norm[[2]]
 
   Fn_wt_err <- t(Weight_error(Fn, S_weights))
@@ -41,14 +48,37 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
 
   C_new2        <- as.matrix(C_new2)
   Cn.s2         <- rowSums(C_new2)
-  Cn.s2_safe    <- ifelse(Cn.s2 == 0, 1, Cn.s2)
-  Cn2           <- C_new2 / Cn.s2_safe
+  Cn.s2         <- ifelse(Cn.s2 == 0, 1, Cn.s2)
+  Cn2           <- C_new2 / Cn.s2
   Cn2           <- as.matrix(Cn2)
   Cn2           <- Cn2 * S_Chl
   colnames(Cn2) <- rownames(Fn)
   colnames(Fn)  <- colnames(S)
   Cn2           <- as.data.frame(Cn2)
   rownames(Cn2) <- rownames(S)
+  
+  if (check_pro) {
+    # determine final class abundance for prochloro
+    Fn_wt_err2 <- t(Weight_error(Fn[nrow(Fn), -ncol(Fn)], S_weights[-length(S_weights)]))
+    S_wt_err2  <- t(Weight_error(S[, -ncol(S)], S_weights[-length(S_weights)]))
+
+    Pb       <- crossprod(Fn_wt_err2, S_wt_err2)
+    Fn_prod2 <- crossprod(Fn_wt_err2)
+
+    PC_new2 <-
+      RcppML::nnls(
+        Fn_prod2,
+        Pb,
+        cd_maxit = 1000,
+        cd_tol   = 1e-10
+      )
+    PC_new2 <- t(PC_new2)
+    PCn.s2  <- rowSums(PC_new2)
+    PCn2    <- PC_new2 / PCn.s2
+    PCn2    <- PCn2 * S_dvChl
+
+    Cn2[, ncol(Cn2)] <- PCn2
+  }
   
   # ---- calculate error terms ---- #
   S_residual <- S - (C_new2 %*% Fn)       # residual error
@@ -57,11 +87,6 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights){
   
   # ---- condition number ---- #
   cd <- kappa(Fn %*% t(S))
-  
-  # NULL assignment to stop NOTE during the package "Check"
-  #  -  no visible binding for global variable
-  vals    <- NULL
-  row_num <- NULL
   
   # ---- plot final results ---- #
   plt <- phyto_figure(Cn2)

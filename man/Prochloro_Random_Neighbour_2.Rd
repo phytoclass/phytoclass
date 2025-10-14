@@ -2,43 +2,45 @@
 % Please edit documentation in R/Prochloro_Random_Neighbour2.R
 \name{Prochloro_Random_Neighbour_2}
 \alias{Prochloro_Random_Neighbour_2}
-\title{Selects a random neighbour for the simulated annealing algorithm.}
+\title{Selects a random neighbours for all non-zero pigments in the simulated
+annealing algorithm.}
 \usage{
 Prochloro_Random_Neighbour_2(
-  Fn,
+  f_new,
   Temp,
   chlv,
-  s_c,
+  chlvp,
+  N,
   place,
   S,
-  cm,
-  min.val,
-  max.val,
-  chlvp
+  S_weights,
+  minF,
+  maxF
 )
 }
 \arguments{
-\item{Fn}{xx}
+\item{f_new}{F matrix}
 
-\item{Temp}{xx}
+\item{Temp}{Temperature of the annealing}
 
-\item{chlv}{xx}
+\item{chlv}{Chlorophyll-a column}
 
-\item{s_c}{xx}
+\item{chlvp}{Dvchla column}
 
-\item{place}{xx}
+\item{N}{Indexs of pigment ratios to be changed}
 
-\item{S}{xx}
+\item{place}{Indexes in F matrix where values are non-zero}
 
-\item{cm}{xx}
+\item{S}{S matrix of samples}
 
-\item{min.val}{xx}
+\item{S_weights}{Weights for NNLS algorithm}
 
-\item{max.val}{xx}
+\item{minF}{Minimum bounds for each phytoplankton group and pigments}
 
-\item{chlvp}{xx}
+\item{maxF}{Maximum bounds for each phytoplankton group and pigments}
 }
 \description{
-Selects a random neighbour for the simulated annealing algorithm.
+Selects a random neighbours for all non-zero pigments in the simulated
+annealing algorithm.
 }
 \keyword{internal}

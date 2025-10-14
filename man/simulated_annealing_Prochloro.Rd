@@ -13,7 +13,9 @@ simulated_annealing_Prochloro(
   niter = 500,
   step = 0.009,
   weight.upper.bound = 30,
-  verbose = TRUE
+  verbose = TRUE,
+  seed = NULL,
+  check_converge = 100
 )
 
 simulated_annealing_Prochloro(
@@ -24,7 +26,9 @@ simulated_annealing_Prochloro(
   niter = 500,
   step = 0.009,
   weight.upper.bound = 30,
-  verbose = TRUE
+  verbose = TRUE,
+  seed = NULL,
+  check_converge = 100
 )
 }
 \arguments{
@@ -43,6 +47,11 @@ simulated_annealing_Prochloro(
 \item{weight.upper.bound}{Upper limit of the weights applied (default value is 30).}
 
 \item{verbose}{Logical value. Output error and temperature at each iteration. Default value of TRUE}
+
+\item{seed}{Set seed number to reproduce the same results}
+
+\item{check_converge}{TRUE/FALSE/integer; set the number of F matrices to
+for convergence checking}
 }
 \value{
 A list containing

@@ -29,7 +29,7 @@ Random_neighbour <- function(f_new, Temp, chlv, N, place, S, S_weights, minF, ma
   p_new <- p_chg + (Temp) * (maxF - minF) * rand # new values for ratios
   oob   <- which(p_new < minF | p_new > maxF)    # out of bounds ratios
 
-  loop <- 1
+  loop <- 0
   while (length(oob) > 0) {
     loop  <- loop + 1
     nr    <- round(runif(length(oob), -1, 1), 4)

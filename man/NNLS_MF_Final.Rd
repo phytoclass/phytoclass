@@ -4,7 +4,7 @@
 \alias{NNLS_MF_Final}
 \title{Perform matrix factorisation for phytoplankton pigments and pigments ratios}
 \usage{
-NNLS_MF_Final(Fn, S, S_Chl, S_weights)
+NNLS_MF_Final(Fn, S, S_Chl, S_weights, S_dvChl = NULL)
 }
 \arguments{
 \item{Fn}{xx}
@@ -14,6 +14,8 @@ NNLS_MF_Final(Fn, S, S_Chl, S_weights)
 \item{S_Chl}{xx}
 
 \item{S_weights}{xx}
+
+\item{S_dvChl}{xx}
 }
 \description{
 Performs the non-negative matrix factorisation for given phytoplankton

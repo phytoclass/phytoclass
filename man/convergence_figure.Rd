@@ -16,8 +16,8 @@ If \code{NULL}, will extract from the \code{iter} column of \code{fm_iter}.}
 A figure with each pigment ratio per iteration per group
 }
 \description{
-A figure to show the pigment ratios for each phytoplankton group and saved
-iterations
+A figure to show the pigment ratios for each phytoplankton group for each
+iteration.
 }
 \examples{
 # ADD_EXAMPLES_HERE

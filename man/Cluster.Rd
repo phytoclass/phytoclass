@@ -4,12 +4,29 @@
 \alias{Cluster}
 \title{Cluster things}
 \usage{
-Cluster(Data, minSamplesPerCluster)
+Cluster(
+  Data,
+  min_cluster_size,
+  row_ids = NULL,
+  dist_method = "euclidean",
+  hclust_method = "ward.D2"
+)
 }
 \arguments{
 \item{Data}{S (sample) matrix}
 
-\item{minSamplesPerCluster}{the minimum number of samples required for a cluster}
+\item{min_cluster_size}{the minimum number of samples required for a cluster}
+
+\item{row_ids}{A vector of custom row names to be added to dendrogram}
+
+\item{dist_method}{Distance metric to be used in \code{stats::dist}. This should
+be one of "euclidean", "maximum", "manhattan", "canberra",
+"binary" or "minkowski".}
+
+\item{hclust_method}{Cluster method to be used in \code{stats::hclust}. This
+should be one of "ward.D", "ward.D2", "single",
+"complete", "average" (= UPGMA), "mcquitty" (= WPGMA),
+"median" (= WPGMC) or "centroid" (= UPGMC).}
 }
 \value{
 A named list of length two. The first element "cluster.list"

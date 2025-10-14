@@ -4,7 +4,7 @@
 \alias{Prochloro_NNLS_MF_Final}
 \title{Final step for MF with prochlorococcus}
 \usage{
-Prochloro_NNLS_MF_Final(Fn, S, S_Chl, cm, S_dvChl)
+Prochloro_NNLS_MF_Final(Fn, S, S_Chl, S_weights, S_dvChl)
 }
 \arguments{
 \item{Fn}{}
@@ -13,7 +13,9 @@ Prochloro_NNLS_MF_Final(Fn, S, S_Chl, cm, S_dvChl)
 
 \item{S_Chl}{}
 
-\item{cm}{}
+\item{S_weights}{}
+
+\item{S_dvChl}{}
 }
 \description{
 Final step for MF with prochlorococcus
