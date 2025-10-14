@@ -57,9 +57,9 @@ Prochloro_Random_Neighbour <- function(
   }
 
   # If error is lower, reassign the values
-  f_new           <- f_new[, seq(ncol(f_new) - 2)]
-  f_new[N]        <- p_new
-  f_new           <- cbind(f_new, chlvp, chlv)
+  f_new    <- f_new[, seq(ncol(f_new) - 2)]
+  f_new[N] <- p_new
+  f_new    <- cbind(f_new, chlvp, chlv)
 
   return(NNLS_MF(f_new, S, S_weights))
   
