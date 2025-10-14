@@ -182,7 +182,6 @@ simulated_annealing_Prochloro <- function(
     chlvp <- f_c[, ncol(f_c) - 1]    # dvChl a
     
     # Seed neighbour (all-at-once)
-    # seed_nb <- Prochloro_Random_Neighbour_2(
     seed_nb <- Prochloro_Random_Neighbour(
       f_c, Temp, chlv, chlvp, N = place, place, S, S_weights,
       minF_fix, maxF_fix
@@ -197,7 +196,6 @@ simulated_annealing_Prochloro <- function(
     for (i in seq(num_loop)) {
       chlv  <- f_c[, ncol(f_c)]
       chlvp <- f_c[, ncol(f_c) - 1]
-      # temp_rand <- Prochloro_Random_Neighbour_2(
       temp_rand <- Prochloro_Random_Neighbour(
         f_c, Temp, chlv, chlvp, N = place, place, S, S_weights, 
         minF_fix, maxF_fix
