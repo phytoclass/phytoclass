@@ -72,7 +72,7 @@ Cluster <- function(
     return(v)
   }
 
-  ndf <- standardise(Data)
+  ndf <- standardise(as.data.frame(Data))
   rownames(ndf) <- rownames(Data)
 
   # ---- clustering ---- #
