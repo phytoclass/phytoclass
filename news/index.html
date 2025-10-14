@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">phytoclass</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,16 @@
       <small>Source: <a href="https://github.com/phytoclass/phytoclass/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.0" id="phytoclass-230">phytoclass 2.3.0<a class="anchor" aria-label="anchor" href="#phytoclass-230"></a></h2>
+<p>This version update removes internal functions that became unused once combined into a single function. The sets of functions include “Conduit”, “Fac_F_RR”, “Minimise_elements” and “Random_neighbor”. ## New features * <code><a href="../reference/convergence_figure.html">convergence_figure()</a></code> was added in <code><a href="../reference/simulated_annealing_Prochloro.html">simulated_annealing_Prochloro()</a></code> * Progress bar was added in <code><a href="../reference/simulated_annealing_Prochloro.html">simulated_annealing_Prochloro()</a></code> * <code><a href="../reference/Cluster.html">Cluster()</a></code> now accepts a <code>row_ids</code> input vector to name each sample * <code><a href="../reference/Cluster.html">Cluster()</a></code> exports an <code>assigments</code> item that relates the ID to the cluster * <code><a href="../reference/Cluster.html">Cluster()</a></code> checks if data.frame input has a column of strings and removes them prior to clustering</p>
+<div class="section level3">
+<h3 id="bug-fixes-2-3-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-3-0"></a></h3>
+<ul><li>The figure functions would <code>error</code> if the number of colors needed exceeded 11. Now, the figure functions can handle additional colors.</li>
+<li>
+<code><a href="../reference/Cluster.html">Cluster()</a></code> had an issue if given a matrix without rownames and would error, now will convert to data.frame prior to running boxcar normalising</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.0" id="phytoclass-220">phytoclass 2.2.0<a class="anchor" aria-label="anchor" href="#phytoclass-220"></a></h2>
 <ul><li>Add automatic switch to Prochlorococcus function based on dvchl column</li>
