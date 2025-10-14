@@ -28,6 +28,16 @@ Cluster <- function(
     hclust_method = "ward.D2"
     ) {
   
+  # remove string columns
+  if (is.data.frame(Data)) {
+    char_cols <- sapply(Data, is.character)
+    if (any(char_cols)) {
+      str_col <- paste(names(char_cols[char_cols]), collapse = ", ")
+      message(paste("Removing string column from clustering:", str_col))
+    }
+    Data <- Data[, !char_cols]
+  }
+  
   number_of_Samples  <- nrow(Data)
   number_of_Features <- ncol(Data) - 1
   
