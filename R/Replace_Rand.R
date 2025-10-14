@@ -27,3 +27,19 @@ Replace_Rand <- function(Fmat, i, S, cm, min.scaler, max.scaler) {
   
   return(res)
 }
+
+#' Randomise individual elements in the F matrix.
+#' 
+#' @keywords internal
+#'
+#' @param x   xx
+#' @param min.scaler     xx 
+#' @param max.scaler     xx
+#'
+#' @return numeric
+#'
+#' @examples
+Randomise_elements <- function(x, min.scaler, max.scaler) {
+  x[x < 0.001] <- 0.001
+  round(runif(n = 1, min = x * min.scaler, max = x * max.scaler), digits = 4)
+}
