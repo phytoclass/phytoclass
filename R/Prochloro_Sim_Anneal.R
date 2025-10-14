@@ -35,6 +35,8 @@ simulated_annealing_Prochloro <- function(S,
                                            weight.upper.bound = 30, 
                                            verbose = TRUE) 
 {
+  return("This function is not being used")
+  
   if (is.null(Fmat)) {
     Fmat <- Fp
   }
