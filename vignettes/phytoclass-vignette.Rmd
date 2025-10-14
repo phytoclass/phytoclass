@@ -123,8 +123,6 @@ Results$Figure
 
 ```{r message=FALSE}
 Clust1 <- Cluster(Sm, minSamplesPerCluster = 14)$cluster.list[[1]]
-# Remove the cluster column/label
-Clust1$Clust <- NULL
 
 set.seed("7683")
 Results <- simulated_annealing(Clust1, niter = 1)

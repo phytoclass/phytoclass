@@ -98,9 +98,9 @@ simulated_annealing <- function(
   place <- which(Fmat[, -ncol(Fmat)] > 0)
   
   if (is.null(user_defined_min_max)) {
-    min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)], place)
+    min_max_mat <- Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)])
   } else {
-    min_max_mat <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)], place)
+    min_max_mat <- Default_min_max(user_defined_min_max,Fmat[, -ncol(Fmat)])
   }
     # if (length(min_max_mat[[1]]) != length(place)) {
     #   message(paste0("\nNumber of rows for user_defined_min_max = ", 
