@@ -24,6 +24,9 @@ Conduit <- function(Fmat, place, S, cm, c_num = c(1, 2, 3)) {
   return(res)
 }
 
+# ============================================================================ #
+# ---- old versions ---- #
+# ============================================================================ #
 
 #' #' Conduit between minimise_elements function and Fac_F_R 
 #' #' of steepest descent algorithm.
