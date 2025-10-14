@@ -22,7 +22,7 @@
 #' plot(Cluster.result$cluster.plot)
 Cluster <- function(
     Data,
-    minSamplesPerCluster ,
+    minSamplesPerCluster,
     row_ids       = NULL,
     dist_method   = "euclidean",
     hclust_method = "ward.D2"
