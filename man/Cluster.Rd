@@ -6,7 +6,7 @@
 \usage{
 Cluster(
   Data,
-  min_cluster_size,
+  minSamplesPerCluster,
   row_ids = NULL,
   dist_method = "euclidean",
   hclust_method = "ward.D2"
@@ -15,7 +15,7 @@ Cluster(
 \arguments{
 \item{Data}{S (sample) matrix}
 
-\item{min_cluster_size}{the minimum number of samples required for a cluster}
+\item{minSamplesPerCluster}{the minimum number of samples required for a cluster}
 
 \item{row_ids}{A vector of custom row names to be added to dendrogram}
 

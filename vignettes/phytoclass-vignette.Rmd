@@ -122,7 +122,7 @@ Results$Figure
 ### Example with clustering
 
 ```{r message=FALSE}
-Clust1 <- Cluster(Sm, min_cluster_size = 14)$cluster.list[[1]]
+Clust1 <- Cluster(Sm, minSamplesPerCluster = 14)$cluster.list[[1]]
 
 set.seed("7683")
 Results <- simulated_annealing(Clust1, niter = 1)

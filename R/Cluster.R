@@ -1,7 +1,7 @@
 #' Cluster things
 #'
 #' @param Data S (sample) matrix
-#' @param min_cluster_size the minimum number of samples required for a cluster
+#' @param minSamplesPerCluster the minimum number of samples required for a cluster
 #' @param row_ids A vector of custom row names to be added to dendrogram
 #' @param dist_method Distance metric to be used in `stats::dist`. This should 
 #'                    be one of "euclidean", "maximum", "manhattan", "canberra", 
@@ -22,7 +22,7 @@
 #' plot(Cluster.result$cluster.plot)
 Cluster <- function(
     Data,
-    min_cluster_size,
+    minSamplesPerCluster ,
     row_ids       = NULL,
     dist_method   = "euclidean",
     hclust_method = "ward.D2"
@@ -41,26 +41,26 @@ Cluster <- function(
   number_of_Samples  <- nrow(Data)
   number_of_Features <- ncol(Data) - 1
   
-  # Warn if min_cluster_size is less than the number of features
-  if (min_cluster_size < number_of_Features) {
+  # Warn if minSamplesPerCluster  is less than the number of features
+  if (minSamplesPerCluster  < number_of_Features) {
     warning(sprintf(
       paste(
-        "min_cluster_size (%d) is less than the number of ",
+        "minSamplesPerCluster  (%d) is less than the number of ",
         "features/pigments (%d). This may lead to poor clustering or errors."
       ),
-      min_cluster_size, number_of_Features
+      minSamplesPerCluster , number_of_Features
     ))
   }
   
-  # Warn if min_cluster_size exceeds half the total number of samples
+  # Warn if minSamplesPerCluster  exceeds half the total number of samples
   maxAllowed <- floor(number_of_Samples / 2)
-  if (min_cluster_size > maxAllowed) {
+  if (minSamplesPerCluster  > maxAllowed) {
     warning(sprintf(
       paste(
-        "min_cluster_size (%d) exceeds half of total samples (%d).", 
+        "minSamplesPerCluster  (%d) exceeds half of total samples (%d).", 
         "Clustering may not be meaningful."
       ),
-      min_cluster_size, maxAllowed
+      minSamplesPerCluster , maxAllowed
     ))
   }
   
@@ -96,7 +96,7 @@ Cluster <- function(
   dynamicCut <- dynamicTreeCut::cutreeDynamic(
     mv.hclust,
     cutHeight            = 70,
-    minClusterSize       = min_cluster_size,
+    minClusterSize       = minSamplesPerCluster ,
     method               = "hybrid",
     distM                = as.matrix(stats::dist(ndf, method = dist_method)),
     deepSplit            = 4,
