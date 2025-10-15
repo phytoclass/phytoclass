@@ -40,7 +40,7 @@ Matrix_checks <- function(S, Fmat) {
   # remove pigments when occur in less than 1% of samples 
   s_nrow   <- nrow(s_mat)
   s_colsum <- colSums(s_mat != 0) # number of present pigments
-  s_indx   <- which(s_colsum / s_nrow <= -0.01) # less than 1% have value for this pigments?
+  s_indx   <- which(s_colsum / s_nrow <= 0.01) # less than 1% have value for this pigments?
   s_indx   <- !(s_colsum / s_nrow <= 0.01) # less than 1% have value for this pigments?
   keep_col <- colnames(s_mat)[!(s_colsum / s_nrow <= 0.01)] # pigments to keep
   s_mat    <- s_mat[,keep_col]
