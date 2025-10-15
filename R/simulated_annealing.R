@@ -83,7 +83,7 @@ simulated_annealing <- function(
   # Check for dvchl/dvchla
   col_names       <- tolower(colnames(S))
   pro_name        <- tolower(c("dvchl", "dvchla", "dv_chla", alt_pro_name))
-  penultimate_col <- col_names %in% 
+  penultimate_col <- col_names %in% pro_name
   
   if (any(penultimate_col)) {
     message("Detected dvchl column. Using simulated_annealing_Prochloro().")
