@@ -75,22 +75,51 @@ simulated_annealing <- function(
   
   # Check for dvchl/dvchla
   col_names <- tolower(colnames(S))
-  penultimate_col <- col_names[length(col_names) - 1]
-
-  if (!is.null(penultimate_col) &&
-      penultimate_col %in% c("dvchl", "dvchla")) {
-
+  penultimate_col <- col_names %in% c("dvchl", "dvchla", "dv_chla")
+  
+  if (any(penultimate_col)) {
     message("Detected dvchl column. Using simulated_annealing_Prochloro().")
+    pro_row <- which(Fmat[,colnames(Fmat)[penultimate_col]] > 0)
 
-    return(simulated_annealing_Prochloro(S = S,
-                                         Fmat = Fmat,
-                                         user_defined_min_max = user_defined_min_max,
-                                         do_matrix_checks = do_matrix_checks,
-                                         niter = niter,
-                                         step = step,
-                                         weight.upper.bound = weight.upper.bound,
-                                         verbose = verbose))
+    if (pro_row != nrow(Fmat)) {
+      message("Moving phytoplankton group with Dvchla to last row.")
+      Fmat <- Fmat[c(setdiff(seq_len(nrow(Fmat)), pro_row), pro_row), ]
+    }
+    return(
+      simulated_annealing_Prochloro(
+        S    = S,
+        Fmat = Fmat,
+        user_defined_min_max = user_defined_min_max,
+        do_matrix_checks     = do_matrix_checks,
+        niter = niter,
+        step  = step,
+        weight.upper.bound = weight.upper.bound,
+        verbose = verbose
+        )
+      )
   }
+  
+  # col_names <- tolower(colnames(S))
+  # penultimate_col <- col_names[length(col_names) - 1]
+  # 
+  # if (!is.null(penultimate_col) &&
+  #     penultimate_col %in% c("dvchl", "dvchla", "dv_chla")) {
+  # 
+  #   message("Detected dvchl column. Using simulated_annealing_Prochloro().")
+  # 
+  #   return(
+  #     simulated_annealing_Prochloro(
+  #       S    = S,
+  #       Fmat = Fmat,
+  #       user_defined_min_max = user_defined_min_max,
+  #       do_matrix_checks     = do_matrix_checks,
+  #       niter = niter,
+  #       step  = step,
+  #       weight.upper.bound = weight.upper.bound,
+  #       verbose = verbose
+  #       )
+  #     )
+  # }
   
   S_Chl <- S[, ncol(S)]
   S     <- Normalise_S(S)
