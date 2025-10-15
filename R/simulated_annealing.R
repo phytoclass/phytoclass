@@ -4,14 +4,20 @@
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
-#' @param do_matrix_checks     This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups
+#' @param do_matrix_checks This should only be set to TRUE when using the default
+#'                         values. This will remove pigment columns that have 
+#'                         column sums of 0. Set to FALSE if using customised 
+#'                         names for pigments and phytoplankton groups
 #' @param niter Number of iterations (default is 500)
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
 #' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
 #' @param seed Set number to reproduce the same results
-#' @param check_converge  TRUE/FALSE/integer; set the number of F matrices to 
+#' @param check_converge TRUE/FALSE/integer; set the number of F matrices to 
 #'                        for convergence checking
+#' @param alt_pro_name Optional: additional alternate versions of 
+#'                     divinyl-chlorophyll-a spellings used to detect 
+#'                     prochlorococcus (Default: "dvchl", "dvchla", "dv_chla")
 #'
 #' @return A list containing 
 #' \enumerate{
@@ -43,7 +49,8 @@ simulated_annealing <- function(
   weight.upper.bound   = 30, 
   verbose              = TRUE,
   seed                 = NULL,
-  check_converge       = 100
+  check_converge       = 100,
+  alt_pro_name         = NULL
   ) {
 
   if (!is.null(seed)) {
@@ -68,14 +75,15 @@ simulated_annealing <- function(
   }
 
   if (do_matrix_checks) {
-    L    <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
-    S    <- as.matrix(L[[1]])
-    Fmat <- as.matrix(L[[2]])
+    mat_check <- Matrix_checks(as.matrix(S), as.matrix(Fmat))
+    S    <- as.matrix(mat_check[[1]])
+    Fmat <- as.matrix(mat_check[[2]])
   }
   
   # Check for dvchl/dvchla
-  col_names <- tolower(colnames(S))
-  penultimate_col <- col_names %in% c("dvchl", "dvchla", "dv_chla")
+  col_names       <- tolower(colnames(S))
+  pro_name        <- tolower(c("dvchl", "dvchla", "dv_chla", alt_pro_name))
+  penultimate_col <- col_names %in% 
   
   if (any(penultimate_col)) {
     message("Detected dvchl column. Using simulated_annealing_Prochloro().")
