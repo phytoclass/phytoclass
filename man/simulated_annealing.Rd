@@ -14,7 +14,8 @@ simulated_annealing(
   weight.upper.bound = 30,
   verbose = TRUE,
   seed = NULL,
-  check_converge = 100
+  check_converge = 100,
+  alt_pro_name = NULL
 )
 }
 \arguments{
@@ -24,7 +25,10 @@ simulated_annealing(
 
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
-\item{do_matrix_checks}{This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups}
+\item{do_matrix_checks}{This should only be set to TRUE when using the default
+values. This will remove pigment columns that have
+column sums of 0. Set to FALSE if using customised
+names for pigments and phytoplankton groups}
 
 \item{niter}{Number of iterations (default is 500)}
 
@@ -38,6 +42,10 @@ simulated_annealing(
 
 \item{check_converge}{TRUE/FALSE/integer; set the number of F matrices to
 for convergence checking}
+
+\item{alt_pro_name}{Optional: additional alternate versions of
+divinyl-chlorophyll-a spellings used to detect
+prochlorococcus (Default: "dvchl", "dvchla", "dv_chla")}
 }
 \value{
 A list containing
