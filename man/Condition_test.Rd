@@ -32,10 +32,7 @@ max.val <- min_max[[4]]
 # Use only non-chla columns for Fmat and S, as in simulated_annealing
 Fmat_sub <- Fmat[, -ncol(Fmat)]
 S_sub <- S[, -ncol(S)]
-# Run Condition_test
-cond <- phytoclass:::Condition_test(S_sub, Fmat_sub, min.val, max.val)
-
 # Calculate mean condition number
-cond <- Condition_test(S, Fn, min.val, max.val)
+cond <- phytoclass:::Condition_test(S_sub, Fmat_sub, min.val, max.val)
 }
 \keyword{internal}
