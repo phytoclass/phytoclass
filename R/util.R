@@ -48,8 +48,7 @@ Normalise_F <- function(Fmat) {
 #'
 #' @examples
 #' # Create sample F matrix with Prochlorococcus
-#' Fmat <- matrix(runif(12), nrow=3)
-#' rownames(Fmat) <- c("diatoms", "prochlorococcus", "dino")
+#' Fmat <- as.matrix(phytoclass::Fp)
 #' result <- Prochloro_Normalise_F(Fmat)
 Prochloro_Normalise_F <- function(Fmat) {
   f_new <- as.matrix(Fmat)
@@ -97,12 +96,11 @@ Prochloro_Normalise_F <- function(Fmat) {
 #'
 #' @param S A matrix or data.frame to be normalized
 #'
-#' @return A matrix where each row sums to 1
+#' @return A matrix
 #'
 #' @examples
 #' # Create a sample matrix
-#' S <- matrix(c(1, 2, 3,
-#'               4, 5, 6), nrow=2, byrow=TRUE)
+#' S <- as.matrix(phytoclass::Sm)
 #' normalized <- Normalise_S(S)
 #' 
 Normalise_S <- function(S){
@@ -226,9 +224,9 @@ Prochloro_Wrangling <- function(Fl, min.val, max.val) {
 #'
 #' @examples
 #' # Create sample matrix and weights
-#' S <- matrix(1:6, nrow=2)
-#' cm <- c(1, 2, 3)  # different weights for each column
-#' weighted <- Weight_error(S, cm)
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#' weighted <- Weight_error(Fmat, S_weights)
 Weight_error <- function(S, cm){
   S <- S %*% diag(cm)
   return(S)
