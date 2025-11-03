@@ -1,18 +1,31 @@
-#' Part of the steepest descent algorithm and work to reduce error given 
-#' the S and F matrices.
+#' Part of the steepest descent algorithm that works to reduce error given 
+#' the S and F matrices by trying different scaling factors.
 #' 
 #' @keywords internal 
 #'
 #' @param Fmat A list containing `F matrix`, `RMSE` and `C matrix`
-#' @param vary Are the index of the non-zero integers to vary
+#' @param vary Indices of non-zero elements to vary in the optimization
 #' @param S A matrix of samples (rows) and pigments (columns)
 #' @param cm A vector of bounded weights for each pigment
-#' @param fac_rr A numeric to call which scaler values to use
-#' @param place A vector of all the indexs of non-zero pigment ratios
+#' @param fac_rr A numeric value (1, 2, or 3) to select which scaler values to use:
+#'        1: (0.99, 1.01), 2: (0.98, 1.02), 3: (0.97, 1.03)
+#' @param place A vector of all the indices of non-zero pigment ratios
 #'
-#' @return
+#' @return A list containing two elements:
+#'   \item{[[1]]}{Updated F matrix after optimization}
+#'   \item{[[2]]}{Vector of indices where improvements were found}
 #'
 #' @examples
+#' # Create sample matrices
+#' F <- matrix(c(0.5, 0.3, 0.2,
+#'               0.4, 0.1, 0.5), nrow=2, byrow=TRUE)
+#' S <- matrix(runif(12), nrow=4)
+#' cm <- c(1, 1, 1)
+#' Fmat <- list(F, 0.1, matrix(1, nrow=2, ncol=4))  # F matrix, RMSE, C matrix
+#' vary <- c(1, 2)  # indices to vary
+#' 
+#' # Run optimization
+#' result <- Fac_F_RR(Fmat, vary, S, cm, fac_rr=1)
 # Inputs are F and which elements to vary, should be all elements
 Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
   

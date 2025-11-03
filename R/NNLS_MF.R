@@ -63,15 +63,32 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
 #' 
 #' @keywords internal
 #'
-#' @param Fn xx
-#' @param S   xx
-#' @param S_Chl   xx
-#' @param S_weights  xx
-#' @param S_dvChl xx
+#' @param Fn F matrix with pigment ratios for each phytoplankton class
+#' @param S Sample data matrix of pigment measurements
+#' @param S_Chl Vector of chlorophyll a concentrations for each sample
+#' @param S_weights Vector of weights for each pigment
+#' @param S_dvChl Optional vector of divinyl chlorophyll concentrations for Prochlorococcus
 #'
-#' @return
+#' @return A list containing the following elements:
+#'   \item{F matrix}{The normalized F matrix of pigment ratios}
+#'   \item{RMSE}{Root mean square error of the fit}
+#'   \item{condition number}{Condition number of Fn %*% t(S)}
+#'   \item{Class abundances}{Data frame of phytoplankton class abundances}
+#'   \item{Figure}{Plot of the results}
+#'   \item{MAE}{Mean absolute error for each pigment}
+#'   \item{Error}{Residual error matrix}
 #'
-#' @examples  
+#' @examples
+#' # Create sample data
+#' Fn <- matrix(runif(12), nrow=3)  # F matrix
+#' rownames(Fn) <- c("diatoms", "cyano", "dino")
+#' colnames(Fn) <- c("chl_a", "chl_b", "chl_c", "fuco")
+#' S <- matrix(runif(20), nrow=5)   # Sample matrix
+#' S_Chl <- runif(5)                # Chlorophyll concentrations
+#' S_weights <- rep(1, 4)           # Equal weights for all pigments
+#' 
+#' # Run analysis
+#' result <- NNLS_MF_Final(Fn, S, S_Chl, S_weights)
 NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL) {
   check_pro <- any(tolower(colnames(Fn)) %in% c("dvchl", "dvchla", "chlvp"))
   

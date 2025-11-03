@@ -32,15 +32,25 @@ Normalise_F <- function(Fmat) {
   return(list(F_1, F.sum))
 }
 
-#' Normalise F for prochloro
+#' Normalize F matrix specifically for Prochlorococcus pigments
+#'
+#' Normalizes pigment ratios differently for Prochlorococcus vs other groups,
+#' using divinyl chlorophyll a for Prochlorococcus and chlorophyll a for others.
 #'
 #' @keywords internal
 #'
-#' @param Fmat 
+#' @param Fmat Matrix with pigment ratios, where the last column is chlorophyll a
+#'             and second-to-last column is divinyl chlorophyll a
 #'
-#' @return
+#' @return A list containing:
+#'   \item{[[1]]}{Normalized matrix where each row is scaled by its biomass marker}
+#'   \item{[[2]]}{Vector of row sums from the scaled matrix}
 #'
 #' @examples
+#' # Create sample F matrix with Prochlorococcus
+#' Fmat <- matrix(runif(12), nrow=3)
+#' rownames(Fmat) <- c("diatoms", "prochlorococcus", "dino")
+#' result <- Prochloro_Normalise_F(Fmat)
 Prochloro_Normalise_F <- function(Fmat) {
   f_new <- as.matrix(Fmat)
   n <- nrow(f_new)
@@ -83,14 +93,17 @@ Prochloro_Normalise_F <- function(Fmat) {
 #' 
 #' This function normalises each column in S to row sum
 #' 
-#'
 #' @keywords internal
 #'
-#' @param S   A matrix or data.frame
+#' @param S A matrix or data.frame to be normalized
 #'
-#' @return A matrix
+#' @return A matrix where each row sums to 1
 #'
 #' @examples
+#' # Create a sample matrix
+#' S <- matrix(c(1, 2, 3,
+#'               4, 5, 6), nrow=2, byrow=TRUE)
+#' normalized <- Normalise_S(S)
 #' 
 Normalise_S <- function(S){
   # Normalise to unit row sum
@@ -202,33 +215,49 @@ Prochloro_Wrangling <- function(Fl, min.val, max.val) {
   return(list(Fmin_vec, Fmax_vec, SE_vec, chlv, chlvp))
 }
 
-#' Apply weights to F/S matrices
+#' Apply weights to F/S matrices by diagonal multiplication
 #' 
 #' @keywords internal
 #'
-#' @param S  xx
-#' @param cm  xx
+#' @param S Matrix to be weighted
+#' @param cm Vector of weights to be applied to columns of S
 #'
-#' @return A matrix
+#' @return A matrix with weighted columns (S %*% diag(cm))
 #'
 #' @examples
+#' # Create sample matrix and weights
+#' S <- matrix(1:6, nrow=2)
+#' cm <- c(1, 2, 3)  # different weights for each column
+#' weighted <- Weight_error(S, cm)
 Weight_error <- function(S, cm){
   S <- S %*% diag(cm)
   return(S)
 }
 
-#' Calculate the condition number ...
+#' Calculate the mean condition number for randomized F matrices
+#' 
+#' Performs multiple simulations with randomized F matrices within given bounds
+#' to assess the numerical stability of the system.
 #' 
 #' @keywords internal
 #'
-#' @param S XX     
-#' @param Fn  XX   
-#' @param min.val XX     
-#' @param max.val XX       
+#' @param S Sample matrix of pigment measurements
+#' @param Fn Initial F matrix of pigment ratios
+#' @param min.val Optional vector of minimum values for each non-zero pigment ratio
+#' @param max.val Optional vector of maximum values for each non-zero pigment ratio
 #'
-#' @return
+#' @return Numeric value representing the mean condition number from 1000 simulations
 #'
 #' @examples
+#' # Create sample matrices
+#' S <- matrix(runif(12), nrow=4)
+#' Fn <- matrix(c(0.5, 0, 0.3,
+#'                0, 0.4, 0.2), nrow=2, byrow=TRUE)
+#' min.val <- c(0.3, 0.1, 0.1)
+#' max.val <- c(0.7, 0.5, 0.4)
+#' 
+#' # Calculate mean condition number
+#' cond <- Condition_test(S, Fn, min.val, max.val)
 Condition_test <- function(S, Fn, min.val = NULL, max.val = NULL) {
   if (is.null(min.val) & is.null(max.val)) {
     min_max <- Default_min_max(phytoclass::min_max, Fn)

@@ -1,16 +1,29 @@
-#' Performs the steepest descent algorithm for a set number of iterations
+#' Performs the steepest descent algorithm for a set number of iterations to
+#' optimize the F matrix of pigment ratios.
 #' 
 #' @keywords internal
 #' 
-#' @param Fmat xx
-#' @param place xx
-#' @param S   xx
-#' @param S_weights   xx
-#' @param num.loops   xx
+#' @param Fmat Initial F matrix containing pigment ratios
+#' @param place Vector of indices where F matrix has non-zero values
+#' @param S Matrix of sample measurements (rows) and pigments (columns)
+#' @param S_weights Vector of weights for each pigment in NNLS optimization
+#' @param num.loops Maximum number of iterations to perform optimization
 #'
-#' @return
+#' @return A list containing:
+#'   \item{[[1]]}{The optimized F matrix}
+#'   \item{[[2]]}{Final RMSE value}
+#'   \item{[[3]]}{Final concentration matrix}
 #'
 #' @examples
+#' # Create sample data
+#' Fmat <- matrix(c(0.5, 0.3, 0.2,
+#'                  0.4, 0.1, 0.5), nrow=2, byrow=TRUE)
+#' place <- c(1, 2, 3, 4, 5, 6)  # all elements are non-zero
+#' S <- matrix(runif(12), nrow=4)  # 4 samples, 3 pigments
+#' S_weights <- rep(1, 3)  # equal weights
+#' 
+#' # Run optimization for 20 iterations
+#' result <- Steepest_Descent(Fmat, place, S, S_weights, num.loops=20)
 Steepest_Descent <- function(Fmat, place, S, S_weights, num.loops) {
   F_new     <- NNLS_MF(Fmat, S, S_weights)
   F_initial <- F_new
