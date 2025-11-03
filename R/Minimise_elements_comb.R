@@ -1,27 +1,26 @@
-#' Part of the steepest descent algorithm that attempts to minimize error 
-#' by iteratively adjusting matrix elements
+#' Part of the steepest descent algorithm
 #' 
 #' @keywords internal
 #'
-#' @param Fmat A list containing the F matrix, RMSE, and C matrix
+#' @param Fmat The F matrix
 #' @param place A vector of indices indicating which elements to adjust
 #' @param S A matrix of samples (rows) and pigments (columns)
 #' @param cm A vector of bounded weights for each pigment
 #' @param c1_num A numeric vector (1, 2, or 3) indicating which scaler values to use
 #'
-#' @return A list containing the optimized F matrix with reduced error
+#' @return A list containing the optimized F matrix with reduced error & vedctor of indicies where improvements were found
 #'
 #' @examples
-#' # Create sample matrices
-#' F <- matrix(c(0.5, 0.3, 0.2,
-#'               0.4, 0.1, 0.5), nrow=2, byrow=TRUE)
-#' S <- matrix(runif(12), nrow=4)
-#' cm <- c(1, 1, 1)
-#' Fmat <- list(F, 0.1, matrix(1, nrow=2, ncol=4))  # F matrix, RMSE, C matrix
-#' place <- c(1, 2, 3)  # elements to minimize
-#' 
-#' # Run optimization
-#' result <- Minimise_elements_comb(Fmat, place, S, cm)
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'
+#'  # Get F_initial from NNLS_MF as done in Steepest_Descent
+#'  F_initial <- phytoclass::NNLS_MF(Fmat, S, S_weights)
+#'
+#'  # Run Minimise_elements_comb with c1_num = 3 (as in Steepest_Descent)
+#'  result <- phytoclass:::Minimise_elements_comb(F_initial[[1]], place, S, S_weights, c1_num = 3) #' # Create sample matrices
 Minimise_elements_comb <- function(Fmat, place, S, cm, c1_num = c(1, 2, 3)) { # A function that reduces every for every element that didn't reduce in index function
   
   f     <- Conduit(Fmat, place, S, cm, c_num = c1_num) # Calls index function
