@@ -13,21 +13,11 @@
 #'
 #' @examples
 #' # Create a sample F matrix
-#' Fmat <- matrix(c(0.5, 0, 0.3,
-#'                  0, 0.4, 0.2), 
-#'                nrow=2, byrow=TRUE,
-#'                dimnames=list(c("diatoms", "cyano"),
-#'                             c("chl_a", "chl_b", "chl_c")))
+#' Fmat <- phytoclass::Fm
 #' 
 #' # Create min_max data frame
-#' min_max <- data.frame(
-#'   class=c("diatoms", "diatoms", "cyano", "cyano"),
-#'   pigment=c("chl_a", "chl_c", "chl_b", "chl_c"),
-#'   min=c(0.4, 0.2, 0.3, 0.1),
-#'   max=c(0.6, 0.4, 0.5, 0.3)
-#' )
-#' 
-#' result <- Default_min_max(min_max, Fmat)
+#' min_max <- phytoclass::min_max
+#' result <- phytoclass:::Default_min_max(min_max, Fmat)
 Default_min_max <- function(min_max, Fmat) {
   
   # selects all non-zero pigment ratios and indexes the phyto names and pigments
