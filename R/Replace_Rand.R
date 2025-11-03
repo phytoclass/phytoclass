@@ -48,7 +48,7 @@ Replace_Rand <- function(Fmat, i, S, cm, min.scaler, max.scaler) {
   return(res)
 }
 
-#' Randomise individual elements in the F matrix by applying scaling factors
+#' Randomise value by applying scaling factors
 #' within specified bounds. Small values (< 0.001) are set to 0.001 to avoid
 #' numerical issues.
 #' 
