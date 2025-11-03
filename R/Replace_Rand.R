@@ -2,6 +2,7 @@
 #' descent algorithm. Randomly modifies a single element and checks if the 
 #' modification reduces the error.
 #' 
+#' @importFrom stats runif
 #' @keywords internal
 #'
 #' @param Fmat A list containing the F matrix, RMSE, and other components

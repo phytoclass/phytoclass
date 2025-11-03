@@ -1,6 +1,7 @@
 #' Select a random neighbour when the previous random neighbour is beyond 
 #' the minimum or maximum value. Part of the simulated annealing algorithm.
 #' 
+#' @importFrom stats runif
 #' @keywords internal
 #'
 #' @param f_new Current F matrix of pigment ratios
