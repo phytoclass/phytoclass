@@ -18,15 +18,21 @@
 #'   \item{Improved}{Logical indicating if the modification reduced error}
 #'
 #' @examples
-#' # Create sample matrices
-#' F <- matrix(c(0.5, 0.3, 0.2,
-#'               0.4, 0.1, 0.5), nrow=2, byrow=TRUE)
-#' S <- matrix(runif(12), nrow=4)
-#' cm <- c(1, 1, 1)
-#' Fmat <- list(F, 0.1, matrix(1, nrow=2, ncol=4))
-#' 
-#' # Try modifying element at index 1
-#' result <- Replace_Rand(Fmat, 1, S, cm, 0.99, 1.01)
+#'  # Setup based on Fac_F_RR usage
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  cm <- as.numeric(phytoclass:::Bounded_weights(S))
+#'
+#'  # Get Fmat as a list from NNLS_MF (as used in Fac_F_RR)
+#'  Fmat_list <- phytoclass::NNLS_MF(Fmat, S, cm)
+#'
+#'  # Test with a single index
+#'  i <- 1 # first non-zero element to modify
+#'  min.scaler <- 0.99
+#'  max.scaler <- 1.01
+#'
+#'  # Run Replace_Rand
+#'  result <- phytoclass:::Replace_Rand(Fmat_list, i, S, cm, min.scaler, max.scaler)
 Replace_Rand <- function(Fmat, i, S, cm, min.scaler, max.scaler) {
   
   # randomise non-zero elements
