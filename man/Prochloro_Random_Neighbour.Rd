@@ -3,7 +3,8 @@
 \name{Prochloro_Random_Neighbour}
 \alias{Prochloro_Random_Neighbour}
 \title{Selects a random neighbour for a subset of non-zero pigments that are outside
-the min and max bounds for the simulated annealing algorithm.}
+the min and max bounds for the simulated annealing algorithm, specifically
+handling Prochlorococcus pigments.}
 \usage{
 Prochloro_Random_Neighbour(
   f_new,
@@ -39,8 +40,42 @@ Prochloro_Random_Neighbour(
 
 \item{maxF}{Maximum bounds for each phytoplankton group and pigments}
 }
+\value{
+A list containing:
+\item{F matrix}{The new F matrix with randomly modified values}
+\item{RMSE}{Root mean square error of the new solution}
+\item{C matrix}{The concentration matrix from NNLS}
+}
 \description{
 Selects a random neighbour for a subset of non-zero pigments that are outside
-the min and max bounds for the simulated annealing algorithm.
+the min and max bounds for the simulated annealing algorithm, specifically
+handling Prochlorococcus pigments.
+}
+\examples{
+ Fmat <- as.matrix(phytoclass::Fp)
+ S <- as.matrix(phytoclass::Sp)
+ S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+ place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+
+ # Get min_max from package data
+ min_max_mat <- phytoclass:::Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)])
+
+ # Get bounds using Prochloro_Wrangling as in simulated_annealing_Prochloro
+ f_c <- Fmat
+ W0 <- phytoclass:::Prochloro_Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])
+ minF <- W0[[1]]
+ maxF <- W0[[2]]
+
+ # Extract chlv and chlvp from the matrix
+ chlv <- f_c[, ncol(f_c)] # Chl a (Tchla)
+ chlvp <- f_c[, ncol(f_c) - 1] # dvChl a
+
+ Temp <- 0.5
+ N <- place
+
+ # Run Prochloro_Random_Neighbour
+ result <- phytoclass:::Prochloro_Random_Neighbour(
+   f_c, Temp, chlv, chlvp, N, place, S, S_weights, minF, maxF
+ )
 }
 \keyword{internal}

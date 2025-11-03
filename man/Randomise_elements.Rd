@@ -2,21 +2,34 @@
 % Please edit documentation in R/Replace_Rand.R
 \name{Randomise_elements}
 \alias{Randomise_elements}
-\title{Randomise individual elements in the F matrix.}
+\title{Randomise value by applying scaling factors
+within specified bounds. Small values (< 0.001) are set to 0.001 to avoid
+numerical issues.}
 \usage{
 Randomise_elements(x, min.scaler, max.scaler)
 }
 \arguments{
-\item{x}{xx}
+\item{x}{The element value to randomize}
 
-\item{min.scaler}{xx}
+\item{min.scaler}{Minimum scaling factor to apply (e.g., 0.99 for 1\% decrease)}
 
-\item{max.scaler}{xx}
+\item{max.scaler}{Maximum scaling factor to apply (e.g., 1.01 for 1\% increase)}
 }
 \value{
-numeric
+A numeric value between x\emph{min.scaler and x}max.scaler, rounded to 4 decimals
 }
 \description{
-Randomise individual elements in the F matrix.
+Randomise value by applying scaling factors
+within specified bounds. Small values (< 0.001) are set to 0.001 to avoid
+numerical issues.
+}
+\examples{
+# Randomize a single value
+x <- 0.5
+new_value <- Randomise_elements(x, 0.99, 1.01)  # +/- 1\% change
+
+# Handle small values
+small_x <- 0.0005
+new_small <- Randomise_elements(small_x, 0.99, 1.01)  # will use 0.001
 }
 \keyword{internal}

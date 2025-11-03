@@ -8,16 +8,35 @@ of steepest descent algorithm.}
 Conduit(Fmat, place, S, cm, c_num = c(1, 2, 3))
 }
 \arguments{
-\item{Fmat}{xx}
+\item{Fmat}{A matrix of contribution values for each pigment and taxa pair}
 
-\item{place}{xx}
+\item{place}{Indices of elements to be modified}
 
-\item{S}{xx}
+\item{S}{Matrix of pigment sample measurements}
 
-\item{cm}{xx}
+\item{cm}{Vector of weights for each column}
+
+\item{c_num}{A numeric value (1, 2, or 3) to select which scaler values to use}
+}
+\value{
+A list containing three elements:
+\item{[\link{1}]}{The modified F matrix}
+\item{[\link{2}]}{Number of iterations or modifications made}
+\item{[\link{3}]}{The original F matrix before modifications}
 }
 \description{
 Conduit between minimise_elements function and Fac_F_R
 of steepest descent algorithm.
+}
+\examples{
+Fmat <- as.matrix(phytoclass::Fm)
+S <- as.matrix(phytoclass::Sm)
+S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+
+# Get F_initial from NNLS_MF as done in Steepest_Descent
+F_initial <- phytoclass::NNLS_MF(Fmat, S, S_weights)
+
+result <- phytoclass:::Conduit(F_initial[[1]], place, S, S_weights, c1_num = 3) 
 }
 \keyword{internal}

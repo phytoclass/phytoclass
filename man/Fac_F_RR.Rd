@@ -2,7 +2,7 @@
 % Please edit documentation in R/Fac_F_RR.R
 \name{Fac_F_RR}
 \alias{Fac_F_RR}
-\title{Part of the steepest descent algorithm and work to reduce error given
+\title{Part of the steepest descent algorithm that works to reduce error given
 the S and F matrices.}
 \usage{
 Fac_F_RR(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL)
@@ -10,18 +10,41 @@ Fac_F_RR(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL)
 \arguments{
 \item{Fmat}{A list containing \verb{F matrix}, \code{RMSE} and \verb{C matrix}}
 
-\item{vary}{Are the index of the non-zero integers to vary}
+\item{vary}{Indices of non-zero elements to vary in the optimization}
 
 \item{S}{A matrix of samples (rows) and pigments (columns)}
 
 \item{cm}{A vector of bounded weights for each pigment}
 
-\item{fac_rr}{A numeric to call which scaler values to use}
+\item{fac_rr}{A numeric value (1, 2, or 3) to select which scaler values to use:
+1: (0.99, 1.01), 2: (0.98, 1.02), 3: (0.97, 1.03)}
 
-\item{place}{A vector of all the indexs of non-zero pigment ratios}
+\item{place}{A vector of all the indices of non-zero pigment ratios}
+}
+\value{
+A list containing two elements:
+\item{[\link{1}]}{Updated F matrix after optimization}
+\item{[\link{2}]}{Vector of indices}
 }
 \description{
-Part of the steepest descent algorithm and work to reduce error given
+Part of the steepest descent algorithm that works to reduce error given
 the S and F matrices.
+}
+\examples{
+ # Setup based on Minimise_elements_comb usage
+ Fmat <- as.matrix(phytoclass::Fm)
+ S <- as.matrix(phytoclass::Sm)
+ cm <- as.numeric(phytoclass:::Bounded_weights(S))
+ place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+
+ # Get F.new from Conduit as done in Minimise_elements_comb
+ f <- phytoclass:::Conduit(Fmat, place, S, cm, c_num = 3)
+ F.new <- f[[1]]
+
+ # Set place1 as done in Minimise_elements_comb
+ place1 <- place # place1 = place when c1_num != 1
+
+ # Run Fac_F_RR
+ result <- phytoclass:::Fac_F_RR(F.new, vary = place, place = place1, S, cm, fac_rr = 3)
 }
 \keyword{internal}

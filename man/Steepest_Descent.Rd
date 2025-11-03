@@ -2,22 +2,39 @@
 % Please edit documentation in R/Steepest_Descent.R
 \name{Steepest_Descent}
 \alias{Steepest_Descent}
-\title{Performs the steepest descent algorithm for a set number of iterations}
+\title{Performs the steepest descent algorithm for a set number of iterations to
+optimize the F matrix of pigment ratios.}
 \usage{
 Steepest_Descent(Fmat, place, S, S_weights, num.loops)
 }
 \arguments{
-\item{Fmat}{xx}
+\item{Fmat}{Initial F matrix containing pigment ratios}
 
-\item{place}{xx}
+\item{place}{Vector of indices where F matrix has non-zero values}
 
-\item{S}{xx}
+\item{S}{Matrix of sample measurements (rows) and pigments (columns)}
 
-\item{S_weights}{xx}
+\item{S_weights}{Vector of weights for each pigment in NNLS optimization}
 
-\item{num.loops}{xx}
+\item{num.loops}{Maximum number of iterations to perform optimization}
+}
+\value{
+A list containing:
+\item{[\link{1}]}{The optimized F matrix}
+\item{[\link{2}]}{Final RMSE value}
+\item{[\link{3}]}{The C matrix (class abundances for each group)}
 }
 \description{
-Performs the steepest descent algorithm for a set number of iterations
+Performs the steepest descent algorithm for a set number of iterations to
+optimize the F matrix of pigment ratios.
+}
+\examples{
+ Fmat <- as.matrix(phytoclass::Fm)
+ S <- as.matrix(phytoclass::Sm)
+ S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+ place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+ num.loops <- 2
+ # Run Steepest_Descent
+ result <- phytoclass:::Steepest_Descent(Fmat, place, S, S_weights, num.loops)
 }
 \keyword{internal}

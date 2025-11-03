@@ -7,15 +7,25 @@
 NNLS_MF_Final(Fn, S, S_Chl, S_weights, S_dvChl = NULL)
 }
 \arguments{
-\item{Fn}{xx}
+\item{Fn}{F matrix with pigment ratios for each phytoplankton class}
 
-\item{S}{xx}
+\item{S}{Sample data matrix of pigment measurements}
 
-\item{S_Chl}{xx}
+\item{S_Chl}{Vector of chlorophyll a concentrations for each sample}
 
-\item{S_weights}{xx}
+\item{S_weights}{Vector of weights for each pigment}
 
-\item{S_dvChl}{xx}
+\item{S_dvChl}{Optional vector of divinyl chlorophyll concentrations for Prochlorococcus}
+}
+\value{
+A list containing the following elements:
+\item{F matrix}{The normalized F matrix of pigment ratios}
+\item{RMSE}{Root mean square error of the fit}
+\item{condition number}{Condition number of Fn \%*\% t(S)}
+\item{Class abundances}{Data frame of phytoplankton class abundances}
+\item{Figure}{Plot of the results}
+\item{MAE}{Mean absolute error for each pigment}
+\item{Error}{Residual error matrix}
 }
 \description{
 Performs the non-negative matrix factorisation for given phytoplankton
@@ -26,5 +36,13 @@ class abundances.
 Unlike NNLS_ML(), it also removes any weighting and normalisation, and
 also multiplies relative abundances by chlorophyll values to determine
 the biomass of phytoplankton groups.
+}
+\examples{
+ Fmat <- as.matrix(phytoclass::Fm)
+ S <- as.matrix(phytoclass::Sm)
+ S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+ S_Chl <- S[, ncol(S)]
+ # Run NNLS_MF_Final
+ result <- phytoclass:::NNLS_MF_Final(Fmat, S, S_Chl, S_weights)
 }
 \keyword{internal}

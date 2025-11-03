@@ -7,12 +7,18 @@
 Normalise_S(S)
 }
 \arguments{
-\item{S}{A matrix or data.frame}
+\item{S}{A matrix or data.frame to be normalized}
 }
 \value{
 A matrix
 }
 \description{
 This function normalises each column in S to row sum
+}
+\examples{
+# Create a sample matrix
+S <- as.matrix(phytoclass::Sm)
+normalized <- Normalise_S(S)
+
 }
 \keyword{internal}
