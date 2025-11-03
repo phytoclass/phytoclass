@@ -77,38 +77,47 @@ Random_neighbour <- function(f_new, Temp, chlv, N, place, S, S_weights, minF, ma
 #' @keywords internal
 #'
 #' @param f_new F matrix of pigment ratios
-#' @param Temp Temperature of the annealing process
-#' @param chlv Chlorophyll-a column to append
-#' @param chlvp Divinyl chlorophyll-a column for Prochlorococcus
-#' @param N Indices of pigment ratios to be modified
-#' @param place Vector of indices where values are non-zero in F matrix
-#' @param S Matrix of samples (rows) and pigments (columns) 
-#' @param S_weights Vector of weights for each pigment in NNLS
-#' @param minF Minimum bounds for each pigment ratio
-#' @param maxF Maximum bounds for each pigment ratio
+#' @param Temp Temperature of the annealing
+#' @param chlv Chlorophyll-a column
+#' @param chlvp Dvchla column
+#' @param N Indexs of pigment ratios to be changed
+#' @param place Indexes in F matrix where values are non-zero
+#' @param S S matrix of samples
+#' @param S_weights Weights for NNLS algorithm
+#' @param minF Minimum bounds for each phytoplankton group and pigments
+#' @param maxF Maximum bounds for each phytoplankton group and pigments
 #'
 #' @return A list containing:
 #'   \item{F matrix}{The new F matrix with randomly modified values}
 #'   \item{RMSE}{Root mean square error of the new solution}
 #'   \item{C matrix}{The concentration matrix from NNLS}
-#'
-#' @examples
-#' # Create sample data with Prochlorococcus
-#' f_new <- matrix(c(0.5, 0, 0.3, 0.2, 1,
-#'                   0, 0.4, 0.2, 0.3, 1), 
-#'                nrow=2, byrow=TRUE)
-#' Temp <- 0.5
-#' chlv <- c(1, 1)
-#' chlvp <- c(0.3, 0.2)  # divinyl chl-a
-#' N <- c(1, 3)  # indices to modify
-#' place <- c(1, 3, 4, 6, 7, 8, 9, 10)
-#' S <- matrix(runif(15), nrow=3)
-#' S_weights <- rep(1, 5)
-#' minF <- c(0.3, 0.1)  # for positions in N
-#' maxF <- c(0.7, 0.5)  # for positions in N
 #' 
-#' result <- Prochloro_Random_Neighbour(f_new, Temp, chlv, chlvp, N, 
-#'                                     place, S, S_weights, minF, maxF)
+#' @examples
+#'  Fmat <- as.matrix(phytoclass::Fp)
+#'  S <- as.matrix(phytoclass::Sp)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'
+#'  # Get min_max from package data
+#'  min_max_mat <- phytoclass:::Default_min_max(phytoclass::min_max, Fmat[, -ncol(Fmat)])
+#'
+#'  # Get bounds using Prochloro_Wrangling as in simulated_annealing_Prochloro
+#'  f_c <- Fmat
+#'  W0 <- phytoclass:::Prochloro_Wrangling(f_c, min_max_mat[[1]], min_max_mat[[2]])
+#'  minF <- W0[[1]]
+#'  maxF <- W0[[2]]
+#'
+#'  # Extract chlv and chlvp from the matrix
+#'  chlv <- f_c[, ncol(f_c)] # Chl a (Tchla)
+#'  chlvp <- f_c[, ncol(f_c) - 1] # dvChl a
+#'
+#'  Temp <- 0.5
+#'  N <- place
+#'
+#'  # Run Prochloro_Random_Neighbour
+#'  result <- phytoclass:::Prochloro_Random_Neighbour(
+#'    f_c, Temp, chlv, chlvp, N, place, S, S_weights, minF, maxF
+#'  )
 Prochloro_Random_Neighbour <- function(
     f_new, Temp, chlv, chlvp, N, place, S, S_weights,
     minF, maxF
