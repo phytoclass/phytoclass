@@ -81,16 +81,12 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
 #'   \item{Error}{Residual error matrix}
 #'
 #' @examples
-#' # Create sample data
-#' Fn <- matrix(runif(12), nrow=3)  # F matrix
-#' rownames(Fn) <- c("diatoms", "cyano", "dino")
-#' colnames(Fn) <- c("chl_a", "chl_b", "chl_c", "fuco")
-#' S <- matrix(runif(20), nrow=5)   # Sample matrix
-#' S_Chl <- runif(5)                # Chlorophyll concentrations
-#' S_weights <- rep(1, 4)           # Equal weights for all pigments
-#' 
-#' # Run analysis
-#' result <- NNLS_MF_Final(Fn, S, S_Chl, S_weights)
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  S_Chl <- S[, ncol(S)]
+#'  # Run NNLS_MF_Final
+#'  result <- phytoclass:::NNLS_MF_Final(Fmat, S, S_Chl, S_weights)
 NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL) {
   check_pro <- any(tolower(colnames(Fn)) %in% c("dvchl", "dvchla", "chlvp"))
   
