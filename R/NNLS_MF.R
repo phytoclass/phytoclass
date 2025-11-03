@@ -15,11 +15,13 @@
 #' @export
 #'
 #' @examples
-#' MC <- Matrix_checks(Sm,Fm)
-#' Snew <- MC$Snew
-#' Fnew <- MC$Fnew
-#' S_weights <- Bounded_weights(Snew, weight.upper.bound = 30)
-#' NNLS_MF(Fnew, Snew, S_weights)
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'  num.loops <- 2
+#'  # Run Steepest_Descent
+#'  result <- phytoclass:::Steepest_Descent(Fmat, place, S, S_weights, num.loops)
 #'
 NNLS_MF <- function(Fn, S, S_weights = NULL) {
   if (is.null(S_weights)) {
