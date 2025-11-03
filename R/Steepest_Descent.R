@@ -12,18 +12,17 @@
 #' @return A list containing:
 #'   \item{[[1]]}{The optimized F matrix}
 #'   \item{[[2]]}{Final RMSE value}
-#'   \item{[[3]]}{Final concentration matrix}
+#'   \item{[[3]]}{The C matrix (class abundances for each group)}
 #'
 #' @examples
-#' # Create sample data
-#' Fmat <- matrix(c(0.5, 0.3, 0.2,
-#'                  0.4, 0.1, 0.5), nrow=2, byrow=TRUE)
-#' place <- c(1, 2, 3, 4, 5, 6)  # all elements are non-zero
-#' S <- matrix(runif(12), nrow=4)  # 4 samples, 3 pigments
-#' S_weights <- rep(1, 3)  # equal weights
-#' 
-#' # Run optimization for 20 iterations
-#' result <- Steepest_Descent(Fmat, place, S, S_weights, num.loops=20)
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'  num.loops <- 2
+#'  # Run Steepest_Descent
+#'  result <- phytoclass:::Steepest_Descent(Fmat, place, S, S_weights, num.loops)
+
 Steepest_Descent <- function(Fmat, place, S, S_weights, num.loops) {
   F_new     <- NNLS_MF(Fmat, S, S_weights)
   F_initial <- F_new
