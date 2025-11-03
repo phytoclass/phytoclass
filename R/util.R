@@ -250,11 +250,16 @@ Weight_error <- function(S, cm){
 #'
 #' @examples
 #' # Create sample matrices
-#' S <- matrix(runif(12), nrow=4)
-#' Fn <- matrix(c(0.5, 0, 0.3,
-#'                0, 0.4, 0.2), nrow=2, byrow=TRUE)
-#' min.val <- c(0.3, 0.1, 0.1)
-#' max.val <- c(0.7, 0.5, 0.4)
+#' Fmat <- as.matrix(phytoclass::Fm)
+#' S <- as.matrix(phytoclass::Sm)
+#' min_max <- phytoclass::min_max
+#' min.val <- min_max[[3]]
+#' max.val <- min_max[[4]]
+#' # Use only non-chla columns for Fmat and S, as in simulated_annealing
+#' Fmat_sub <- Fmat[, -ncol(Fmat)]
+#' S_sub <- S[, -ncol(S)]
+#' # Run Condition_test
+#' cond <- phytoclass:::Condition_test(S_sub, Fmat_sub, min.val, max.val)
 #' 
 #' # Calculate mean condition number
 #' cond <- Condition_test(S, Fn, min.val, max.val)
