@@ -2,7 +2,10 @@
 % Please edit documentation in R/simulated_annealing.R
 \name{simulated_annealing}
 \alias{simulated_annealing}
-\title{This is the main phytoclass algorithm. It performs simulated annealing algorithm for S and F matrices. See the examples (Fm, Sm) for how to set up matrices, and the vignette for more detailed instructions. Different pigments and phytoplankton groups may be used.}
+\title{This is the main phytoclass algorithm. It performs simulated annealing
+algorithm for S and F matrices. See the examples (Fm, Sm) for how to set
+up matrices, and the vignette for more detailed instructions. Different
+pigments and phytoplankton groups may be used.}
 \usage{
 simulated_annealing(
   S,
@@ -36,7 +39,8 @@ names for pigments and phytoplankton groups}
 
 \item{weight.upper.bound}{Upper limit of the weights applied (default value is 30).}
 
-\item{verbose}{Logical value. Output error and temperature at each iteration. Default value of TRUE}
+\item{verbose}{Logical value. Output error and temperature at each
+iteration. Default value of TRUE}
 
 \item{seed}{Set number to reproduce the same results}
 
@@ -62,7 +66,10 @@ A list containing
 }
 }
 \description{
-This is the main phytoclass algorithm. It performs simulated annealing algorithm for S and F matrices. See the examples (Fm, Sm) for how to set up matrices, and the vignette for more detailed instructions. Different pigments and phytoplankton groups may be used.
+This is the main phytoclass algorithm. It performs simulated annealing
+algorithm for S and F matrices. See the examples (Fm, Sm) for how to set
+up matrices, and the vignette for more detailed instructions. Different
+pigments and phytoplankton groups may be used.
 }
 \examples{
 # Using the built-in matrices Sm and Fm

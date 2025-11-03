@@ -8,7 +8,8 @@
 #' @param cm A vector of bounded weights for each pigment
 #' @param c1_num A numeric vector (1, 2, or 3) indicating which scaler values to use
 #'
-#' @return A list containing the optimized F matrix with reduced error & vedctor of indicies where improvements were found
+#' @return A list containing the optimized F matrix with reduced error and
+#'   vector of indices where improvements were found
 #'
 #' @examples
 #'  Fmat <- as.matrix(phytoclass::Fm)
@@ -20,7 +21,9 @@
 #'  F_initial <- phytoclass::NNLS_MF(Fmat, S, S_weights)
 #'
 #'  # Run Minimise_elements_comb with c1_num = 3 (as in Steepest_Descent)
-#'  result <- phytoclass:::Minimise_elements_comb(F_initial[[1]], place, S, S_weights, c1_num = 3) #' # Create sample matrices
+#'  result <- phytoclass:::Minimise_elements_comb(
+#'    F_initial[[1]], place, S, S_weights, c1_num = 3
+#'  )
 Minimise_elements_comb <- function(Fmat, place, S, cm, c1_num = c(1, 2, 3)) { # A function that reduces every for every element that didn't reduce in index function
   
   f     <- Conduit(Fmat, place, S, cm, c_num = c1_num) # Calls index function
@@ -65,7 +68,9 @@ Minimise_elements_comb <- function(Fmat, place, S, cm, c1_num = c(1, 2, 3)) { # 
 #' #' @return
 #' #'
 #' #' @examples
-#' Minimise_elements <- function(Fmat, place, S, cm){   # A function that reduces every for every element that didn't reduce in index function
+#' Minimise_elements <- function(Fmat, place, S, cm){
+#'   # A function that reduces every for every element that didn't reduce
+#'   # in index function
 #'   f <- Conduit_3(Fmat, place, S, cm) # Calls index function
 #'   F.new <- f[[1]] # F matrix
 #'   n <- f[[2]] #elements that reduce error
@@ -120,7 +125,9 @@ Minimise_elements_comb <- function(Fmat, place, S, cm, c1_num = c(1, 2, 3)) { # 
 #' #' @return
 #' #'
 #' #' @examples
-#' Minimise_elements2 <- function(Fmat, place, S, cm){   # A function that reduces every for every element that didn't reduce in index function
+#' Minimise_elements2 <- function(Fmat, place, S, cm){
+#'   # A function that reduces every for every element that didn't reduce
+#'   # in index function
 #'   f <- Conduit_2(Fmat, place, S, cm) # Calls index function
 #'   F.new <- f[[1]] # F matrix
 #'   n <- f[[2]] #elements that reduce error

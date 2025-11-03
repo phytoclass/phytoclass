@@ -1,4 +1,7 @@
-#' This is the main phytoclass algorithm. It performs simulated annealing algorithm for S and F matrices. See the examples (Fm, Sm) for how to set up matrices, and the vignette for more detailed instructions. Different pigments and phytoplankton groups may be used.
+#' This is the main phytoclass algorithm. It performs simulated annealing
+#' algorithm for S and F matrices. See the examples (Fm, Sm) for how to set
+#' up matrices, and the vignette for more detailed instructions. Different
+#' pigments and phytoplankton groups may be used.
 #' @importFrom progress progress_bar
 
 #' @param S   Sample data matrix – a matrix of pigment samples
@@ -11,7 +14,8 @@
 #' @param niter Number of iterations (default is 500)
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
-#' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
+#' @param verbose Logical value. Output error and temperature at each
+#'   iteration. Default value of TRUE
 #' @param seed Set number to reproduce the same results
 #' @param check_converge TRUE/FALSE/integer; set the number of F matrices to 
 #'                        for convergence checking

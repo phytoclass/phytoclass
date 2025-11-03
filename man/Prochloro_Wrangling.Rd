@@ -14,7 +14,8 @@ Prochloro_Wrangling(Fl, min.val, max.val)
 \item{max.val}{A vector of maximum values for each non-zero pigment ratio}
 }
 \value{
-A list containing vectorized min/max bounds and current values for Prochlorococcus-aware normalization
+A list containing vectorized min/max bounds and current values for
+Prochlorococcus-aware normalization
 }
 \description{
 Prochloro Wrangling

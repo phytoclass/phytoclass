@@ -175,7 +175,8 @@ Wrangling <- function(Fl, min.val, max.val) {
 #' @param min.val A vector of minimum values for each non-zero pigment ratio
 #' @param max.val A vector of maximum values for each non-zero pigment ratio
 #'
-#' @return A list containing vectorized min/max bounds and current values for Prochlorococcus-aware normalization
+#' @return A list containing vectorized min/max bounds and current values for
+#'   Prochlorococcus-aware normalization
 Prochloro_Wrangling <- function(Fl, min.val, max.val) {
   
   # set up initial F, Fmin, Fmax, matrix by removing Tchla column

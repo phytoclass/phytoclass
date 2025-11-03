@@ -52,7 +52,10 @@ Steepest_Descent <- function(Fmat, place, S, S_weights, num.loops) {
   return(F_new)
 }
 
-#' Stand-alone version of steepest descent algorithm. This is similar to the CHEMTAX steepest descent algorithm. It is not required to use this function, and as results are not bound by minimum and maximum, results may be unrealistic.
+#' Stand-alone version of steepest descent algorithm. This is similar to the
+#' CHEMTAX steepest descent algorithm. It is not required to use this
+#' function, and as results are not bound by minimum and maximum, results may
+#' be unrealistic.
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix

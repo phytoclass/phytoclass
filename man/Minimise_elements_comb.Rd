@@ -18,7 +18,8 @@ Minimise_elements_comb(Fmat, place, S, cm, c1_num = c(1, 2, 3))
 \item{c1_num}{A numeric vector (1, 2, or 3) indicating which scaler values to use}
 }
 \value{
-A list containing the optimized F matrix with reduced error & vedctor of indicies where improvements were found
+A list containing the optimized F matrix with reduced error and
+vector of indices where improvements were found
 }
 \description{
 Part of the steepest descent algorithm
@@ -33,6 +34,8 @@ Part of the steepest descent algorithm
  F_initial <- phytoclass::NNLS_MF(Fmat, S, S_weights)
 
  # Run Minimise_elements_comb with c1_num = 3 (as in Steepest_Descent)
- result <- phytoclass:::Minimise_elements_comb(F_initial[[1]], place, S, S_weights, c1_num = 3) #' # Create sample matrices
+ result <- phytoclass:::Minimise_elements_comb(
+   F_initial[[1]], place, S, S_weights, c1_num = 3
+ )
 }
 \keyword{internal}
