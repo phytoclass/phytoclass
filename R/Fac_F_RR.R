@@ -1,5 +1,5 @@
 #' Part of the steepest descent algorithm that works to reduce error given 
-#' the S and F matrices by trying different scaling factors.
+#' the S and F matrices.
 #' 
 #' @keywords internal 
 #'
@@ -13,19 +13,24 @@
 #'
 #' @return A list containing two elements:
 #'   \item{[[1]]}{Updated F matrix after optimization}
-#'   \item{[[2]]}{Vector of indices where improvements were found}
+#'   \item{[[2]]}{Vector of indices}
 #'
 #' @examples
-#' # Create sample matrices
-#' F <- matrix(c(0.5, 0.3, 0.2,
-#'               0.4, 0.1, 0.5), nrow=2, byrow=TRUE)
-#' S <- matrix(runif(12), nrow=4)
-#' cm <- c(1, 1, 1)
-#' Fmat <- list(F, 0.1, matrix(1, nrow=2, ncol=4))  # F matrix, RMSE, C matrix
-#' vary <- c(1, 2)  # indices to vary
-#' 
-#' # Run optimization
-#' result <- Fac_F_RR(Fmat, vary, S, cm, fac_rr=1)
+#'  # Setup based on Minimise_elements_comb usage
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  cm <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'
+#'  # Get F.new from Conduit as done in Minimise_elements_comb
+#'  f <- phytoclass:::Conduit(Fmat, place, S, cm, c_num = 3)
+#'  F.new <- f[[1]]
+#'
+#'  # Set place1 as done in Minimise_elements_comb
+#'  place1 <- place # place1 = place when c1_num != 1
+#'
+#'  # Run Fac_F_RR
+#'  result <- phytoclass:::Fac_F_RR(F.new, vary = place, place = place1, S, cm, fac_rr = 3)
 # Inputs are F and which elements to vary, should be all elements
 Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
   
