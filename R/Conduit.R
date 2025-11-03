@@ -3,21 +3,21 @@
 #' 
 #' @keywords internal
 #'
-#' @param Fmat A matrix representing the fluorescence excitation spectra
+#' @param Fmat A matrix of contribution values for each pigment and taxa pair
 #' @param place Indices of elements to be modified
-#' @param S Target spectral matrix
-#' @param cm Concentration matrix
-#' @param c_num Factor reduction ratio number (1, 2, or 3)
+#' @param S Matrix of pigment sample measurements 
+#' @param cm Vector of weights for each column
+#' @param c_num A numeric value (1, 2, or 3) to select which scaler values to use
 #' @return A list containing three elements:
 #'   \item{[[1]]}{The modified F matrix}
 #'   \item{[[2]]}{Number of iterations or modifications made}
 #'   \item{[[3]]}{The original F matrix before modifications}
 #' @examples
 #' # Create sample matrices
-#' Fmat <- matrix(runif(20), nrow=4)
-#' S <- matrix(runif(12), nrow=4)
-#' cm <- matrix(runif(6), nrow=2)
-#' place <- c(1,2)
+#' Fmat <- phytoclass::Fm
+#' S <- as.matrix(phytoclass::Sm)
+#' cm <- as.numeric(phytoclass:::Bounded_weights(S))
+#' place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0) # non-zero, non-chla pigments
 #' result <- Conduit(Fmat, place, S, cm)
 Conduit <- function(Fmat, place, S, cm, c_num = c(1, 2, 3)) {
   # run NNLS to get previous RMSE
