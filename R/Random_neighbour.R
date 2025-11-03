@@ -19,21 +19,19 @@
 #'   \item{C matrix}{The concentration matrix from NNLS}
 #'
 #' @examples
-#' # Create sample data
-#' f_new <- matrix(c(0.5, 0, 0.3, 1,
-#'                   0, 0.4, 0.2, 1), 
-#'                 nrow=2, byrow=TRUE)
-#' Temp <- 0.5
-#' chlv <- c(1, 1)
-#' N <- c(1, 3)  # indices to modify
-#' place <- c(1, 3, 4, 6, 7, 8)  # non-zero indices
-#' S <- matrix(runif(12), nrow=4)
-#' S_weights <- rep(1, 3)
-#' minF <- c(0.3, 0.1)  # for positions in N
-#' maxF <- c(0.7, 0.5)  # for positions in N
-#' 
-#' result <- Random_neighbour(f_new, Temp, chlv, N, place, 
-#'                           S, S_weights, minF, maxF)
+#'  # Setup based on simulated_annealing usage
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'  min_max <- phytoclass::min_max
+#'  minF <- min_max[[3]][seq_along(place)]
+#'  maxF <- min_max[[4]][seq_along(place)]
+#'  chlv <- rep(1, nrow(Fmat)) # typical usage in simulated_annealing
+#'  Temp <- 0.5
+#'  N <- place
+#'  # Run Random_neighbour
+#'  result <- phytoclass:::Random_neighbour(Fmat, Temp, chlv, N, place, S, S_weights, minF, maxF)
 Random_neighbour <- function(f_new, Temp, chlv, N, place, S, S_weights, minF, maxF) {
   
   # extract ratios to be changed
