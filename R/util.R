@@ -7,8 +7,6 @@
 #' @param Fmat  A matrix to vectorise
 #'
 #' @return A vector of non-zero pigment elements
-#'
-#' @examples
 vectorise <- function(Fmat) {
   return(Fmat[Fmat > 0])
 }
@@ -22,8 +20,6 @@ vectorise <- function(Fmat) {
 #' @return A list consisting of two components:
 #'     - a matrix of pigment ratios normalized to row sums
 #'     - a vector of row sums
-#'
-#' @examples
 Normalise_F <- function(Fmat) {
   Fmat  <- as.matrix(Fmat)           # convert to matrix
   F_1   <- Fmat / Fmat[, ncol(Fmat)] # divide Fmat by last column
@@ -146,7 +142,6 @@ Bounded_weights <- function(S, weight.upper.bound = 30) {
 #'     - A vector Fmax with the maximum pigment ratio values
 #'     - A vector SE with the current pigment ratio values
 #'     - A vector chlv with the pigment ratio values for the last column in Fl
-#' @examples
 Wrangling <- function(Fl, min.val, max.val) {
   
   # set up initial F, Fmin, Fmax, matrix by removing Tchla column
@@ -176,13 +171,11 @@ Wrangling <- function(Fl, min.val, max.val) {
 #' 
 #' @keywords internal
 #'
-#' @param Fl 
-#' @param min.val 
-#' @param max.val 
+#' @param Fl Initial F matrix (i.e. pigment ratio matrix)
+#' @param min.val A vector of minimum values for each non-zero pigment ratio
+#' @param max.val A vector of maximum values for each non-zero pigment ratio
 #'
-#' @return
-#'
-#' @examples
+#' @return A list containing vectorized min/max bounds and current values for Prochlorococcus-aware normalization
 Prochloro_Wrangling <- function(Fl, min.val, max.val) {
   
   # set up initial F, Fmin, Fmax, matrix by removing Tchla column
