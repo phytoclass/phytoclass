@@ -13,12 +13,15 @@
 #'   \item{[[2]]}{Number of iterations or modifications made}
 #'   \item{[[3]]}{The original F matrix before modifications}
 #' @examples
-#' # Create sample matrices
-#' Fmat <- phytoclass::Fm
+#' Fmat <- as.matrix(phytoclass::Fm)
 #' S <- as.matrix(phytoclass::Sm)
-#' cm <- as.numeric(phytoclass:::Bounded_weights(S))
-#' place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0) # non-zero, non-chla pigments
-#' result <- Conduit(Fmat, place, S, cm)
+#' S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#' place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'
+#' # Get F_initial from NNLS_MF as done in Steepest_Descent
+#' F_initial <- phytoclass::NNLS_MF(Fmat, S, S_weights)
+#'
+#' result <- phytoclass:::Conduit(F_initial[[1]], place, S, S_weights, c1_num = 3) 
 Conduit <- function(Fmat, place, S, cm, c_num = c(1, 2, 3)) {
   # run NNLS to get previous RMSE
   F.old <- NNLS_MF(Fmat, S, cm)
