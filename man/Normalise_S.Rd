@@ -18,7 +18,7 @@ This function normalises each column in S to row sum
 \examples{
 # Create a sample matrix
 S <- as.matrix(phytoclass::Sm)
-normalized <- Normalise_S(S)
+normalized <- phytoclass:::Normalise_S(S)
 
 }
 \keyword{internal}

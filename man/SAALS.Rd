@@ -24,8 +24,8 @@ SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 }
 \value{
 A list containing:
-\item{[\link{1}]}{The optimized F matrix}
-\item{[\link{2}]}{Final RMSE value}
+\code{1}: The optimized F matrix
+\code{2}: Final RMSE value
 }
 \description{
 Apply the steepest descent algorithm to optimize pigment ratios

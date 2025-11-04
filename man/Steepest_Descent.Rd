@@ -20,9 +20,9 @@ Steepest_Descent(Fmat, place, S, S_weights, num.loops)
 }
 \value{
 A list containing:
-\item{[\link{1}]}{The optimized F matrix}
-\item{[\link{2}]}{Final RMSE value}
-\item{[\link{3}]}{The C matrix (class abundances for each group)}
+\code{1}: The optimized F matrix
+\code{2}: Final RMSE value
+\code{3}: The C matrix (class abundances for each group)
 }
 \description{
 Performs the steepest descent algorithm for a set number of iterations to

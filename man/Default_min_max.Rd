@@ -15,8 +15,8 @@ Default_min_max(min_max, Fmat)
 }
 \value{
 A list containing two elements:
-\item{[\link{1}]}{Vector of minimum values for each non-zero pigment ratio}
-\item{[\link{2}]}{Vector of maximum values for each non-zero pigment ratio}
+\code{1}: Vector of minimum values for each non-zero pigment ratio
+\code{2}: Vector of maximum values for each non-zero pigment ratio
 }
 \description{
 Sets the default minimum and maximum values for phytoplankton groups

@@ -97,7 +97,7 @@ Prochloro_Normalise_F <- function(Fmat) {
 #' @examples
 #' # Create a sample matrix
 #' S <- as.matrix(phytoclass::Sm)
-#' normalized <- Normalise_S(S)
+#' normalized <- phytoclass:::Normalise_S(S)
 #' 
 Normalise_S <- function(S){
   # Normalise to unit row sum

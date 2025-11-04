@@ -23,8 +23,8 @@ Fac_F_RR(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL)
 }
 \value{
 A list containing two elements:
-\item{[\link{1}]}{Updated F matrix after optimization}
-\item{[\link{2}]}{Vector of indices}
+\code{1}: Updated F matrix after optimization
+\code{2}: Vector of indices
 }
 \description{
 Part of the steepest descent algorithm that works to reduce error given
