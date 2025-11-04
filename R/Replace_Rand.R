@@ -64,11 +64,11 @@ Replace_Rand <- function(Fmat, i, S, cm, min.scaler, max.scaler) {
 #' @examples
 #' # Randomize a single value
 #' x <- 0.5
-#' new_value <- Randomise_elements(x, 0.99, 1.01)  # +/- 1% change
+#' new_value <- phytoclass:::Randomise_elements(x, 0.99, 1.01)  # +/- 1% change
 #' 
 #' # Handle small values
 #' small_x <- 0.0005
-#' new_small <- Randomise_elements(small_x, 0.99, 1.01)  # will use 0.001
+#' new_small <- phytoclass:::Randomise_elements(small_x, 0.99, 1.01)  # will use 0.001
 Randomise_elements <- function(x, min.scaler, max.scaler) {
   x[x < 0.001] <- 0.001
   round(runif(n = 1, min = x * min.scaler, max = x * max.scaler), digits = 4)

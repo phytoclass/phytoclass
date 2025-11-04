@@ -19,8 +19,9 @@ Apply weights to F/S matrices by diagonal multiplication
 }
 \examples{
 # Create sample matrix and weights
- Fmat <- as.matrix(phytoclass::Fm)
- S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
-weighted <- Weight_error(Fmat, S_weights)
+S <- as.matrix(phytoclass::Sm)
+Fmat <- as.matrix(phytoclass::Fm)
+S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+weighted <- phytoclass:::Weight_error(Fmat, S_weights)
 }
 \keyword{internal}

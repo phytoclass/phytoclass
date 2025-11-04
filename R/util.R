@@ -39,13 +39,13 @@ Normalise_F <- function(Fmat) {
 #'             and second-to-last column is divinyl chlorophyll a
 #'
 #' @return A list containing:
-#'   \item{[[1]]}{Normalized matrix where each row is scaled by its biomass marker}
-#'   \item{[[2]]}{Vector of row sums from the scaled matrix}
+#'   \code{1}: Normalized matrix where each row is scaled by its biomass marker
+#'   \code{2}: Vector of row sums from the scaled matrix
 #'
 #' @examples
 #' # Create sample F matrix with Prochlorococcus
 #' Fmat <- as.matrix(phytoclass::Fp)
-#' result <- Prochloro_Normalise_F(Fmat)
+#' result <- phytoclass:::Prochloro_Normalise_F(Fmat)
 Prochloro_Normalise_F <- function(Fmat) {
   f_new <- as.matrix(Fmat)
   n <- nrow(f_new)
@@ -218,9 +218,10 @@ Prochloro_Wrangling <- function(Fl, min.val, max.val) {
 #'
 #' @examples
 #' # Create sample matrix and weights
-#'  Fmat <- as.matrix(phytoclass::Fm)
-#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
-#' weighted <- Weight_error(Fmat, S_weights)
+#' S <- as.matrix(phytoclass::Sm)
+#' Fmat <- as.matrix(phytoclass::Fm)
+#' S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#' weighted <- phytoclass:::Weight_error(Fmat, S_weights)
 Weight_error <- function(S, cm){
   S <- S %*% diag(cm)
   return(S)

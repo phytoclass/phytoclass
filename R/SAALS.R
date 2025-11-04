@@ -22,7 +22,7 @@
 #'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
 #'  num.loops <- 2
 #'  # Run SAALS
-#'  result <- phytoclass:::SAALS(Fmat, place, S, S_weights, num.loops)
+#'  result <- phytoclass:::SAALS(Fmat, NULL, NULL, place, S, S_weights, num.loops)
 
 SAALS <- function(Ft, min.value, max.value, place, S, cm, num.loops){
   g <- Steepest_Descent(Ft, place, S, cm, num.loops)

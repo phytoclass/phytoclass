@@ -38,6 +38,6 @@ in phytoplankton classification. Loosely wraps Seepest_Descent function.
  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
  num.loops <- 2
  # Run SAALS
- result <- phytoclass:::SAALS(Fmat, place, S, S_weights, num.loops)
+ result <- phytoclass:::SAALS(Fmat, NULL, NULL, place, S, S_weights, num.loops)
 }
 \keyword{internal}

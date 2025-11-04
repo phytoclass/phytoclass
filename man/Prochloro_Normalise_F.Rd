@@ -12,8 +12,8 @@ and second-to-last column is divinyl chlorophyll a}
 }
 \value{
 A list containing:
-\item{[\link{1}]}{Normalized matrix where each row is scaled by its biomass marker}
-\item{[\link{2}]}{Vector of row sums from the scaled matrix}
+\code{1}: Normalized matrix where each row is scaled by its biomass marker
+\code{2}: Vector of row sums from the scaled matrix
 }
 \description{
 Normalizes pigment ratios differently for Prochlorococcus vs other groups,
@@ -22,6 +22,6 @@ using divinyl chlorophyll a for Prochlorococcus and chlorophyll a for others.
 \examples{
 # Create sample F matrix with Prochlorococcus
 Fmat <- as.matrix(phytoclass::Fp)
-result <- Prochloro_Normalise_F(Fmat)
+result <- phytoclass:::Prochloro_Normalise_F(Fmat)
 }
 \keyword{internal}
