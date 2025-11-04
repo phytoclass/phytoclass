@@ -9,9 +9,9 @@
 #' @param cm Vector of weights for each column
 #' @param c_num A numeric value (1, 2, or 3) to select which scaler values to use
 #' @return A list containing three elements:
-#'   \item{[[1]]}{The modified F matrix}
-#'   \item{[[2]]}{Number of iterations or modifications made}
-#'   \item{[[3]]}{The original F matrix before modifications}
+#'   \code{1}: The modified F matrix
+#'   \code{2}: Number of iterations or modifications made
+#'   \code{3}: The original F matrix before modifications
 #' @examples
 #' Fmat <- as.matrix(phytoclass::Fm)
 #' S <- as.matrix(phytoclass::Sm)
@@ -21,7 +21,7 @@
 #' # Get F_initial from NNLS_MF as done in Steepest_Descent
 #' F_initial <- phytoclass::NNLS_MF(Fmat, S, S_weights)
 #'
-#' result <- phytoclass:::Conduit(F_initial[[1]], place, S, S_weights, c1_num = 3) 
+#' result <- phytoclass:::Conduit(F_initial[[1]], place, S, S_weights, c_num = 3)
 Conduit <- function(Fmat, place, S, cm, c_num = c(1, 2, 3)) {
   # run NNLS to get previous RMSE
   F.old <- NNLS_MF(Fmat, S, cm)

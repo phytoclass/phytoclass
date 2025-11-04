@@ -8,8 +8,8 @@
 #' @param Fmat F matrix with phytoplankton groups as rows and pigments as columns
 #'
 #' @return A list containing two elements:
-#'   \item{[[1]]}{Vector of minimum values for each non-zero pigment ratio}
-#'   \item{[[2]]}{Vector of maximum values for each non-zero pigment ratio}
+#'   \code{1}: Vector of minimum values for each non-zero pigment ratio
+#'   \code{2}: Vector of maximum values for each non-zero pigment ratio
 #'
 #' @examples
 #' # Create a sample F matrix

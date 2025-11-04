@@ -20,9 +20,9 @@ Conduit(Fmat, place, S, cm, c_num = c(1, 2, 3))
 }
 \value{
 A list containing three elements:
-\item{[\link{1}]}{The modified F matrix}
-\item{[\link{2}]}{Number of iterations or modifications made}
-\item{[\link{3}]}{The original F matrix before modifications}
+\code{1}: The modified F matrix
+\code{2}: Number of iterations or modifications made
+\code{3}: The original F matrix before modifications
 }
 \description{
 Conduit between minimise_elements function and Fac_F_R
@@ -37,6 +37,6 @@ place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
 # Get F_initial from NNLS_MF as done in Steepest_Descent
 F_initial <- phytoclass::NNLS_MF(Fmat, S, S_weights)
 
-result <- phytoclass:::Conduit(F_initial[[1]], place, S, S_weights, c1_num = 3) 
+result <- phytoclass:::Conduit(F_initial[[1]], place, S, S_weights, c_num = 3)
 }
 \keyword{internal}

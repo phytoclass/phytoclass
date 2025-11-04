@@ -10,9 +10,9 @@
 #' @param num.loops Maximum number of iterations to perform optimization
 #'
 #' @return A list containing:
-#'   \item{[[1]]}{The optimized F matrix}
-#'   \item{[[2]]}{Final RMSE value}
-#'   \item{[[3]]}{The C matrix (class abundances for each group)}
+#'   \code{1}: The optimized F matrix
+#'   \code{2}: Final RMSE value
+#'   \code{3}: The C matrix (class abundances for each group)
 #'
 #' @examples
 #'  Fmat <- as.matrix(phytoclass::Fm)

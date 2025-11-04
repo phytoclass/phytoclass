@@ -12,8 +12,8 @@
 #' @param num.loops Maximum number of iterations for the steepest descent
 #'
 #' @return A list containing:
-#'   \item{[[1]]}{The optimized F matrix}
-#'   \item{[[2]]}{Final RMSE value}
+#'   \code{1}: The optimized F matrix
+#'   \code{2}: Final RMSE value
 #'
 #' @examples
 #'  Fmat <- as.matrix(phytoclass::Fm)

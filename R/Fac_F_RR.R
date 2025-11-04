@@ -12,8 +12,8 @@
 #' @param place A vector of all the indices of non-zero pigment ratios
 #'
 #' @return A list containing two elements:
-#'   \item{[[1]]}{Updated F matrix after optimization}
-#'   \item{[[2]]}{Vector of indices}
+#'   \code{1}: Updated F matrix after optimization
+#'   \code{2}: Vector of indices
 #'
 #' @examples
 #'  # Setup based on Minimise_elements_comb usage
