@@ -129,8 +129,8 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL) {
     PCn.s2  <- rowSums(PC_new2)
     PCn2    <- PC_new2 / PCn.s2
     PCn2    <- PCn2 * S_dvChl
-    
-    Cn2[, ncol(Cn2)] <- PCn2
+
+    Cn2[, ncol(Cn2)] <- as.vector(PCn2)
   }
   
   # ---- calculate error terms ---- #
