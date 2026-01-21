@@ -8,8 +8,8 @@
 #' @param cm A vector of bounded weights for each pigment
 #' @param c1_num A numeric vector (1, 2, or 3) indicating which scaler values to use
 #'
-#' @return A list containing the optimized F matrix with reduced error and
-#'   vector of indices where improvements were found
+#' @return A list containing the F matrix with updated ratios, the RMSE of new estimates,
+#'   and an updated C matrix of estimated group contribution.
 #'
 #' @examples
 #'  Fmat <- as.matrix(phytoclass::Fm)
