@@ -61,14 +61,30 @@ names will need to fit the naming criteria of phytoclass.</p>
 
 
 <dl><dt id="arg-min-max">min_max<a class="anchor" aria-label="anchor" href="#arg-min-max"></a></dt>
-<dd><p>A data.frame with 3 4 columns for class, pigment, min and max.</p></dd>
+<dd><p>A data.frame with 4 columns for class, pigment, min and max values</p></dd>
 
 
 <dt id="arg-fmat">Fmat<a class="anchor" aria-label="anchor" href="#arg-fmat"></a></dt>
-<dd><p>F matrix</p></dd>
+<dd><p>F matrix with phytoplankton groups as rows and pigments as columns</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A list containing two elements:
+<code>1</code>: Vector of minimum values for each non-zero pigment ratio
+<code>2</code>: Vector of maximum values for each non-zero pigment ratio</p>
+    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create a sample F matrix</span></span></span>
+<span class="r-in"><span><span class="va">Fmat</span> <span class="op">&lt;-</span> <span class="fu">phytoclass</span><span class="fu">::</span><span class="va"><a href="Fm.html">Fm</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create min_max data frame</span></span></span>
+<span class="r-in"><span><span class="va">min_max</span> <span class="op">&lt;-</span> <span class="fu">phytoclass</span><span class="fu">::</span><span class="va"><a href="min_max.html">min_max</a></span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">phytoclass</span><span class="fu">:::</span><span class="fu">Default_min_max</span><span class="op">(</span><span class="va">min_max</span>, <span class="va">Fmat</span><span class="op">)</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -78,7 +94,7 @@ names will need to fit the naming criteria of phytoclass.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

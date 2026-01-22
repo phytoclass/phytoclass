@@ -61,23 +61,48 @@ class abundances.</p>
 
 
 <dl><dt id="arg-fn">Fn<a class="anchor" aria-label="anchor" href="#arg-fn"></a></dt>
-<dd><p>xx</p></dd>
+<dd><p>F matrix with pigment ratios for each phytoplankton class</p></dd>
 
 
 <dt id="arg-s">S<a class="anchor" aria-label="anchor" href="#arg-s"></a></dt>
-<dd><p>xx</p></dd>
+<dd><p>Sample data matrix of pigment measurements</p></dd>
 
 
 <dt id="arg-s-chl">S_Chl<a class="anchor" aria-label="anchor" href="#arg-s-chl"></a></dt>
-<dd><p>xx</p></dd>
+<dd><p>Vector of chlorophyll a concentrations for each sample</p></dd>
 
 
 <dt id="arg-s-weights">S_weights<a class="anchor" aria-label="anchor" href="#arg-s-weights"></a></dt>
-<dd><p>xx</p></dd>
+<dd><p>Vector of weights for each pigment</p></dd>
 
 
 <dt id="arg-s-dvchl">S_dvChl<a class="anchor" aria-label="anchor" href="#arg-s-dvchl"></a></dt>
-<dd><p>xx</p></dd>
+<dd><p>Optional vector of divinyl chlorophyll concentrations for Prochlorococcus</p></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A list containing the following elements:</p>
+<dl><dt>F matrix</dt>
+<dd><p>The normalized F matrix of pigment ratios</p></dd>
+
+<dt>RMSE</dt>
+<dd><p>Root mean square error of the fit</p></dd>
+
+<dt>condition number</dt>
+<dd><p>Condition number of Fn %*% t(S)</p></dd>
+
+<dt>Class abundances</dt>
+<dd><p>Data frame of phytoplankton class abundances</p></dd>
+
+<dt>Figure</dt>
+<dd><p>Plot of the results</p></dd>
+
+<dt>MAE</dt>
+<dd><p>Mean absolute error for each pigment</p></dd>
+
+<dt>Error</dt>
+<dd><p>Residual error matrix</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -87,6 +112,16 @@ also multiplies relative abundances by chlorophyll values to determine
 the biomass of phytoplankton groups.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="va">Fmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">phytoclass</span><span class="fu">::</span><span class="va"><a href="Fm.html">Fm</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">phytoclass</span><span class="fu">::</span><span class="va"><a href="Sm.html">Sm</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">S_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu">phytoclass</span><span class="fu">:::</span><span class="fu"><a href="Bounded_weights.html">Bounded_weights</a></span><span class="op">(</span><span class="va">S</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">S_Chl</span> <span class="op">&lt;-</span> <span class="va">S</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">S</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span> <span class="co"># Run NNLS_MF_Final</span></span></span>
+<span class="r-in"><span> <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">phytoclass</span><span class="fu">:::</span><span class="fu">NNLS_MF_Final</span><span class="op">(</span><span class="va">Fmat</span>, <span class="va">S</span>, <span class="va">S_Chl</span>, <span class="va">S_weights</span><span class="op">)</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -96,7 +131,7 @@ the biomass of phytoplankton groups.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

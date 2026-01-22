@@ -81,87 +81,13 @@ class abundances.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">MC</span> <span class="op">&lt;-</span> <span class="fu"><a href="Matrix_checks.html">Matrix_checks</a></span><span class="op">(</span><span class="va">Sm</span>,<span class="va">Fm</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">Snew</span> <span class="op">&lt;-</span> <span class="va">MC</span><span class="op">$</span><span class="va">Snew</span></span></span>
-<span class="r-in"><span><span class="va">Fnew</span> <span class="op">&lt;-</span> <span class="va">MC</span><span class="op">$</span><span class="va">Fnew</span></span></span>
-<span class="r-in"><span><span class="va">S_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="Bounded_weights.html">Bounded_weights</a></span><span class="op">(</span><span class="va">Snew</span>, weight.upper.bound <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">NNLS_MF</span><span class="op">(</span><span class="va">Fnew</span>, <span class="va">Snew</span>, <span class="va">S_weights</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`F matrix `</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   Per X19but Fuco Neox Pra Viol X19hex Allo Zea Chl_b Tchla</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Prasinophytes       0      0    0    1   1    1      0    0   1     1     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chlorophytes        0      0    0    1   0    1      0    0   1     1     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cryptophytes        0      0    0    0   0    0      0    1   0     0     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Diatoms-2           0      0    1    0   0    0      0    0   0     0     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dinoflagellates-1   1      0    0    0   0    0      0    0   0     0     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Haptophytes         0      1    1    0   0    0      1    0   0     0     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pelagophytes        0      1    1    0   0    0      0    0   0     0     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Syn                 0      0    0    0   0    0      0    0   1     0     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $RMSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1127568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C matrix`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Prasinophytes Chlorophytes Cryptophytes Diatoms-2 Dinoflagellates-1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   0.088117948   0.00000000 0.0217204089 0.4901801      0.0037567947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]   0.055584649   0.00000000 0.0373938768 0.6222451      0.0027804911</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]   0.023402989   0.00000000 0.0237891848 0.8898721      0.0015045577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]   0.025080760   0.00000000 0.0208394859 0.8879702      0.0013748370</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]   0.027278768   0.00000000 0.0050338409 0.8891283      0.0007088272</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]   0.024427004   0.00000000 0.0006420380 0.8482800      0.0403115206</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]   0.029818901   0.00000000 0.0056863026 0.8501687      0.0004333909</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]   0.006998486   0.00000000 0.0097623255 0.8482667      0.0004993785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]   0.007273723   0.00000000 0.0834778062 0.8126633      0.0005630781</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]   0.041423150   0.00000000 0.0248502005 0.7213906      0.0007292296</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]   0.033785036   0.00000000 0.0480895900 0.7854960      0.0007137484</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]   0.047211598   0.00000000 0.0005753971 0.8297532      0.0005753971</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]   0.065913285   0.00000000 0.0008208615 0.7888618      0.0008208615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]   0.088836617   0.00000000 0.0299819886 0.8287089      0.0006540520</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]   0.058417376   0.00000000 0.0440282484 0.8389594      0.0009788646</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]   0.125844391   0.00000000 0.0258929304 0.7449531      0.0010843156</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]   0.085675844   0.00000000 0.0205483370 0.7943691      0.0012253888</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]   0.080155362   0.00000000 0.0327531006 0.6997688      0.0009135323</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]   0.077226096   0.00000000 0.0355593296 0.7586179      0.0010293554</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]   0.065007214   0.00000000 0.0509516342 0.7059805      0.0011235075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21,]   0.078274256   0.00000000 0.0339483113 0.7547636      0.0009751164</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22,]   0.031530158   0.00000000 0.0263143309 0.8543388      0.0008336558</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [23,]   0.037075351   0.00000000 0.0290232371 0.8314658      0.0009196788</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [24,]   0.062767108   0.00151289 0.0562106906 0.6948740      0.0008153781</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25,]   0.058367609   0.00000000 0.0575224093 0.7466852      0.0009684633</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [26,]   0.069420509   0.00000000 0.0401302883 0.8048198      0.0007330733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [27,]   0.060138593   0.00000000 0.0395615803 0.7292408      0.0006281012</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28,]   0.075116512   0.00000000 0.0391858968 0.7480381      0.0007317574</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [29,]   0.109413008   0.00000000 0.0750124557 0.5374235      0.0015472772</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Haptophytes Pelagophytes          Syn</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  0.39622477   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  0.28199589   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]  0.06143118   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  0.06473471   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  0.06518414   0.01266611 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]  0.07389414   0.01244533 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]  0.11389271   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  0.13447311   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]  0.09602212   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  0.21160678   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]  0.10185148   0.00000000 0.0300641351</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]  0.07127730   0.00000000 0.0506071021</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]  0.11859426   0.00000000 0.0249889572</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]  0.05181846   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]  0.05761614   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]  0.10222524   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]  0.09818131   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]  0.18640925   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]  0.12756732   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]  0.17693716   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21,]  0.13203875   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22,]  0.08698308   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [23,]  0.10151595   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [24,]  0.18371728   0.00000000 0.0001026917</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25,]  0.13645632   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [26,]  0.08489631   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [27,]  0.14672943   0.01494256 0.0087589477</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28,]  0.13363978   0.00000000 0.0032879586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [29,]  0.27660378   0.00000000 0.0000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="va">Fmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">phytoclass</span><span class="fu">::</span><span class="va"><a href="Fm.html">Fm</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">phytoclass</span><span class="fu">::</span><span class="va"><a href="Sm.html">Sm</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">S_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu">phytoclass</span><span class="fu">:::</span><span class="fu"><a href="Bounded_weights.html">Bounded_weights</a></span><span class="op">(</span><span class="va">S</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">place</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">Fmat</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">Fmat</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">num.loops</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span> <span class="co"># Run Steepest_Descent</span></span></span>
+<span class="r-in"><span> <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">phytoclass</span><span class="fu">:::</span><span class="fu"><a href="Steepest_Descent.html">Steepest_Descent</a></span><span class="op">(</span><span class="va">Fmat</span>, <span class="va">place</span>, <span class="va">S</span>, <span class="va">S_weights</span>, <span class="va">num.loops</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -174,7 +100,7 @@ class abundances.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
