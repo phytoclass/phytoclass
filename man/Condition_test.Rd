@@ -2,20 +2,37 @@
 % Please edit documentation in R/util.R
 \name{Condition_test}
 \alias{Condition_test}
-\title{Calculate the condition number ...}
+\title{Calculate the mean condition number for randomized F matrices}
 \usage{
 Condition_test(S, Fn, min.val = NULL, max.val = NULL)
 }
 \arguments{
-\item{S}{XX}
+\item{S}{Sample matrix of pigment measurements}
 
-\item{Fn}{XX}
+\item{Fn}{Initial F matrix of pigment ratios}
 
-\item{min.val}{XX}
+\item{min.val}{Optional vector of minimum values for each non-zero pigment ratio}
 
-\item{max.val}{XX}
+\item{max.val}{Optional vector of maximum values for each non-zero pigment ratio}
+}
+\value{
+Numeric value representing the mean condition number from 1000 simulations
 }
 \description{
-Calculate the condition number ...
+Performs multiple simulations with randomized F matrices within given bounds
+to assess the numerical stability of the system.
+}
+\examples{
+# Create sample matrices
+Fmat <- as.matrix(phytoclass::Fm)
+S <- as.matrix(phytoclass::Sm)
+min_max <- phytoclass::min_max
+min.val <- min_max[[3]]
+max.val <- min_max[[4]]
+# Use only non-chla columns for Fmat and S, as in simulated_annealing
+Fmat_sub <- Fmat[, -ncol(Fmat)]
+S_sub <- S[, -ncol(S)]
+# Calculate mean condition number
+cond <- phytoclass:::Condition_test(S_sub, Fmat_sub, min.val, max.val)
 }
 \keyword{internal}

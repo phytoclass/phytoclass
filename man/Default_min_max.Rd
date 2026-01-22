@@ -9,13 +9,26 @@ names will need to fit the naming criteria of phytoclass.}
 Default_min_max(min_max, Fmat)
 }
 \arguments{
-\item{min_max}{A data.frame with 3 4 columns for class, pigment, min and max.}
+\item{min_max}{A data.frame with 4 columns for class, pigment, min and max values}
 
-\item{Fmat}{F matrix}
+\item{Fmat}{F matrix with phytoplankton groups as rows and pigments as columns}
+}
+\value{
+A list containing two elements:
+\code{1}: Vector of minimum values for each non-zero pigment ratio
+\code{2}: Vector of maximum values for each non-zero pigment ratio
 }
 \description{
 Sets the default minimum and maximum values for phytoplankton groups
 pigment ratios. To use this function, pigment and phytoplankton group
 names will need to fit the naming criteria of phytoclass.
+}
+\examples{
+# Create a sample F matrix
+Fmat <- phytoclass::Fm
+
+# Create min_max data frame
+min_max <- phytoclass::min_max
+result <- phytoclass:::Default_min_max(min_max, Fmat)
 }
 \keyword{internal}

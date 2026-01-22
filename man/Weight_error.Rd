@@ -2,19 +2,26 @@
 % Please edit documentation in R/util.R
 \name{Weight_error}
 \alias{Weight_error}
-\title{Apply weights to F/S matrices}
+\title{Apply weights to F/S matrices by diagonal multiplication}
 \usage{
 Weight_error(S, cm)
 }
 \arguments{
-\item{S}{xx}
+\item{S}{Matrix to be weighted}
 
-\item{cm}{xx}
+\item{cm}{Vector of weights to be applied to columns of S}
 }
 \value{
-A matrix
+A matrix with weighted columns (S \%*\% diag(cm))
 }
 \description{
-Apply weights to F/S matrices
+Apply weights to F/S matrices by diagonal multiplication
+}
+\examples{
+# Create sample matrix and weights
+S <- as.matrix(phytoclass::Sm)
+Fmat <- as.matrix(phytoclass::Fm)
+S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+weighted <- phytoclass:::Weight_error(Fmat, S_weights)
 }
 \keyword{internal}

@@ -1,15 +1,20 @@
-#' Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus. 
-#' Chlorophyll must be the final column of both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column. 
+#' Perform simulated annealing algorithm for samples with divinyl
+#' chlorophyll and prochlorococcus. Chlorophyll must be the final column of
+#' both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column.
 #' See how the example Sp and Fp matrices are organised.
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix
 #' @param user_defined_min_max data frame with some format as min_max built-in data
-#' @param do_matrix_checks     This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups
+#' @param do_matrix_checks This should only be set to TRUE when using the
+#'   default values. This will remove pigment columns that have column sums
+#'   of 0. Set to FALSE if using customised names for pigments and
+#'   phytoplankton groups
 #' @param niter Number of iterations (default is 500)
 #' @param step  Step ratio used (default is 0.009)
 #' @param weight.upper.bound Upper limit of the weights applied (default value is 30). 
-#' @param verbose Logical value. Output error and temperature at each iteration. Default value of TRUE
+#' @param verbose Logical value. Output error and temperature at each
+#'   iteration. Default value of TRUE
 #' @param seed Set seed number to reproduce the same results
 #' @param check_converge  TRUE/FALSE/integer; set the number of F matrices to 
 #'                        for convergence checking

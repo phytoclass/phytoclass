@@ -7,11 +7,15 @@
 Prochloro_Wrangling(Fl, min.val, max.val)
 }
 \arguments{
-\item{Fl}{}
+\item{Fl}{Initial F matrix (i.e. pigment ratio matrix)}
 
-\item{min.val}{}
+\item{min.val}{A vector of minimum values for each non-zero pigment ratio}
 
-\item{max.val}{}
+\item{max.val}{A vector of maximum values for each non-zero pigment ratio}
+}
+\value{
+A list containing vectorized min/max bounds and current values for
+Prochlorococcus-aware normalization
 }
 \description{
 Prochloro Wrangling

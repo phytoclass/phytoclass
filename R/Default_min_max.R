@@ -4,13 +4,20 @@
 #'  
 #' @keywords internal
 #' 
-#' @param min_max A data.frame with 3 4 columns for class, pigment, min and max.
-#' @param Fmat    F matrix
+#' @param min_max A data.frame with 4 columns for class, pigment, min and max values
+#' @param Fmat F matrix with phytoplankton groups as rows and pigments as columns
 #'
-#' @return
+#' @return A list containing two elements:
+#'   \code{1}: Vector of minimum values for each non-zero pigment ratio
+#'   \code{2}: Vector of maximum values for each non-zero pigment ratio
 #'
 #' @examples
+#' # Create a sample F matrix
+#' Fmat <- phytoclass::Fm
 #' 
+#' # Create min_max data frame
+#' min_max <- phytoclass::min_max
+#' result <- phytoclass:::Default_min_max(min_max, Fmat)
 Default_min_max <- function(min_max, Fmat) {
   
   # selects all non-zero pigment ratios and indexes the phyto names and pigments

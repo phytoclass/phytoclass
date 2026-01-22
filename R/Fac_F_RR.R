@@ -1,18 +1,36 @@
-#' Part of the steepest descent algorithm and work to reduce error given 
+#' Part of the steepest descent algorithm that works to reduce error given 
 #' the S and F matrices.
 #' 
 #' @keywords internal 
 #'
 #' @param Fmat A list containing `F matrix`, `RMSE` and `C matrix`
-#' @param vary Are the index of the non-zero integers to vary
+#' @param vary Indices of non-zero elements to vary in the optimization
 #' @param S A matrix of samples (rows) and pigments (columns)
 #' @param cm A vector of bounded weights for each pigment
-#' @param fac_rr A numeric to call which scaler values to use
-#' @param place A vector of all the indexs of non-zero pigment ratios
+#' @param fac_rr A numeric value (1, 2, or 3) to select which scaler values to use:
+#'        1: (0.99, 1.01), 2: (0.98, 1.02), 3: (0.97, 1.03)
+#' @param place A vector of all the indices of non-zero pigment ratios
 #'
-#' @return
+#' @return A list containing two elements:
+#'   \code{1}: Updated F matrix after optimization
+#'   \code{2}: Vector of indices
 #'
 #' @examples
+#'  # Setup based on Minimise_elements_comb usage
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  cm <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'
+#'  # Get F.new from Conduit as done in Minimise_elements_comb
+#'  f <- phytoclass:::Conduit(Fmat, place, S, cm, c_num = 3)
+#'  F.new <- f[[1]]
+#'
+#'  # Set place1 as done in Minimise_elements_comb
+#'  place1 <- place # place1 = place when c1_num != 1
+#'
+#'  # Run Fac_F_RR
+#'  result <- phytoclass:::Fac_F_RR(F.new, vary = place, place = place1, S, cm, fac_rr = 3)
 # Inputs are F and which elements to vary, should be all elements
 Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
   
@@ -222,7 +240,9 @@ Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
 #' #' @examples
 #' Fac_F_RR3 <- function(Fmat, vary, place, S, cm){
 #'   F.locs <- vector()
-#'   F.new <- lapply(vary, function(i) {Replace_Rand(Fmat, i, S, cm, min.scaler = 0.97, max.scaler = 1.03)})
+#'   F.new <- lapply(vary, function(i) {
+#'     Replace_Rand(Fmat, i, S, cm, min.scaler = 0.97, max.scaler = 1.03)
+#'   })
 #'   cont <- lapply(1:length(F.new), function(i){ c <- which(length(F.new[[i]]) == 4)})
 #'   conts <- which(cont==1)
 #'   if(!is.null(length(conts))){

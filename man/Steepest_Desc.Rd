@@ -2,7 +2,10 @@
 % Please edit documentation in R/Steepest_Descent.R
 \name{Steepest_Desc}
 \alias{Steepest_Desc}
-\title{Stand-alone version of steepest descent algorithm. This is similar to the CHEMTAX steepest descent algorithm. It is not required to use this function, and as results are not bound by minimum and maximum, results may be unrealistic.}
+\title{Stand-alone version of steepest descent algorithm. This is similar to the
+CHEMTAX steepest descent algorithm. It is not required to use this
+function, and as results are not bound by minimum and maximum, results may
+be unrealistic.}
 \usage{
 Steepest_Desc(Fmat, S, num.loops)
 }
@@ -25,7 +28,10 @@ A list containing
 }
 }
 \description{
-Stand-alone version of steepest descent algorithm. This is similar to the CHEMTAX steepest descent algorithm. It is not required to use this function, and as results are not bound by minimum and maximum, results may be unrealistic.
+Stand-alone version of steepest descent algorithm. This is similar to the
+CHEMTAX steepest descent algorithm. It is not required to use this
+function, and as results are not bound by minimum and maximum, results may
+be unrealistic.
 }
 \examples{
 MC <- Matrix_checks(Sm,Fm)

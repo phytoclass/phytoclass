@@ -2,8 +2,9 @@
 % Please edit documentation in R/simulated_annealing_prochloro.R
 \name{simulated_annealing_Prochloro}
 \alias{simulated_annealing_Prochloro}
-\title{Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus.
-Chlorophyll must be the final column of both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column.
+\title{Perform simulated annealing algorithm for samples with divinyl
+chlorophyll and prochlorococcus. Chlorophyll must be the final column of
+both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column.
 See how the example Sp and Fp matrices are organised.}
 \usage{
 simulated_annealing_Prochloro(
@@ -26,7 +27,10 @@ simulated_annealing_Prochloro(
 
 \item{user_defined_min_max}{data frame with some format as min_max built-in data}
 
-\item{do_matrix_checks}{This should only be set to TRUE when using the default values. This will remove pigment columns that have column sums of 0. Set to FALSE if using customised names for pigments and phytoplankton groups}
+\item{do_matrix_checks}{This should only be set to TRUE when using the
+default values. This will remove pigment columns that have column sums
+of 0. Set to FALSE if using customised names for pigments and
+phytoplankton groups}
 
 \item{niter}{Number of iterations (default is 500)}
 
@@ -34,7 +38,8 @@ simulated_annealing_Prochloro(
 
 \item{weight.upper.bound}{Upper limit of the weights applied (default value is 30).}
 
-\item{verbose}{Logical value. Output error and temperature at each iteration. Default value of TRUE}
+\item{verbose}{Logical value. Output error and temperature at each
+iteration. Default value of TRUE}
 
 \item{seed}{Set seed number to reproduce the same results}
 
@@ -54,8 +59,9 @@ A list containing
 }
 }
 \description{
-Perform simulated annealing algorithm for samples with divinyl chlorophyll and prochlorococcus.
-Chlorophyll must be the final column of both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column.
+Perform simulated annealing algorithm for samples with divinyl
+chlorophyll and prochlorococcus. Chlorophyll must be the final column of
+both S and F matrices, with Divinyl Chlorophyll a the 2nd to last column.
 See how the example Sp and Fp matrices are organised.
 }
 \examples{
