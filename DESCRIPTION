@@ -23,7 +23,6 @@ Description: Determine the chlorophyll a (Chl a) concentrations of different
     ratios for phytoplankton groups.
 Imports:
     bestNormalize,
-    dplyr,
     dynamicTreeCut,
     ggplot2,
     RcppML,

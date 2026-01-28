@@ -2,26 +2,42 @@
 % Please edit documentation in R/SAALS.R
 \name{SAALS}
 \alias{SAALS}
-\title{Apply the steepest descent algorithm}
+\title{Apply the steepest descent algorithm to optimize pigment ratios
+in phytoplankton classification. Loosely wraps Seepest_Descent function.}
 \usage{
 SAALS(Ft, min.value, max.value, place, S, cm, num.loops)
 }
 \arguments{
-\item{Ft}{xx}
+\item{Ft}{Initial F matrix containing pigment ratios}
 
-\item{min.value}{xx}
+\item{min.value}{UNUSED?}
 
-\item{max.value}{xx}
+\item{max.value}{UNUSED?}
 
-\item{place}{xx}
+\item{place}{Vector of indices where F matrix has non-zero values}
 
-\item{S}{xx}
+\item{S}{Matrix of sample measurements}
 
-\item{cm}{xx}
+\item{cm}{Vector of bounded weights for each pigment}
 
-\item{num.loops}{xx}
+\item{num.loops}{Maximum number of iterations for the steepest descent}
+}
+\value{
+A list containing:
+\code{1}: The optimized F matrix
+\code{2}: Final RMSE value
 }
 \description{
-Apply the steepest descent algorithm
+Apply the steepest descent algorithm to optimize pigment ratios
+in phytoplankton classification. Loosely wraps Seepest_Descent function.
+}
+\examples{
+ Fmat <- as.matrix(phytoclass::Fm)
+ S <- as.matrix(phytoclass::Sm)
+ S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+ place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+ num.loops <- 2
+ # Run SAALS
+ result <- phytoclass:::SAALS(Fmat, NULL, NULL, place, S, S_weights, num.loops)
 }
 \keyword{internal}

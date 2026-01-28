@@ -15,11 +15,13 @@
 #' @export
 #'
 #' @examples
-#' MC <- Matrix_checks(Sm,Fm)
-#' Snew <- MC$Snew
-#' Fnew <- MC$Fnew
-#' S_weights <- Bounded_weights(Snew, weight.upper.bound = 30)
-#' NNLS_MF(Fnew, Snew, S_weights)
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'  num.loops <- 2
+#'  # Run Steepest_Descent
+#'  result <- phytoclass:::Steepest_Descent(Fmat, place, S, S_weights, num.loops)
 #'
 NNLS_MF <- function(Fn, S, S_weights = NULL) {
   if (is.null(S_weights)) {
@@ -63,15 +65,28 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
 #' 
 #' @keywords internal
 #'
-#' @param Fn xx
-#' @param S   xx
-#' @param S_Chl   xx
-#' @param S_weights  xx
-#' @param S_dvChl xx
+#' @param Fn F matrix with pigment ratios for each phytoplankton class
+#' @param S Sample data matrix of pigment measurements
+#' @param S_Chl Vector of chlorophyll a concentrations for each sample
+#' @param S_weights Vector of weights for each pigment
+#' @param S_dvChl Optional vector of divinyl chlorophyll concentrations for Prochlorococcus
 #'
-#' @return
+#' @return A list containing the following elements:
+#'   \item{F matrix}{The normalized F matrix of pigment ratios}
+#'   \item{RMSE}{Root mean square error of the fit}
+#'   \item{condition number}{Condition number of Fn %*% t(S)}
+#'   \item{Class abundances}{Data frame of phytoplankton class abundances}
+#'   \item{Figure}{Plot of the results}
+#'   \item{MAE}{Mean absolute error for each pigment}
+#'   \item{Error}{Residual error matrix}
 #'
-#' @examples  
+#' @examples
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  S_Chl <- S[, ncol(S)]
+#'  # Run NNLS_MF_Final
+#'  result <- phytoclass:::NNLS_MF_Final(Fmat, S, S_Chl, S_weights)
 NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL) {
   check_pro <- any(tolower(colnames(Fn)) %in% c("dvchl", "dvchla", "chlvp"))
   

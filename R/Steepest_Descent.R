@@ -1,16 +1,28 @@
-#' Performs the steepest descent algorithm for a set number of iterations
+#' Performs the steepest descent algorithm for a set number of iterations to
+#' optimize the F matrix of pigment ratios.
 #' 
 #' @keywords internal
 #' 
-#' @param Fmat xx
-#' @param place xx
-#' @param S   xx
-#' @param S_weights   xx
-#' @param num.loops   xx
+#' @param Fmat Initial F matrix containing pigment ratios
+#' @param place Vector of indices where F matrix has non-zero values
+#' @param S Matrix of sample measurements (rows) and pigments (columns)
+#' @param S_weights Vector of weights for each pigment in NNLS optimization
+#' @param num.loops Maximum number of iterations to perform optimization
 #'
-#' @return
+#' @return A list containing:
+#'   \code{1}: The optimized F matrix
+#'   \code{2}: Final RMSE value
+#'   \code{3}: The C matrix (class abundances for each group)
 #'
 #' @examples
+#'  Fmat <- as.matrix(phytoclass::Fm)
+#'  S <- as.matrix(phytoclass::Sm)
+#'  S_weights <- as.numeric(phytoclass:::Bounded_weights(S))
+#'  place <- which(Fmat[, seq(ncol(Fmat) - 2)] > 0)
+#'  num.loops <- 2
+#'  # Run Steepest_Descent
+#'  result <- phytoclass:::Steepest_Descent(Fmat, place, S, S_weights, num.loops)
+
 Steepest_Descent <- function(Fmat, place, S, S_weights, num.loops) {
   F_new     <- NNLS_MF(Fmat, S, S_weights)
   F_initial <- F_new
@@ -40,7 +52,10 @@ Steepest_Descent <- function(Fmat, place, S, S_weights, num.loops) {
   return(F_new)
 }
 
-#' Stand-alone version of steepest descent algorithm. This is similar to the CHEMTAX steepest descent algorithm. It is not required to use this function, and as results are not bound by minimum and maximum, results may be unrealistic.
+#' Stand-alone version of steepest descent algorithm. This is similar to the
+#' CHEMTAX steepest descent algorithm. It is not required to use this
+#' function, and as results are not bound by minimum and maximum, results may
+#' be unrealistic.
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
 #' @param Fmat   Pigment to Chl a matrix
