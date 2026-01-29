@@ -1,5 +1,12 @@
 # Changelog
 
+## phytoclass 2.3.1
+
+### Enhancements
+
+- Updated `min_max.rda` using new pigment ratio min/max from Simon
+  Wright
+
 ## phytoclass 2.3.0
 
 This version update removes internal functions that became unused once

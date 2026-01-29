@@ -93,11 +93,11 @@ A list containing
 set.seed(5326)
 sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
 #> 
-#> Condition number = 9290
+#> Condition number = 11601
 #> 
 #> Iterations:         001 of 1 
-#> Current error:      0.0079 
-#> Neighbour's error:  0.0079 
+#> Current error:      0.009 
+#> Neighbour's error:  0.009 
 #> Temperature (%):    99.1 
 #> Using 15 color palette for `convergence plot`.
 sa.example$Figure

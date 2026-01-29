@@ -10,7 +10,7 @@ started.
 - identify integration test, vignette, or testthat test to work from.
 - modify & test until passing
   - edit
-  - `devtools::load_all()`
+  - [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html)
   - run your test\|\|vignette
 - `git commit` changes
 

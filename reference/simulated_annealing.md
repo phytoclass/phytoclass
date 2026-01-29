@@ -104,27 +104,27 @@ A list containing
 set.seed(5326)
 sa.example <- simulated_annealing(Sm, Fm, niter = 5)
 #> 
-#> Condition number = 393
+#> Condition number = 826
 #> 
 #> Iterations:         001 of 5 
-#> Current error:      0.026 
-#> Neighbour's error:  0.026 
+#> Current error:      0.0269 
+#> Neighbour's error:  0.0269 
 #> Temperature (%):    99.1 
 #> Iterations:         002 of 5 
-#> Current error:      0.0236 
-#> Neighbour's error:  0.0236 
+#> Current error:      0.0255 
+#> Neighbour's error:  0.0255 
 #> Temperature (%):    98.21 
 #> Iterations:         003 of 5 
-#> Current error:      0.0236 
-#> Neighbour's error:  0.0263 
+#> Current error:      0.0255 
+#> Neighbour's error:  0.0273 
 #> Temperature (%):    97.32 
 #> Iterations:         004 of 5 
-#> Current error:      0.0236 
-#> Neighbour's error:  0.0243 
+#> Current error:      0.0255 
+#> Neighbour's error:  0.027 
 #> Temperature (%):    96.45 
 #> Iterations:         005 of 5 
-#> Current error:      0.0236 
-#> Neighbour's error:  0.0265 
+#> Current error:      0.0237 
+#> Neighbour's error:  0.0237 
 #> Temperature (%):    95.58 
 sa.example$Figure
 ```
