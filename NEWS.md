@@ -1,6 +1,7 @@
 # phytoclass 2.3.1
 ## Enhancements
-* Updated `min_max.rda` using new pigment ratio min/max from Simon Wright
+* Updated `min_max.rda` using new pigment ratio min/max from Simon Wright.
+* Improve "custom-example" vignette to use southern ocean `min_max`.
 
 # phytoclass 2.3.0
 This version update removes internal functions that became unused once combined
