@@ -62,7 +62,7 @@
 #'
 #'
 #' @format ## `min_max`
-#' A data frame with 76 rows and 4 columns:
+#' A data frame with 51 rows and 4 columns:
 #' \describe{
 #'   \item{class}{XX}
 #'   \item{Pig_Abbrev}{XX}
