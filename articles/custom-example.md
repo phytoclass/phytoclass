@@ -1,4 +1,18 @@
-# Example Usage : custom F & MinMax Matrices
+# Example Usage : Custom F & MinMax Matrices
+
+Phytoclass uses three input matrices:
+
+- `S` : The pigment values from field samples.
+- `F` : Defines which pigments are present in each taxa.
+- `min_max` : Specifies limits of taxa contributions for each pigment.
+
+The `F` and `min_max` matrices built into phytoclass are designed for
+general use. Specifying maxtrices tailored to a specific study region
+can improve accuracy of results.
+
+In this example we provide an `F` and `min_max` matrices which have been
+derived from a standard deviation calculation on pigment-to-chlorophyll
+ratios found in literature about the Southern Ocean.
 
 ``` r
 library(phytoclass)
@@ -35,7 +49,7 @@ if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
     ## [1] "dropping unneeded numeric index"
 
 ``` r
-min_max_matrix <- read.csv(here("vignettes/custom-example-min_max.csv"))
+min_max_matrix <- read.csv(here("vignettes/custom-example-min_max-southern_ocean.csv"))
 ```
 
 ``` r

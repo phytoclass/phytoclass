@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Example Usage : custom F &amp; MinMax Matrices • phytoclass</title>
+<title>Example Usage : Custom F &amp; MinMax Matrices • phytoclass</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Example Usage : custom F &amp; MinMax Matrices">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Example Usage : Custom F &amp; MinMax Matrices">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -34,7 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/common-issues-f-matrix.html">Common Issues : F Matrix</a></li>
-    <li><a class="dropdown-item" href="../articles/custom-example.html">Example Usage : custom F &amp; MinMax Matrices</a></li>
+    <li><a class="dropdown-item" href="../articles/custom-example.html">Example Usage : Custom F &amp; MinMax Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/minimal-example.html">Example : Minimal</a></li>
     <li><a class="dropdown-item" href="../articles/minmax.html">Table of Default F MinMax Values</a></li>
     <li><a class="dropdown-item" href="../articles/phytoclass-vignette.html">The phytoclass package</a></li>
@@ -60,7 +60,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Example Usage : custom F &amp; MinMax Matrices</h1>
+      <h1>Example Usage : Custom F &amp; MinMax Matrices</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/phytoclass/phytoclass/blob/main/vignettes/custom-example.Rmd" class="external-link"><code>vignettes/custom-example.Rmd</code></a></small>
@@ -69,6 +69,24 @@
 
     
     
+<p>Phytoclass uses three input matrices:</p>
+<ul>
+<li>
+<code>S</code> : The pigment values from field samples.</li>
+<li>
+<code>F</code> : Defines which pigments are present in each
+taxa.</li>
+<li>
+<code>min_max</code> : Specifies limits of taxa contributions for
+each pigment.</li>
+</ul>
+<p>The <code>F</code> and <code>min_max</code> matrices built into
+phytoclass are designed for general use. Specifying maxtrices tailored
+to a specific study region can improve accuracy of results.</p>
+<p>In this example we provide an <code>F</code> and <code>min_max</code>
+matrices which have been derived from a standard deviation calculation
+on pigment-to-chlorophyll ratios found in literature about the Southern
+Ocean.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/phytoclass/phytoclass/" class="external-link">phytoclass</a></span><span class="op">)</span></span>
 <span></span>
@@ -94,7 +112,7 @@
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "dropping unneeded numeric index"</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">min_max_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"vignettes/custom-example-min_max.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">min_max_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"vignettes/custom-example-min_max-southern_ocean.csv"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># === remove numeric rownames introduced by read.csv</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^[0-9]+$"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">min_max_matrix</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
