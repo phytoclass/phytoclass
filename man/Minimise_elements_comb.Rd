@@ -18,8 +18,8 @@ Minimise_elements_comb(Fmat, place, S, cm, c1_num = c(1, 2, 3))
 \item{c1_num}{A numeric vector (1, 2, or 3) indicating which scaler values to use}
 }
 \value{
-A list containing the optimized F matrix with reduced error and
-vector of indices where improvements were found
+A list containing the F matrix with updated ratios, the RMSE of new estimates,
+and an updated C matrix of estimated group contribution.
 }
 \description{
 Part of the steepest descent algorithm
