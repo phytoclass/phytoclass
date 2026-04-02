@@ -87,7 +87,7 @@ Matrix_checks <- function(S, Fmat) {
   
   # Remove phytoplankton taxa if it maps to one pigment or less.
   # Chl_a should always be one pigment.
-  f_mat <- f_mat[-which(rowSums(f_mat) <= 1),]
+  f_mat <- f_mat[!rowSums(f_mat) <= 1,]
   
   
   # final check to remove F cols with no pigments
