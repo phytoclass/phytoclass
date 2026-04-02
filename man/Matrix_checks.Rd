@@ -2,24 +2,26 @@
 % Please edit documentation in R/Matrix_checks.R
 \name{Matrix_checks}
 \alias{Matrix_checks}
-\title{Remove any column values that average 0. Further to this, also remove
-phytoplankton groups from the F matrix if their diagnostic pigment
-isn’t present.}
+\title{This function ensures S and F matrices are properly formatted and ordered
+for the simulated annealing function.}
 \usage{
 Matrix_checks(S, Fmat)
 }
 \arguments{
 \item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{Fmat}{Pigment to Chl a matrix}
+\item{Fmat}{Pigment to taxa matrix}
 }
 \value{
 Named list with new S and Fmat matrices
 }
 \description{
-Remove any column values that average 0. Further to this, also remove
-phytoplankton groups from the F matrix if their diagnostic pigment
-isn’t present.
+Some checks applied:
+\itemize{
+\item drops columns with 0 values
+\item drops taxa with missing major pigments, which are indicated with a '2'
+\item drops pigments with < 1\% in samples
+}
 }
 \examples{
 MC <- Matrix_checks(Sm, Fm)  
