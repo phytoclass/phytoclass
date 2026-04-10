@@ -1,9 +1,13 @@
-#' Remove any column values that average 0. Further to this, also remove
-#' phytoplankton groups from the F matrix if their diagnostic pigment
-#' isn’t present. 
+#' This function ensures S and F matrices are properly formatted and ordered
+#' for the simulated annealing function.
+#' 
+#' Some checks applied:
+#'   * drops columns with 0 values 
+#'   * drops taxa with missing major pigments, which are indicated with a '2'
+#'   * drops pigments with < 1% in samples
 #'
 #' @param S   Sample data matrix – a matrix of pigment samples
-#' @param Fmat   Pigment to Chl a matrix
+#' @param Fmat   Pigment to taxa matrix
 #'
 #' @return Named list with new S and Fmat matrices
 #' @export
@@ -47,7 +51,7 @@ Matrix_checks <- function(S, Fmat) {
   f_mat    <- f_mat[,keep_col]
   
   
-  # check S matrix that pigments occur in > 50% of samples and total concentration
+  # Check S matrix that pigments occur in > 50% of samples and total concentration
   # is >= 1% of total pigment pool
   # NOTE: removal of pigments is not implemented
   pig_percent_gt0 <- colSums(s_mat != 0)[-ncol(s_mat)] / s_nrow # pigment amount percent greater than 0 
@@ -56,45 +60,35 @@ Matrix_checks <- function(S, Fmat) {
   # f_mat <- f_mat[, !(pig_percent < 0.01  & pig_percent_gt0 <= 0.5)]
   # s_mat <- s_mat[, !(pig_percent < 0.01  & pig_percent_gt0 <= 0.5)]
   
-  check_mat <-
-    matrix(
-      c(
-        c(
-          "Chlorophytes", "Prasinophytes", "Prasinophytes", "Dinoflagellates-1",
-          "Diatoms-1", "Diatoms-2", "Syn", "Cryptophytes", "Haptophytes-H",
-          "Haptophytes-L", "Diatoms-1", "Pelagophytes", "Prasinophytes"
-        ),
-        c(
-          "Chl_b", "Chl_b", "Pra", "Per", "Chl_c1", "Fuco", "Zea", "Allo",
-          "X19hex", "X19hex", "Fuco", "X19but", "Chl_b"
-        )
-      ),
-      ncol = 2
-    )
   
-  # TODO: test more using F matrix with "2" showing major pigment
-  # f_check_indx <- which(f_mat_og == 2, arr.ind = TRUE)
-  # f_check <- data.frame(
-  #   phtyo = rownames(f_check_indx),
-  #   f_check_indx,
-  #   row.names = NULL
-  #  )
-  # 
-  # check_mat <- cbind(
-  #   f_check,
-  #   pig = colnames(f_mat_og)[f_check_indx[, 2]]
-  #   )[, -c(2:3)]
-  #   
-  # TODO: add warning if no major pigments are found that they should examine
-  # F matrix
+  # Drop when required pigment-taxa pairs (major pigments) are missing.
+  # Required pairs are specified in the F matrix with a "2" to indicate a
+  # major pigment.
+  f_check_indx <- which(f_mat_og == 2, arr.ind = TRUE)
+  f_check <- data.frame(
+    phtyo = rownames(f_check_indx),
+    f_check_indx,
+    row.names = NULL
+  )
 
-  for (i in seq(nrow(check_mat))) {
+  check_mat <- cbind(
+    f_check,
+    pig = colnames(f_mat_og)[f_check_indx[, 2]]
+  )[, -c(2:3)]
+
+  for (i in seq(nrow(check_mat))) {  # skips if no 2s in f_mat_og
     phyto_row <- which(rownames(f_mat) == check_mat[i, 1])
     pig_col   <- which(colnames(s_mat) == check_mat[i, 2])
     if (length(pig_col) == 0 & length(phyto_row) > 0) {
       f_mat <- f_mat[-phyto_row,]
     }
   }
+  
+  
+  # Remove phytoplankton taxa if it maps to one pigment or less.
+  # Chl_a should always be one pigment.
+  f_mat <- f_mat[!rowSums(f_mat) <= 1,]
+  
   
   # final check to remove F cols with no pigments
   kn <- which(colSums(f_mat) == 0)
@@ -103,7 +97,7 @@ Matrix_checks <- function(S, Fmat) {
     s_mat <- s_mat[,-kn]
   }
   
-  return(list(Snew = as.matrix(s_mat), Fnew = as.matrix(f_mat)))
   
+  return(list(Snew = as.matrix(s_mat), Fnew = as.matrix(f_mat)))
 }
 
