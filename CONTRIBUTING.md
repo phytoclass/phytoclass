@@ -10,7 +10,7 @@ started.
 - identify integration test, vignette, or testthat test to work from.
 - modify & test until passing
   - edit
-  - [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html)
+  - `devtools::load_all()`
   - run your test\|\|vignette
 - `git commit` changes
 
@@ -23,6 +23,16 @@ started.
 - `./tests/testthat/` is where unit tests will be placed, but none exist
   yet.
 
+## Updating the default F matrix
+
+After updating the `.csv` in the `data-raw/` directory, run the
+following to update the `.rda` object:
+
+``` r
+Fm <- read.csv("data-raw/Fm.csv", row.names=1)
+save(Fm, file="data/Fm.rda")
+```
+
 ## Pushing a Release
 
     # 1. Open your package project in RStudio (clone from GitHub if needed)
@@ -32,23 +42,17 @@ started.
     # 3. Regenerate documentation
     devtools::document()
 
-    # 4. Run all tests
-    devtools::test()
-
-    # 5. Check package with CRAN-level checks
+    # 4. Check package with CRAN-level checks
     devtools::check()
 
-    # 6. (Optional) Check on remote platforms
+    # 5. (Optional) Check on remote platforms
     devtools::check_rhub()
     devtools::check_win_devel()
 
-    # 7. Bump version if needed
+    # 6. Bump version if needed
     #    Check that NEWS.md and DESCRIPTION file match.
     #    (choose "patch", "minor", or "major")
     usethis::use_version("patch")
 
-    # 8. Build package for CRAN submission
-    devtools::build()
-
-    # 9. Submit to CRAN
+    # 7. Submit to CRAN
     devtools::submit_cran()

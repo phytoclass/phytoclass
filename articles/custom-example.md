@@ -31,7 +31,7 @@ S_matrix <- read.csv(here("vignettes/custom-example-S.csv"), row.names = 1)
 
 ``` r
 # pigment-taxa occurrence matrix (specific to an oceanographic region)
-F_matrix <- read.csv(here("vignettes/custom-example-F.csv"))
+F_matrix <- read.csv(here("vignettes/custom-example-F.csv"), row.names = 1)
 ```
 
 ``` r
@@ -40,31 +40,12 @@ if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
   print("dropping unneeded numeric index")
   # Set the first column as row names
   rownames(F_matrix) <- F_matrix[[1]]
-  
-  # Remove the first column
-  F_matrix <- F_matrix[, -1] 
 }
 ```
-
-    ## [1] "dropping unneeded numeric index"
 
 ``` r
 min_max_matrix <- read.csv(here("vignettes/custom-example-min_max-southern_ocean.csv"))
 ```
-
-``` r
-# === remove numeric rownames introduced by read.csv
-if (all(grepl("^[0-9]+$", rownames(min_max_matrix)))) {
-  print("dropping unneeded numeric index")
-  # Set the first column as row names
-  rownames(min_max_matrix) <- min_max_matrix[[1]]
-  
-  # Remove the first column
-  min_max_matrix <- min_max_matrix[, -1] 
-}
-```
-
-    ## [1] "dropping unneeded numeric index"
 
 ``` r
 phytoclass::simulated_annealing(
@@ -165,7 +146,7 @@ phytoclass::simulated_annealing(
     ## 
     ## $Figure
 
-![](custom-example_files/figure-html/unnamed-chunk-6-1.png)
+![](custom-example_files/figure-html/unnamed-chunk-5-1.png)
 
     ## 
     ## $MAE
@@ -2871,4 +2852,4 @@ phytoclass::simulated_annealing(
     ## 
     ## $converge_plot
 
-![](custom-example_files/figure-html/unnamed-chunk-6-2.png)
+![](custom-example_files/figure-html/unnamed-chunk-5-2.png)

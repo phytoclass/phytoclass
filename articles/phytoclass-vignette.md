@@ -577,7 +577,6 @@ Results$Figure
 
 ``` r
 #Create Fm (F matrix). Alternatively, a .csv file can be uploaded.
-#Create Fm (F matrix). Alternatively, a .csv file can be uploaded.
 Fu <- data.frame(
   Per = c(0, 0, 0, 0, 1, 0, 0, 0),
   X19but = c(0, 0, 0, 0, 0, 1, 1, 0),

@@ -1,6 +1,45 @@
 # Changelog
 
+## phytoclass 3.0.0
+
+### Functionality-breaking change
+
+Previous version performed “major pigment” checks using a set of
+hard-coded taxa-pigment pairs. When a major pigment was not included in
+the sample set, the taxa was dropped.
+
+For phytoclass\>=3.0.0, these major pigments are indicated using ’2’s in
+the F matrix.
+
+The default behavior, specified by the following matrix:
+
+``` r
+check_mat <-
+  matrix(
+    c(
+      c(
+        "Chlorophytes", "Prasinophytes", "Prasinophytes", "Dinoflagellates-1",
+        "Diatoms-1", "Diatoms-2", "Syn", "Cryptophytes", "Haptophytes-H",
+        "Haptophytes-L", "Diatoms-1", "Pelagophytes", "Prasinophytes"
+      ),
+      c(
+        "Chl_b", "Chl_b", "Pra", "Per", "Chl_c1", "Fuco", "Zea", "Allo",
+        "X19hex", "X19hex", "Fuco", "X19but", "Chl_b"
+      )
+    ),
+    ncol = 2
+  )
+```
+
+Is reproduced using an updated default F matrix that includes ’2’s.
+
+Some very rare edge cases will function differently. Older custom F
+matrices using only ’1’s will no longer do the major pigment check for
+the exact string matches above.
+
 ## phytoclass 2.3.1
+
+CRAN release: 2026-01-30
 
 ### Enhancements
 

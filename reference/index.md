@@ -7,9 +7,9 @@
 - [`Cluster()`](Cluster.md) : Cluster things
 - [`Fm`](Fm.md) : Fm data
 - [`Fp`](Fp.md) : Fp data
-- [`Matrix_checks()`](Matrix_checks.md) : Remove any column values that
-  average 0. Further to this, also remove phytoplankton groups from the
-  F matrix if their diagnostic pigment isn’t present.
+- [`Matrix_checks()`](Matrix_checks.md) : This function ensures S and F
+  matrices are properly formatted and ordered for the simulated
+  annealing function.
 - [`NNLS_MF()`](NNLS_MF.md) : Performs the non-negative matrix
   factorisation for given phytoplankton pigments and pigment ratios, to
   attain an estimate of phytoplankton class abundances.

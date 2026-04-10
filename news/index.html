@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">phytoclass</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,34 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.3.1" id="phytoclass-231">phytoclass 2.3.1<a class="anchor" aria-label="anchor" href="#phytoclass-231"></a></h2>
+<h2 class="pkg-version" data-toc-text="3.0.0" id="phytoclass-300">phytoclass 3.0.0<a class="anchor" aria-label="anchor" href="#phytoclass-300"></a></h2>
+<div class="section level3">
+<h3 id="functionality-breaking-change-3-0-0">Functionality-breaking change<a class="anchor" aria-label="anchor" href="#functionality-breaking-change-3-0-0"></a></h3>
+<p>Previous version performed “major pigment” checks using a set of hard-coded taxa-pigment pairs. When a major pigment was not included in the sample set, the taxa was dropped.</p>
+<p>For phytoclass&gt;=3.0.0, these major pigments are indicated using ’2’s in the F matrix.</p>
+<p>The default behavior, specified by the following matrix:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">check_mat</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Chlorophytes"</span>, <span class="st">"Prasinophytes"</span>, <span class="st">"Prasinophytes"</span>, <span class="st">"Dinoflagellates-1"</span>,</span>
+<span>        <span class="st">"Diatoms-1"</span>, <span class="st">"Diatoms-2"</span>, <span class="st">"Syn"</span>, <span class="st">"Cryptophytes"</span>, <span class="st">"Haptophytes-H"</span>,</span>
+<span>        <span class="st">"Haptophytes-L"</span>, <span class="st">"Diatoms-1"</span>, <span class="st">"Pelagophytes"</span>, <span class="st">"Prasinophytes"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Chl_b"</span>, <span class="st">"Chl_b"</span>, <span class="st">"Pra"</span>, <span class="st">"Per"</span>, <span class="st">"Chl_c1"</span>, <span class="st">"Fuco"</span>, <span class="st">"Zea"</span>, <span class="st">"Allo"</span>,</span>
+<span>        <span class="st">"X19hex"</span>, <span class="st">"X19hex"</span>, <span class="st">"Fuco"</span>, <span class="st">"X19but"</span>, <span class="st">"Chl_b"</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    ncol <span class="op">=</span> <span class="fl">2</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p>Is reproduced using an updated default F matrix that includes ’2’s.</p>
+<p>Some very rare edge cases will function differently. Older custom F matrices using only ’1’s will no longer do the major pigment check for the exact string matches above.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1" id="phytoclass-231">phytoclass 2.3.1<a class="anchor" aria-label="anchor" href="#phytoclass-231"></a></h2><p class="text-muted">CRAN release: 2026-01-30</p>
 <div class="section level3">
 <h3 id="enhancements-2-3-1">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-2-3-1"></a></h3>
 <ul><li>Updated <code>min_max.rda</code> using new pigment ratio min/max from Simon Wright.</li>

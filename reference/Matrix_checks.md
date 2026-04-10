@@ -1,8 +1,12 @@
-# Remove any column values that average 0. Further to this, also remove phytoplankton groups from the F matrix if their diagnostic pigment isn’t present.
+# This function ensures S and F matrices are properly formatted and ordered for the simulated annealing function.
 
-Remove any column values that average 0. Further to this, also remove
-phytoplankton groups from the F matrix if their diagnostic pigment isn’t
-present.
+Some checks applied:
+
+- drops columns with 0 values
+
+- drops taxa with missing major pigments, which are indicated with a '2'
+
+- drops pigments with \< 1% in samples
 
 ## Usage
 
@@ -18,7 +22,7 @@ Matrix_checks(S, Fmat)
 
 - Fmat:
 
-  Pigment to Chl a matrix
+  Pigment to taxa matrix
 
 ## Value
 

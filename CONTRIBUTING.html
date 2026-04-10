@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">phytoclass</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
 <ul><li>identify integration test, vignette, or testthat test to work from.</li>
 <li>modify &amp; test until passing
 <ul><li>edit</li>
-<li><code><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">devtools::load_all()</a></code></li>
+<li><code>devtools::load_all()</code></li>
 <li>run your test||vignette</li>
 </ul></li>
 <li>
@@ -64,34 +64,35 @@
 <code>./tests/testthat/</code> is where unit tests will be placed, but none exist yet.</li>
 </ul></div>
 <div class="section level2">
+<h2 id="updating-the-default-f-matrix">Updating the default F matrix<a class="anchor" aria-label="anchor" href="#updating-the-default-f-matrix"></a></h2>
+<p>After updating the <code>.csv</code> in the <code>data-raw/</code> directory, run the following to update the <code>.rda</code> object:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Fm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"data-raw/Fm.csv"</span>, row.names<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">Fm</span>, file<span class="op">=</span><span class="st">"data/Fm.rda"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="pushing-a-release">Pushing a Release<a class="anchor" aria-label="anchor" href="#pushing-a-release"></a></h2>
 <pre><code><span><span class="co"># 1. Open your package project in RStudio (clone from GitHub if needed)</span></span>
 <span></span>
 <span><span class="co"># 2. Update NEWS.md with a summary of changes</span></span>
 <span></span>
 <span><span class="co"># 3. Regenerate documentation</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">document</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">document</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 4. Run all tests</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">test</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># 4. Check package with CRAN-level checks</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 5. Check package with CRAN-level checks</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># 5. (Optional) Check on remote platforms</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check_rhub</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">check_win_devel</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 6. (Optional) Check on remote platforms</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check_rhub.html" class="external-link">check_rhub</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check_win.html" class="external-link">check_win_devel</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 7. Bump version if needed</span></span>
+<span><span class="co"># 6. Bump version if needed</span></span>
 <span><span class="co">#    Check that NEWS.md and DESCRIPTION file match.</span></span>
 <span><span class="co">#    (choose "patch", "minor", or "major")</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_version.html" class="external-link">use_version</a></span><span class="op">(</span><span class="st">"patch"</span><span class="op">)</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_version</span><span class="op">(</span><span class="st">"patch"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 8. Build package for CRAN submission</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/build.html" class="external-link">build</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># 9. Submit to CRAN</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/submit_cran.html" class="external-link">submit_cran</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<span><span class="co"># 7. Submit to CRAN</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">submit_cran</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 
 
