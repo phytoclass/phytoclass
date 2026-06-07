@@ -20,14 +20,19 @@ vectorise <- function(Fmat) {
 #' @return A list consisting of two components:
 #'     - a matrix of pigment ratios normalized to row sums
 #'     - a vector of row sums
-Normalise_F <- function(Fmat) {
-  Fmat  <- as.matrix(Fmat)           # convert to matrix
-  F_1   <- Fmat / Fmat[, ncol(Fmat)] # divide Fmat by last column
-  F.sum <- rowSums(F_1)              # sum rows
-  F_1   <- F_1 / F.sum               # divide by sum
-  return(list(F_1, F.sum))
+Normalise_F <- function(Fmat, chemtax_style = FALSE) {
+    Fmat <- as.matrix(Fmat)
+    if (chemtax_style) {
+        F.sum <- rowSums(Fmat)
+        F.sum[F.sum == 0] <- 1
+        F_1   <- Fmat / F.sum
+    } else {
+        F_1   <- Fmat / Fmat[, ncol(Fmat)]
+        F.sum <- rowSums(F_1)
+        F_1   <- F_1 / F.sum
+    }
+    list(F_1, F.sum)
 }
-
 #' Normalize F matrix specifically for Prochlorococcus pigments
 #'
 #' Normalizes pigment ratios differently for Prochlorococcus vs other groups,
@@ -47,43 +52,28 @@ Normalise_F <- function(Fmat) {
 #' Fmat <- as.matrix(phytoclass::Fp)
 #' result <- phytoclass:::Prochloro_Normalise_F(Fmat)
 Prochloro_Normalise_F <- function(Fmat) {
-  f_new <- as.matrix(Fmat)
-  n <- nrow(f_new)
-  p <- ncol(f_new)
-  
-  # Identify Pro row (prefer rowname; else assume last row)
-  pro_names <- c("pro", "prochlorococcus", "prochlorococcus-1", "pro-1")
-  i_pro <- which(tolower(rownames(Fmat)) %in% pro_names)
-  if (length(i_pro) != 1) i_pro <- n
-  i_nonpro <- setdiff(seq_len(n), i_pro)
-  
-  chla   <- f_new[, p]        # last column is Chl a (Tchla)
-  dvchla <- f_new[, p - 1]    # second last is dvChl a
-  
-  # --- Row-wise scaling so biomass pigment == 1 ---
-  # Non-Pro groups: scale by Chl a of that row
-  if (length(i_nonpro) > 0) {
-    denom <- chla[i_nonpro]
-    denom[!is.finite(denom) | denom == 0] <- 1   # guard
-    f_new[i_nonpro, ] <- f_new[i_nonpro, , drop = FALSE] / denom
-  }
-  
-  # Pro row: scale by its dvChl a
-  dv_pro <- dvchla[i_pro]
-  if (!is.finite(dv_pro) || dv_pro == 0) dv_pro <- 1
-  f_new[i_pro, ] <- f_new[i_pro, , drop = FALSE] / dv_pro
-  
-  # Enforce exact biomass markers after scaling
-  f_new[i_pro, p - 1] <- 1      # Pro: dvChl a == 1
-  # (Chl a for Pro should already be 0; keep it as-is.)
-  
-  # Final step mirrors your original pipeline:
-  # compute row sums AFTER pigment scaling; return the *pre-row-sum* scaled version via Fn <- Fn * F.sum
-  f_sum <- rowSums(f_new)
-  f_norm <- f_new / f_sum
-  return(list(as.matrix(f_norm), f_sum))
+    f_new <- as.matrix(Fmat)
+    n     <- nrow(f_new)
+    p     <- ncol(f_new)
+    pro_names <- c("pro", "prochlorococcus", "prochlorococcus-1", "pro-1")
+    i_pro     <- which(tolower(rownames(Fmat)) %in% pro_names)
+    if (length(i_pro) != 1) i_pro <- n
+    i_nonpro  <- setdiff(seq_len(n), i_pro)
+    chla   <- f_new[, p]
+    dvchla <- f_new[, p - 1]
+    if (length(i_nonpro) > 0) {
+        denom <- chla[i_nonpro]
+        denom[!is.finite(denom) | denom == 0] <- 1
+        f_new[i_nonpro, ] <- f_new[i_nonpro, , drop = FALSE] / denom
+    }
+    dv_pro <- dvchla[i_pro]
+    if (!is.finite(dv_pro) || dv_pro == 0) dv_pro <- 1
+    f_new[i_pro, ] <- f_new[i_pro, , drop = FALSE] / dv_pro
+    f_sum <- rowSums(f_new)
+    f_sum[f_sum == 0] <- 1
+    f_norm <- f_new / f_sum
+    list(as.matrix(f_norm), f_sum)
 }
-
 #' Normalise matrix to row sum
 #' 
 #' This function normalises each column in S to row sum
@@ -117,12 +107,21 @@ Normalise_S <- function(S){
 #' @examples
 #' Bounded_weights(Sm, weight.upper.bound = 30)
 #' 
-Bounded_weights <- function(S, weight.upper.bound = 30) {
-  n <- colMeans(S)
-  S <- n^-1
-  S[S > weight.upper.bound] <- weight.upper.bound
-  S[length(S)] <- 1
-  return(S)
+Bounded_weights <- function(S, weight.upper.bound = 30,
+                            chemtax_weights = FALSE) {
+    n <- colMeans(S, na.rm = TRUE)
+    w <- n^-1
+    if (chemtax_weights) {
+        # Pure CHEMTAX: no cap, no chl a override
+        finite_w <- w[is.finite(w)]
+        w[!is.finite(w)] <- if (length(finite_w)) max(finite_w) else 1
+    } else {
+        # phytoclass default
+        w[!is.finite(w)] <- weight.upper.bound
+        w[w > weight.upper.bound] <- weight.upper.bound
+        w[length(w)] <- 1
+    }
+    w
 }
 
 #' Wrangle data to vectors
@@ -272,3 +271,47 @@ Condition_test <- function(S, Fn, min.val = NULL, max.val = NULL) {
   return(mean(sn))
 }
 
+# Per-sample equality + non-negativity constrained least squares via Lawson-Hanson.
+# - Fn:           k × p  (class × pigment F matrix)
+# - S:            n × p  (sample × pigment, optionally normalised)
+# - S_weights:    p-vector of pigment weights
+# - equality_sum: NULL, a scalar, or a length-n vector for per-row equality target
+#                 If NULL, only the non-negativity constraint applies.
+nnls_lsei <- function(Fn, S, S_weights, equality_sum = NULL) {
+
+    if (!requireNamespace("limSolve", quietly = TRUE)) {
+        stop("Package 'limSolve' is required. ",
+             "Install with install.packages('limSolve').")
+    }
+
+    Fn_w <- Fn %*% diag(S_weights)
+    S_w  <- S  %*% diag(S_weights)
+    k    <- nrow(Fn)
+    n    <- nrow(S)
+    C    <- matrix(0, nrow = n, ncol = k,
+                   dimnames = list(rownames(S), rownames(Fn)))
+
+    if (!is.null(equality_sum) && length(equality_sum) == 1L) {
+        equality_sum <- rep(equality_sum, n)
+    }
+
+    for (i in seq_len(n)) {
+        sol <- tryCatch(
+            if (is.null(equality_sum)) {
+                limSolve::lsei(
+                    A = t(Fn_w), B = S_w[i, ],
+                    G = diag(k), H = rep(0, k),
+                    verbose = FALSE)
+            } else {
+                limSolve::lsei(
+                    A = t(Fn_w), B = S_w[i, ],
+                    E = matrix(1, nrow = 1, ncol = k), F = equality_sum[i],
+                    G = diag(k), H = rep(0, k),
+                    verbose = FALSE)
+            },
+            error = function(e) list(X = rep(0, k))
+        )
+        C[i, ] <- sol$X
+    }
+    C
+}
