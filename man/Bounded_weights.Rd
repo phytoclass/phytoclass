@@ -4,12 +4,15 @@
 \alias{Bounded_weights}
 \title{Add weights to the data, bound at a maximum.}
 \usage{
-Bounded_weights(S, weight.upper.bound = 30)
+Bounded_weights(S, weight.upper.bound = 30, chemtax_weights = FALSE)
 }
 \arguments{
 \item{S}{Sample data matrix – a matrix of pigment samples}
 
-\item{weight.upper.bound}{Upper bound for weights (default is 30)}
+\item{weight.upper.bound}{Upper bound for weights (default: 30)}
+
+\item{chemtax_weights}{Uncapped column-mean weighting with no chl_a
+override (default: FALSE)}
 }
 \value{
 A vector with upper bounds for weights

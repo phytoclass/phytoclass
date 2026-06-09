@@ -17,7 +17,9 @@ simulated_annealing_Prochloro(
   weight.upper.bound = 30,
   verbose = TRUE,
   seed = NULL,
-  check_converge = 100
+  check_converge = 100,
+  preserve_F = TRUE,
+  chemtax_style = TRUE
 )
 }
 \arguments{
@@ -45,6 +47,13 @@ iteration. Default value of TRUE}
 
 \item{check_converge}{TRUE/FALSE/integer; set the number of F matrices to
 for convergence checking}
+
+\item{preserve_F}{Initial nnls C matrix from from non-binary F matrix values
+clamped to user_defined_min_max instead of starting with binary 0/1
+(default = TRUE)}
+
+\item{chemtax_style}{uncapped column-mean weighting with no chl_a
+override (default = TRUE)}
 }
 \value{
 A list containing
@@ -69,4 +78,6 @@ See how the example Sp and Fp matrices are organised.
 set.seed(5326)
 sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
 sa.example$Figure
+
+
 }

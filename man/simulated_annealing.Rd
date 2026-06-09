@@ -18,7 +18,9 @@ simulated_annealing(
   verbose = TRUE,
   seed = NULL,
   check_converge = 100,
-  alt_pro_name = NULL
+  alt_pro_name = NULL,
+  preserve_F = TRUE,
+  chemtax_style = TRUE
 )
 }
 \arguments{
@@ -50,6 +52,13 @@ for convergence checking}
 \item{alt_pro_name}{Optional: additional alternate versions of
 divinyl-chlorophyll-a spellings used to detect
 prochlorococcus (Default: "dvchl", "dvchla", "dv_chla")}
+
+\item{preserve_F}{Initial nnls C matrix from from non-binary F matrix values
+clamped to user_defined_min_max instead of starting with binary 0/1
+(default = TRUE)}
+
+\item{chemtax_style}{uncapped column-mean weighting with no chl_a
+override (default = TRUE)}
 }
 \value{
 A list containing
@@ -76,4 +85,6 @@ pigments and phytoplankton groups may be used.
 set.seed(5326)
 sa.example <- simulated_annealing(Sm, Fm, niter = 5)
 sa.example$Figure
+
+
 }
