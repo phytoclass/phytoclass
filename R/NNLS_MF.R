@@ -42,7 +42,8 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
       cd_maxit = 1000, 
       cd_tol   = 1e-8
     )
-  # for when RcppML updates in CRAN to v1.0.0:
+  # TODO: add in when RcppML updates in CRAN to v1.0.0, then require this 
+  # version of RcppML
   # C_new2  <- RcppML::nnls(w = Fn_prod, A = b, cd_maxit = 1000, cd_tol = 1e-8)
   
   C_new2        <- t(C_new2)
