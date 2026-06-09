@@ -108,6 +108,8 @@ simulated_annealing_Prochloro <- function(
   }
   
   # ---- start iteration process ---- #
+  # TODO: need update to matrix_checks() to not convert F ratios to 0/1 if a
+  # decimal
   if (preserve_F) {
     # Use the same slice as min_max_mat (excludes chla only).
     # The dvchla anchor (1) gets clamped against its (1,1) bound — a no-op —

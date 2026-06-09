@@ -142,6 +142,8 @@ simulated_annealing <- function(
   }
 
   # ---- start iteration process ---- #
+  # TODO: need update to matrix_checks() to not convert F ratios to 0/1 if a 
+  # decimal
   if (preserve_F) {
     non_chla        <- Fmat[, -ncol(Fmat)]
     non_chla[place] <- pmin(pmax(non_chla[place], min_max_mat[[1]]),
