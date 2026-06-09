@@ -16,6 +16,8 @@ vectorise <- function(Fmat) {
 #' @keywords internal
 #' 
 #' @param Fmat A matrix or data.frame with the last column containing non-zeros
+#' @param chemtax_weights Normalize to a row sum instead of chl_a. Brings the 
+#'          inversion in line with Mackey et al. 1996 
 #'
 #' @return A list consisting of two components:
 #'     - a matrix of pigment ratios normalized to row sums
@@ -33,6 +35,7 @@ Normalise_F <- function(Fmat, chemtax_style = FALSE) {
     }
     list(F_1, F.sum)
 }
+
 #' Normalize F matrix specifically for Prochlorococcus pigments
 #'
 #' Normalizes pigment ratios differently for Prochlorococcus vs other groups,
@@ -52,28 +55,40 @@ Normalise_F <- function(Fmat, chemtax_style = FALSE) {
 #' Fmat <- as.matrix(phytoclass::Fp)
 #' result <- phytoclass:::Prochloro_Normalise_F(Fmat)
 Prochloro_Normalise_F <- function(Fmat) {
-    f_new <- as.matrix(Fmat)
-    n     <- nrow(f_new)
-    p     <- ncol(f_new)
-    pro_names <- c("pro", "prochlorococcus", "prochlorococcus-1", "pro-1")
-    i_pro     <- which(tolower(rownames(Fmat)) %in% pro_names)
-    if (length(i_pro) != 1) i_pro <- n
-    i_nonpro  <- setdiff(seq_len(n), i_pro)
-    chla   <- f_new[, p]
-    dvchla <- f_new[, p - 1]
-    if (length(i_nonpro) > 0) {
-        denom <- chla[i_nonpro]
-        denom[!is.finite(denom) | denom == 0] <- 1
-        f_new[i_nonpro, ] <- f_new[i_nonpro, , drop = FALSE] / denom
-    }
-    dv_pro <- dvchla[i_pro]
-    if (!is.finite(dv_pro) || dv_pro == 0) dv_pro <- 1
-    f_new[i_pro, ] <- f_new[i_pro, , drop = FALSE] / dv_pro
-    f_sum <- rowSums(f_new)
-    f_sum[f_sum == 0] <- 1
-    f_norm <- f_new / f_sum
-    list(as.matrix(f_norm), f_sum)
+  f_new <- as.matrix(Fmat)
+  n <- nrow(f_new)
+  p <- ncol(f_new)
+  
+  # Identify Pro row (prefer rowname; else assume last row)
+  pro_names <- c("pro", "prochlorococcus", "prochlorococcus-1", "pro-1")
+  i_pro <- which(tolower(rownames(Fmat)) %in% pro_names)
+  if (length(i_pro) != 1) i_pro <- n
+  i_nonpro <- setdiff(seq_len(n), i_pro)
+  
+  chla   <- f_new[, p]        # last column is Chl a (Tchla)
+  dvchla <- f_new[, p - 1]    # second last is dvChl a
+  
+  # --- Row-wise scaling so biomass pigment == 1 ---
+  # Non-Pro groups: scale by Chl a of that row
+  if (length(i_nonpro) > 0) {
+    denom <- chla[i_nonpro]
+    denom[!is.finite(denom) | denom == 0] <- 1   # guard
+    f_new[i_nonpro, ] <- f_new[i_nonpro, , drop = FALSE] / denom
+  }
+  
+  # Pro row: scale by its dvChl a
+  dv_pro <- dvchla[i_pro]
+  if (!is.finite(dv_pro) || dv_pro == 0) dv_pro <- 1
+  f_new[i_pro, ] <- f_new[i_pro, , drop = FALSE] / dv_pro
+  
+  # compute row sums AFTER pigment scaling; return the *pre-row-sum* scaled 
+  # version via Fn <- Fn * F.sum
+  f_sum <- rowSums(f_new)
+  f_sum[f_sum == 0] <- 1
+  f_norm <- f_new / f_sum
+  return(list(as.matrix(f_norm), f_sum))
 }
+
 #' Normalise matrix to row sum
 #' 
 #' This function normalises each column in S to row sum
@@ -99,7 +114,9 @@ Normalise_S <- function(S){
 #' Add weights to the data, bound at a maximum.
 #' 
 #' @param S   Sample data matrix – a matrix of pigment samples
-#' @param weight.upper.bound  Upper bound for weights (default is 30)        
+#' @param weight.upper.bound  Upper bound for weights (default: 30) 
+#' @param chemtax_weights Uncapped column-mean weighting with no chl_a
+#'          override (default: FALSE)      
 #'
 #' @return A vector with upper bounds for weights
 #' @export
@@ -271,47 +288,3 @@ Condition_test <- function(S, Fn, min.val = NULL, max.val = NULL) {
   return(mean(sn))
 }
 
-# Per-sample equality + non-negativity constrained least squares via Lawson-Hanson.
-# - Fn:           k × p  (class × pigment F matrix)
-# - S:            n × p  (sample × pigment, optionally normalised)
-# - S_weights:    p-vector of pigment weights
-# - equality_sum: NULL, a scalar, or a length-n vector for per-row equality target
-#                 If NULL, only the non-negativity constraint applies.
-nnls_lsei <- function(Fn, S, S_weights, equality_sum = NULL) {
-
-    if (!requireNamespace("limSolve", quietly = TRUE)) {
-        stop("Package 'limSolve' is required. ",
-             "Install with install.packages('limSolve').")
-    }
-
-    Fn_w <- Fn %*% diag(S_weights)
-    S_w  <- S  %*% diag(S_weights)
-    k    <- nrow(Fn)
-    n    <- nrow(S)
-    C    <- matrix(0, nrow = n, ncol = k,
-                   dimnames = list(rownames(S), rownames(Fn)))
-
-    if (!is.null(equality_sum) && length(equality_sum) == 1L) {
-        equality_sum <- rep(equality_sum, n)
-    }
-
-    for (i in seq_len(n)) {
-        sol <- tryCatch(
-            if (is.null(equality_sum)) {
-                limSolve::lsei(
-                    A = t(Fn_w), B = S_w[i, ],
-                    G = diag(k), H = rep(0, k),
-                    verbose = FALSE)
-            } else {
-                limSolve::lsei(
-                    A = t(Fn_w), B = S_w[i, ],
-                    E = matrix(1, nrow = 1, ncol = k), F = equality_sum[i],
-                    G = diag(k), H = rep(0, k),
-                    verbose = FALSE)
-            },
-            error = function(e) list(X = rep(0, k))
-        )
-        C[i, ] <- sol$X
-    }
-    C
-}
