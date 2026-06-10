@@ -107,7 +107,8 @@ simulated_annealing <- function(
         weight.upper.bound = weight.upper.bound,
         verbose            = verbose,
         seed               = seed,
-        check_converge     = check_converge
+        check_converge     = check_converge,
+        chemtax_style      = chemtax_style
       ))
   }
   
