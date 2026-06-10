@@ -159,14 +159,6 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL,
   
   check_pro <- any(tolower(colnames(Fn)) %in% c("dvchl", "dvchla", "chlvp"))
 
-  if (check_pro && chemtax_style) {
-    warning(
-      "chemtax_style not yet supported for prochloro samples; ",
-      "falling back to phytoclass normalisation."
-    )
-    chemtax_style <- FALSE
-  }
-
   if (check_pro) {
     F_norm <- Prochloro_Normalise_F(Fn, chemtax_style)
     Fn <- F_norm[[1]] * F_norm[[2]]
