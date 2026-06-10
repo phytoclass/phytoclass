@@ -55,7 +55,7 @@ simulated_annealing_Prochloro <- function(
     seed                 = NULL,
     check_converge       = 100,
     preserve_F           = TRUE,
-    chemtax_style        = TRUE
+    chemtax_style        = FALSE
 ) {
   
   if (!is.null(seed)) set.seed(seed)
