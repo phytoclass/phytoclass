@@ -70,7 +70,7 @@ NNLS_MF <- function(Fn, S, S_weights = NULL) {
 #'  \item The root mean square error (RMSE)
 #'  \item The C matrix (class abundances for each group)
 #'  }
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'  Fmat <- as.matrix(phytoclass::Fm)
@@ -168,23 +168,39 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL,
   }
 
   if (check_pro) {
-    F_norm <- Prochloro_Normalise_F(Fn)
+    F_norm <- Prochloro_Normalise_F(Fn, chemtax_style)
     Fn <- F_norm[[1]] * F_norm[[2]]
   } else {
     F_norm <- Normalise_F(Fn, chemtax_style = chemtax_style)
     Fn <- if (chemtax_style) F_norm[[1]] else F_norm[[1]] * F_norm[[2]]
   }
 
-  equality_sum <-
-    if (chemtax_style) {
-      1
-    } else if (check_pro) {
-      NULL
-    } else {
-      S[, ncol(S)]
-    }
-
-  C_new2 <- nnls_lsei(Fn, S, S_weights, equality_sum = equality_sum)
+  Fn_wt_err <- t(Weight_error(Fn, S_weights))
+  S_wt_err  <- t(Weight_error(S, S_weights))
+  
+  b       <- crossprod(Fn_wt_err, S_wt_err) # right hand side of linear eq
+  Fn_prod <- crossprod(Fn_wt_err) # positive definite matrix with coefficients
+  
+  # ---- calc NNLS ---- #
+  C_new2  <-
+    RcppML::nnls(
+      Fn_prod,
+      b,
+      cd_maxit = 1000,
+      cd_tol   = 1e-10
+    )
+  C_new2 <- t(C_new2)
+  
+  # equality_sum <-
+  #   if (chemtax_style) {
+  #     1
+  #   } else if (check_pro) {
+  #     NULL
+  #   } else {
+  #     S[, ncol(S)]
+  #   }
+  # 
+  # C_new2 <- nnls_lsei(Fn, S, S_weights, equality_sum = equality_sum)
 
   if (check_pro) {
     n_cls                        <- ncol(C_new2)
@@ -196,7 +212,6 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL,
     Cn_nonpro_sum                <- ifelse(Cn_nonpro_sum == 0, 1, Cn_nonpro_sum)
     Cn_nonpro                    <- (C_nonpro / Cn_nonpro_sum) * (S_Chl - new_pro)
     Cn2                          <- cbind(Cn_nonpro, new_pro)
-    colnames(Cn2)                <- rownames(Fn)
     
   } else if (chemtax_style) {
     F_chla              <- Fn[, ncol(Fn)]
@@ -208,34 +223,38 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL,
     Cn_sum              <- rowSums(Cn2)
     Cn_sum              <- ifelse(Cn_sum == 0, 1, Cn_sum)
     Cn2                 <- sweep(Cn2 / Cn_sum, 1, S_Chl, "*")
-    colnames(Cn2)       <- rownames(Fn)
     
   } else {
     Cn.s2         <- rowSums(C_new2)
     Cn.s2         <- ifelse(Cn.s2 == 0, 1, Cn.s2)
     Cn2           <- (C_new2 / Cn.s2) * S_Chl
-    colnames(Cn2) <- rownames(Fn)
   }
-
+  
+  colnames(Cn2) <- rownames(Fn)
   colnames(Fn)  <- colnames(S)
   Cn2           <- as.data.frame(Cn2)
   rownames(Cn2) <- rownames(S)
 
-  S_residual <- S - (C_new2 %*% Fn)
-  S_rmse     <- sqrt(mean(S_residual^2))
-  S_mae      <- colMeans(abs(S_residual))
-  cd         <- kappa(Fn %*% t(S))
-  plt        <- phyto_figure(Cn2)
-
-  list(
-    `F matrix`         = Fn,
-    RMSE               = S_rmse,
-    `condition number` = cd,
-    `Class abundances` = Cn2,
-    Figure             = plt,
-    MAE                = S_mae,
-    Error              = S_residual
-  )
+  # ---- calculate error terms ---- #
+  S_residual <- S - (C_new2 %*% Fn)       # residual error
+  S_rmse     <- sqrt(mean(S_residual^2))  # RMSE
+  S_mae      <- colMeans(abs(S_residual)) # MAE
+  
+  # ---- condition number ---- #
+  cd <- kappa(Fn %*% t(S))
+  
+  # ---- plot final results ---- #
+  plt <- phyto_figure(Cn2)
+  
+  return(list(
+    "F matrix"         = Fn,
+    "RMSE"             = S_rmse,
+    "condition number" = cd,
+    "Class abundances" = Cn2,
+    "Figure"           = plt,
+    "MAE"              = S_mae,
+    "Error"            = S_residual
+  ))
 }
 # ============================================================================ #
 # ---- old versions ---- #
