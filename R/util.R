@@ -56,7 +56,12 @@ Normalise_F <- function(Fmat, chemtax_style = FALSE) {
 #' # Create sample F matrix with Prochlorococcus
 #' Fmat <- as.matrix(phytoclass::Fp)
 #' result <- phytoclass:::Prochloro_Normalise_F(Fmat)
-Prochloro_Normalise_F <- function(Fmat) {
+Prochloro_Normalise_F <- function(Fmat, chemtax_style = FALSE) {
+  
+  if (chemtax_style) {
+    return(Normalise_F(Fmat, chemtax_style))
+  }
+  
   f_new <- as.matrix(Fmat)
   n <- nrow(f_new)
   p <- ncol(f_new)
