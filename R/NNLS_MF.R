@@ -161,10 +161,14 @@ NNLS_MF_Final <- function(Fn, S, S_Chl, S_weights, S_dvChl = NULL,
 
   if (check_pro) {
     F_norm <- Prochloro_Normalise_F(Fn, chemtax_style)
-    Fn <- F_norm[[1]] * F_norm[[2]]
   } else {
     F_norm <- Normalise_F(Fn, chemtax_style = chemtax_style)
-    Fn <- if (chemtax_style) F_norm[[1]] else F_norm[[1]] * F_norm[[2]]
+  }
+  
+  if (chemtax_style) {
+    Fn <- F_norm[[1]]
+  } else {
+    Fn <- F_norm[[1]] * F_norm[[2]] # <- this seems to bring to pre-normal Fmat
   }
 
   Fn_wt_err <- t(Weight_error(Fn, S_weights))
