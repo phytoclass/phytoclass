@@ -13,7 +13,9 @@ Pull requests are welcomed, please open an issue on github to get started.
 ## Testing
 * `./tests/integration/` includes user-contributed data and `.qmd` files that use these data.
   * Running the tests is accomplished by rendering the `.qmd` files using quarto or RStudio.
-* `./tests/testthat/` is where unit tests will be placed, but none exist yet.
+* `./tests/testthat/` is where unit tests are placed.
+    * Run all testthat tests with `Rscript -e 'devtools::test()'`
+    * Run an individual test like `testthat::test_file("tests/testthat/test-condition_test.R")`
 
 ## Updating the default F matrix
 After updating the `.csv` in the `data-raw/` directory, run the following to 
