@@ -23,17 +23,19 @@ vectorise <- function(Fmat) {
 #'     - a matrix of pigment ratios normalized to row sums
 #'     - a vector of row sums
 Normalise_F <- function(Fmat, chemtax_style = FALSE) {
-    Fmat <- as.matrix(Fmat)
-    if (chemtax_style) {
-        F.sum <- rowSums(Fmat)
-        F.sum[F.sum == 0] <- 1
-        F_1   <- Fmat / F.sum
-    } else {
-        F_1   <- Fmat / Fmat[, ncol(Fmat)]
-        F.sum <- rowSums(F_1)
-        F_1   <- F_1 / F.sum
-    }
-    list(F_1, F.sum)
+  Fmat <- as.matrix(Fmat)
+  if (chemtax_style) {
+    # simple row normalization
+    F.sum <- rowSums(Fmat)
+    F.sum[F.sum == 0] <- 1
+    F_1 <- Fmat / F.sum
+  } else {
+    # scales rows relative to last column, then rescales rows sum to 1
+    F_1 <- Fmat / Fmat[, ncol(Fmat)]
+    F.sum <- rowSums(F_1)
+    F_1 <- F_1 / F.sum
+  }
+  list(F_1, F.sum)
 }
 
 #' Normalize F matrix specifically for Prochlorococcus pigments
