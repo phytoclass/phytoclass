@@ -20,7 +20,7 @@ simulated_annealing(
   check_converge = 100,
   alt_pro_name = NULL,
   preserve_F = TRUE,
-  chemtax_style = TRUE
+  chemtax_style = FALSE
 )
 }
 \arguments{

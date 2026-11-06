@@ -4,7 +4,7 @@
 \alias{Prochloro_Normalise_F}
 \title{Normalize F matrix specifically for Prochlorococcus pigments}
 \usage{
-Prochloro_Normalise_F(Fmat)
+Prochloro_Normalise_F(Fmat, chemtax_style = FALSE)
 }
 \arguments{
 \item{Fmat}{Matrix with pigment ratios, where the last column is chlorophyll a

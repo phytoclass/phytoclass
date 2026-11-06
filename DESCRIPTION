@@ -1,6 +1,6 @@
 Package: phytoclass
 Title: Estimate Chla Concentrations of Phytoplankton Groups
-Version: 3.0.0
+Version: 3.1.0
 Authors@R: c(person(
     "Alexander", "Hayward", role = c("aut", "cre", "cph"), email = "phytoclass@outlook.com"
   ), person(
@@ -33,7 +33,6 @@ Imports:
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.8)
 LazyData: true
@@ -47,3 +46,4 @@ VignetteBuilder: knitr
 URL: https://github.com/phytoclass/phytoclass/
 BugReports: https://github.com/phytoclass/phytoclass/issues/
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

@@ -19,7 +19,7 @@ simulated_annealing_Prochloro(
   seed = NULL,
   check_converge = 100,
   preserve_F = TRUE,
-  chemtax_style = TRUE
+  chemtax_style = FALSE
 )
 }
 \arguments{

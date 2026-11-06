@@ -37,3 +37,4 @@ Per-sample equality + non-negativity constrained least squares via Lawson-Hanson
  result <- phytoclass:::Steepest_Descent(Fmat, place, S, S_weights, num.loops)
 
 }
+\keyword{internal}
