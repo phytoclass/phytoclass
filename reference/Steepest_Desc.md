@@ -45,6 +45,8 @@ A list containing
 
 ``` r
 MC <- Matrix_checks(Sm,Fm)
+#> Removing pigments that occur in less than 1% of samples: Per, X19but, Fuco, Neox, Pra, Viol, X19hex, Allo, Zea, Chl_b, Tchla
+#> Removing phytoplankton taxa that map to one pigment or less:
 Snew <- MC$Snew
 Fnew <- MC$Fnew
 SDRes <- Steepest_Desc(Fnew,Snew, num.loops = 20)

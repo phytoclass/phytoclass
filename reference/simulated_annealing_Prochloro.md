@@ -92,6 +92,8 @@ A list containing
 # Using the built-in matrices Sp and Fp.
 set.seed(5326)
 sa.example <- simulated_annealing_Prochloro(Sp, Fp, niter = 1)
+#> Removing pigments that occur in less than 1% of samples: Per, X19but, Fuco, Neox, Pra, Viol, X19hex, Allo, Zea, Lut, ChlcMGDG18, Chl_b, Dvchla, Tchla
+#> Removing phytoplankton taxa that map to one pigment or less:
 #> 
 #> Condition number = 11601
 #> 

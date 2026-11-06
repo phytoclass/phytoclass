@@ -39,6 +39,7 @@ To run the simulated annealing call the function with your S matrix
 passed as the only argument.
 
 ``` r
+
 # Load the sample matrix from a file
 # If your file does not contain sample names (e.g., Sample_1, Sample_2), you may omit `row.names = 1`
 # In that case, do: S_matrix <- read.csv("vignettes/custom-example-S.csv")
@@ -54,6 +55,7 @@ Results of the simulated annealing run are in the `results` object
 returned by the function.
 
 ``` r
+
 results$`condition number`
 results$RMSE
 results$MAE

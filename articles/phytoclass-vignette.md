@@ -1,6 +1,7 @@
 # The phytoclass package
 
 ``` r
+
 library(phytoclass)
 ```
 
@@ -9,8 +10,8 @@ library(phytoclass)
 The *phytoclass* package uses non-negative matrix factorization and
 simulated annealing to determine the biomass of different phytoplankton
 groups from pigment concentrations. The methodology is discussed in
-(Hayward, Pinkerton, and Gutierrez‐Rodriguez 2023) and is similar to the
-CHEMTAX method of Mackey et al. (1996).
+(Hayward et al. 2023) and is similar to the CHEMTAX method of Mackey et
+al. (1996).
 
 For ease of use, most functions have default options. However the user
 also has the option to set their own parameters within the program, and
@@ -88,15 +89,15 @@ The *Cluster* function divides all pigment concentrations by the total
 Chl a concentration. Following this the data undergoes BoxCox
 transformation, and the data is hierarchically clustered using the Ward
 method based on the Manhattan distances between pigment samples. The
-DynamicTreeCut method of (Langfelder, Zhang, and Horvath 2008) is then
-used to prune the dendogram into reasonable clusters of specified
-size(s).
+DynamicTreeCut method of (Langfelder et al. 2008) is then used to prune
+the dendogram into reasonable clusters of specified size(s).
 
 The function returns a list of the clusters and the cluster dendrogram.
 
 An example, using the built-in sample data set Sm:
 
 ``` r
+
 Cluster.result <- Cluster(Sm, 14)
 #> Registered S3 method overwritten by 'generics':
 #>   method                 from   
@@ -105,6 +106,7 @@ Cluster.result <- Cluster(Sm, 14)
 ```
 
 ``` r
+
 # list of clusters
 Cluster.result$cluster.list
 #> $`1`
@@ -179,11 +181,13 @@ plot(Cluster.result$cluster.plot)
 The example here uses the built-in sample matrix Sm.
 
 ``` r
+
 set.seed("7683")
 Results <- simulated_annealing(Sm, niter = 1)
 ```
 
 ``` r
+
 Results$`condition number`
 #> [1] 490.8151
 Results$RMSE
@@ -368,6 +372,7 @@ Results$`Class abundances`
 ```
 
 ``` r
+
 Results$Figure
 ```
 
@@ -376,6 +381,7 @@ Results$Figure
 #### Example with clustering
 
 ``` r
+
 Clust1 <- Cluster(Sm, minSamplesPerCluster = 14)$cluster.list[[1]]
 #>  ..done.
 
@@ -384,6 +390,7 @@ Results <- simulated_annealing(Clust1, niter = 1)
 ```
 
 ``` r
+
 Results$`condition number`
 #> [1] 490.8151
 Results$RMSE
@@ -568,6 +575,7 @@ Results$`Class abundances`
 ```
 
 ``` r
+
 Results$Figure
 ```
 
@@ -576,6 +584,7 @@ Results$Figure
 #### Example using non-default values
 
 ``` r
+
 #Create Fm (F matrix). Alternatively, a .csv file can be uploaded.
 Fu <- data.frame(
   Per = c(0, 0, 0, 0, 1, 0, 0, 0),
@@ -623,6 +632,7 @@ Min_max <- data.frame(
 ```
 
 ``` r
+
 set.seed("7683")
 Results <- simulated_annealing(
   S = Sm, 
@@ -636,6 +646,7 @@ Results <- simulated_annealing(
 ```
 
 ``` r
+
 set.seed("7683")
 Results <- simulated_annealing(
   S = Sm, 
@@ -649,6 +660,7 @@ Results <- simulated_annealing(
 ```
 
 ``` r
+
 Results$`condition number`
 #> [1] 1042.712
 Results$RMSE
@@ -803,6 +815,7 @@ Results$`Class abundances`
 ```
 
 ``` r
+
 Results$Figure
 ```
 
@@ -826,7 +839,10 @@ S = S matrix
 F = F matrix
 
 ``` r
+
 MC <- Matrix_checks(Sm, Fm)  
+#> Removing pigments that occur in less than 1% of samples: Per, X19but, Fuco, Neox, Pra, Viol, X19hex, Allo, Zea, Chl_b, Tchla
+#> Removing phytoplankton taxa that map to one pigment or less:
 Snew <- MC$Snew
 Fnew <- MC$Fnew  
 ```
@@ -846,6 +862,7 @@ S = S matrix
 num.loops = the number of loops/iterations to perform
 
 ``` r
+
 MC <- Matrix_checks(Sm, Fm)  
 Snew <- MC$Snew
 Fnew <- MC$Fnew
@@ -865,6 +882,7 @@ S = sample matrix
 weight.upper.bound = maximum weights upper bound
 
 ``` r
+
 Bounded_weights(Sm, weight.upper.bound = 30)
 #>        Per     X19but       Fuco       Neox        Pra       Viol     X19hex 
 #>  30.000000  30.000000   3.405156  30.000000  30.000000  30.000000  15.742517 
@@ -888,7 +906,10 @@ S = sample matrix
 cm = weights for each column
 
 ``` r
+
 MC <- Matrix_checks(Sm, Fm)  
+#> Removing pigments that occur in less than 1% of samples: Per, X19but, Fuco, Neox, Pra, Viol, X19hex, Allo, Zea, Chl_b, Tchla
+#> Removing phytoplankton taxa that map to one pigment or less:
 Snew <- MC$Snew
 Fnew <- MC$Fnew
 cm <- Bounded_weights(Snew, weight.upper.bound = 30)
@@ -972,6 +993,7 @@ Results$`C matrix`
 ## References
 
 ``` r
+
 samples <- phytoclass::Sm
 # samples <- read.csv()
 
@@ -986,6 +1008,8 @@ phytoclass::simulated_annealing(
   Fmat = F_matrix,
   user_defined_min_max = min_max_matrix
 )
+#> Removing pigments that occur in less than 1% of samples: Per, X19but, Fuco, Neox, Pra, Viol, X19hex, Allo, Zea, Chl_b, Tchla
+#> Removing phytoplankton taxa that map to one pigment or less:
 #> 
 #> Condition number = 858
 #> Iterations:         001 of 500 

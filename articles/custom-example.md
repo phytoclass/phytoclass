@@ -15,6 +15,7 @@ derived from a standard deviation calculation on pigment-to-chlorophyll
 ratios found in literature about the Southern Ocean.
 
 ``` r
+
 library(phytoclass)
 
 library(here)
@@ -23,6 +24,7 @@ library(here)
     ## here() starts at /home/runner/work/phytoclass/phytoclass
 
 ``` r
+
 # Load the sample matrix from a file
 # If your file does not contain sample names (e.g., Sample_1, Sample_2), you may omit `row.names = 1`
 # In that case, do: S_matrix <- read.csv(here("vignettes/custom-example-S.csv"))
@@ -30,11 +32,13 @@ S_matrix <- read.csv(here("vignettes/custom-example-S.csv"), row.names = 1)
 ```
 
 ``` r
+
 # pigment-taxa occurrence matrix (specific to an oceanographic region)
 F_matrix <- read.csv(here("vignettes/custom-example-F.csv"), row.names = 1)
 ```
 
 ``` r
+
 # === remove numeric rownames introduced by read.csv
 if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
   print("dropping unneeded numeric index")
@@ -44,10 +48,12 @@ if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
 ```
 
 ``` r
+
 min_max_matrix <- read.csv(here("vignettes/custom-example-min_max-southern_ocean.csv"))
 ```
 
 ``` r
+
 phytoclass::simulated_annealing(
   S_matrix,
   Fmat = F_matrix,
@@ -55,6 +61,10 @@ phytoclass::simulated_annealing(
   verbose = FALSE
 )
 ```
+
+    ## Removing pigments that occur in less than 1% of samples: Per, X19but, Fuco, Neox, Pra, Viol, X19hex, Allo, Zea, Chl_b, Tchla
+
+    ## Removing phytoplankton taxa that map to one pigment or less:
 
     ## $`F matrix`
     ##                      Per X19but   Fuco   Neox        Pra      Viol X19hex

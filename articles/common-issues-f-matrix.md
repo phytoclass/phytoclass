@@ -39,6 +39,7 @@ that must be removed. This is sometimes introduced by `read.csv` or
 `readRDS`. A workaround for this:
 
 ``` r
+
 # === remove numeric rownames introduced by read.csv
 if (all(grepl("^[0-9]+$", rownames(F_matrix)))) {
   print("dropping unneeded numeric index")

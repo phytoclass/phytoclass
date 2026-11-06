@@ -14,6 +14,7 @@ the F matrix.
 The default behavior, specified by the following matrix:
 
 ``` r
+
 check_mat <-
   matrix(
     c(

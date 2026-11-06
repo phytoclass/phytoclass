@@ -45,12 +45,14 @@ annealing function. I would use this with more caution.
 It can be installed from CRAN with:
 
 ``` r
+
 install.packages("phytoclass")
 ```
 
 Or the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("AndyMcKenzieFromNZ/phytoclass")
 ```
@@ -60,6 +62,7 @@ devtools::install_github("AndyMcKenzieFromNZ/phytoclass")
 For the built-in samples matrix Sm of pigment samples:
 
 ``` r
+
 library(phytoclass)
 set.seed("84545")
 

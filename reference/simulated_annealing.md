@@ -103,6 +103,8 @@ A list containing
 # Using the built-in matrices Sm and Fm
 set.seed(5326)
 sa.example <- simulated_annealing(Sm, Fm, niter = 5)
+#> Removing pigments that occur in less than 1% of samples: Per, X19but, Fuco, Neox, Pra, Viol, X19hex, Allo, Zea, Chl_b, Tchla
+#> Removing phytoplankton taxa that map to one pigment or less:
 #> 
 #> Condition number = 826
 #> 
