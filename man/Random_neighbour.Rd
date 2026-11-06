@@ -50,5 +50,6 @@ the minimum or maximum value. Part of the simulated annealing algorithm.
  N <- place
  # Run Random_neighbour
  result <- phytoclass:::Random_neighbour(Fmat, Temp, chlv, N, place, S, S_weights, minF, maxF)
+ 
 }
 \keyword{internal}

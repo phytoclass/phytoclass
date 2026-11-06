@@ -4,7 +4,7 @@
 \alias{NNLS_MF_Final}
 \title{Perform matrix factorisation for phytoplankton pigments and pigments ratios}
 \usage{
-NNLS_MF_Final(Fn, S, S_Chl, S_weights, S_dvChl = NULL)
+NNLS_MF_Final(Fn, S, S_Chl, S_weights, S_dvChl = NULL, chemtax_style = FALSE)
 }
 \arguments{
 \item{Fn}{F matrix with pigment ratios for each phytoplankton class}
@@ -16,6 +16,9 @@ NNLS_MF_Final(Fn, S, S_Chl, S_weights, S_dvChl = NULL)
 \item{S_weights}{Vector of weights for each pigment}
 
 \item{S_dvChl}{Optional vector of divinyl chlorophyll concentrations for Prochlorococcus}
+
+\item{chemtax_style}{uncapped column-mean weighting with no chl_a
+override (default = FALSE)}
 }
 \value{
 A list containing the following elements:
@@ -44,5 +47,7 @@ the biomass of phytoplankton groups.
  S_Chl <- S[, ncol(S)]
  # Run NNLS_MF_Final
  result <- phytoclass:::NNLS_MF_Final(Fmat, S, S_Chl, S_weights)
+
+
 }
 \keyword{internal}
