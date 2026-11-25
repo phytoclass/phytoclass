@@ -132,14 +132,11 @@ simulated_annealing <- function(
   )
   
   if (verbose) {
-    message(paste0(
-      "\nCondition number = ", round(condition.test),
-      "\n\n"
-    ))
+    message(paste0("\nCondition number = ", round(condition.test), "\n\n"))
   }
   
   if (condition.test > 10^5) {
-    print("Abort process: condition number of S matrix greater than 100 000\n")
+    message("Abort process: condition number of S matrix greater than 100 000\n")
   }
 
   # ---- start iteration process ---- #

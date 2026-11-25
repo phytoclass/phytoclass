@@ -104,7 +104,7 @@ simulated_annealing_Prochloro <- function(
     message(paste0("\nCondition number = ", round(condition.test), "\n\n"))
   }
   if (condition.test > 1e5) {
-    print("Abort process: condition number of S matrix greater than 100 000\n")
+    message("Abort process: condition number of S matrix greater than 100 000\n")
   }
   
   # ---- start iteration process ---- #
