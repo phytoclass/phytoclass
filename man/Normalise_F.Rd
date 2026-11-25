@@ -4,10 +4,13 @@
 \alias{Normalise_F}
 \title{This function normalises each column in F to row sum}
 \usage{
-Normalise_F(Fmat)
+Normalise_F(Fmat, chemtax_style = FALSE)
 }
 \arguments{
 \item{Fmat}{A matrix or data.frame with the last column containing non-zeros}
+
+\item{chemtax_weights}{Normalize to a row sum instead of chl_a. Brings the
+inversion in line with Mackey et al. 1996}
 }
 \value{
 A list consisting of two components:

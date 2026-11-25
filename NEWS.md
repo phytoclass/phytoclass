@@ -1,3 +1,22 @@
+# phytoclass 3.1.0
+* chemtax_style (default TRUE) on simulated_annealing, simulated_annealing_Prochloro, Bounded_weights, Normalise_F, and NLS_MF_Final. When TRUE: uncapped column-mean weighting with no chl_a override, F normalised to a simplex (rows sum to 1), and C reported asfraction-of-pigment-pool. Brings the inversion in line with Mackey et al. 1996 rather than the modified phytoclass scheme.
+
+* preserve_F (default TRUE) starts SA from literature F values clamped to  user_defined_min_max instead of binarising to 0/1.
+
+* New nnls_lsei helper using limSolve::lsei for equality-constrained NNLS in NNLS_MF_Final's non-prochloro and chemtax_style paths. Adds limSolve to Imports.
+
+* Prochloro row-sum drift (~1%): NNLS_MF_Final used to fit prochloro on its own and overwrite the last column of C, which broke the row sum. Restructured so non-prochloro and prochloro shares of S_Chl are resolved jointly,  rowSums(C) now matches S_Chl to machine precision.
+
+* Samples with zero dvChl no longer affect the prochloro output with NaN.
+
+* Random_neighbour and Prochloro_Random_Neighbour: hard max_loops = 200 break stops them spinning on very tight min/max bounds.
+
+* Fac_F_RR: removed dead is.null(length(conts)) branch.
+
+* Random_neighbour: dropped colnames(f_new) <- colnames(FALSE) typo.
+
+* TODO added for furture use of RcppML::nnls called with named args to silence the deprecation warning.
+
 # phytoclass 3.0.0
 ## Functionality-breaking change
 Previous version performed "major pigment" checks using a set of hard-coded

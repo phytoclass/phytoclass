@@ -16,16 +16,26 @@ vectorise <- function(Fmat) {
 #' @keywords internal
 #' 
 #' @param Fmat A matrix or data.frame with the last column containing non-zeros
+#' @param chemtax_weights Normalize to a row sum instead of chl_a. Brings the 
+#'          inversion in line with Mackey et al. 1996 
 #'
 #' @return A list consisting of two components:
 #'     - a matrix of pigment ratios normalized to row sums
 #'     - a vector of row sums
-Normalise_F <- function(Fmat) {
-  Fmat  <- as.matrix(Fmat)           # convert to matrix
-  F_1   <- Fmat / Fmat[, ncol(Fmat)] # divide Fmat by last column
-  F.sum <- rowSums(F_1)              # sum rows
-  F_1   <- F_1 / F.sum               # divide by sum
-  return(list(F_1, F.sum))
+Normalise_F <- function(Fmat, chemtax_style = FALSE) {
+  Fmat <- as.matrix(Fmat)
+  if (chemtax_style) {
+    # simple row normalization
+    F.sum <- rowSums(Fmat)
+    F.sum[F.sum == 0] <- 1
+    F_1 <- Fmat / F.sum
+  } else {
+    # scales rows relative to last column, then rescales rows sum to 1
+    F_1 <- Fmat / Fmat[, ncol(Fmat)]
+    F.sum <- rowSums(F_1)
+    F_1 <- F_1 / F.sum
+  }
+  list(F_1, F.sum)
 }
 
 #' Normalize F matrix specifically for Prochlorococcus pigments
@@ -46,7 +56,12 @@ Normalise_F <- function(Fmat) {
 #' # Create sample F matrix with Prochlorococcus
 #' Fmat <- as.matrix(phytoclass::Fp)
 #' result <- phytoclass:::Prochloro_Normalise_F(Fmat)
-Prochloro_Normalise_F <- function(Fmat) {
+Prochloro_Normalise_F <- function(Fmat, chemtax_style = FALSE) {
+  
+  if (chemtax_style) {
+    return(Normalise_F(Fmat, chemtax_style))
+  }
+  
   f_new <- as.matrix(Fmat)
   n <- nrow(f_new)
   p <- ncol(f_new)
@@ -73,13 +88,10 @@ Prochloro_Normalise_F <- function(Fmat) {
   if (!is.finite(dv_pro) || dv_pro == 0) dv_pro <- 1
   f_new[i_pro, ] <- f_new[i_pro, , drop = FALSE] / dv_pro
   
-  # Enforce exact biomass markers after scaling
-  f_new[i_pro, p - 1] <- 1      # Pro: dvChl a == 1
-  # (Chl a for Pro should already be 0; keep it as-is.)
-  
-  # Final step mirrors your original pipeline:
-  # compute row sums AFTER pigment scaling; return the *pre-row-sum* scaled version via Fn <- Fn * F.sum
+  # compute row sums AFTER pigment scaling; return the *pre-row-sum* scaled 
+  # version via Fn <- Fn * F.sum
   f_sum <- rowSums(f_new)
+  f_sum[f_sum == 0] <- 1
   f_norm <- f_new / f_sum
   return(list(as.matrix(f_norm), f_sum))
 }
@@ -109,7 +121,9 @@ Normalise_S <- function(S){
 #' Add weights to the data, bound at a maximum.
 #' 
 #' @param S   Sample data matrix – a matrix of pigment samples
-#' @param weight.upper.bound  Upper bound for weights (default is 30)        
+#' @param weight.upper.bound  Upper bound for weights (default: 30) 
+#' @param chemtax_weights Uncapped column-mean weighting with no chl_a
+#'          override (default: FALSE)      
 #'
 #' @return A vector with upper bounds for weights
 #' @export
@@ -117,12 +131,21 @@ Normalise_S <- function(S){
 #' @examples
 #' Bounded_weights(Sm, weight.upper.bound = 30)
 #' 
-Bounded_weights <- function(S, weight.upper.bound = 30) {
-  n <- colMeans(S)
-  S <- n^-1
-  S[S > weight.upper.bound] <- weight.upper.bound
-  S[length(S)] <- 1
-  return(S)
+Bounded_weights <- function(S, weight.upper.bound = 30,
+                            chemtax_weights = FALSE) {
+    n <- colMeans(S, na.rm = TRUE)
+    w <- n^-1
+    if (chemtax_weights) {
+        # Pure CHEMTAX: no cap, no chl a override
+        finite_w <- w[is.finite(w)]
+        w[!is.finite(w)] <- if (length(finite_w)) max(finite_w) else 1
+    } else {
+        # phytoclass default
+        w[!is.finite(w)] <- weight.upper.bound
+        w[w > weight.upper.bound] <- weight.upper.bound
+        w[length(w)] <- 1
+    }
+    w
 }
 
 #' Wrangle data to vectors

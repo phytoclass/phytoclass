@@ -32,6 +32,7 @@
 #'  # Run Fac_F_RR
 #'  result <- phytoclass:::Fac_F_RR(F.new, vary = place, place = place1, S, cm, fac_rr = 3)
 # Inputs are F and which elements to vary, should be all elements
+
 Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
   
   # which min and max scale values to use
@@ -62,22 +63,6 @@ Fac_F_RR <- function(Fmat, vary, S, cm, fac_rr = c(1, 2, 3), place = NULL) {
   cont  <- vapply(F.new, function(i) {i[[4]]}, logical(1))
   # extracts the index which has a better RMSE (i.e. TRUE)
   conts <- which(cont == 1) 
-  
-  # if the length is null, will either run through NNLS or recursively go to 
-  # level one of Fac_F_RR
-  # NOTE: this doesn't seem to be possible because when length(NULL) = 0 and is
-  #       never null
-  if (is.null(length(conts))) {
-    if (fac_rr == 1) {
-      F.new <- NNLS_MF(Fmat[[1]], S, cm)
-      cont  <- vary
-    } else {
-      # TODO: remove because doesnt have enough inputs to work
-      c1    <- Fac_F_RR(Fmat, place, fac_rr = 1)
-      F.new <- c1[[1]]
-      cont  <- c1[[2]]
-    }
-  }
   
   # when at least one pigment adjustment has a better RMSE, will replace all
   # pigment ratios in the Fmat with the better one and re-run NNLS
